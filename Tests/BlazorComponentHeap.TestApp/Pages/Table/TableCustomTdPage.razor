@@ -1,0 +1,81 @@
+@using BlazorComponentHeap.Components.Table
+@using BlazorComponentHeap.Components.Table.TableColumn
+
+@page "/table-custom-td"
+
+<div style="height:400px; display: flex; flex-direction: column; padding: 30px;">
+    
+    <BCHTable TRowData="UserModel"
+              Items="_users">
+        <BCHTableColumn TRowData="UserModel"
+                        Expression="c => c.Id"
+                        Title="Id"/>
+        <BCHTableColumn TRowData="UserModel"
+                        Expression="c => c.Name"
+                        Title="Name"/>
+        <BCHTableColumn TRowData="UserModel"
+                        Expression="c => c.Email"
+                        Title="Email">
+            <TdTemplate>
+                <div>
+                    Custom td in table
+                </div>
+                <div>
+                    @context.Email
+                </div>
+            </TdTemplate>
+        </BCHTableColumn>
+    </BCHTable>
+    
+</div>
+
+@code {
+    class UserModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public DateTime Birthday { get; set; }
+    }
+
+    private List<UserModel> _users = new List<UserModel>
+    {
+        new UserModel
+        {
+            Id = 1,
+            Name = $"FirstName 1",
+            Email = $"email1@gmail.com",
+        },
+        new UserModel
+        {
+            Id = 2,
+            Name = $"FirstName 2",
+            Email = $"email2@gmail.com",
+        },
+        new UserModel
+        {
+            Id = 3,
+            Name = $"FirstName 3",
+            Email = $"email3@gmail.com",
+        },
+        new UserModel
+        {
+            Id = 4,
+            Name = $"FirstName 4",
+            Email = $"email4@gmail.com",
+        },
+        new UserModel
+        {
+            Id = 5,
+            Name = $"FirstName 5",
+            Email = $"email5@gmail.com",
+        },
+        new UserModel
+        {
+            Id = 6,
+            Name = $"FirstName 6",
+            Email = $"email6@gmail.com",
+        }
+    };
+}
+

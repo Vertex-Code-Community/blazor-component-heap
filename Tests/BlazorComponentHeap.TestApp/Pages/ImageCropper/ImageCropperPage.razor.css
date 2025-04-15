@@ -1,0 +1,9 @@
+
+.page-cnt {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    display: flex;
+}

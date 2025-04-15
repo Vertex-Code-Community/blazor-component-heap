@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    
+    <Title>BlazorComponentHeap.Components</Title>
+    <Authors>WebSvit</Authors>
+    <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
+    <Description>An exceptional Blazor component library featuring unique components you won't find anywhere else.</Description>
+    <Company>WebSvit</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+</Project>

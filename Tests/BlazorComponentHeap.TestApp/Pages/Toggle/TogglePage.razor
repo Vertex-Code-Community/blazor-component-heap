@@ -1,0 +1,22 @@
+﻿@page "/toggle"
+
+<div class="toggle-page">
+    <p>
+        <BCHToggle @bind-Value="@_value" Disabled="true" Label="disabled" />
+    </p>
+    <p>
+        <BCHToggle Label="Some text 1"/>
+    </p>
+    <p>
+        <BCHToggle Label="Changed color" 
+            CheckedBackgroundColor="red" 
+            CheckedCircleColor="blue"
+            DefaultBackgroundColor="black"
+            DefaultCircleColor="pink"/>
+    </p>
+
+</div>
+
+<div class="">
+    <button @onclick="OnClick">Show Info</button>
+</div>

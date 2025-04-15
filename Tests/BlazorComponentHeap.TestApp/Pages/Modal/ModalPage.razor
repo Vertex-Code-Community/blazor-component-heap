@@ -1,0 +1,29 @@
+﻿@page "/modal"
+
+<div class="page-cnt">
+    <button @onclick="OnModal1SwitchClicked">Open Modal 1</button>
+    <button @onclick="OnModal2SwitchClicked">Open Modal 2</button>
+</div>
+
+<BCHModal Width="20%"
+          Height="20%"
+          CloseOnOverlayClicked="true"
+          @bind-Show="_showModal1">
+    <div class="data-cnt">
+        <div>Text 1</div>
+        <div>Text 2</div>
+        <div>Text 3</div>
+    </div>
+</BCHModal>
+
+<BCHModal Width="20%"
+          Height="20%"
+          X="50px"
+          Y="50px"
+          @bind-Show="_showModal2">
+    <div class="data-cnt">
+        <div>Text 1</div>
+        <div>Text 2</div>
+        <div>Text 3</div>
+    </div>
+</BCHModal>

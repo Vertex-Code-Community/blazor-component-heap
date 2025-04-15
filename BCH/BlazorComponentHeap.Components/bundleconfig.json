@@ -1,0 +1,23 @@
+[
+  {
+    "outputFileName": "wwwroot/BCH.styles.css",
+    "inputFiles": [
+      "wwwroot/bch-css/styles.css",
+      "wwwroot/bch-fonts/fonts.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/BCH.scripts.js",
+    "inputFiles": [
+      "wwwroot/bch-js/bch-common.js",
+      "wwwroot/bch-js/bch-cropper.js",
+      "wwwroot/bch-js/bch-script.js",
+      "wwwroot/bch-js/bch-event-handlers.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]     

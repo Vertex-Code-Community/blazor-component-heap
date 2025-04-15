@@ -1,0 +1,35 @@
+@page "/new-tabs"
+@using BlazorComponentHeap.Components.Tabs
+
+<div class="page-cnt">
+    <BCHTabs TItem="string"
+             @bind-Selected="_selected"
+             Items="_items">
+
+        <TabTemplate Context="item">
+            <div class="bch-no-selectable-text"
+                 style="width: 100%; height: 100%; border: 1px solid blue; @(_selected == item ? "background: yellow;" : "")">
+                @item.ToString()
+            </div>
+        </TabTemplate>
+        
+        <ContentTemplate Context="item">
+            <div class="tab-content-wrapper">@item</div>
+        </ContentTemplate>
+
+    </BCHTabs>
+</div>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+</style>

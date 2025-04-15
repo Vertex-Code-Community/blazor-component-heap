@@ -1,0 +1,129 @@
+﻿@page "/select"
+@using BlazorComponentHeap.Components.Select
+
+<div class="select-container">
+
+    <p onclick="history.go(-1)">Back</p>
+
+    <div class="wrapper">
+
+        @* <BCHSelect TItem="string" *@
+        @*            Options="_emptyList" *@
+        @*            ElementNamePredicate="x => x"/> *@
+
+        @* <BCHSelect TItem="string"/> *@
+
+        @* <BCHSelect TItem="string" *@
+        @*            Options="_items"/> *@
+
+        <div>@_isOpened</div>
+
+        <BCHSelect TItem="int"
+                   Options="_itemsInts"/>
+
+        <BCHSelect TItem="int"
+                   Options="_itemsInts"
+                   Height="70"
+                   @bind-IsOpened="_isOpened"/>
+
+        <BCHSelect TItem="string"
+                   Options="_items"
+                   @bind-Selected="_selected"/>
+
+        <BCHSelect TItem="string"
+                   Options="_items"
+                   Filtering="true"/>
+
+        @* <BCHSelect TItem="int" *@
+        @*            Filtering="true" *@
+        @*            Options="_itemsInts"/> *@
+        @* *@
+        @* <BCHSelect TItem="int?" *@
+        @*            DefaultValue="35" *@
+        @*            Options="_itemsInts2"/> *@
+        @* *@
+        @* <BCHSelect TItem="string" *@
+        @*            Options="_items"/> *@
+        @* *@
+        @* <BCHSelect TItem="int" *@
+        @*            DefaultValue="5" *@
+        @*            Options="_itemsInts"/> *@
+
+
+        @* <BCHSelect TItem="string" *@
+        @*            Options="_items" *@
+        @*            Height="300" *@
+        @*            Filtering="true" *@
+        @*            Grouping="true" *@
+        @*            ScrollToSelected="true" *@
+        @*            ElementNamePredicate="x => x" *@
+        @*            GroupPredicate='x => x.Contains("s") ? "Even" : (x.Contains("tt") ? "TT" : "Odd")' *@
+        @*            GroupNamePredicate='x => x.Contains("s") ? "Even" : (x.Contains("tt") ? "TT" : "Odd")'/> *@
+
+        @* <BCHSelect TItem="string" *@
+        @*            Options="_items" *@
+        @*            Height="300" *@
+        @*            Filtering="false" *@
+        @*            Grouping="true" *@
+        @*            ElementNamePredicate="x => x" *@
+        @*            GroupPredicate='x => x.Contains("s")' *@
+        @*            GroupNamePredicate='x => x.Contains("s") ? "Even" : "Odd"'/> *@
+
+        @* <BCHSelect TItem="string" *@
+        @*            Options="_items" *@
+        @*            Height="300" *@
+        @*            Filtering="true" *@
+        @*            Grouping="true" *@
+        @*            MultipleSelect="true" *@
+        @*            ElementNamePredicate="x => x" *@
+        @*            GroupPredicate='x => x.Contains("s")' *@
+        @*            GroupNamePredicate='x => x.Contains("s") ? "Even" : "Odd"' *@
+        @*            SelectedItems="_selectedItems"/> *@
+
+        <BCHSelect TItem="string"
+                   Options="_items"
+                   ContentHeight="300"
+                   Filtering="false"
+                   MultipleValues="true"
+                   OptionNamePredicate="x => x"
+                   GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"'
+                   SelectedItems="_selectedItems"/>
+
+        <BCHSelect TItem="string"
+                   Options="_items"
+                   Filtering="true"/>
+        
+        <BCHSelect TItem="string"
+                   Options="_items"
+                   Filtering="true"/>
+        
+        <BCHSelect TItem="string"
+                   Options="_items"
+                   Filtering="true"/>
+        
+        <BCHSelect TItem="string"
+                   Options="_items"
+                   Filtering="true"/>
+        
+        @* <input type="text"/> *@
+        @* <input type="text"/> *@
+        @* <input type="text"/> *@
+        @* <input type="text"/> *@
+
+    </div>
+
+</div>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+</style>

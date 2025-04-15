@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>BlazorComponentHeap.Components</id>
+    <version>1.0.0</version>
+    <authors>WebSvit</authors>
+    <description>An exceptional Blazor component library featuring unique components you won't find anywhere else.</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+        <dependency id="BlazorComponentHeap.Shared" version="1.0.0" />
+        <dependency id="BlazorComponentHeap.Core" version="1.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="BCH\BlazorComponentHeap.Components\bin\Release\net6.0\*.dll" target="lib\net6.0" />
+    <file src="BCH\BlazorComponentHeap.Components\wwwroot\**\*.*" target="content\wwwroot" />
+  </files>
+</package>

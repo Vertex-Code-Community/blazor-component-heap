@@ -1,0 +1,97 @@
+@using BlazorComponentHeap.Components.Tabs.TabPanel.DefaultTab
+@using BlazorComponentHeap.Components.Tabs.TabDraggingContent
+@using BlazorComponentHeap.Components.Tabs.TabPanel
+@using BlazorComponentHeap.Components.Tabs.TabPanelScroller
+@typeparam TItem
+
+<BCHSubscriptionEnabler>
+    <div class="bch-tabs-container">
+        <BCHTabPanelScroller TItem="TItem"
+                             Gap="Gap"
+                             Items="Items"
+                             DraggableContext="_draggableContext"
+                             TabWidthPredicate="TabWidthPredicate"
+                             ScrollToSelected="ScrollToSelected"
+                             ScrollTabWidth="ScrollTabWidth"
+                             TabHeight="TabHeight"
+                             Selected="_selectedValue">
+
+            <BCHTabPanel TItem="TItem"
+                         @bind-Selected="Selected"
+                         Gap="Gap"
+                         Items="Items"
+                         DraggableContext="_draggableContext"
+                         MinimalTabCount="MinimalTabCount"
+                         Draggable="_draggable"
+                         TabWidthPredicate="TabWidthPredicate"
+                         OnItemDragStart="OnItemDragStartAsync"
+                         OnItemDragEnd="OnItemDragEnd"
+                         OnItemDrag="OnItemDragAsync">
+
+                <ItemTemplate Context="item">
+
+                    @if (TabTemplate == null)
+                    {
+                        <BCHDefaultTab TItem="TItem"
+                                       Item="@item"
+                                       DefaultTabText="DefaultTabText"
+                                       SelectedItem="_selectedValue"
+                                       ShowCloseButton="@(Items.Count > 1 && ShowCloseOnDefaultTab)"
+                                       OnClose="OnCloseItem"/>
+                    }
+                    else
+                    {
+                        @TabTemplate(item)
+                    }
+
+                </ItemTemplate>
+
+            </BCHTabPanel>
+
+        </BCHTabPanelScroller>
+
+        <div id="@_contentId" class="bch-tabs-content">
+            @if (_draggableContext.DraggingItem != _selectedValue && ContentTemplate is not null)
+            {
+                @ContentTemplate(_selectedValue)
+                @* TODO: Default template *@
+            }
+        </div>
+    </div>
+</BCHSubscriptionEnabler>
+
+<BCHModal @ref="_modalComponent"
+          Width="@($"{_width}px")"
+          Height="@($"{_height + TabHeight}px")"
+          CssClass="@($"draggable-panel-floating-item")"
+          X="@($"{(_draggableContext.DraggingPosition.X - _draggableContext.StartOffset.X).ToString(_nF)}px")"
+          Y="@($"{(_draggableContext.DraggingPosition.Y - _draggableContext.StartOffset.Y).ToString(_nF)}px")"
+          CssStyles="pointer-events: none;"
+          Show="@(_draggableContext.DraggingItem != null && _isDragging)">
+    <BCHTabDraggingContent TItem="TItem"
+                           Item="_draggableContext.DraggingItem"
+                           TabHeight="TabHeight"
+                           TabWidthPredicate="TabWidthPredicate">
+        <TabTemplate Context="item">
+            @if (TabTemplate == null)
+            {
+                <BCHDefaultTab TItem="TItem"
+                               Item="@item"
+                               DefaultTabText="DefaultTabText"
+                               SelectedItem="_selectedValue"
+                               ShowCloseButton="ShowCloseOnDefaultTab"/>
+            }
+            else
+            {
+                @TabTemplate(item)
+            }
+        </TabTemplate>
+
+        <ContentTemplate Context="item">
+            @if (ContentTemplate is not null)
+            {
+                @ContentTemplate(item)
+            }
+        </ContentTemplate>
+    </BCHTabDraggingContent>
+</BCHModal>

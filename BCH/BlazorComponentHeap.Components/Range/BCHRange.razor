@@ -1,0 +1,41 @@
+﻿<BCHSubscriptionEnabler>
+    @if (Vertical)
+    {
+        <div class="bch-vertical-range-container"
+             id="@_containerId"
+             @onmousedown="async (e) => { await OnContainerVerticalDownAsync((float)e.PageY, true); }"
+             @ontouchstart="async (e) => { await OnContainerVerticalDownAsync((float)e.Touches[0].PageY, false); }">
+            <div class="bch-range-circle"
+                 id="@_circleId"
+                 style="transform: translate(-6px, @(GetBottomOffset())px);"
+                 @onmousedown="async (e) => { await OnVerticalDownAsync((float)e.PageY, true); }"
+                 @ontouchstart="async (e) => { await OnVerticalDownAsync((float)e.Touches[0].PageY, false); }">
+                <div class="bch-range-tooltip" style="left: @(_thumbWidth)px; @(ShowTooltip && _showTooltip ? "" : "display: none;")">
+                    <label class="bch-no-selectable-text">@Math.Round(_value, AfterPointCountNumber)</label>
+                </div>
+
+            </div>
+            <div class="bch-fill-color" style="height: @(((((_value - Min) / (Max - Min)) * ContainerHeight) + (_thumbHeight / 2)).ToString(_nF))px; @(!ShowFillColor ? "display: none;" : "")"></div>
+        </div>
+    }
+    else
+    {
+        <div id="@_containerId"
+             class="bch-horizontal-range-container"
+             @onmousedown="async (e) => { await OnContainerHorizontalDownAsync((float)e.PageX, true); }"
+             @ontouchstart="async (e) => { await OnContainerHorizontalDownAsync((float)e.Touches[0].PageX, false); }">
+            <div id="@_circleId"
+                 class="bch-range-circle"
+                 @onmousedown="async (e) => { await OnHorizontalDownAsync((float)e.PageX, true); }"
+                 @ontouchstart="async (e) => { await OnHorizontalDownAsync((float)e.Touches[0].PageX, false); }"
+                 style="transform: translate(@(GetLeftOffset())px, 0px);">
+
+                <div class="bch-range-tooltip" style="top: -@(_thumbHeight)px; @(ShowTooltip && _showTooltip ? "" : "display: none;")">
+                    <label class="bch-no-selectable-text">@Math.Round(_value, AfterPointCountNumber) @TypeValue</label>
+                </div>
+
+            </div>
+            <div class="bch-fill-color" style="width: @(GetFillOffsetX())px; @(!ShowFillColor ? "display: none;" : "")"></div>
+        </div>
+    }
+</BCHSubscriptionEnabler>

@@ -1,0 +1,66 @@
+﻿@page "/table"
+@using BlazorComponentHeap.Shared.Enums.Table
+@using BlazorComponentHeap.TestAppMAUI.TestModels
+
+<div style="height:400px; display: flex; flex-direction: column; padding: 30px;">
+    
+    <p onclick="history.go(-1)">Back</p>
+
+    <BCHTable MinWidth="670px"
+              TRowData="UserModel"
+              PageSize="5"
+              Items="_users"
+              IsPagination="true"
+              IsScrollPagination="false"
+              OnFilterData="(e) => FilterData(e)"
+              OnSortData="(sort) => SortedData(sort)"
+              @bind-CurrentPage="_currentPage">
+        <BCHTableColumn TRowData="UserModel"
+                        Expression="c => c.FirstName"
+                        Title="First name"
+                        IsSorted="true"
+                        FilterProperty="FirstName"
+                        FilterType="ColumnFilterType.TextSearch"/>
+        <BCHTableColumn TRowData="UserModel"
+                        Expression="c => c.LastName"
+                        Title="Last name"
+                        IsSorted="true"
+                        FilterProperty="LastName"
+                        FilterType="ColumnFilterType.NumberSearch"/>
+        <BCHTableColumn TRowData="UserModel"
+                        IsSorted="true"
+                        Expression="c => c.BirthDay"
+                        FilterType="ColumnFilterType.Select"
+                        Title="Birthdate"
+                        FilterProperty="Birthdate"
+                        SelectData="@_selectData"/>
+        <BCHTableColumn TRowData="UserModel"
+                        Title="Orders"
+                        FilterProperty="Orders"
+                        FilterType="ColumnFilterType.MultiSelect"
+                        SelectData="@_selectData">
+            <TdTemplate>
+                @context.StartDate startday
+            </TdTemplate>
+        </BCHTableColumn>
+
+        <BCHTableColumn TRowData="UserModel"
+                        Title="Name"
+                        FilterType="ColumnFilterType.DateRange">
+            <TdTemplate>
+                <a href="/edit/@context.FirstName/@context.LastName">edit</a>
+            </TdTemplate>
+
+        </BCHTableColumn>
+
+        <BCHTableColumn TRowData="UserModel"
+                        Title="Orders"
+                        FilterType="ColumnFilterType.Date">
+            <TdTemplate>
+                @context.StartDate
+            </TdTemplate>
+        </BCHTableColumn>
+
+    </BCHTable>
+</div>
+

@@ -1,0 +1,6 @@
+﻿<BCHSubscriptionEnabler ShowNotification="false">
+    @foreach (var modalModel in ModalService.Modals)
+    {
+        <BCHModalContent @key="@modalModel" ModalModel="modalModel"/>
+    }
+</BCHSubscriptionEnabler>
