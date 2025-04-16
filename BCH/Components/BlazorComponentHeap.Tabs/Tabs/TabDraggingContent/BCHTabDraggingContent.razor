@@ -1,0 +1,10 @@
+@typeparam TItem
+
+<div class="bch-dragging-tabs-container">
+    <div class="bch-dragging-tabs-panel" style="height: @(TabHeight)px; width: @(TabWidthPredicate!.Invoke(Item))px;">
+        @TabTemplate(Item)
+    </div>
+    <div class="bch-dragging-tabs-content">
+        @ContentTemplate(Item)
+    </div>
+</div>

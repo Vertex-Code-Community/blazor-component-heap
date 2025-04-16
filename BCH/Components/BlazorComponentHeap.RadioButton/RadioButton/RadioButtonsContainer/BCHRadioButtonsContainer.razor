@@ -1,0 +1,7 @@
+﻿@typeparam TItem
+
+<BCHSubscriptionEnabler>
+    <CascadingValue IsFixed="true" Name="@($"BCHRadioButtonContainer{nameof(TItem)}")" Value="this">
+        @ChildContent
+    </CascadingValue>
+</BCHSubscriptionEnabler>

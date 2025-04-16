@@ -1,0 +1,172 @@
+.bch-cropper-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    
+    visibility: hidden;
+    touch-action: none;
+}
+
+.bch-no-mobile-selection {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
+    .bch-cropper-container.bch-loaded {
+        visibility: visible;
+    }
+
+.bch-cropper-container .bch-image-wrapper {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+}
+
+.bch-cropper-container .bch-image-wrapper > img {
+    will-change: transform;
+    object-fit: cover;
+    pointer-events: none;
+
+    width: 100%;
+    height: 100%;
+}
+
+.bch-cropper-container .bch-image-wrapper > .bch-image {
+    will-change: transform;
+    pointer-events: none;
+
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: contain !important;
+}
+
+.bch-cropper-container > .bch-circle-cropper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    box-shadow: 0 0 0 2000px rgb(41, 41, 41);
+    opacity: 0.5;
+}
+
+.bch-cropper-container > .bch-circle-cropper::after {
+    content: ' ';
+    display: block;
+    padding-bottom: 100%;
+}
+
+.bch-cropper-container > .bch-canvas-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+}
+
+.bch-cropper-container > .bch-canvas-holder > canvas {
+    position: absolute;
+    pointer-events: none;
+    /*opacity: 0.bch-3;*/
+    visibility: hidden;
+}
+
+.bch-cropper-container > .bch-rectangular-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    width: 100%;
+    height: 100%;
+}
+
+    .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper {
+        position: absolute;
+        box-shadow: 0 0 0 8000px rgba(41, 41, 41, 0.3);
+        /*opacity: 0.5;*/
+        pointer-events: all;
+        
+        border: 2px solid #33B469;
+    }
+
+    .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-handle {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        
+        width: 28px;
+        height: 28px;
+        background: #33B469;
+        opacity: 0.3;
+        cursor: pointer;
+    }
+
+    .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-border {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        pointer-events: none;
+    }
+
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-border.bch-b1 {
+            top: -3px;
+            left: -3px;
+            
+            border-top: 4px solid #33B469;
+            border-left: 4px solid #33B469;
+        }
+
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-border.bch-b2 {
+            top: -3px;
+            right: -3px;
+        
+            border-top: 4px solid #33B469;
+            border-right: 4px solid #33B469;
+        }
+
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-border.bch-b3 {
+            bottom: -3px;
+            left: -3px;
+        
+            border-bottom: 4px solid #33B469;
+            border-left: 4px solid #33B469;
+        }
+
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-border.bch-b4 {
+            bottom: -3px;
+            right: -3px;
+        
+            border-bottom: 4px solid #33B469;
+            border-right: 4px solid #33B469;
+        }
+
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-handle:hover,
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-handle.bch-active {
+            opacity: 1.0;
+        }
+
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper.bch-disabled,
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper.bch-disabled > .bch-handle {
+            pointer-events: none;
+        }
+
+    .bch-cropper-container > .bch-rectangular-wrapper.bch-disabled {
+        pointer-events: none;
+    }

@@ -1,0 +1,8 @@
+﻿namespace BlazorComponentHeap.Core.Models.Scheduler;
+
+public class TimeIntersectionGroup
+{
+    public DateTime Start { get; set; }
+    public DateTime End { get; set; }
+    public List<Appointment> Appointments { get; set; } = new();
+}
