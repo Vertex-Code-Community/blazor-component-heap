@@ -1,9 +1,9 @@
 using System.Globalization;
 using System.Reflection.Metadata;
 using BlazorComponentHeap.Components.Models.Zoom;
+using BlazorComponentHeap.Core.Models.Events;
+using BlazorComponentHeap.Core.Models.Math;
 using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Shared.Models.Events;
-using BlazorComponentHeap.Shared.Models.Math;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;

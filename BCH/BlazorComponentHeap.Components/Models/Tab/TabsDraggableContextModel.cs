@@ -1,6 +1,6 @@
 using BlazorComponentHeap.Components.Tabs.TabPanel;
-using BlazorComponentHeap.Shared.Models.Markup;
-using BlazorComponentHeap.Shared.Models.Math;
+using BlazorComponentHeap.Core.Models.Markup;
+using BlazorComponentHeap.Core.Models.Math;
 
 namespace BlazorComponentHeap.Components.Models.Tab;
 

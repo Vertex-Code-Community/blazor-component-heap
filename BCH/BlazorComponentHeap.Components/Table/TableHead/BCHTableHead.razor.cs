@@ -1,6 +1,6 @@
 ﻿using BlazorComponentHeap.Components.Table.TableColumn;
-using BlazorComponentHeap.Shared.Models.Datepicker;
-using BlazorComponentHeap.Shared.Models.Table;
+using BlazorComponentHeap.Core.Models.Datepicker;
+using BlazorComponentHeap.Core.Models.Table;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorComponentHeap.Components.Table.TableHead;

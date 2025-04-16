@@ -1,13 +1,13 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using BlazorComponentHeap.Components.Modal;
+using BlazorComponentHeap.Core.Models.Events;
+using BlazorComponentHeap.Core.Models.Math;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using BlazorComponentHeap.Core.Services.Interfaces;
 using BlazorComponentHeap.Core.Services;
-using BlazorComponentHeap.Shared.Models.Events;
-using BlazorComponentHeap.Shared.Models.Math;
 
 namespace BlazorComponentHeap.Components.Select;
 

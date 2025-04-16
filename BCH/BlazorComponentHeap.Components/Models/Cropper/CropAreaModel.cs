@@ -1,4 +1,4 @@
-using BlazorComponentHeap.Shared.Models.Math;
+using BlazorComponentHeap.Core.Models.Math;
 
 namespace BlazorComponentHeap.Components.Models.Cropper;
 

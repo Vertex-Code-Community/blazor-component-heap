@@ -2,8 +2,8 @@ using System.Globalization;
 using BlazorComponentHeap.Components.Modal;
 using BlazorComponentHeap.Components.Models.Tab;
 using BlazorComponentHeap.Components.Tabs.TabsDraggableContext;
+using BlazorComponentHeap.Core.Models.Math;
 using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Shared.Models.Math;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorComponentHeap.Components.Tabs;

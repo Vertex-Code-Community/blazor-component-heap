@@ -1,9 +1,9 @@
 ﻿using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Shared.Models.Markup;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using System.Globalization;
+using BlazorComponentHeap.Core.Models.Markup;
 
 namespace BlazorComponentHeap.Components.Range;
 
