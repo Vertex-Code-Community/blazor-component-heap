@@ -1,7 +1,7 @@
 ﻿@using BlazorComponentHeap.Table.Table.TablePagination
 @typeparam TRowData
 
-<BCHSubscriptionEnabler>
+
     <CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
 
     <div id="@_containerId" class="bch-table-container">
@@ -64,7 +64,7 @@
             </tfoot>
         </table>
     </div>
-</BCHSubscriptionEnabler>
+
 
 <style>
     .bch-table-container#@_containerId .bch-pagination-container {

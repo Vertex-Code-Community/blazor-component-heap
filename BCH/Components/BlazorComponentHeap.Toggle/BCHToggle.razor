@@ -1,4 +1,4 @@
-﻿<BCHSubscriptionEnabler>
+﻿
     <div class="bch-toggle" id="@_toggleId">
         <input type="checkbox"
                class="toggle-button @(Disabled ? "toggle-disabled" : "")"
@@ -7,7 +7,7 @@
                @bind-value="@Value">
         <label for="toggle-button" class="text bch-no-selectable-text @(Disabled ? "text-disabled" : "")">@Label</label>
     </div>
-</BCHSubscriptionEnabler>
+
 
 <style>
     .bch-toggle#@_toggleId > .toggle-button {
