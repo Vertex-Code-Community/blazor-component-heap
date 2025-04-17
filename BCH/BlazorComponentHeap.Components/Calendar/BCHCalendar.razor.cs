@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Globalization;
-using BlazorComponentHeap.Shared.Models.Events;
-using BlazorComponentHeap.Shared.Models.Math;
+using BlazorComponentHeap.Core.Models.Events;
+using BlazorComponentHeap.Core.Models.Math;
 
 namespace BlazorComponentHeap.Components.Calendar;
 

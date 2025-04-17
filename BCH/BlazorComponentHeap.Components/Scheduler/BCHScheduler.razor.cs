@@ -1,9 +1,9 @@
 ﻿using BlazorComponentHeap.Components.Models.Scheduler;
 using BlazorComponentHeap.Components.Scheduler.AppointmentItem;
 using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Shared.Extensions;
 using Microsoft.AspNetCore.Components;
 using System.Globalization;
+using BlazorComponentHeap.Core.Extensions;
 
 namespace BlazorComponentHeap.Components.Scheduler;
 

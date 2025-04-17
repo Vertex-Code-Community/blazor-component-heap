@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorComponentHeap.Core.Models.Events;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using BlazorComponentHeap.Shared.Models.Events;
 
 namespace BlazorComponentHeap.Components;
 

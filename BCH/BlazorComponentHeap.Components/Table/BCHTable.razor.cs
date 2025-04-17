@@ -1,7 +1,7 @@
 ﻿using BlazorComponentHeap.Components.Table.TableColumn;
+using BlazorComponentHeap.Core.Models.Events;
+using BlazorComponentHeap.Core.Models.Table;
 using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Shared.Models.Events;
-using BlazorComponentHeap.Shared.Models.Table;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorComponentHeap.Components.Table;

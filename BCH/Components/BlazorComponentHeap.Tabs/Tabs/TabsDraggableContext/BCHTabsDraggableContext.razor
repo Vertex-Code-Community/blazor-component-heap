@@ -1,0 +1,5 @@
+@typeparam TItem
+
+<CascadingValue IsFixed="true" Name="@($"BCHTabsDraggableContext{nameof(TItem)}")" Value="this">
+    @ChildContent
+</CascadingValue>

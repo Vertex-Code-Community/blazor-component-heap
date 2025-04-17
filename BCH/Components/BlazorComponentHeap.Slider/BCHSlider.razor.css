@@ -1,0 +1,149 @@
+﻿.bch-slider-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+    .bch-slider-container > .bch-scroll-btn {
+        width: 40px;
+        height: 100%;
+        z-index: 100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .bch-slider-container > .bch-scroll-btn > .bch-icon-wrapper {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-left > .bch-icon-wrapper {
+            background: url(bch-img/slider/arrow-right.svg) center no-repeat;
+            transform: rotate(180deg);
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-right > .bch-icon-wrapper {
+            background: url(bch-img/slider/arrow-right.svg) center no-repeat;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-right > .bch-icon-wrapper:hover {
+            transform: scale(1.2);
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-left > .bch-icon-wrapper:hover {
+            transform: rotate(180deg) scale(1.2);
+        }
+
+        .bch-slider-container:not(.bch-circular) > .bch-scroll-btn.bch-left.bch-disabled > .bch-icon-wrapper {
+            transform: rotate(180deg) scale(1.0);
+            opacity: 0.3;
+        }
+
+        .bch-slider-container:not(.bch-circular) > .bch-scroll-btn.bch-right.bch-disabled > .bch-icon-wrapper {
+            transform: scale(1.0);
+            opacity: 0.3;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-left.bch-above-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-right.bch-above-content {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-left.bch-bottom-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 20px;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-right.bch-bottom-content {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 20px;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-circle-buttons > .bch-icon-wrapper {
+            margin-bottom: 25px;
+        }
+
+        .bch-slider-container > .bch-scroll-btn.bch-above-content > .bch-icon-wrapper {
+            margin-bottom: 0;
+            background-color: #FFFFFF;
+            border-radius: 50px;
+        }
+
+    .bch-slider-container > .bch-slider-content {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+        .bch-slider-container.bch-circle-buttons-above-content > .bch-slider-content {
+            height: 100% !important;
+        }
+
+        .bch-slider-container > .bch-slider-content > .bch-scroller {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            transition: all 0.25s ease;
+        }
+
+            .bch-slider-container > .bch-slider-content > .bch-scroller > .bch-item {
+                position: absolute;
+                top: 0;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+    .bch-slider-container > .bch-circles-wrapper {
+        position: absolute;
+        left: 20px;
+        bottom: 0;
+        width: calc(100% - 40px);
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+    }
+
+        .bch-slider-container > .bch-circles-wrapper > .bch-circle {
+            width: 9px;
+            height: 9px;
+            background: #FFFFFF;
+            border: 1px solid #33B469;
+            border-radius: 50px;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+            .bch-slider-container > .bch-circles-wrapper > .bch-circle:hover {
+                transform: scale(1.2);
+            }
+
+            .bch-slider-container > .bch-circles-wrapper > .bch-circle > .bch-selected {
+                width: 9px;
+                height: 9px;
+                border-radius: 50px;
+                background: #33B469;
+            }

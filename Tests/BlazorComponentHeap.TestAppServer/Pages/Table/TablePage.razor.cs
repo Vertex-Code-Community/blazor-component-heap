@@ -1,5 +1,5 @@
-﻿using BlazorComponentHeap.Shared.Enums.Table;
-using BlazorComponentHeap.Shared.Models.Table;
+﻿using BlazorComponentHeap.Core.Enums.Table;
+using BlazorComponentHeap.Core.Models.Table;
 using BlazorComponentHeap.TestAppServer.TestModels;
 
 namespace BlazorComponentHeap.TestAppServer.Pages.Table;

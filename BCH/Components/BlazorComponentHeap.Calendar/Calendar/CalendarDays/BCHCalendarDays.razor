@@ -1,0 +1,75 @@
+﻿<div id="@Id" class="dch-datepicker-table" @onclick="async () => { await OnFocusOut.InvokeAsync(); }">
+    <div class="bch-datepicker-header-info">
+
+        <div class="selected-month-year" @onclick="async () => { await OnClickByMonthAsync(); }">
+            <label class="bch-datepicker-month">@(GetMonthName(_month)[0].ToString().ToUpper() + GetMonthName(_month).Substring(1)), </label>
+            <label class="bch-datepicker-year"> @_year</label>
+            <img src="_content/BlazorComponentHeap.Components/bch-img/datepicker/arrow-top-bottom-icon.svg">
+        </div>
+
+        <div class="change-month">
+            <div class="previous-month" @onclick="PreviousMonthAsync">
+                <img src="_content/BlazorComponentHeap.Components/bch-img/datepicker/arrow-up-icon.svg">
+            </div>
+
+            <div class="next-month" @onclick="NextMonthAsync">
+                <img src="_content/BlazorComponentHeap.Components/bch-img/datepicker/arrow-bottom-icon.svg">
+            </div>
+        </div>
+    </div>
+    <div class="bch-datepicker-days">
+        <table class="bch-datepicker-table">
+            <thead>
+                <tr>
+                    @foreach (var day in _weekDays)
+                    {
+                        <th class="bch-name-week-day">@(day[0].ToString().ToUpper() + day.Substring(1))</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int r = 0; r < _rowsCount; r++)
+                {
+                    <tr>
+                        @foreach (var item in _days.Skip(r * 7).Take(7))
+                        {
+                            <td @onclick="async () => { await SelectDateAsync(item.Date); }"
+                                class="@(_startDay == item.Date.Date ? "bch-start-selected-day" : "")
+                                        @(_endDay == item.Date.Date ? "bch-end-selected-day" : "")
+                                @(_endDay != DateTime.MinValue && _startDay != DateTime.MinValue && item.Date.Date < _endDay && item.Date.Date > _startDay ? "rang-dates" : "")">
+                                @if (!IsDateRange)
+                                {
+                                    <div class="bch-item-day
+                                        @(item.IsOtherDay ? "bch-datepicker-other-day" : "")
+                                        @(DateTime.Now.Date == item.Date.Date ? "current-day" : "")
+                                        @(SelectedDate == item.Date ? "bch-selected-day" : "")">
+                                        <label>@item.Date.Day</label>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="bch-item-day
+                                        @(item.IsOtherDay ? "bch-datepicker-other-day" : "")
+                                        @(DateTime.Now.Date == item.Date.Date ? "current-day" : "")
+                                        
+                                        ">
+                                        <label>@item.Date.Day</label>
+                                    </div>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+    @if (IsDateRange)
+    {
+        <div class="bch-apply-button">
+            <button @onclick="ApplyDatesAsync">Apply</button>
+        </div>
+    }
+</div>

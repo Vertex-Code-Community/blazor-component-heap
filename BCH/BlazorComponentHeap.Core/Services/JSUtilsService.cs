@@ -1,5 +1,5 @@
-﻿using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Shared.Models.Markup;
+﻿using BlazorComponentHeap.Core.Models.Markup;
+using BlazorComponentHeap.Core.Services.Interfaces;
 using Microsoft.JSInterop;
 
 namespace BlazorComponentHeap.Core.Services;

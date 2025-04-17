@@ -1,6 +1,6 @@
-﻿using BlazorComponentHeap.Shared.Models.Datepicker;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System.Globalization;
+using BlazorComponentHeap.Core.Models.Datepicker;
 
 namespace BlazorComponentHeap.Components.Calendar.CalendarDays;
 
