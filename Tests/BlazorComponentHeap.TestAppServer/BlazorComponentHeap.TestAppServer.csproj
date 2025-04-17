@@ -6,8 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\BCH\BlazorComponentHeap.Components\BlazorComponentHeap.Components.csproj" />
-  </ItemGroup>
-
 </Project>

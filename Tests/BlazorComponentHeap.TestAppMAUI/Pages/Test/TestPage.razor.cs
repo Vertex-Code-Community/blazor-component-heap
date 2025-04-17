@@ -1,4 +1,4 @@
-﻿namespace BlazorComponentHeap.TestApp.Pages.Test;
+﻿namespace BlazorComponentHeap.TestAppMAUI.Pages.Test;
 
 public partial class TestPage
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace BlazorComponentHeap.TestApp.Pages.Test.Popup;
+namespace BlazorComponentHeap.TestAppMAUI.Pages.Test.Popup;
 
 public class PopupComponent : ComponentBase
 {

@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-services.AddBCHComponents("subscription_key"); 
+services.AddBCHComponents(); 
 services.AddRazorPages();
 services.AddServerSideBlazor();
 
