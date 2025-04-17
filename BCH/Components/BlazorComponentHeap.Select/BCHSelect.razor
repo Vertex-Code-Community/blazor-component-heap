@@ -1,7 +1,7 @@
 ﻿@using BlazorComponentHeap.Modal.Modal
 @typeparam TItem
 
-<BCHSubscriptionEnabler>
+
 
     <div id="@_containerId"
          class="@("bch-select-container bch-no-selectable-text " + $"{(IsOpened ? "show" : "")} " + $"{(_selectedValue != null! ? "has-selected" : "")} " + $"{(UpperSide ? "bch-upper-side" : "")} " + $"{CssClass}")"
@@ -37,7 +37,7 @@
         
     </div>
 
-</BCHSubscriptionEnabler>
+
 
 <BCHModal CssClass="@($"bch-select-content-modal-wrapper {CssClass} {_contentClass}" + (UpperSide ? "bch-upper-side" : ""))"
           Width="@($"{_contentWidth.ToString(_nF)}px")"

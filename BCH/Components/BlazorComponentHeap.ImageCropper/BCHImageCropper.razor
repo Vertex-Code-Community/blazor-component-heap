@@ -1,6 +1,8 @@
+@using BlazorComponentHeap.Core.Models.Cropper
+@using BlazorComponentHeap.Core.Models.Zoom
 @using Microsoft.JSInterop
 
-<BCHSubscriptionEnabler>
+
 
     @if (!_isServerSide)
     {
@@ -122,7 +124,7 @@
         <div class="bch-not-supported">BCHImageCropper is not supported on Blazor Server</div>
     }
 
-</BCHSubscriptionEnabler>
+
 
 <style>
 

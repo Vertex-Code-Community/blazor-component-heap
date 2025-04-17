@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<BCHSubscriptionEnabler>
+
     <div class="@("bch-slider-container " + $"{(CircleButtonsAboveContent ? "bch-circle-buttons-above-content" : "")} " + $"{(CircularScroll ? "bch-circular" : "")}")">
         <div class="@("bch-scroll-btn bch-left " + $"{(ButtonsAboveContent ? "bch-above-content" : "")} " + $"{(ShowCircleButtons ? "bch-circle-buttons" : "")} " + $"{(_scrollIndex == 0 ? "bch-disabled" : "")}")">
             <div class="bch-icon-wrapper" @onclick="() => { OnNextClicked(1); }"></div>
@@ -50,4 +50,3 @@
             <div class="bch-icon-wrapper" @onclick="() => { OnNextClicked(-1); }"></div>
         </div>
     </div>
-</BCHSubscriptionEnabler>
