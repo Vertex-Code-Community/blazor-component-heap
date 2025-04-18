@@ -1,6 +1,5 @@
 ﻿using BlazorComponentHeap.Core.Extensions;
 using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
 
 namespace BlazorComponentHeap.TestAppMAUI;
 
@@ -21,7 +20,7 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddBCHComponents("_live_key_af3ca774-12d8-4622-b4b5-b1c1b6bf3621");
+        builder.Services.AddBCHComponents();
 
         return builder.Build();
     }

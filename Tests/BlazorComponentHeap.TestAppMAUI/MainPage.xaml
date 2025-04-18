@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BlazorComponentHeap.TestAppMAUI"
-             xmlns:common="clr-namespace:BlazorComponentHeap.Components;assembly=BlazorComponentHeap.Components"
+             xmlns:common="clr-namespace:BlazorComponentHeap.Modal;assembly=BlazorComponentHeap.Modal"
+             xmlns:root="clr-namespace:BlazorComponentHeap.Modal.Modal.Root;assembly=BlazorComponentHeap.Modal"
              x:Class="BlazorComponentHeap.TestAppMAUI.MainPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html">
         <BlazorWebView.RootComponents>
             <RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
-            <RootComponent Selector="#app::after" ComponentType="{x:Type common:Modal.Root.BCHRootModal}" />
+            <RootComponent Selector="#app::after" ComponentType="{x:Type root:BCHRootModal}" />
         </BlazorWebView.RootComponents>
     </BlazorWebView>
 

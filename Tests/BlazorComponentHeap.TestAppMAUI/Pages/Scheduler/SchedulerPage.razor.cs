@@ -1,4 +1,4 @@
-﻿using BlazorComponentHeap.Components.Models.Scheduler;
+﻿using BlazorComponentHeap.Core.Models.Scheduler;
 
 namespace BlazorComponentHeap.TestAppMAUI.Pages.Scheduler;
 
