@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj" />
+    <ProjectReference Include="..\BlazorComponentHeap.Calendar\BlazorComponentHeap.Calendar.csproj" />
   </ItemGroup>
 
 </Project>
