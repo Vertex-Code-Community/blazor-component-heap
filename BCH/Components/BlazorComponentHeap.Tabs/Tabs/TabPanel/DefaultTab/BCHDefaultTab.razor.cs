@@ -12,10 +12,10 @@ public partial class BCHDefaultTab<TItem> : ComponentBase where TItem : class
 
     private bool IsSelected => Item == SelectedItem;
     
-    private readonly string _iconImage = "_content/BlazorComponentHeap.Components/bch-img/tabs/default-icon/default-tab.svg";
-    private readonly string _selectedIconImage = "_content/BlazorComponentHeap.Components/bch-img/tabs/default-icon/default-tab-selected.svg";
-    private readonly string _closeIcon = "_content/BlazorComponentHeap.Components/bch-img/tabs/close-tab.svg";
-    private readonly string _closeIconSelected = "_content/BlazorComponentHeap.Components/bch-img/tabs/close-tab-selected.svg";
+    private readonly string _iconImage = "_content/BlazorComponentHeap.Core/bch-img/tabs/default-icon/default-tab.svg";
+    private readonly string _selectedIconImage = "_content/BlazorComponentHeap.Core/bch-img/tabs/default-icon/default-tab-selected.svg";
+    private readonly string _closeIcon = "_content/BlazorComponentHeap.Core/bch-img/tabs/close-tab.svg";
+    private readonly string _closeIconSelected = "_content/BlazorComponentHeap.Core/bch-img/tabs/close-tab-selected.svg";
 
     private Func<TItem, string> _defaultTabText = x => $"{x}";
     

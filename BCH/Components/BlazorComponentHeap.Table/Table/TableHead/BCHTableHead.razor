@@ -15,7 +15,7 @@
                 {
                     <img class="bch-sort-checkbox"
                          @onclick="async () => { await OnSortedAsync(Column.FilterProperty); }"
-                         src="_content/BlazorComponentHeap.Components/bch-img/table/arrow-top-bottom-sort.svg"/>
+                         src="_content/BlazorComponentHeap.Core/bch-img/table/arrow-top-bottom-sort.svg" />
                 }
                 <label class="title">@Column.Title</label>
             </div>
@@ -108,7 +108,7 @@
         }
 
         .bch-table-head-container#@_containerId .bch-datepicker-wrapper.@_calendarTableClass .bch-datepicker .bch-datepicker-img {
-            content: url("_content/BlazorComponentHeap.Components/bch-img/table/calendar-icon.svg") !important;
+            content: url("_content/BlazorComponentHeap.Core/bch-img/table/calendar-icon.svg") !important;
         }
         
     .bch-calendar-days-modal-wrapper.@_calendarTableClass,

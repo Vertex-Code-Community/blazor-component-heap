@@ -4,16 +4,16 @@
         <div class="selected-month-year" @onclick="async () => { await OnClickByMonthAsync(); }">
             <label class="bch-datepicker-month">@(GetMonthName(_month)[0].ToString().ToUpper() + GetMonthName(_month).Substring(1)), </label>
             <label class="bch-datepicker-year"> @_year</label>
-            <img src="_content/BlazorComponentHeap.Components/bch-img/datepicker/arrow-top-bottom-icon.svg">
+            <img src="_content/BlazorComponentHeap.Core/bch-img/datepicker/arrow-top-bottom-icon.svg">
         </div>
 
         <div class="change-month">
             <div class="previous-month" @onclick="PreviousMonthAsync">
-                <img src="_content/BlazorComponentHeap.Components/bch-img/datepicker/arrow-up-icon.svg">
+                <img src="_content/BlazorComponentHeap.Core/bch-img/datepicker/arrow-up-icon.svg">
             </div>
 
             <div class="next-month" @onclick="NextMonthAsync">
-                <img src="_content/BlazorComponentHeap.Components/bch-img/datepicker/arrow-bottom-icon.svg">
+                <img src="_content/BlazorComponentHeap.Core/bch-img/datepicker/arrow-bottom-icon.svg">
             </div>
         </div>
     </div>
