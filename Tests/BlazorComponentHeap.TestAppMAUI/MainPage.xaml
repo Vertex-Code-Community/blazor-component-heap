@@ -10,7 +10,8 @@
     <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html">
         <BlazorWebView.RootComponents>
             <RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
-            <RootComponent Selector="#app::after" ComponentType="{x:Type root:BCHRootModal}" />
+            <RootComponent Selector="#modal"
+                           ComponentType="{x:Type common:Modal.Root.BCHRootModal}" />
         </BlazorWebView.RootComponents>
     </BlazorWebView>
 
