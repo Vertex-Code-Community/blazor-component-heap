@@ -2,7 +2,7 @@
 using BlazorComponentHeap.Core.Models.Datepicker;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorComponentHeap.Calendar.Calendar.CalendarDays;
+namespace BlazorComponentHeap.Calendar;
 
 public partial class BCHCalendarDays
 {

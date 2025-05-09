@@ -2,7 +2,7 @@ using BlazorComponentHeap.Core.Models;
 using BlazorComponentHeap.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorComponentHeap.Modal.Modal.Content;
+namespace BlazorComponentHeap.Modal;
 
 public partial class BCHModalContent : IDisposable
 {

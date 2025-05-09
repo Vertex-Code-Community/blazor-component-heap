@@ -4,7 +4,7 @@ using BlazorComponentHeap.Core.Models.Math;
 using BlazorComponentHeap.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorComponentHeap.Calendar.Calendar;
+namespace BlazorComponentHeap.Calendar;
 
 public partial class BCHCalendar : IAsyncDisposable
 {

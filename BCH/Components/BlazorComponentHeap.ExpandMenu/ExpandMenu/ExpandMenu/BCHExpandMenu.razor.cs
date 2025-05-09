@@ -1,8 +1,8 @@
 ﻿using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.ExpandMenu.ExpandMenu.ExpandMenuContainer;
+using BlazorComponentHeap.ExpandMenu;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorComponentHeap.ExpandMenu.ExpandMenu.ExpandMenu;
+namespace BlazorComponentHeap.ExpandMenu;
 
 public partial class BCHExpandMenu : IDisposable
 {

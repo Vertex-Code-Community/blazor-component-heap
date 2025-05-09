@@ -1,7 +1,7 @@
-﻿using BlazorComponentHeap.ExpandMenu.ExpandMenu.ExpandMenu;
+﻿using BlazorComponentHeap.ExpandMenu;
 using Microsoft.AspNetCore.Components;
 
-namespace BlazorComponentHeap.ExpandMenu.ExpandMenu.ExpandMenuContainer;
+namespace BlazorComponentHeap.ExpandMenu;
 
 public partial class BCHExpandMenuContainer
 {
