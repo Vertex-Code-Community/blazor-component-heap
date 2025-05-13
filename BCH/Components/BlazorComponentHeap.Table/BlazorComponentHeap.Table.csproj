@@ -28,4 +28,8 @@
     <ProjectReference Include="..\BlazorComponentHeap.Select\BlazorComponentHeap.Select.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Table\" />
+  </ItemGroup>
+
 </Project>

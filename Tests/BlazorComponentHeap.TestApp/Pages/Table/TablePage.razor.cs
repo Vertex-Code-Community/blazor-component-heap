@@ -1,5 +1,5 @@
 ﻿using BlazorComponentHeap.Core.Models.Table;
-using BlazorComponentHeap.Table.Table;
+using BlazorComponentHeap.Table;
 using BlazorComponentHeap.TestApp.Routing.Services;
 using BlazorComponentHeap.TestApp.TestModels;
 using Microsoft.AspNetCore.Components;
