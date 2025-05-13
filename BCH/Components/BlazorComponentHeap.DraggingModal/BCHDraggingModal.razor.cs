@@ -2,7 +2,7 @@ using System.Globalization;
 using BlazorComponentHeap.Core.Models.Events;
 using BlazorComponentHeap.Core.Models.Math;
 using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Modal.Modal;
+using BlazorComponentHeap.Modal;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 

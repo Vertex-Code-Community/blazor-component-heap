@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BlazorComponentHeap.TestAppMAUI"
              xmlns:common="clr-namespace:BlazorComponentHeap.Modal;assembly=BlazorComponentHeap.Modal"
-             xmlns:root="clr-namespace:BlazorComponentHeap.Modal.Modal.Root;assembly=BlazorComponentHeap.Modal"
+             xmlns:root="clr-namespace:BlazorComponentHeap.Modal.Root;assembly=BlazorComponentHeap.Modal"
              x:Class="BlazorComponentHeap.TestAppMAUI.MainPage"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
 
@@ -11,7 +11,7 @@
         <BlazorWebView.RootComponents>
             <RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
             <RootComponent Selector="#modal"
-                           ComponentType="{x:Type common:Modal.Root.BCHRootModal}" />
+                           ComponentType="{x:Type root:BCHRootModal}" />
         </BlazorWebView.RootComponents>
     </BlazorWebView>
 

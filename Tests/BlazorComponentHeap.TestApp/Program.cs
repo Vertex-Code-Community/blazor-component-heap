@@ -1,5 +1,5 @@
 using BlazorComponentHeap.Core.Extensions;
-using BlazorComponentHeap.Modal.Modal.Root;
+using BlazorComponentHeap.Modal.Root;
 using BlazorComponentHeap.TestApp;
 using BlazorComponentHeap.TestApp.Routing.Services;
 using Microsoft.AspNetCore.Components.Web;
