@@ -13,11 +13,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BCH\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj" />
+    <ProjectReference Include="..\..\BCH\BlazorComponentHeap.Files\BlazorComponentHeap.Files.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Calendar\BlazorComponentHeap.Calendar.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Cropper\BlazorComponentHeap.Cropper.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.DraggingModal\BlazorComponentHeap.DraggingModal.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.ExpandMenu\BlazorComponentHeap.ExpandMenu.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.ImageCropper\BlazorComponentHeap.ImageCropper.csproj" />
+    <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Input\BlazorComponentHeap.Input.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Modal\BlazorComponentHeap.Modal.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.RadioButton\BlazorComponentHeap.RadioButton.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.RangeCalendar\BlazorComponentHeap.RangeCalendar.csproj" />

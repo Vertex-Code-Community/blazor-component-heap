@@ -28,4 +28,8 @@
     <ProjectReference Include="..\BlazorComponentHeap.Range\BlazorComponentHeap.Range.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

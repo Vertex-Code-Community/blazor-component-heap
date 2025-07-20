@@ -8,8 +8,8 @@ namespace BlazorComponentHeap.ImageCropper;
 
 public partial class BCHImageCropper : IAsyncDisposable
 {
-    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IJSRuntime JsRuntime { get; set; }
+    [Inject] public required IJSUtilsService JsUtilsService { get; set; }
 
     [Parameter] public string BackgroundColor { get; set; } = "#ffffff";
     [Parameter] public string ResultFormat { get; set; } = "image/jpeg";

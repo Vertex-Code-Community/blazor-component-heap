@@ -1,14 +1,14 @@
-﻿window.addEventListener("resize", () => {
-    DotNet.invokeMethodAsync("BlazorComponentHeap.Core", 'OnBrowserResizeAsync').then(data => data);
-});
-
-window.addEventListener('scroll',function(event) {
-    const pathCoordinates = getPathCoordinates(event);
-    
-    DotNet.invokeMethodAsync("BlazorComponentHeap.Core", 'OnBrowserGlobalScrollAsync', {
-        pathCoordinates: pathCoordinates
-    });
-}, true);
+﻿// window.addEventListener("resize", () => {
+//     DotNet.invokeMethodAsync("BlazorComponentHeap.Core", 'OnBrowserResizeAsync').then(data => data);
+// });
+//
+// window.addEventListener('scroll',function(event) {
+//     const pathCoordinates = getPathCoordinates(event);
+//    
+//     DotNet.invokeMethodAsync("BlazorComponentHeap.Core", 'OnBrowserGlobalScrollAsync', {
+//         pathCoordinates: pathCoordinates
+//     });
+// }, true);
 
 function bchGetBoundingClientRectById(id, param) {
 
@@ -168,4 +168,17 @@ function bchFocusElement(elementId) {
     const element = document.getElementById(elementId);
     if (element === document.activeElement) return;
     element.focus();
+}
+
+function bchGetUUID() {
+    if (crypto?.randomUUID) {
+        return crypto.randomUUID();
+    }
+
+    // Polyfill for Safari < 15.4
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = crypto.getRandomValues(new Uint8Array(1))[0] & 15;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }

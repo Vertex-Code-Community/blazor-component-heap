@@ -1,0 +1,10 @@
+@page "/inputs"
+@using BlazorComponentHeap.Input
+
+<div class="inputs-page">
+    @* 1. request dialog *@
+    <button @onclick="OnRequestFileAsync">Request File Dialog</button>
+    @* 2. input type="file" *@
+    <BCHInputFile OnChange="(e) => OnChangeAsync(e)" multiple create-image-preview/>
+    @* 3. drag and drop *@
+</div>

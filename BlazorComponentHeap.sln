@@ -49,6 +49,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Toggle"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Zoom", "BCH\Components\BlazorComponentHeap.Zoom\BlazorComponentHeap.Zoom.csproj", "{E9C5786E-C15D-CE1D-AD05-253189B5BBA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Input", "BCH\Components\BlazorComponentHeap.Input\BlazorComponentHeap.Input.csproj", "{6BFAE09E-424E-417D-8B8A-DD94C9612D8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Files", "BCH\BlazorComponentHeap.Files\BlazorComponentHeap.Files.csproj", "{95462481-BEA0-4DFF-8398-52F69953A355}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +141,14 @@ Global
 		{E9C5786E-C15D-CE1D-AD05-253189B5BBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9C5786E-C15D-CE1D-AD05-253189B5BBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9C5786E-C15D-CE1D-AD05-253189B5BBA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BFAE09E-424E-417D-8B8A-DD94C9612D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BFAE09E-424E-417D-8B8A-DD94C9612D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BFAE09E-424E-417D-8B8A-DD94C9612D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BFAE09E-424E-417D-8B8A-DD94C9612D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95462481-BEA0-4DFF-8398-52F69953A355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95462481-BEA0-4DFF-8398-52F69953A355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95462481-BEA0-4DFF-8398-52F69953A355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95462481-BEA0-4DFF-8398-52F69953A355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -163,6 +175,8 @@ Global
 		{8A7A4F0F-24F7-4712-940A-EE59C02217B6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{D62EEB6C-772C-407E-BB71-1345CC37AC55} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{E9C5786E-C15D-CE1D-AD05-253189B5BBA4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{6BFAE09E-424E-417D-8B8A-DD94C9612D8E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{95462481-BEA0-4DFF-8398-52F69953A355} = {DBC6FB35-5EB3-4057-A28A-AB55BB5A6DA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {126013D3-68F2-4915-A284-E0056A565CE6}
