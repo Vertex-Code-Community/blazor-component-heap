@@ -1,15 +1,17 @@
 ﻿using System.Globalization;
-using BlazorComponentHeap.Core.Extensions;
-using BlazorComponentHeap.Core.Models.Scheduler;
-using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Scheduler.AppointmentItem;
+using BlazorComponentHeap.DomInterop.Services;
+using BlazorComponentHeap.Maths.Extensions;
 using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.Scheduler.AppointmentItem;
+using Appointment = BlazorComponentHeap.Scheduler.Models.Appointment;
+using Day = BlazorComponentHeap.Scheduler.Models.Day;
+using TimeIntersectionGroup = BlazorComponentHeap.Scheduler.Models.TimeIntersectionGroup;
 
 namespace BlazorComponentHeap.Scheduler;
 
 public partial class BCHScheduler
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
 
     [Parameter] public string Gap { get; set; } = "4px";
     [Parameter] public string ItemHeight { get; set; } = "90px";
@@ -52,11 +54,11 @@ public partial class BCHScheduler
     {
         if (firstRender && ScrollToWorkingArea)
         {
-            var scrollerRect = await JsUtilsService.GetBoundingClientRectAsync(_contentScrollerId);
+            var scrollerRect = await DomInteropService.GetBoundingClientRectAsync(_contentScrollerId);
             if (scrollerRect is not null)
             {
                 var cellHeightInPixels = (int) (scrollerRect.Height / 24);
-                await JsUtilsService.ScrollToAsync(_contentScrollId, "0", $"{(cellHeightInPixels * WorkingAreaStartHour)}", "auto");
+                await DomInteropService.ScrollToAsync(_contentScrollId, "0", $"{(cellHeightInPixels * WorkingAreaStartHour)}", "auto");
             }
         }
     }

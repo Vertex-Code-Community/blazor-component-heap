@@ -1,10 +1,44 @@
 @page "/inputs"
 @using BlazorComponentHeap.Input
+@using BlazorComponentHeap.Files.Components.FileDropZone
 
 <div class="inputs-page">
     @* 1. request dialog *@
     <button @onclick="OnRequestFileAsync">Request File Dialog</button>
     @* 2. input type="file" *@
-    <BCHInputFile OnChange="(e) => OnChangeAsync(e)" multiple create-image-preview/>
+    <BCHInputFile OnChange="e => OnChangeAsync(e)" multiple create-image-preview/>
     @* 3. drag and drop *@
+    
+    <BCHFileDropZone @bind-IsDragging="_isDraggingOver"
+                     OnFileDrop="OnFileDropAsync" class="file-drop-area" create-image-preview>
+        @if (_isDraggingOver)
+        {
+            <div class="text">Drop it here</div>
+        }
+        else
+        {
+            <div class="text">Drop files in</div>
+        }
+    </BCHFileDropZone>
+    
+    @if (!string.IsNullOrEmpty(_draggedImage))
+    {
+        <img src="@_draggedImage" 
+             alt="No Image" 
+             style="width: 200px; height: 200px; border: 1px solid black;"/>
+    }
+    
 </div>
+
+<style>
+    .file-drop-area {
+        width: 200px;
+        height: 200px;
+        background: red;
+        color: white;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

@@ -1,5 +1,5 @@
-﻿using BlazorComponentHeap.Core.Models.Scheduler;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using Appointment = BlazorComponentHeap.Scheduler.Models.Appointment;
 
 namespace BlazorComponentHeap.Scheduler.AppointmentItem;
 

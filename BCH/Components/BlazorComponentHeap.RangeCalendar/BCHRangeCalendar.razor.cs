@@ -1,15 +1,17 @@
 ﻿using System.Globalization;
-using BlazorComponentHeap.Core.Models.Datepicker;
-using BlazorComponentHeap.Core.Models.Events;
-using BlazorComponentHeap.Core.Models.Math;
-using BlazorComponentHeap.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.Calendar.Models;
+using BlazorComponentHeap.DomInterop.Services;
+using BlazorComponentHeap.GlobalEvents.Events;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.Maths.Models;
 
 namespace BlazorComponentHeap.RangeCalendar;
 
 public partial class BCHRangeCalendar : IAsyncDisposable
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
 
     [Parameter] public string CssClass { get; set; } = string.Empty;
     [Parameter] public string Format { get; set; } = string.Empty;
@@ -50,39 +52,31 @@ public partial class BCHRangeCalendar : IAsyncDisposable
     private Vec2 _containerPos = new();
     private NumberFormatInfo _nF = new() { NumberDecimalSeparator = "." };
 
-    protected override void OnInitialized()
+    protected override Task OnInitializedAsync()
     {
-        IJSUtilsService.OnGlobalScroll += OnGlobalScrollAsync;
-        
         _culture = new CultureInfo(Culture);
 
         _values.Start = DateTime.MinValue;
         _values.End = DateTime.MinValue;
 
         if (string.IsNullOrWhiteSpace(Format))
-        {
             Format = _culture.DateTimeFormat.ShortDatePattern;
-        }
+
+        return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey,
+            OnDocumentMouseDownAsync);
     }
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
-        {
-            await JsUtilsService.AddDocumentListenerAsync<ExtMouseEventArgs>("mousedown", _subscriptionKey,
-                OnDocumentMouseDownAsync);
-        }
-        
         if (_showDate || _showMonth) await _inputRef.FocusAsync();
     }
 
     public async ValueTask DisposeAsync()
     {
-        IJSUtilsService.OnGlobalScroll -= OnGlobalScrollAsync;
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtMouseEventArgs>("mousedown", _subscriptionKey);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey);
     }
 
-    private Task OnGlobalScrollAsync(ScrollEventArgs e)
+    private Task OnWindowGlobalScrollAsync(BchScrollEventArgs e)
     {
         var scrollContainer = e.PathCoordinates.FirstOrDefault();
         if (scrollContainer?.Id == $"{_yearsSelectContentId}_scroller") return Task.CompletedTask;
@@ -91,10 +85,10 @@ public partial class BCHRangeCalendar : IAsyncDisposable
         _showMonth = false;
         StateHasChanged();
 
-        return Task.CompletedTask;
+        return UnsubscribeFromGlobalScrollAsync();
     }
 
-    private Task OnDocumentMouseDownAsync(ExtMouseEventArgs e)
+    private Task OnDocumentMouseDownAsync(BchMouseEventArgs e)
     {
         var container = e.PathCoordinates
             .FirstOrDefault(x => 
@@ -114,7 +108,7 @@ public partial class BCHRangeCalendar : IAsyncDisposable
             _showMonth = false;
             StateHasChanged();
             
-            return Task.CompletedTask;
+            return UnsubscribeFromGlobalScrollAsync();
         }
         
         if (_showMonth)
@@ -122,14 +116,14 @@ public partial class BCHRangeCalendar : IAsyncDisposable
             _showMonth = false;
             _showDate = true;
             StateHasChanged();
-            return Task.CompletedTask;
+            return SubscribeOnGlobalScrollAsync();
         }
         
         _showDate = false;
         _showMonth = false;
         StateHasChanged();
 
-        return Task.CompletedTask;
+        return UnsubscribeFromGlobalScrollAsync();
     }
 
     private string GetValues()
@@ -153,12 +147,17 @@ public partial class BCHRangeCalendar : IAsyncDisposable
 
     private async Task OnCalendarClickedAsync()
     {
-        var containerRect = await JsUtilsService.GetBoundingClientRectAsync(_containerId);
+        var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
+        if (containerRect is null) return;
+        
         _containerPos.Set(containerRect.X, containerRect.Y);
         
         _showDate = !_showMonth && !_showDate;
         _showMonth = false;
         _defaultStartDay = DateTime.MinValue;
+        
+        if (_showDate)
+            await SubscribeOnGlobalScrollAsync();
         
         StateHasChanged();
     }
@@ -172,8 +171,16 @@ public partial class BCHRangeCalendar : IAsyncDisposable
     {
         if (_showDate || _showMonth)
         {
-            var containerRect = await JsUtilsService.GetBoundingClientRectAsync(_containerId);
+            var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
+            if (containerRect is null) return;
+            
             _containerPos.Set(containerRect.X, containerRect.Y);
+            
+            await SubscribeOnGlobalScrollAsync();
+        }
+        else
+        {
+            await UnsubscribeFromGlobalScrollAsync();
         }
         
         StateHasChanged();

@@ -1,20 +1,23 @@
 using System.Globalization;
-using BlazorComponentHeap.Core.Models.Events;
-using BlazorComponentHeap.Core.Models.Math;
-using BlazorComponentHeap.Core.Models.Zoom;
-using BlazorComponentHeap.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using BlazorComponentHeap.DomInterop.Services;
+using BlazorComponentHeap.GlobalEvents.Events;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.Maths.Models;
+using ViewMode = BlazorComponentHeap.Zoom.Models.ViewMode;
+using ZoomContext = BlazorComponentHeap.Zoom.Models.ZoomContext;
 
 namespace BlazorComponentHeap.Zoom;
 
 public partial class BCHZoom : IAsyncDisposable
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
-    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
+    [Inject] public required IJSRuntime JsRuntime { get; set; }
     
-    [Parameter] public RenderFragment<ZoomContext> ChildContent { get; set; } = null!;
+    [Parameter] public required RenderFragment<ZoomContext> ChildContent { get; set; }
     [Parameter] public ZoomContext ZoomContext { get; set; } = new();
     [Parameter] public float Factor { get; set; } = 0.009f;
     [Parameter] public float MinScale { get; set; } = 2.0f;
@@ -66,18 +69,18 @@ public partial class BCHZoom : IAsyncDisposable
 
         _size = new Vec2 { X = Width, Y = Height };
 
-        IJSUtilsService.OnResize += OnResizeAsync;
+        // IJSUtilsService.OnResize += OnResizeAsync;
         ZoomContext.ZoomUp += OnZoomUp;
         ZoomContext.ZoomDown += OnZoomDownAsync;
     }
 
     public async ValueTask DisposeAsync()
     {
-        IJSUtilsService.OnResize -= OnResizeAsync;
+        // IJSUtilsService.OnResize -= OnResizeAsync;
         ZoomContext.ZoomUp -= OnZoomUp;
         ZoomContext.ZoomDown -= OnZoomDownAsync;
         
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtWheelEventArgs>("mousewheel", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -85,7 +88,7 @@ public partial class BCHZoom : IAsyncDisposable
         if (firstRender)
         {
             _dppx = await JsRuntime.InvokeAsync<float>("bchGetPixelRatio");
-            await JsUtilsService.AddDocumentListenerAsync<ExtWheelEventArgs>("mousewheel", _key, OnMouseWheelAsync, 
+            await GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key, OnMouseWheelAsync, 
                 false, false, false);
             
            // await CenterContentAsync();
@@ -97,7 +100,7 @@ public partial class BCHZoom : IAsyncDisposable
             _changePerformed = false;
             _outerContentChanged = false;
 
-            var navigationRect = await JsUtilsService.GetBoundingClientRectAsync(_navigationId);
+            var navigationRect = await DomInteropService.GetBoundingClientRectAsync(_navigationId);
             if (navigationRect is null) return;
 
             _navigationSize.Set(navigationRect.Width, navigationRect.Height);
@@ -123,17 +126,18 @@ public partial class BCHZoom : IAsyncDisposable
 
     private async Task OnResizeAsync()
     {
-        var wrapperRect = await JsUtilsService.GetBoundingClientRectAsync(_wrapperId);
-        var navigationRect = await JsUtilsService.GetBoundingClientRectAsync(_navigationId);
+        var wrapperRect = await DomInteropService.GetBoundingClientRectAsync(_wrapperId);
+        if (wrapperRect is null) return;
+        
+        var navigationRect = await DomInteropService.GetBoundingClientRectAsync(_navigationId);
+        if (navigationRect is null) return;
 
         _viewPortSize.Set(wrapperRect.Width, wrapperRect.Height);
         _navigationSize.Set(navigationRect.Width, navigationRect.Height);
         _navigationOffsetSize.Set(navigationRect.OffsetWidth, navigationRect.OffsetHeight);
 
         if (BoundsByParent)
-        {
             _size.Set(wrapperRect.Width, wrapperRect.Height);
-        }
 
         Update();
     }
@@ -142,8 +146,8 @@ public partial class BCHZoom : IAsyncDisposable
     {
         if (ViewMode == ViewMode.Default) return;
         
-        var wrapperRect = await JsUtilsService.GetBoundingClientRectAsync(_wrapperId);
-        var navigationRect = await JsUtilsService.GetBoundingClientRectAsync(_navigationId);
+        var wrapperRect = await DomInteropService.GetBoundingClientRectAsync(_wrapperId);
+        var navigationRect = await DomInteropService.GetBoundingClientRectAsync(_navigationId);
         
         _viewPortSize.Set(wrapperRect.Width, wrapperRect.Height);
         _navigationSize.Set(navigationRect.Width, navigationRect.Height);
@@ -211,7 +215,7 @@ public partial class BCHZoom : IAsyncDisposable
         StateHasChanged();
     }
 
-    private Task OnMouseWheelAsync(ExtWheelEventArgs e)
+    private Task OnMouseWheelAsync(BchWheelEventArgs e)
     {
         if (!ZoomOnMouseWheel) return Task.CompletedTask;
 
@@ -330,7 +334,8 @@ public partial class BCHZoom : IAsyncDisposable
             var dx = e.Touches[0].ScreenX - e.Touches[1].ScreenX;
             var dy = e.Touches[0].ScreenY - e.Touches[1].ScreenY;
 
-            var wrapperRect = await JsUtilsService.GetBoundingClientRectAsync(_wrapperId);
+            var wrapperRect = await DomInteropService.GetBoundingClientRectAsync(_wrapperId);
+            if (wrapperRect is null) return;
 
             var x0 = e.Touches[0].PageX - wrapperRect.Left;
             var y0 = e.Touches[0].PageY - wrapperRect.Top;

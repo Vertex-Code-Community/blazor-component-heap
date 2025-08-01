@@ -1,6 +1,8 @@
-﻿using BlazorComponentHeap.Core.Extensions;
+﻿using Microsoft.Extensions.Logging;
+using BlazorComponentHeap.DomInterop.Extensions;
+using BlazorComponentHeap.GlobalEvents.Extensions;
+using BlazorComponentHeap.Modal.Extensions;
 using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
 
 namespace BlazorComponentHeap.TestAppMAUI;
 
@@ -14,14 +16,17 @@ public static class MauiProgram
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts => { fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"); });
 
-        builder.Services.AddMauiBlazorWebView();
+        var services = builder.Services;
+        services.AddMauiBlazorWebView();
 
 #if DEBUG
-        builder.Services.AddBlazorWebViewDeveloperTools();
+        services.AddBlazorWebViewDeveloperTools();
         builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddBCHComponents();
+        services.AddBchModal();
+        services.AddBchDomInterop();
+        services.AddBchGlobalEvents();
 
         return builder.Build();
     }

@@ -1,0 +1,9 @@
+<div @attributes="AdditionalAttributes"
+     @onfiledrop="e => OnFileDrop.InvokeAsync(e)"
+     @ondragover="() => { }"
+     @ondropdragover="OnDragOver"
+     @ondropdragleave="OnDragLeave"
+     @ondragover:preventDefault
+     bch-file-drop-zone>
+    @ChildContent
+</div>

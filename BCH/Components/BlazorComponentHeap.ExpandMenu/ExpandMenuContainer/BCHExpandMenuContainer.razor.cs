@@ -1,11 +1,11 @@
-﻿using BlazorComponentHeap.ExpandMenu.ExpandMenuComponent;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.ExpandMenu.ExpandMenuComponent;
 
 namespace BlazorComponentHeap.ExpandMenu.ExpandMenuContainer;
 
 public partial class BCHExpandMenuContainer
 {
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public required RenderFragment ChildContent { get; set; }
 
     private List<BCHExpandMenu> _expandMenus = new();
 

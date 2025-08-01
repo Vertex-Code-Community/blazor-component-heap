@@ -1,12 +1,12 @@
-using BlazorComponentHeap.Core.Models;
-using BlazorComponentHeap.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.Modal.Models;
+using BlazorComponentHeap.Modal.Services;
 
 namespace BlazorComponentHeap.Modal.Content;
 
 public partial class BCHModalContent : IDisposable
 {
-    [Inject] private IModalService ModalService { get; set; } = null!;
+    [Inject] public required IModalService ModalService { get; set; }
 
     [Parameter] public ModalModel ModalModel { get; set; } = null!;
 

@@ -1,10 +1,9 @@
 using System.Globalization;
-using BlazorComponentHeap.Core.Models.Events;
-using BlazorComponentHeap.Core.Models.Math;
-using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Modal;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using BlazorComponentHeap.GlobalEvents.Events;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.Maths.Models;
+using BlazorComponentHeap.Modal;
 
 namespace BlazorComponentHeap.DraggingModal;
 
@@ -12,8 +11,8 @@ public partial class BCHDraggingModal : IAsyncDisposable
 {
     private static int _globalZIndex = 999999;
 
-    [Inject] public IJSRuntime JsRuntime { get; set; } = null!;
-    [Inject] public IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
+    
     [Parameter] public string ContainerId { get; set; } = $"_id_{Guid.NewGuid()}";
     [Parameter] public string HandleId { get; set; } = $"_id_{Guid.NewGuid()}";
     [Parameter] public string Width { get; set; } = "100px";
@@ -21,8 +20,6 @@ public partial class BCHDraggingModal : IAsyncDisposable
     [Parameter] public int InitialX { get; set; }
     [Parameter] public int InitialY { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
-    // [Parameter] public EventCallback<ExtMouseEventArgs> OnMouseDown { get; set; }
-    // [Parameter] public EventCallback<ExtMouseEventArgs> OnMouseMove { get; set; }
     [Parameter] public EventCallback<bool> ShowChanged { get; set; }
     [Parameter] public bool Show
     {
@@ -51,27 +48,27 @@ public partial class BCHDraggingModal : IAsyncDisposable
     {
         _pos.Set(InitialX, InitialY);
         
-        await JsUtilsService.AddDocumentListenerAsync<ExtMouseEventArgs>("mousedown", _key, OnDocumentMouseDown);
-        await JsUtilsService.AddDocumentListenerAsync<ExtMouseEventArgs>("mousemove", _key, OnDocumentMouseMoveAsync);
-        await JsUtilsService.AddDocumentListenerAsync<ExtTouchEventArgs>("touchmove", _key, OnDocumentTouchMove);
-        await JsUtilsService.AddDocumentListenerAsync<ExtTouchEventArgs>("touchstart", _key, OnDocumentTouchStartAsync);
-        await JsUtilsService.AddDocumentListenerAsync<ExtTouchEventArgs>("touchend", _key, OnDocumentTouchEndAsync);
-        await JsUtilsService.AddDocumentListenerAsync<object>("mouseup", _key, OnMouseLeaveUp);
-        await JsUtilsService.AddDocumentListenerAsync<object>("contextmenu", _key, OnMouseLeaveUp);
+        await GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _key, OnDocumentMouseDown);
+        await GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousemove", _key, OnDocumentMouseMoveAsync);
+        await GlobalEventsService.AddDocumentListenerAsync<BchTouchEventArgs>("touchmove", _key, OnDocumentTouchMove);
+        await GlobalEventsService.AddDocumentListenerAsync<BchTouchEventArgs>("touchstart", _key, OnDocumentTouchStartAsync);
+        await GlobalEventsService.AddDocumentListenerAsync<BchTouchEventArgs>("touchend", _key, OnDocumentTouchEndAsync);
+        await GlobalEventsService.AddDocumentListenerAsync<object>("mouseup", _key, OnMouseLeaveUp);
+        await GlobalEventsService.AddDocumentListenerAsync<object>("contextmenu", _key, OnMouseLeaveUp);
     }
 
     public async ValueTask DisposeAsync()
     {
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtMouseEventArgs>("mousedown", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtMouseEventArgs>("mousemove", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtTouchEventArgs>("touchmove", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtTouchEventArgs>("touchstart", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtTouchEventArgs>("touchend", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<object>("mouseup", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<object>("contextmenu", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mousedown", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mousemove", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchTouchEventArgs>("touchmove", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchTouchEventArgs>("touchstart", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchTouchEventArgs>("touchend", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<object>("mouseup", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<object>("contextmenu", _key);
     }
 
-    private Task OnDocumentMouseDown(ExtMouseEventArgs e)
+    private Task OnDocumentMouseDown(BchMouseEventArgs e)
     {
         if (e.PathCoordinates.Any(x => x.ClassList.Contains("close-btn") || x.ClassList.Contains("icon"))) 
             return Task.CompletedTask;
@@ -94,7 +91,7 @@ public partial class BCHDraggingModal : IAsyncDisposable
         return Task.CompletedTask;
     }
 
-    private async Task OnDocumentMouseMoveAsync(ExtMouseEventArgs e)
+    private async Task OnDocumentMouseMoveAsync(BchMouseEventArgs e)
     {
         if (!_dragStarted) return;
 
@@ -111,12 +108,12 @@ public partial class BCHDraggingModal : IAsyncDisposable
         await _modalComponent!.SetPositionAsync($"{_pos.X.ToString(_nF)}px", $"{_pos.Y.ToString(_nF)}px");
     }
 
-    private Task OnDocumentTouchMove(ExtTouchEventArgs e)
+    private Task OnDocumentTouchMove(BchTouchEventArgs e)
     {
         if (e.Touches.Count != 1) return Task.CompletedTask;
         var touch = e.Touches.First();
         
-        return OnDocumentMouseMoveAsync(new ExtMouseEventArgs()
+        return OnDocumentMouseMoveAsync(new BchMouseEventArgs
         {
             PageX = touch.PageX,
             PageY = touch.PageY,
@@ -124,17 +121,17 @@ public partial class BCHDraggingModal : IAsyncDisposable
         });
     }
     
-    private Task OnDocumentTouchEndAsync(ExtTouchEventArgs e)
+    private Task OnDocumentTouchEndAsync(BchTouchEventArgs e)
     {
         return OnMouseLeaveUp(new object());
     }
     
-    private Task OnDocumentTouchStartAsync(ExtTouchEventArgs e)
+    private Task OnDocumentTouchStartAsync(BchTouchEventArgs e)
     {
         if (e.Touches.Count != 1) return Task.CompletedTask;
         var touch = e.Touches.First();
         
-        return OnDocumentMouseDown(new ExtMouseEventArgs
+        return OnDocumentMouseDown(new BchMouseEventArgs
         {
             PageX = touch.PageX,
             PageY = touch.PageY,

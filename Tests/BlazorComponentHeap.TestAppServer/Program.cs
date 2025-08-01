@@ -1,10 +1,15 @@
-using BlazorComponentHeap.Core.Extensions;
+using BlazorComponentHeap.DomInterop.Extensions;
+using BlazorComponentHeap.GlobalEvents.Extensions;
+using BlazorComponentHeap.Modal.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
 
-services.AddBCHComponents(); 
+services.AddBchModal();
+services.AddBchDomInterop();
+services.AddBchGlobalEvents();
+
 services.AddRazorPages();
 services.AddServerSideBlazor();
 

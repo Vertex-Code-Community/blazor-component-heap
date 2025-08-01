@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj" />
     <ProjectReference Include="..\BlazorComponentHeap.Modal\BlazorComponentHeap.Modal.csproj" />
   </ItemGroup>
 

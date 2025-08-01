@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
-using BlazorComponentHeap.Core.Models.Datepicker;
 using Microsoft.AspNetCore.Components;
+using DateRange = BlazorComponentHeap.Calendar.Models.DateRange;
+using WeekDay = BlazorComponentHeap.Calendar.Models.WeekDay;
 
 namespace BlazorComponentHeap.Calendar.CalendarDays;
 

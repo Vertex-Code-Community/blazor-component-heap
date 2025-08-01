@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BCH\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj" />
-    <ProjectReference Include="..\..\BCH\BlazorComponentHeap.Files\BlazorComponentHeap.Files.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Calendar\BlazorComponentHeap.Calendar.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Cropper\BlazorComponentHeap.Cropper.csproj" />
     <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.DraggingModal\BlazorComponentHeap.DraggingModal.csproj" />

@@ -16,15 +16,16 @@
               Height="unset"
               X="@($"{_containerPos.X.ToString(_nF)}px")"
               Y="@($"{_containerPos.Y.ToString(_nF)}px")"
-              @bind-Show="_showDate">
+              Show="_showDate"
+              ShowChanged="OnDateChanged">
         <BCHCalendarDays Id="@_calendarDaysId"
-                         OnDateSelected="async (e) => { Value = e; _showDate = false; await OnShowModeChangedAsync(); }"
+                         OnDateSelected=" e => { Value = e; _showDate = false; return OnShowModeChangedAsync(); }"
                          Culture="@Culture"
                          DefaultMonth="_selectedMonth"
                          DefaultYear="_selectedYear"
-                         OnFocusOut="async () => { await _inputRef.FocusAsync(); }"
+                         OnFocusOut="() => _inputRef.FocusAsync()"
                          SelectedDate="Value"
-                         IsShowMonth="async (e) => { _showMonth = e; _showDate = false; await OnShowModeChangedAsync(); }"/>
+                         IsShowMonth="e => { _showMonth = e; _showDate = false; return OnShowModeChangedAsync(); }"/>
     </BCHModal>
 
     <BCHModal CssClass="@($"bch-calendar-months-modal-wrapper {CssClass}")"
@@ -32,15 +33,16 @@
               Height="unset"
               X="@($"{_containerPos.X.ToString(_nF)}px")"
               Y="@($"{_containerPos.Y.ToString(_nF)}px")"
-              @bind-Show="_showMonth">
+              Show="_showMonth"
+              ShowChanged="OnMonthChanged">
         <BCHCalendarMonths Id="@_calendarMonthsId"
                            YearsSelectContentId="@_yearsSelectContentId"
                            SelectedMonth="_selectedMonth"
                            SelectedYear="_selectedYear"
-                           MonthChanged="async (e) => { _selectedMonth = e; await OnShowModeChangedAsync(); }"
-                           YearChanged="async (e) => { _selectedYear = e; await OnShowModeChangedAsync(); }"
-                           IsShowDate="async (e) => { _showMonth = false; _showDate = e; await OnShowModeChangedAsync(); }"
-                           OnFocusOut="async () => { await _inputRef.FocusAsync(); }"/>
+                           MonthChanged="e => { _selectedMonth = e; return OnShowModeChangedAsync(); }"
+                           YearChanged="e => { _selectedYear = e; return OnShowModeChangedAsync(); }"
+                           IsShowDate="e => { _showMonth = false; _showDate = e; return OnShowModeChangedAsync(); }"
+                           OnFocusOut="() => _inputRef.FocusAsync()"/>
     </BCHModal>
 </div>
 

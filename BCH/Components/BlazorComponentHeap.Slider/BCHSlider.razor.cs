@@ -5,10 +5,9 @@ namespace BlazorComponentHeap.Slider;
 
 public partial class BCHSlider<TItem> : ComponentBase where TItem : class
 {
-    [Parameter] public TItem DefaultValue { get; set; } = null!;
     [Parameter] public List<TItem> Items { get; set; } = new();
     [Parameter] public bool ButtonsOnTopOfContent { get; set; } = false;
-    [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; } = null!;
+    [Parameter] public required RenderFragment<TItem> ItemTemplate { get; set; }
     [Parameter] public int RenderItemCount { get; set; } = 1;
     [Parameter] public bool CircularScroll { get; set; } = false;
     [Parameter] public bool ButtonsAboveContent { get; set; } = false;

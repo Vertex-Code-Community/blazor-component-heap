@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\BlazorComponentHeap.Files\BlazorComponentHeap.Files.csproj" />
+      <ProjectReference Include="..\..\Modules\BlazorComponentHeap.Files\BlazorComponentHeap.Files.csproj" />
     </ItemGroup>
 
 </Project>

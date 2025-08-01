@@ -1,5 +1,5 @@
-﻿using BlazorComponentHeap.Core.Enums.Table;
-using BlazorComponentHeap.Core.Models.Table;
+﻿using BlazorComponentHeap.Core.Models.Table;
+using BlazorComponentHeap.Table.Models;
 using BlazorComponentHeap.TestAppMAUI.TestModels;
 
 namespace BlazorComponentHeap.TestAppMAUI.Pages.Table;
@@ -117,7 +117,6 @@ public partial class TablePage
         {
             Console.WriteLine(item);
         });
-
     }
 
     private void SortedData(TableSortParameters data)

@@ -1,12 +1,12 @@
-﻿using BlazorComponentHeap.Core.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.DomInterop.Services;
 using BlazorComponentHeap.ExpandMenu.ExpandMenuContainer;
-using Microsoft.AspNetCore.Components;
 
 namespace BlazorComponentHeap.ExpandMenu.ExpandMenuComponent;
 
 public partial class BCHExpandMenu : IDisposable
 {
-    [Inject] private IJSUtilsService JSUtilsService { get; set; }
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
 
     [CascadingParameter(Name = "BCHExpandMenuContainer")] public BCHExpandMenuContainer OwnerContainer { get; set; } = null!;
     
@@ -14,26 +14,25 @@ public partial class BCHExpandMenu : IDisposable
     [Parameter] public string Description { get; set; } = string.Empty;
     [Parameter] public bool Disabled { get; set; }
 
-    private string _descriptionId = $"_id_{Guid.NewGuid()}";
-    private double _heightDescription = default(double);
+    private readonly string _descriptionId = $"_id_{Guid.NewGuid()}";
+    private double _heightDescription = 0;
 
     protected override void OnInitialized()
     {
         OwnerContainer.AddExpandMenu(this);
-        IJSUtilsService.OnResize += OnResizeAsync;
+        // IJSUtilsService.OnResize += OnResizeAsync;
     }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    
+    public void Dispose()
     {
-        if(firstRender)
-        {
-            
-        }
+        // IJSUtilsService.OnResize -= OnResizeAsync;
     }
 
     private async Task OnResizeAsync()
     {
-        var boundingClientRect = await JSUtilsService.GetBoundingClientRectAsync(_descriptionId);
+        var boundingClientRect = await DomInteropService.GetBoundingClientRectAsync(_descriptionId);
+        if (boundingClientRect is null) return;
+        
         _heightDescription = boundingClientRect.OffsetHeight;
         StateHasChanged();
     }
@@ -41,19 +40,10 @@ public partial class BCHExpandMenu : IDisposable
     private async Task OnClick()
     {
         await OnResizeAsync();
-
-        if (Disabled)
-        {
-            return;
-        }
+        if (Disabled) return;
 
         OwnerContainer.SelectButton(this);
     }
 
     public void Update() => StateHasChanged();
-
-    public void Dispose()
-    {
-        IJSUtilsService.OnResize -= OnResizeAsync;
-    }
 }

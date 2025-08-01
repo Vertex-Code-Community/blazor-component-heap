@@ -1,5 +1,5 @@
-using BlazorComponentHeap.Core.Models.Markup;
-using BlazorComponentHeap.Core.Models.Math;
+using BlazorComponentHeap.GlobalEvents.Models;
+using BlazorComponentHeap.Maths.Models;
 using BlazorComponentHeap.Tabs.TabPanel;
 
 namespace BlazorComponentHeap.Tabs.Models;
@@ -16,5 +16,5 @@ public class TabsDraggableContextModel<TItem> where TItem : class
     internal Action? OnUpdate { get; set; }
     internal Func<Task>? OnUpdateScroller { get; set; }
     internal Action? OnRerenderScroller { get; set; }
-    internal Action<float, float, List<CoordsHolder>>? OnMove { get; set; }
+    internal Action<float, float, List<ElementParameters>>? OnMove { get; set; }
 }

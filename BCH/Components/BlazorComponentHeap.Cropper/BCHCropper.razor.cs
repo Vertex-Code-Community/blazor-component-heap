@@ -1,20 +1,22 @@
 using System.Globalization;
-using BlazorComponentHeap.Core.Models.Cropper;
-using BlazorComponentHeap.Core.Models.Events;
-using BlazorComponentHeap.Core.Models.Math;
-using BlazorComponentHeap.Core.Models.Zoom;
-using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Zoom;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using BlazorComponentHeap.Cropper.Models;
+using BlazorComponentHeap.DomInterop.Services;
+using BlazorComponentHeap.GlobalEvents.Events;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.Maths.Models;
+using BlazorComponentHeap.Zoom;
+using BlazorComponentHeap.Zoom.Models;
 
 namespace BlazorComponentHeap.Cropper;
 
 public partial class BCHCropper : IAsyncDisposable
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
-    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
+    [Inject] public required IJSRuntime JsRuntime { get; set; }
 
     [Parameter] public string Base64Image { get; set; } = string.Empty;
     [Parameter] public CropperType CropperType { get; set; } = CropperType.MovableRectangle;
@@ -61,24 +63,24 @@ public partial class BCHCropper : IAsyncDisposable
     private float _scaleLinear = -1;
     private bool _isServerSide = false;
     
-    protected override void OnInitialized()
+    protected override Task OnInitializedAsync()
     {
+        // IJSUtilsService.OnResize += OnResizeAsync;
         _isServerSide = JsRuntime.GetType().Name.Contains("Remote"); // JsRuntime is IJSInProcessRuntime - webassembly, WebViewJsRuntime - MAUI
-        
-        IJSUtilsService.OnResize += OnResizeAsync;
         _zoomContext.OnUpdate += OnUpdateZoom;
+        
+        return GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key, OnMouseWheel, 
+            false, false, false);
     }
     
     public async ValueTask DisposeAsync()
     {
-        IJSUtilsService.OnResize -= OnResizeAsync;
+        // IJSUtilsService.OnResize -= OnResizeAsync;
         _zoomContext.OnUpdate -= OnUpdateZoom;
-        
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtWheelEventArgs>("mousewheel", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key);
     }
     
-    [JSInvokable]
-    public Task OnMouseWheel(ExtWheelEventArgs e)
+    private Task OnMouseWheel(BchWheelEventArgs e)
     {
         if (!ScaleOnMouseWheel || _bchZoom is null) return Task.CompletedTask;
 
@@ -125,29 +127,24 @@ public partial class BCHCropper : IAsyncDisposable
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (!firstRender) return;
+        await OnResizeAsync();
+
+        if (StretchCropArea)
         {
-            await JsUtilsService.AddDocumentListenerAsync<ExtWheelEventArgs>("mousewheel", _key, OnMouseWheel, 
-                false, false, false);
+            _rectSize.X = _circleSize;
+            _rectSize.Y = _circleSize;
+
+            _rectPos.X = (_cropperWidth - _circleSize) * 0.5f;
+            _rectPos.Y = (_cropperHeight - _circleSize) * 0.5f;
             
-            await OnResizeAsync();
-
-            if (StretchCropArea)
-            {
-                _rectSize.X = _circleSize;
-                _rectSize.Y = _circleSize;
-
-                _rectPos.X = (_cropperWidth - _circleSize) * 0.5f;
-                _rectPos.Y = (_cropperHeight - _circleSize) * 0.5f;
-                
-                StateHasChanged();
-            }
+            StateHasChanged();
         }
     }
 
     private async Task OnResizeAsync()
     {
-        var rect = await JsUtilsService.GetBoundingClientRectAsync(_cropperId);
+        var rect = await DomInteropService.GetBoundingClientRectAsync(_cropperId);
 
         if (rect is not null)
         {
@@ -201,10 +198,10 @@ public partial class BCHCropper : IAsyncDisposable
     
     private async Task OnMouseDownAsync(MouseEventArgs e, bool rectDragged)
     {
-        await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup", _key, OnMouseLeaveUpAsync);
-        await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _key, OnMouseLeaveUpAsync);
-        await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove", _key, OnMouseMoveAsync);
-        await JsUtilsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove", _key, OnTouchMoveAsync);
+        await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup", _key, OnMouseLeaveUpAsync);
+        await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _key, OnMouseLeaveUpAsync);
+        await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove", _key, OnMouseMoveAsync);
+        await GlobalEventsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove", _key, OnTouchMoveAsync);
         
         _lastMousePosition.Set(e.PageX, e.PageY);
         _rectDragged = rectDragged;
@@ -215,10 +212,10 @@ public partial class BCHCropper : IAsyncDisposable
     
     private async Task OnMouseLeaveUpAsync(MouseEventArgs _)
     {
-        await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("mouseup", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("touchend", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("mousemove", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<TouchEventArgs>("touchmove", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mouseup", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("touchend", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mousemove", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<TouchEventArgs>("touchmove", _key);
         
         if (!_rectDragged && !_rectHandleDragged) return;
         
@@ -269,9 +266,11 @@ public partial class BCHCropper : IAsyncDisposable
         _processingData = true;
         StateHasChanged();
         
-        var imageRect = await JsUtilsService.GetBoundingClientRectAsync(_imageId);
-        var imgBounds = new Vec2 { X = (float)imageRect.OffsetWidth,Y = (float)imageRect.OffsetHeight };
-            
+        var imageRect = await DomInteropService.GetBoundingClientRectAsync(_imageId);
+        if (imageRect is null) return string.Empty;
+        
+        var imgBounds = new Vec2 { X = imageRect.OffsetWidth,Y = imageRect.OffsetHeight };
+        // TODO: make as file stream
         var base64Result = await JsRuntime.InvokeAsync<string>("bchOnCropImage", _canvasId, 
             _canvasHolderId, _imageId, _zoomContext.TopLeftPos, imgBounds, _zoomContext.AngleInRadians, 
             _zoomContext.Scale, ResultFormat, 1.0f, BackgroundColor, CroppedWidth, _rectPos, _rectSize);
@@ -299,7 +298,9 @@ public partial class BCHCropper : IAsyncDisposable
         
         if (CropperType is CropperType.MovableRectangle or CropperType.FixedRectangle)
         {
-            var rect = await JsUtilsService.GetBoundingClientRectAsync(_cropperId);
+            var rect = await DomInteropService.GetBoundingClientRectAsync(_cropperId);
+            if (rect is null) return;
+            
             _cropperWidth = (int) rect.Width;
             _cropperHeight = (int) rect.Height;
             _circleSize = Math.Min(_cropperWidth, _cropperHeight);

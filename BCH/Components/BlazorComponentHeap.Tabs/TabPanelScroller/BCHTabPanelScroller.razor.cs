@@ -1,15 +1,13 @@
 using System.Globalization;
-using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Tabs.Models;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using BlazorComponentHeap.DomInterop.Services;
+using BlazorComponentHeap.Tabs.Models;
 
 namespace BlazorComponentHeap.Tabs.TabPanelScroller;
 
 public partial class BCHTabPanelScroller<TItem> : ComponentBase, IDisposable where TItem : class
 {
-    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
     
     [Parameter] public int Gap { get; set; }
     [Parameter] public int TabHeight { get; set; }
@@ -31,11 +29,11 @@ public partial class BCHTabPanelScroller<TItem> : ComponentBase, IDisposable whe
     private bool _showRight = false;
     private TItem? _prevSelected = null;
 
-    protected override void OnInitialized()
-    {
-        IJSUtilsService.OnResize += UpdateScrollAsync;
-        IJSUtilsService.OnResize += UpdateControlButtonsAsync;
-    }
+    // protected override void OnInitialized()
+    // {
+    //     IJSUtilsService.OnResize += UpdateScrollAsync;
+    //     IJSUtilsService.OnResize += UpdateControlButtonsAsync;
+    // }
     
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -60,8 +58,8 @@ public partial class BCHTabPanelScroller<TItem> : ComponentBase, IDisposable whe
 
     public void Dispose()
     {
-        IJSUtilsService.OnResize -= UpdateScrollAsync;
-        IJSUtilsService.OnResize -= UpdateControlButtonsAsync;
+        // IJSUtilsService.OnResize -= UpdateScrollAsync;
+        // IJSUtilsService.OnResize -= UpdateControlButtonsAsync;
         
         DraggableContext.OnUpdateScroller -= UpdateAsync;
         DraggableContext.OnRerenderScroller -= StateHasChanged;
@@ -76,8 +74,8 @@ public partial class BCHTabPanelScroller<TItem> : ComponentBase, IDisposable whe
     private async Task UpdateScrollAsync() => await UpdateScrollAsync(0);
     private async Task UpdateScrollAsync(float offset)
     {
-        var panelRect = await JsUtilsService.GetBoundingClientRectAsync(_panelContainerId);
-        var scrollerRect = await JsUtilsService.GetBoundingClientRectAsync(_panelScrollerId);
+        var panelRect = await DomInteropService.GetBoundingClientRectAsync(_panelContainerId);
+        var scrollerRect = await DomInteropService.GetBoundingClientRectAsync(_panelScrollerId);
 
         if (panelRect is null || scrollerRect is null) return;
 
@@ -101,8 +99,8 @@ public partial class BCHTabPanelScroller<TItem> : ComponentBase, IDisposable whe
     
     private async Task UpdateControlButtonsAsync()
     {
-        var containerRect = await JsUtilsService.GetBoundingClientRectAsync(_panelContainerId);
-        var draggableRect = await JsUtilsService.GetBoundingClientRectAsync(_panelScrollerId);
+        var containerRect = await DomInteropService.GetBoundingClientRectAsync(_panelContainerId);
+        var draggableRect = await DomInteropService.GetBoundingClientRectAsync(_panelScrollerId);
 
         if (containerRect == null! || draggableRect == null!) return;
 
@@ -129,8 +127,8 @@ public partial class BCHTabPanelScroller<TItem> : ComponentBase, IDisposable whe
     
     private async Task ScrollAsync(TItem item)
     {
-        var containerRect = await JsUtilsService.GetBoundingClientRectAsync(_panelContainerId);
-        var draggableRect = await JsUtilsService.GetBoundingClientRectAsync(_panelScrollerId);
+        var containerRect = await DomInteropService.GetBoundingClientRectAsync(_panelContainerId);
+        var draggableRect = await DomInteropService.GetBoundingClientRectAsync(_panelScrollerId);
 
         if (containerRect is null || draggableRect is null) return;
 

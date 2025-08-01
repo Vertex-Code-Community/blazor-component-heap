@@ -1,5 +1,4 @@
-﻿using BlazorComponentHeap.Core.Enums.Table;
-using BlazorComponentHeap.Core.Models.Table;
+﻿using BlazorComponentHeap.Table.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorComponentHeap.Table.TableColumn;

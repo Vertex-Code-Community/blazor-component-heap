@@ -1,17 +1,20 @@
 ﻿using System.Globalization;
-using BlazorComponentHeap.Core.Models.Events;
-using BlazorComponentHeap.Core.Models.Math;
-using BlazorComponentHeap.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using BlazorComponentHeap.DomInterop.Services;
+using BlazorComponentHeap.GlobalEvents.Events;
+using BlazorComponentHeap.GlobalEvents.Models;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.Maths.Models;
 
 namespace BlazorComponentHeap.Select;
 
 public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
-    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
+    [Inject] public required IJSRuntime JsRuntime { get; set; }
 
     private class Element
     {
@@ -108,52 +111,36 @@ public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
     private float _contentWidth = 0;
     private NumberFormatInfo _nF = new () { NumberDecimalSeparator = "." };
 
-    private bool _isHybridApp = false;
-
-    protected override void OnInitialized()
+    protected override Task OnInitializedAsync()
     {
-        IJSUtilsService.OnGlobalScroll += OnGlobalScrollAsync;
-        
-        _isHybridApp = JsRuntime.GetType().Name.Contains("WebView");
-        
         OptionNamePredicate ??= x => $"{x}";
         
         if (FilterByPredicate == null!)
-        {
             FilterByPredicate = OptionNamePredicate;
-        }
 
         if (!MultipleValues && DefaultValue != null && Options.Contains(DefaultValue))
-        {
             Selected = DefaultValue;
-        }
 
         //var isClass = default(TItem) == null; // Only true if T is a reference type or nullable value type
         _placeholder = (Selected == null) ? DefaultText : OptionNamePredicate.Invoke(Selected);
         
-        StateHasChanged();
+        return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey, 
+            OnDocumentMouseDownAsync);
     }
 
     public async ValueTask DisposeAsync()
     {
-        IJSUtilsService.OnGlobalScroll -= OnGlobalScrollAsync;
-
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtMouseEventArgs>("mousedown", _subscriptionKey);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchScrollEventArgs>("scroll", _subscriptionKey);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
-        {
-            await JsUtilsService.AddDocumentListenerAsync<ExtMouseEventArgs>("mousedown", _subscriptionKey,
-                OnDocumentMouseDownAsync);
-        }
-        
         if (IsOpened)
         {
             //if (Filtering) await _inputRef.FocusAsync();
 
-            if (Filtering) await JsUtilsService.FocusAsync(_inputId);
+            if (Filtering) await DomInteropService.FocusAsync(_inputId);
 
             if (ScrollToSelected && Selected != null! && !MultipleValues && !_scrolled)
             {
@@ -178,7 +165,7 @@ public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
                 }
                 
                 var offset = index * ItemHeight;
-                await JsUtilsService.ScrollToAsync(ScrollerId, "0", $"{offset}", "auto");
+                await DomInteropService.ScrollToAsync(ScrollerId, "0", $"{offset}", "auto");
             }
         }
 
@@ -189,7 +176,7 @@ public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
         }
     }
 
-    private async Task OnGlobalScrollAsync(ScrollEventArgs e)
+    private async Task OnWindowGlobalScrollAsync(BchScrollEventArgs e)
     {
         var scrollContainer = e.PathCoordinates.FirstOrDefault();
         if (scrollContainer?.Id == ScrollerId) return;
@@ -249,7 +236,7 @@ public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
     {
         if (!IsOpened)
         {
-            var containerRect = await JsUtilsService.GetBoundingClientRectAsync(_containerId);
+            var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
             _containerPos.Set(containerRect.X, containerRect.Y);
             _contentWidth = (float) containerRect.Width;
         }
@@ -342,7 +329,7 @@ public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
         await OnFilterKeyDown.InvokeAsync(e);
     }
 
-    private async Task OnDocumentMouseDownAsync(ExtMouseEventArgs e)
+    private async Task OnDocumentMouseDownAsync(BchMouseEventArgs e)
     {
         var container = e.PathCoordinates
             .FirstOrDefault(x => x.Id == _containerId || x.Id == ContentId);
@@ -361,8 +348,14 @@ public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
     private async Task SetOpenedAsync(bool isOpened)
     {
         if (_isOpened == isOpened) return;
-        
         _isOpened = isOpened;
+        
+        if (_isOpened)
+            await GlobalEventsService.AddDocumentListenerAsync<BchScrollEventArgs>("scroll", 
+                _subscriptionKey, OnWindowGlobalScrollAsync, subscribingContext: GlobalSubscribingContext.Window);
+        else
+            await GlobalEventsService.RemoveDocumentListenerAsync<BchScrollEventArgs>("scroll", _subscriptionKey);
+        
         await IsOpenedChanged.InvokeAsync(isOpened);
     }
 

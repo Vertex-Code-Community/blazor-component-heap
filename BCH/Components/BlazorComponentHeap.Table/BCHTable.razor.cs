@@ -1,7 +1,8 @@
-﻿using BlazorComponentHeap.Core.Models.Events;
+﻿using Microsoft.AspNetCore.Components;
 using BlazorComponentHeap.Core.Models.Table;
+using BlazorComponentHeap.GlobalEvents.Events;
+using BlazorComponentHeap.Table.Models;
 using BlazorComponentHeap.Table.TableColumn;
-using Microsoft.AspNetCore.Components;
 
 namespace BlazorComponentHeap.Table;
 
@@ -83,7 +84,7 @@ public partial class BCHTable<TRowData> : ComponentBase
         ReloadItems();
     }
 
-    private void OnScroll(ScrollEventArgs e)
+    private void OnScroll(BchScrollEventArgs e)
     {
         if (IsPagination && IsScrollPagination)
         {

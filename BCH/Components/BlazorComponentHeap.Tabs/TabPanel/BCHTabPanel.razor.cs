@@ -1,16 +1,16 @@
 using System.Globalization;
-using BlazorComponentHeap.Core.Models.Events;
-using BlazorComponentHeap.Core.Models.Markup;
-using BlazorComponentHeap.Core.Models.Math;
-using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Tabs.Models;
 using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.GlobalEvents.Events;
+using BlazorComponentHeap.GlobalEvents.Models;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.Maths.Models;
+using BlazorComponentHeap.Tabs.Models;
 
 namespace BlazorComponentHeap.Tabs.TabPanel;
 
 public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where TItem : class
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
 
     [Parameter] public int Gap { get; set; }
     [Parameter] public string CssClass { get; set; } = string.Empty;
@@ -66,9 +66,9 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
             DraggableContext.OnUpdate += StateHasChanged;
             DraggableContext.OnMove += OnDocumentMove;
 
-            await JsUtilsService.AddDocumentListenerAsync<ExtMouseEventArgs>("mouseup", _subscriptionKey,
+            await GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mouseup", _subscriptionKey,
                 OnDocumentUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<ExtTouchEventArgs>("touchend", _subscriptionKey,
+            await GlobalEventsService.AddDocumentListenerAsync<BchTouchEventArgs>("touchend", _subscriptionKey,
                 OnDocumentTouchEndAsync);
         }
         
@@ -80,10 +80,10 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
         DraggableContext.OnUpdate -= StateHasChanged; // TODO: unsubscribe if subscribed only
         DraggableContext.OnMove -= OnDocumentMove; // TODO: unsubscribe if subscribed only
         
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtMouseEventArgs>("mousemove", _subscriptionKey);
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtTouchEventArgs>("touchmove", _subscriptionKey);
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtMouseEventArgs>("mouseup", _subscriptionKey);
-        await JsUtilsService.RemoveDocumentListenerAsync<ExtTouchEventArgs>("touchend", _subscriptionKey);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mousemove", _subscriptionKey);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchTouchEventArgs>("touchmove", _subscriptionKey);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mouseup", _subscriptionKey);
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchTouchEventArgs>("touchend", _subscriptionKey);
     }
 
     protected override void OnParametersSet()
@@ -107,7 +107,7 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
         OnParametersSet();
     }
 
-    private async Task OnMouseDownAsync(TItem item, float pageX, float pageY, float x, float y, List<CoordsHolder> pathCoordinates)
+    private async Task OnMouseDownAsync(TItem item, float pageX, float pageY, float x, float y, List<ElementParameters> pathCoordinates)
     {
         var itemHolder = pathCoordinates.FirstOrDefault(x => x.ClassList.Contains($"_cls_item_{_panelId}"));
         var removeHolder = pathCoordinates.FirstOrDefault(x => x.ClassList.Contains("bch-tab-control-btn"));
@@ -115,9 +115,9 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
 
         if (Draggable)
         {
-            await JsUtilsService.AddDocumentListenerAsync<ExtMouseEventArgs>("mousemove", _subscriptionKey,
+            await GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousemove", _subscriptionKey,
                 OnDocumentMouseMove);
-            await JsUtilsService.AddDocumentListenerAsync<ExtTouchEventArgs>("touchmove", _subscriptionKey,
+            await GlobalEventsService.AddDocumentListenerAsync<BchTouchEventArgs>("touchmove", _subscriptionKey,
                 OnDocumentTouchMove);
         }
         
@@ -127,7 +127,7 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
         _pressedItem = item;
     }
     
-    private Task OnDocumentTouchMove(ExtTouchEventArgs e)
+    private Task OnDocumentTouchMove(BchTouchEventArgs e)
     {
         if (e.Touches.Count != 1) return Task.CompletedTask;
         var touch = e.Touches.First();
@@ -137,14 +137,14 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
         return Task.CompletedTask;
     }
 
-    private Task OnDocumentMouseMove(ExtMouseEventArgs e)
+    private Task OnDocumentMouseMove(BchMouseEventArgs e)
     {
         DraggableContext.OnMove?.Invoke((float)e.PageX, (float)e.PageY, e.PathCoordinates);
         
         return Task.CompletedTask;
     }
     
-    private void OnDocumentMove(float pageX, float pageY, List<CoordsHolder> pathCoordinates)
+    private void OnDocumentMove(float pageX, float pageY, List<ElementParameters> pathCoordinates)
     {
         if (Items.Count <= _minimalTabCount && _pressedItem != null) return;
 
@@ -202,12 +202,12 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
         if (prevHovered != _hoveredItem || prevDirection != _direction) StateHasChanged();
     }
 
-    private Task OnDocumentTouchEndAsync(ExtTouchEventArgs e)
+    private Task OnDocumentTouchEndAsync(BchTouchEventArgs e)
     {
         if (e.Touches.Count != 1) return Task.CompletedTask;
         var touch = e.Touches.First();
         
-        return OnDocumentUpAsync(new ExtMouseEventArgs
+        return OnDocumentUpAsync(new BchMouseEventArgs
         {
             PageX = touch.PageX,
             PageY = touch.PageY,
@@ -215,7 +215,7 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
         });
     }
 
-    private async Task OnDocumentUpAsync(ExtMouseEventArgs e)
+    private async Task OnDocumentUpAsync(BchMouseEventArgs e)
     {
         var (direction, index) = GetItemHolder(e.PathCoordinates);
         var ind = index;
@@ -299,15 +299,15 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
 
         if (Draggable)
         {
-            await JsUtilsService.RemoveDocumentListenerAsync<ExtMouseEventArgs>("mousemove", _subscriptionKey);
-            await JsUtilsService.RemoveDocumentListenerAsync<ExtTouchEventArgs>("touchmove", _subscriptionKey);
+            await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mousemove", _subscriptionKey);
+            await GlobalEventsService.RemoveDocumentListenerAsync<BchTouchEventArgs>("touchmove", _subscriptionKey);
         }
     }
 
     // needed for mobile, when long-click causes context menu opening and we need to cancel on mousedown changes in state
     private Task OnContextMenuAsync()
     {
-        return OnDocumentUpAsync(new ExtMouseEventArgs());
+        return OnDocumentUpAsync(new BchMouseEventArgs());
     }
 
     private void OnItemClicked(TItem item)
@@ -315,7 +315,7 @@ public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
         Selected = item;
     }
 
-    private (bool, int) GetItemHolder(List<CoordsHolder> pathCoordinates)
+    private (bool, int) GetItemHolder(List<ElementParameters> pathCoordinates)
     {
         var itemHolder = pathCoordinates.FirstOrDefault(x => x.ClassList.Contains($"_cls_item_{_panelId}"));
         if (itemHolder is null) return (false, -1);

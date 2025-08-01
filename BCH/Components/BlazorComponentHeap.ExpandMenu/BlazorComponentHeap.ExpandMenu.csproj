@@ -23,11 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\..\Modules\BlazorComponentHeap.DomInterop\BlazorComponentHeap.DomInterop.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,19 +1,19 @@
 using System.Globalization;
-using BlazorComponentHeap.Core.Models.Math;
-using BlazorComponentHeap.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.DomInterop.Services;
+using BlazorComponentHeap.Maths.Models;
 using BlazorComponentHeap.Modal;
 using BlazorComponentHeap.Tabs.Models;
 using BlazorComponentHeap.Tabs.TabsDraggableContext;
-using Microsoft.AspNetCore.Components;
 
 namespace BlazorComponentHeap.Tabs;
 
 public partial class BCHTabs<TItem> : ComponentBase where TItem : class
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
     
     [CascadingParameter(Name = $"BCHTabsDraggableContext{nameof(TItem)}")] 
-    public BCHTabsDraggableContext<TItem>? OwnerContainer { get; set; } = null!;
+    public BCHTabsDraggableContext<TItem>? OwnerContainer { get; set; }
 
     [Parameter] public int Gap { get; set; } = 4;
     [Parameter] public int TabHeight { get; set; } = 35;
@@ -26,8 +26,8 @@ public partial class BCHTabs<TItem> : ComponentBase where TItem : class
     [Parameter] public bool ScrollToSelected { get; set; } = true;
     [Parameter] public bool ShowCloseOnDefaultTab { get; set; } = true;
     
-    [Parameter] public RenderFragment<TItem>? TabTemplate { get; set; } = null!;
-    [Parameter] public RenderFragment<TItem>? ContentTemplate { get; set; } = null!;
+    [Parameter] public RenderFragment<TItem>? TabTemplate { get; set; }
+    [Parameter] public RenderFragment<TItem>? ContentTemplate { get; set; }
     
     [Parameter] public EventCallback<TItem> SelectedChanged { get; set; }
     [Parameter] public TItem Selected
@@ -77,11 +77,11 @@ public partial class BCHTabs<TItem> : ComponentBase where TItem : class
 
     private async Task OnItemDragStartAsync()
     {
-        var rectRect = await JsUtilsService.GetBoundingClientRectAsync(_contentId);
-        // Console.WriteLine($"OnItemDragStartAsync {rectRect.Width} {rectRect.Height}");
+        var rect = await DomInteropService.GetBoundingClientRectAsync(_contentId);
+        if (rect is null) return;
 
-        _width = (int) rectRect.Width;
-        _height = (int) rectRect.Height;
+        _width = (int) rect.Width;
+        _height = (int) rect.Height;
         _isDragging = true;
         
         StateHasChanged();

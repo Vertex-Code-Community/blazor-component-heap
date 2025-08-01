@@ -1,15 +1,15 @@
-using BlazorComponentHeap.Core.Services.Interfaces;
-using BlazorComponentHeap.Cropper;
-using BlazorComponentHeap.Range;
-using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.Cropper;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.Range;
 
 namespace BlazorComponentHeap.ImageCropper;
 
 public partial class BCHImageCropper : IAsyncDisposable
 {
     [Inject] public required IJSRuntime JsRuntime { get; set; }
-    [Inject] public required IJSUtilsService JsUtilsService { get; set; }
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
 
     [Parameter] public string BackgroundColor { get; set; } = "#ffffff";
     [Parameter] public string ResultFormat { get; set; } = "image/jpeg";
@@ -43,15 +43,15 @@ public partial class BCHImageCropper : IAsyncDisposable
     {
         if (firstRender)
         {
-            await JsUtilsService.AddDocumentListenerAsync<object>("mouseup", _key, OnMouseUp);
-            await JsUtilsService.AddDocumentListenerAsync<object>("touchend", _key, OnMouseUp);
+            await GlobalEventsService.AddDocumentListenerAsync<object>("mouseup", _key, OnMouseUp);
+            await GlobalEventsService.AddDocumentListenerAsync<object>("touchend", _key, OnMouseUp);
         }
     }
 
     public async ValueTask DisposeAsync()
     {
-        await JsUtilsService.RemoveDocumentListenerAsync<object>("mouseup", _key);
-        await JsUtilsService.RemoveDocumentListenerAsync<object>("touchend", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<object>("mouseup", _key);
+        await GlobalEventsService.RemoveDocumentListenerAsync<object>("touchend", _key);
     }
     
     private Task OnMouseUp(object _)
@@ -90,6 +90,7 @@ public partial class BCHImageCropper : IAsyncDisposable
         await _bchCropper.SetRectangleRatioAsync(ratio);
     }
 
+    // TODO: make as file stream
     public Task<string> GetBase64ResultAsync()
     {
         return _bchCropper.GetBase64ResultAsync();

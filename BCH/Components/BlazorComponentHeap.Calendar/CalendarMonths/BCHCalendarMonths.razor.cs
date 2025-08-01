@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using BlazorComponentHeap.Core.Models.Datepicker;
 using Microsoft.AspNetCore.Components;
+using Month = BlazorComponentHeap.Calendar.Models.Month;
 
 namespace BlazorComponentHeap.Calendar.CalendarMonths;
 

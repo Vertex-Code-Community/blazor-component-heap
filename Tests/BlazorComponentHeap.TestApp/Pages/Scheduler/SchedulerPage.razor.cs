@@ -1,4 +1,4 @@
-﻿using BlazorComponentHeap.Core.Models.Scheduler;
+﻿using BlazorComponentHeap.Scheduler.Models;
 
 namespace BlazorComponentHeap.TestApp.Pages.Scheduler;
 

@@ -1,5 +1,6 @@
-﻿using BlazorComponentHeap.Core.Models.Datepicker;
+﻿using BlazorComponentHeap.Calendar.Models;
 using BlazorComponentHeap.Core.Models.Table;
+using BlazorComponentHeap.Table.Models;
 using BlazorComponentHeap.Table.TableColumn;
 using Microsoft.AspNetCore.Components;
 

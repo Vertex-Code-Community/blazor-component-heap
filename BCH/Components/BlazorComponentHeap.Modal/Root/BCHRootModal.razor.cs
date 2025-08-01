@@ -1,11 +1,11 @@
-﻿using BlazorComponentHeap.Core.Services.Interfaces;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using BlazorComponentHeap.Modal.Services;
 
 namespace BlazorComponentHeap.Modal.Root;
 
 public partial class BCHRootModal : IDisposable
 {
-    [Inject] private IModalService ModalService { get; set; } = null!;
+    [Inject] public required IModalService ModalService { get; set; }
 
     protected override void OnInitialized()
     {

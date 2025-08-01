@@ -1,5 +1,5 @@
-﻿using BlazorComponentHeap.Core.Models;
-using BlazorComponentHeap.Core.Services.Interfaces;
+﻿using BlazorComponentHeap.Modal.Models;
+using BlazorComponentHeap.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 

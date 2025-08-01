@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj" />
     <ProjectReference Include="..\BlazorComponentHeap.Cropper\BlazorComponentHeap.Cropper.csproj" />
     <ProjectReference Include="..\BlazorComponentHeap.Range\BlazorComponentHeap.Range.csproj" />
   </ItemGroup>

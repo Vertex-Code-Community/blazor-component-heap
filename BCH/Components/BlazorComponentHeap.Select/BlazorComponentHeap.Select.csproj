@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\BlazorComponentHeap.DomInterop\BlazorComponentHeap.DomInterop.csproj" />
+    <ProjectReference Include="..\..\Modules\BlazorComponentHeap.GlobalEvents\BlazorComponentHeap.GlobalEvents.csproj" />
+    <ProjectReference Include="..\..\Modules\BlazorComponentHeap.Maths\BlazorComponentHeap.Maths.csproj" />
     <ProjectReference Include="..\BlazorComponentHeap.Modal\BlazorComponentHeap.Modal.csproj" />
     <ProjectReference Include="..\..\BlazorComponentHeap.Core\BlazorComponentHeap.Core.csproj" />
   </ItemGroup>

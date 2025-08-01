@@ -1,15 +1,17 @@
 ﻿using System.Globalization;
-using BlazorComponentHeap.Core.Models.Markup;
-using BlazorComponentHeap.Core.Services.Interfaces;
+using BlazorComponentHeap.DomInterop.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using BlazorComponentHeap.GlobalEvents.Services;
+using BlazorComponentHeap.DomInterop.Services;
 
 namespace BlazorComponentHeap.Range;
 
-public partial class BCHRange : IDisposable
+public partial class BCHRange
 {
-    [Inject] private IJSUtilsService JsUtilsService { get; set; } = null!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
+    [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
 
     [Parameter] public int Step { get; set; }
     [Parameter] public int AfterPointCountNumber { get; set; }
@@ -69,11 +71,6 @@ public partial class BCHRange : IDisposable
     private float _prevPageY;
     private float _prevPageX;
 
-    protected override void OnInitialized()
-    {
-        IJSUtilsService.OnResize += OnResizeAsync;
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         _firstRender = firstRender;
@@ -116,16 +113,16 @@ public partial class BCHRange : IDisposable
 
         if (isMouse)
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnHorizontalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnHorizontalMouseMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnHorizontalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnHorizontalMouseMoveAsync);
         }
         else
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnHorizontalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnHorizontalTouchMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnHorizontalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnHorizontalTouchMoveAsync);
         }
         
-        _thumb = await JsUtilsService.GetBoundingClientRectAsync(_circleId);
+        _thumb = await DomInteropService.GetBoundingClientRectAsync(_circleId);
         
         _prevPageX = pageX;
         _offsetX = pageX - _container.Left - _thumb.Width * 0.5f;
@@ -143,16 +140,16 @@ public partial class BCHRange : IDisposable
         
         if (isMouse)
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnHorizontalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnHorizontalMouseMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnHorizontalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnHorizontalMouseMoveAsync);
         }
         else
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnHorizontalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnHorizontalTouchMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnHorizontalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnHorizontalTouchMoveAsync);
         }
 
-        _thumb = await JsUtilsService.GetBoundingClientRectAsync(_circleId);
+        _thumb = await DomInteropService.GetBoundingClientRectAsync(_circleId);
     }
 
     [JSInvokable]
@@ -160,13 +157,13 @@ public partial class BCHRange : IDisposable
     {
         if (_isMouse)
         {
-            await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("mouseup", _containerId);
-            await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("mousemove", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mouseup", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mousemove", _containerId);
         }
         else
         {
-            await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("touchend", _containerId);
-            await JsUtilsService.RemoveDocumentListenerAsync<TouchEventArgs>("touchmove", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("touchend", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<TouchEventArgs>("touchmove", _containerId);
         }
         
         _showTooltip = false;
@@ -234,16 +231,16 @@ public partial class BCHRange : IDisposable
         
         if (isMouse)
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnVerticalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnVerticalMouseMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnVerticalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnVerticalMouseMoveAsync);
         }
         else
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnVerticalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnVerticalTouchMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnVerticalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnVerticalTouchMoveAsync);
         }
         
-        _thumb = await JsUtilsService.GetBoundingClientRectAsync(_circleId);
+        _thumb = await DomInteropService.GetBoundingClientRectAsync(_circleId);
 
         _prevPageY = pageY;
         _offsetY = _container.Height - (pageY - _container.Top + _thumb.Height * 0.5f);
@@ -261,16 +258,16 @@ public partial class BCHRange : IDisposable
         
         if (isMouse)
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnVerticalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnVerticalMouseMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup",  _containerId, OnVerticalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove",  _containerId, OnVerticalMouseMoveAsync);
         }
         else
         {
-            await JsUtilsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnVerticalUpAsync);
-            await JsUtilsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnVerticalTouchMoveAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _containerId, OnVerticalUpAsync);
+            await GlobalEventsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove",  _containerId, OnVerticalTouchMoveAsync);
         }
         
-        _thumb = await JsUtilsService.GetBoundingClientRectAsync(_circleId);
+        _thumb = await DomInteropService.GetBoundingClientRectAsync(_circleId);
     }
 
     [JSInvokable]
@@ -278,13 +275,13 @@ public partial class BCHRange : IDisposable
     {
         if (_isMouse)
         {
-            await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("mouseup", _containerId);
-            await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("mousemove", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mouseup", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mousemove", _containerId);
         }
         else
         {
-            await JsUtilsService.RemoveDocumentListenerAsync<MouseEventArgs>("touchend", _containerId);
-            await JsUtilsService.RemoveDocumentListenerAsync<TouchEventArgs>("touchmove", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("touchend", _containerId);
+            await GlobalEventsService.RemoveDocumentListenerAsync<TouchEventArgs>("touchmove", _containerId);
         }
         
         _showTooltip = false;
@@ -360,8 +357,8 @@ public partial class BCHRange : IDisposable
 
     private async Task OnUpdateAsync()
     {
-        _container = await JsUtilsService.GetBoundingClientRectAsync(_containerId);
-        _thumb = await JsUtilsService.GetBoundingClientRectAsync(_circleId);
+        _container = await DomInteropService.GetBoundingClientRectAsync(_containerId);
+        _thumb = await DomInteropService.GetBoundingClientRectAsync(_circleId);
 
         _container ??= new();
         _thumb ??= new();
@@ -387,11 +384,6 @@ public partial class BCHRange : IDisposable
     private async Task OnResizeAsync()
     {
         await OnUpdateAsync();
-    }
-
-    public void Dispose()
-    {
-        IJSUtilsService.OnResize -= OnResizeAsync;
     }
 
     public async Task SetValueAsync(float value)

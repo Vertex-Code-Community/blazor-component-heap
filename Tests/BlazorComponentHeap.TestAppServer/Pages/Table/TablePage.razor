@@ -1,5 +1,5 @@
 ﻿@page "/table"
-@using BlazorComponentHeap.Core.Enums.Table
+@using BlazorComponentHeap.Table.Models
 @using BlazorComponentHeap.TestAppServer.TestModels
 
 <div style="height:400px; display: flex; flex-direction: column; padding: 30px;">
@@ -18,20 +18,20 @@
                         Title="First name"
                         IsSorted="true"
                         FilterProperty="FirstName"
-                        FilterType="ColumnFilterType.TextSearch" />
+                        FilterType="ColumnFilterType.TextSearch"/>
         <BCHTableColumn TRowData="UserModel"
                         Expression="c => c.LastName"
                         Title="Last name"
                         IsSorted="true"
                         FilterProperty="LastName"
-                        FilterType="ColumnFilterType.NumberSearch" />
+                        FilterType="ColumnFilterType.NumberSearch"/>
         <BCHTableColumn TRowData="UserModel"
                         IsSorted="true"
                         Expression="c => c.BirthDay"
                         FilterType="ColumnFilterType.Select"
                         Title="Birthdate"
                         FilterProperty="Birthdate"
-                        SelectData="@_selectData" />
+                        SelectData="@_selectData"/>
         <BCHTableColumn TRowData="UserModel"
                         Title="Orders"
                         FilterProperty="Orders"
