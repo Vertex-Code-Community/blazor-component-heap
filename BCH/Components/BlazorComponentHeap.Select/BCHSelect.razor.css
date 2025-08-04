@@ -32,7 +32,7 @@
             transition: min-width 0.1s ease;
             min-width: 0;
             height: 24px;
-            background: url(bch-img/select/select-search.svg) left no-repeat;
+            background: url(img/select-search.svg) left no-repeat;
         }
 
         .bch-select-container > .bch-button > .search-icon.opened {
@@ -102,7 +102,7 @@
         transition: all 0.2s ease;
         width: 14px;
         height: 7px;
-        background: url(bch-img/select/select-arrow.svg) center no-repeat;
+        background: url(img/select-arrow.svg) center no-repeat;
         margin-left: auto;
     }
 
@@ -230,7 +230,7 @@
                     .bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span {
                         width: 14px;
                         height: 7px;
-                        background: url(bch-img/select/select-arrow.svg) center no-repeat;
+                        background: url(img/select-arrow.svg) center no-repeat;
                         margin-right: 10px;
                         transition: all 0.25s ease;
                     }
