@@ -36,7 +36,7 @@ public partial class BCHDraggingModal : IAsyncDisposable
     private bool _show { get; set; }
     private bool _dragStarted = false;
     private int _zIndex = _globalZIndex;
-    private BCHModal? _modalComponent = null!;
+    private BchModal? _modalComponent = null!;
 
     private readonly string _key = $"_id_{Guid.NewGuid()}";
     private readonly NumberFormatInfo _nF = new() { NumberDecimalSeparator = "." };

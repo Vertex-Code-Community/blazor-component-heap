@@ -4,9 +4,9 @@ namespace BlazorComponentHeap.Modal.Services;
 
 internal class ModalService : IModalService
 {
-    public IReadOnlyList<ModalModel> Modals { get; } = new List<ModalModel>();
+    public IReadOnlyList<ModalModel> Modals => _modals;
     public event Action? OnUpdate;
-    public event Action<ModalModel>? OnOverlayClicked = null!;
+    public event Action<ModalModel>? OnOverlayClicked;
 
     private readonly List<ModalModel> _modals = new();
 

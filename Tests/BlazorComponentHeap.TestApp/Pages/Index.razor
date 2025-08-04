@@ -3,6 +3,7 @@
 <div style="height:400px; display: flex; flex-direction: column;">
     <div>@JsRuntime.GetType().Name</div>
 
+    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/modal"); }'> Modal</a>
     <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/table"); }'> Table link</a>
     <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/table-custom-td"); }'> Table Custom Td link</a>
     <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/datepicker"); }'> Datepicker link</a>
@@ -12,7 +13,6 @@
     <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/scheduler"); }'> Scheduler link</a>
     <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/radio-buttons"); }'> Radio-Buttons link</a>
     <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/dragging-modal"); }'> Dragging Modal</a>
-    <a href="/modal"> Modal</a>
     <a href="/zoom"> Zoom</a>
     <a href="/cropper"> Cropper</a>
     <a href="/image-cropper"> Cropper Image</a>

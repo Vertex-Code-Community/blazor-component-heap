@@ -3,7 +3,7 @@ using BlazorComponentHeap.Modal.Services;
 
 namespace BlazorComponentHeap.Modal.Root;
 
-public partial class BCHRootModal : IDisposable
+public partial class BchRootModal : IDisposable
 {
     [Inject] public required IModalService ModalService { get; set; }
 

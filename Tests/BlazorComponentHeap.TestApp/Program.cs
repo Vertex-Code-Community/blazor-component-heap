@@ -1,6 +1,6 @@
-using BlazorComponentHeap.DomInterop.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using BlazorComponentHeap.DomInterop.Extensions;
 using BlazorComponentHeap.Files.Extensions;
 using BlazorComponentHeap.GlobalEvents.Extensions;
 using BlazorComponentHeap.Modal.Extensions;
@@ -11,7 +11,7 @@ using BlazorComponentHeap.TestApp.Routing.Services;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.RootComponents.Add<BCHRootModal>("body::after");
+builder.RootComponents.Add<BchRootModal>("body::after");
 
 var services = builder.Services;
 

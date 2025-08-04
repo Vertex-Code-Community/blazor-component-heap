@@ -4,7 +4,7 @@ using BlazorComponentHeap.Modal.Services;
 
 namespace BlazorComponentHeap.Modal.Content;
 
-public partial class BCHModalContent : IDisposable
+public partial class BchModalContent : IDisposable
 {
     [Inject] public required IModalService ModalService { get; set; }
 

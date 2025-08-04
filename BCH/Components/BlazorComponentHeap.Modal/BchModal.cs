@@ -1,16 +1,16 @@
-﻿using BlazorComponentHeap.Modal.Models;
-using BlazorComponentHeap.Modal.Services;
+﻿using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
+using BlazorComponentHeap.Modal.Models;
+using BlazorComponentHeap.Modal.Services;
 
 namespace BlazorComponentHeap.Modal;
 
-public class BCHModal : ComponentBase, IDisposable
+public class BchModal : ComponentBase, IDisposable
 {
-    [Inject] private IModalService ModalService { get; set; } = null!;
-    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+    [Inject] public required IModalService ModalService { get; set; }
+    [Inject] public required IJSRuntime JsRuntime { get; set; }
     
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter, EditorRequired] public required RenderFragment ChildContent { get; set; }
     [Parameter] public EventCallback OnOverlayClicked { get; set; }
     
     [Parameter] public string Id { get; set; } = "";

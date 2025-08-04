@@ -11,7 +11,7 @@
         <BlazorWebView.RootComponents>
             <RootComponent Selector="#app" ComponentType="{x:Type local:Main}" />
             <RootComponent Selector="#modal"
-                           ComponentType="{x:Type root:BCHRootModal}" />
+                           ComponentType="{x:Type root:BchRootModal}" />
         </BlazorWebView.RootComponents>
     </BlazorWebView>
 

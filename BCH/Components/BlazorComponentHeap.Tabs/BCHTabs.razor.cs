@@ -42,7 +42,7 @@ public partial class BCHTabs<TItem> : ComponentBase where TItem : class
         }
     }
 
-    private BCHModal? _modalComponent;
+    private BchModal? _modalComponent;
     private TItem _selectedValue = default!;
     private readonly string _contentId = $"_id_{Guid.NewGuid()}";
 

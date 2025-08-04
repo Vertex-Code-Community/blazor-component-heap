@@ -11,7 +11,7 @@
         <img class="bch-datepicker-img" src="_content/BlazorComponentHeap.Core/bch-img/datepicker/calendar-icon.svg"/>
     </div>
 
-    <BCHModal CssClass="@($"bch-calendar-days-modal-wrapper {CssClass}")"
+    <BchModal CssClass="@($"bch-calendar-days-modal-wrapper {CssClass}")"
               Width="250px"
               Height="unset"
               X="@($"{_containerPos.X.ToString(_nF)}px")"
@@ -33,9 +33,9 @@
                          OnCloseDate="() => { _showDate = false; return OnShowModeChangedAsync(); }"
                          IsShowMonth="e => { _showMonth = e; _showDate = false; return OnShowModeChangedAsync(); }"/>
 
-    </BCHModal>
+    </BchModal>
 
-    <BCHModal CssClass="@($"bch-calendar-months-modal-wrapper {CssClass}")"
+    <BchModal CssClass="@($"bch-calendar-months-modal-wrapper {CssClass}")"
               Width="250px"
               Height="unset"
               X="@($"{_containerPos.X.ToString(_nF)}px")"
@@ -51,7 +51,7 @@
                            YearChanged="e=> { _selectedYear = e; StateHasChanged(); }"
                            IsShowDate="e => { _showMonth = false; _showDate = e; return OnShowModeChangedAsync(); }"
                            OnFocusOut="() => _inputRef.FocusAsync()"/>
-    </BCHModal>
+    </BchModal>
 
 </div>
 
