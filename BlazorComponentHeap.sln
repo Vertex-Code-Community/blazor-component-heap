@@ -15,53 +15,53 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorComponentHeap.TestApp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Modal", "BCH\Components\BlazorComponentHeap.Modal\BlazorComponentHeap.Modal.csproj", "{1E7AB6F0-C4FC-4FB3-9A0A-A7E98156EE6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Modal", "BCH\Components\Bch.Components.Modal\Bch.Components.Modal.csproj", "{1E7AB6F0-C4FC-4FB3-9A0A-A7E98156EE6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Select", "BCH\Components\BlazorComponentHeap.Select\BlazorComponentHeap.Select.csproj", "{91F519E5-7394-4A76-8775-91584DB16F4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Select", "BCH\Components\Bch.Components.Select\Bch.Components.Select.csproj", "{91F519E5-7394-4A76-8775-91584DB16F4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Calendar", "BCH\Components\BlazorComponentHeap.Calendar\BlazorComponentHeap.Calendar.csproj", "{206DFD80-2E65-4E6F-BC56-A27008AA3636}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Calendar", "BCH\Components\Bch.Components.Calendar\Bch.Components.Calendar.csproj", "{206DFD80-2E65-4E6F-BC56-A27008AA3636}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Cropper", "BCH\Components\BlazorComponentHeap.Cropper\BlazorComponentHeap.Cropper.csproj", "{F9CABDFA-AFA9-43EE-A44C-AA6C280B031D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Cropper", "BCH\Components\Bch.Components.Cropper\Bch.Components.Cropper.csproj", "{F9CABDFA-AFA9-43EE-A44C-AA6C280B031D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.DraggingModal", "BCH\Components\BlazorComponentHeap.DraggingModal\BlazorComponentHeap.DraggingModal.csproj", "{215BFDE4-3247-49D0-AFD7-928FBA5FD19C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.DraggingModal", "BCH\Components\Bch.Components.DraggingModal\Bch.Components.DraggingModal.csproj", "{215BFDE4-3247-49D0-AFD7-928FBA5FD19C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.ExpandMenu", "BCH\Components\BlazorComponentHeap.ExpandMenu\BlazorComponentHeap.ExpandMenu.csproj", "{B9B23105-B9C2-4455-8BF8-BAF227C61812}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.ExpandMenu", "BCH\Components\Bch.Components.ExpandMenu\Bch.Components.ExpandMenu.csproj", "{B9B23105-B9C2-4455-8BF8-BAF227C61812}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.ImageCropper", "BCH\Components\BlazorComponentHeap.ImageCropper\BlazorComponentHeap.ImageCropper.csproj", "{C74B96E8-C963-428A-BC32-17CD35DA3380}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.ImageCropper", "BCH\Components\Bch.Components.ImageCropper\Bch.Components.ImageCropper.csproj", "{C74B96E8-C963-428A-BC32-17CD35DA3380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.RadioButton", "BCH\Components\BlazorComponentHeap.RadioButton\BlazorComponentHeap.RadioButton.csproj", "{51006A9C-BC7D-4111-B77E-5D0BC42A52E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.RadioButton", "BCH\Components\Bch.Components.RadioButton\Bch.Components.RadioButton.csproj", "{51006A9C-BC7D-4111-B77E-5D0BC42A52E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.RangeCalendar", "BCH\Components\BlazorComponentHeap.RangeCalendar\BlazorComponentHeap.RangeCalendar.csproj", "{878FC912-AB9C-4C2A-B2AC-248E3909C30D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.RangeCalendar", "BCH\Components\Bch.Components.RangeCalendar\Bch.Components.RangeCalendar.csproj", "{878FC912-AB9C-4C2A-B2AC-248E3909C30D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Range", "BCH\Components\BlazorComponentHeap.Range\BlazorComponentHeap.Range.csproj", "{4474F67D-CE82-4714-84D8-314754C6E115}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Range", "BCH\Components\Bch.Components.Range\Bch.Components.Range.csproj", "{4474F67D-CE82-4714-84D8-314754C6E115}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Scheduler", "BCH\Components\BlazorComponentHeap.Scheduler\BlazorComponentHeap.Scheduler.csproj", "{EABD6B55-3881-431C-8855-49306943D940}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Scheduler", "BCH\Components\Bch.Components.Scheduler\Bch.Components.Scheduler.csproj", "{EABD6B55-3881-431C-8855-49306943D940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Slider", "BCH\Components\BlazorComponentHeap.Slider\BlazorComponentHeap.Slider.csproj", "{229ADD12-CC2D-427B-909E-AA863C20A966}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Slider", "BCH\Components\Bch.Components.Slider\Bch.Components.Slider.csproj", "{229ADD12-CC2D-427B-909E-AA863C20A966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Table", "BCH\Components\BlazorComponentHeap.Table\BlazorComponentHeap.Table.csproj", "{2BFCC75A-54FB-447E-80E8-AFA0F6AFD2B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Table", "BCH\Components\Bch.Components.Table\Bch.Components.Table.csproj", "{2BFCC75A-54FB-447E-80E8-AFA0F6AFD2B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Tabs", "BCH\Components\BlazorComponentHeap.Tabs\BlazorComponentHeap.Tabs.csproj", "{8A7A4F0F-24F7-4712-940A-EE59C02217B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Tabs", "BCH\Components\Bch.Components.Tabs\Bch.Components.Tabs.csproj", "{8A7A4F0F-24F7-4712-940A-EE59C02217B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Toggle", "BCH\Components\BlazorComponentHeap.Toggle\BlazorComponentHeap.Toggle.csproj", "{D62EEB6C-772C-407E-BB71-1345CC37AC55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Toggle", "BCH\Components\Bch.Components.Toggle\Bch.Components.Toggle.csproj", "{D62EEB6C-772C-407E-BB71-1345CC37AC55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Zoom", "BCH\Components\BlazorComponentHeap.Zoom\BlazorComponentHeap.Zoom.csproj", "{E9C5786E-C15D-CE1D-AD05-253189B5BBA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Zoom", "BCH\Components\Bch.Components.Zoom\Bch.Components.Zoom.csproj", "{E9C5786E-C15D-CE1D-AD05-253189B5BBA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Input", "BCH\Components\BlazorComponentHeap.Input\BlazorComponentHeap.Input.csproj", "{6BFAE09E-424E-417D-8B8A-DD94C9612D8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Input", "BCH\Components\Bch.Components.Input\Bch.Components.Input.csproj", "{6BFAE09E-424E-417D-8B8A-DD94C9612D8E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{8A867CD5-5250-4BBC-AA10-84FDA3FF202B}"
 EndProject
-Project("{32E662EC-AE83-409D-8729-8107D8437382}") = "BlazorComponentHeap.Files", "BCH\Modules\BlazorComponentHeap.Files\BlazorComponentHeap.Files.csproj", "{95462481-BEA0-4DFF-8398-52F69953A355}"
+Project("{32E662EC-AE83-409D-8729-8107D8437382}") = "Bch.Modules.Files", "BCH\Modules\Bch.Modules.Files\Bch.Modules.Files.csproj", "{95462481-BEA0-4DFF-8398-52F69953A355}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.GlobalEvents", "BCH\Modules\BlazorComponentHeap.GlobalEvents\BlazorComponentHeap.GlobalEvents.csproj", "{54630B3A-4748-4BF9-826B-49BB6E6A7FD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Modules.GlobalEvents", "BCH\Modules\Bch.Modules.GlobalEvents\Bch.Modules.GlobalEvents.csproj", "{54630B3A-4748-4BF9-826B-49BB6E6A7FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.DomInterop", "BCH\Modules\BlazorComponentHeap.DomInterop\BlazorComponentHeap.DomInterop.csproj", "{9C0FE5F9-66D8-433B-AB30-781B867A6E13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Modules.DomInterop", "BCH\Modules\Bch.Modules.DomInterop\Bch.Modules.DomInterop.csproj", "{9C0FE5F9-66D8-433B-AB30-781B867A6E13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Storage", "BCH\Modules\BlazorComponentHeap.Storage\BlazorComponentHeap.Storage.csproj", "{60F49CBA-8BF2-4CE3-A4B3-8F1BBBB58381}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Modules.Storage", "BCH\Modules\Bch.Modules.Storage\Bch.Modules.Storage.csproj", "{60F49CBA-8BF2-4CE3-A4B3-8F1BBBB58381}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Themes", "BCH\Modules\BlazorComponentHeap.Themes\BlazorComponentHeap.Themes.csproj", "{ABB66D17-F451-4143-AD76-F330D6554554}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Modules.Themes", "BCH\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj", "{ABB66D17-F451-4143-AD76-F330D6554554}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorComponentHeap.Maths", "BCH\Modules\BlazorComponentHeap.Maths\BlazorComponentHeap.Maths.csproj", "{F4CC9C2E-0F1B-449E-83B4-AB14E90FF065}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Modules.Maths", "BCH\Modules\Bch.Modules.Maths\Bch.Modules.Maths.csproj", "{F4CC9C2E-0F1B-449E-83B4-AB14E90FF065}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

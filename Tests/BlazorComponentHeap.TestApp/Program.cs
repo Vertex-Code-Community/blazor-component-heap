@@ -1,10 +1,10 @@
+using Bch.Components.Modal.Extensions;
+using Bch.Components.Modal.Root;
+using Bch.Modules.DomInterop.Extensions;
+using Bch.Modules.Files.Extensions;
+using Bch.Modules.GlobalEvents.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using BlazorComponentHeap.DomInterop.Extensions;
-using BlazorComponentHeap.Files.Extensions;
-using BlazorComponentHeap.GlobalEvents.Extensions;
-using BlazorComponentHeap.Modal.Extensions;
-using BlazorComponentHeap.Modal.Root;
 using BlazorComponentHeap.TestApp;
 using BlazorComponentHeap.TestApp.Routing.Services;
 

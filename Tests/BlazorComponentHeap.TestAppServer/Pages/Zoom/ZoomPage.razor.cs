@@ -1,5 +1,5 @@
-using BlazorComponentHeap.Scheduler.Models;
-using BlazorComponentHeap.Zoom.Models;
+using Bch.Components.Scheduler.Models;
+using Bch.Components.Zoom.Models;
 
 namespace BlazorComponentHeap.TestAppServer.Pages.Zoom;
 

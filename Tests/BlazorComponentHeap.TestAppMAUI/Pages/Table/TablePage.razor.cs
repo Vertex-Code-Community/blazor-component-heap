@@ -1,5 +1,4 @@
-﻿using BlazorComponentHeap.Core.Models.Table;
-using BlazorComponentHeap.Table.Models;
+﻿using Bch.Components.Table.Models;
 using BlazorComponentHeap.TestAppMAUI.TestModels;
 
 namespace BlazorComponentHeap.TestAppMAUI.Pages.Table;

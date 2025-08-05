@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using BlazorComponentHeap.Files.Events;
 
 namespace BlazorComponentHeap.TestApp;
 

@@ -1,0 +1,45 @@
+@using Bch.Components.Select
+@{
+    var items = GetPages(CurrentPage, _totalPages);
+}
+
+@if (items.Count > 0)
+{
+    <div id="@_containerId" class="bch-pagination-container">
+        <div class="select-page-size">
+            <BCHSelect TItem="int"
+                       Height="40"
+                       Width="60"
+                       ContentHeight="201"
+                       Options="Sizes.Select(x => (int) x)"
+                       UpperSide="true"
+                       CssClass="bch-table-pagination-select"
+                       @bind-Selected="PageSize" />
+        </div>
+        <div class="select-page-number bch-no-selectable-text">
+            <div class="prev-page @(CurrentPage == 1 ? "bch-disabled" : "")" @onclick="async () => { await OnPaginationAsync(false); }"></div>
+            
+            @foreach (var item in items)
+            {
+                <label @onclick="async () => { await OnSelectPageNumberAsync(item); }"
+                       class="page-number-item @(GetActivePage(item)) @(item is string ? "bch-pagination-dots" : "")">
+                    @item
+                </label>
+            }
+            
+            <div class="next-page @(CurrentPage == _totalPages ? "bch-disabled" : "")" @onclick="async () => { await OnPaginationAsync(true); }"></div>
+        </div>
+    </div>
+}
+
+<style>
+    .bch-pagination-container#@_containerId > .select-page-size .bch-select-container > .bch-button {
+        gap: 5px;
+    }
+    
+    .bch-table-pagination-select .bch-option {
+        padding: 0 !important;
+        border: none !important;
+        justify-content: center;
+    }
+</style>

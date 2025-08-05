@@ -1,4 +1,4 @@
-using BlazorComponentHeap.Cropper;
+using Bch.Components.Cropper;
 
 namespace BlazorComponentHeap.TestAppServer.Pages.Cropper;
 

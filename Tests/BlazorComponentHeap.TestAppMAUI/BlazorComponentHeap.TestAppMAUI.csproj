@@ -73,22 +73,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Calendar\BlazorComponentHeap.Calendar.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Cropper\BlazorComponentHeap.Cropper.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.DraggingModal\BlazorComponentHeap.DraggingModal.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.ExpandMenu\BlazorComponentHeap.ExpandMenu.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.ImageCropper\BlazorComponentHeap.ImageCropper.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Modal\BlazorComponentHeap.Modal.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.RadioButton\BlazorComponentHeap.RadioButton.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.RangeCalendar\BlazorComponentHeap.RangeCalendar.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Range\BlazorComponentHeap.Range.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Scheduler\BlazorComponentHeap.Scheduler.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Select\BlazorComponentHeap.Select.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Slider\BlazorComponentHeap.Slider.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Table\BlazorComponentHeap.Table.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Tabs\BlazorComponentHeap.Tabs.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Toggle\BlazorComponentHeap.Toggle.csproj" />
-	  <ProjectReference Include="..\..\BCH\Components\BlazorComponentHeap.Zoom\BlazorComponentHeap.Zoom.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Calendar\Bch.Components.Calendar.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Cropper\Bch.Components.Cropper.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.DraggingModal\Bch.Components.DraggingModal.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.ExpandMenu\Bch.Components.ExpandMenu.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.ImageCropper\Bch.Components.ImageCropper.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Modal\Bch.Components.Modal.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.RadioButton\Bch.Components.RadioButton.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.RangeCalendar\Bch.Components.RangeCalendar.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Range\Bch.Components.Range.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Scheduler\Bch.Components.Scheduler.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Select\Bch.Components.Select.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Slider\Bch.Components.Slider.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Table\Bch.Components.Table.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Tabs\Bch.Components.Tabs.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Toggle\Bch.Components.Toggle.csproj" />
+	  <ProjectReference Include="..\..\BCH\Components\Bch.Components.Zoom\Bch.Components.Zoom.csproj" />
 	</ItemGroup>
 
 </Project>

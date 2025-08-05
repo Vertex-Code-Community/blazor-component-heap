@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using BlazorComponentHeap.DomInterop.Extensions;
-using BlazorComponentHeap.GlobalEvents.Extensions;
-using BlazorComponentHeap.Modal.Extensions;
+﻿using Bch.Components.Modal.Extensions;
+using Bch.Modules.DomInterop.Extensions;
+using Bch.Modules.GlobalEvents.Extensions;
+using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 
 namespace BlazorComponentHeap.TestAppMAUI;

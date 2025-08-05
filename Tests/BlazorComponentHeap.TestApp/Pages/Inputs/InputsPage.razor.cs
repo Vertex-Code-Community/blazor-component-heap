@@ -1,8 +1,8 @@
+using Bch.Modules.Files;
+using Bch.Modules.Files.Events;
+using Bch.Modules.Files.Extensions;
+using Bch.Modules.Files.Models;
 using Microsoft.AspNetCore.Components;
-using BlazorComponentHeap.Files;
-using BlazorComponentHeap.Files.Events;
-using BlazorComponentHeap.Files.Extensions;
-using BlazorComponentHeap.Files.Models;
 
 namespace BlazorComponentHeap.TestApp.Pages.Inputs;
 

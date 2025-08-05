@@ -1,0 +1,4 @@
+﻿@foreach (var modalModel in ModalService.Modals)
+{
+    <BchModalContent @key="@modalModel" ModalModel="modalModel"/>
+}
