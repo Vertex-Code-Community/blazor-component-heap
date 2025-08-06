@@ -4,9 +4,9 @@ using Bch.Modules.Files.Extensions;
 using Bch.Modules.Files.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Bch.Integration.Pages.Pages.Inputs;
+namespace Bch.Integration.Pages.Pages.FileInputs;
 
-public partial class InputsPage
+public partial class FileInputsPage
 {
     [Inject] public required IBchFilesService BchFilesService { get; set; }
     

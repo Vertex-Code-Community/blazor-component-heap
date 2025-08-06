@@ -1,11 +1,11 @@
-Blazor.registerCustomEventType('filedrop', {
+Blazor.registerCustomEventType('bchfiledrop', {
     browserEventName: 'drop',
     createEventArgs: event => {
         event.preventDefault();
 
         const files = event.dataTransfer.files;
         if (!files.length) return { files: [] }
-        
+
         const dropZone = event.target?.closest('[bch-file-drop-zone]');
         const createImagePreview = dropZone?.hasAttribute('create-image-preview');
         const fileInfos = [];
@@ -13,7 +13,7 @@ Blazor.registerCustomEventType('filedrop', {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             const guid = bchGetUUID();
-            
+
             console.log(file.type);
 
             const fileInfo = {
@@ -33,7 +33,7 @@ Blazor.registerCustomEventType('filedrop', {
     }
 });
 
-Blazor.registerCustomEventType('dropdragover', {
+Blazor.registerCustomEventType('bchdropdragover', {
     browserEventName: 'dragover',
     createEventArgs: event => {
         event.preventDefault();
@@ -41,7 +41,7 @@ Blazor.registerCustomEventType('dropdragover', {
     }
 });
 
-Blazor.registerCustomEventType('dropdragleave', {
+Blazor.registerCustomEventType('bchdropdragleave', {
     browserEventName: 'dragleave',
     createEventArgs: event => {
         return {}

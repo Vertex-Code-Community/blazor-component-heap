@@ -14,10 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\Modules\Bch.Modules.Files\Bch.Modules.Files.csproj" />
     </ItemGroup>
 

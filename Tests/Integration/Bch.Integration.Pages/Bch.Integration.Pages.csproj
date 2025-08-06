@@ -15,10 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot\"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Calendar\Bch.Components.Calendar.csproj"/>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Cropper\Bch.Components.Cropper.csproj"/>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.DraggingModal\Bch.Components.DraggingModal.csproj"/>
