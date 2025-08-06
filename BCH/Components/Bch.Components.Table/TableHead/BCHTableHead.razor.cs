@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.Table.TableHead;
 
-public partial class BCHTableHead<TRowData> : ComponentBase where TRowData : class
+public partial class BchTableHead<TRowData> : ComponentBase where TRowData : class
 {
     [Parameter] public string Width { get; set; } = string.Empty;
-    [Parameter] public BCHTableColumn<TRowData> Column { get; set; } = null!;
+    [Parameter] public BchTableColumn<TRowData> Column { get; set; } = null!;
     [Parameter] public EventCallback<TableFilterParameters> OnFilterData { get; set; }
     [Parameter] public EventCallback<TableSortParameters> OnClickSorted { get; set; }
 

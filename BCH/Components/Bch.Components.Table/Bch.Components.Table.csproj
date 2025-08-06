@@ -24,4 +24,8 @@
         <ProjectReference Include="..\Bch.Components.RangeCalendar\Bch.Components.RangeCalendar.csproj"/>
         <ProjectReference Include="..\Bch.Components.Select\Bch.Components.Select.csproj"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj"/>
+    </ItemGroup>
 </Project>

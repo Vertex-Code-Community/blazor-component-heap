@@ -7,7 +7,7 @@ using Bch.Modules.Maths.Models;
 
 namespace Bch.Components.Calendar;
 
-public partial class BCHCalendar : IAsyncDisposable
+public partial class BchCalendar : IAsyncDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }

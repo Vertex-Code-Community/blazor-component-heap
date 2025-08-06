@@ -22,11 +22,15 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="wwwroot\"/>
+    </ItemGroup>
+    
+    <ItemGroup>
         <ProjectReference Include="..\Bch.Components.Cropper\Bch.Components.Cropper.csproj"/>
         <ProjectReference Include="..\Bch.Components.Range\Bch.Components.Range.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot\"/>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
     </ItemGroup>
 </Project>

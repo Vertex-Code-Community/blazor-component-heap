@@ -3,20 +3,20 @@ using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.ExpandMenu.ExpandMenuContainer;
 
-public partial class BCHExpandMenuContainer
+public partial class BchExpandMenuContainer
 {
     [Parameter] public required RenderFragment ChildContent { get; set; }
 
-    private List<BCHExpandMenu> _expandMenus = new();
+    private List<BchExpandMenu> _expandMenus = new();
 
-    internal BCHExpandMenu SelectedMenu { get; set; } = null!;
+    internal BchExpandMenu SelectedMenu { get; set; } = null!;
 
-    internal void AddExpandMenu(BCHExpandMenu expandMenu)
+    internal void AddExpandMenu(BchExpandMenu expandMenu)
     {
         _expandMenus.Add(expandMenu);
     }
 
-    internal void SelectButton(BCHExpandMenu expandMenu)
+    internal void SelectButton(BchExpandMenu expandMenu)
     {
         if (SelectedMenu == expandMenu)
         {

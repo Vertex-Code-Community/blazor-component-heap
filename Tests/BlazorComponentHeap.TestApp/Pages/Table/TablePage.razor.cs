@@ -20,7 +20,7 @@ public partial class TablePage
     
     private int _currentPage = 1;
 
-    private BCHTable<UserModel>? _tableRef;
+    private BchTable<UserModel>? _tableRef;
 
     protected override void OnInitialized()
     {

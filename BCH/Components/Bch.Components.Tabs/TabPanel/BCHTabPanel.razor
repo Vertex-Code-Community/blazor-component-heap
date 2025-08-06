@@ -23,8 +23,8 @@
             <div class="bch-content-wrapper"
                  style="width: @($"{itemWidth}px");"
                  @oncontextmenu="OnContextMenuAsync"
-                 @onextmousedown="async e => { await OnMouseDownAsync(item, (float)e.PageX, (float)e.PageY, e.X, e.Y, e.PathCoordinates); }"
-                 @onexttouchstart="async e => { var t = e.Touches[0]; await OnMouseDownAsync(item, t.PageX, t.PageY, t.X, t.Y, e.PathCoordinates); }">
+                 @onbchtabsmousedown="async e => { await OnMouseDownAsync(item, (float)e.PageX, (float)e.PageY, e.X, e.Y, e.PathCoordinates); }"
+                 @onbchtabstouchstart="async e => { var t = e.Touches[0]; await OnMouseDownAsync(item, t.PageX, t.PageY, t.X, t.Y, e.PathCoordinates); }">
                 
                 @ItemTemplate(item)
                 

@@ -12,7 +12,7 @@ public class TabsDraggableContextModel<TItem> where TItem : class
     internal Vec2 DraggingPosition { get; set; } = new();
     internal Vec2 StartOffset { get; set; } = new();
     internal List<TItem>? Items { get; set; }
-    internal BCHTabPanel<TItem>? TabPanelInstance { get; set; }
+    internal BchTabPanel<TItem>? TabPanelInstance { get; set; }
     internal Action? OnUpdate { get; set; }
     internal Func<Task>? OnUpdateScroller { get; set; }
     internal Action? OnRerenderScroller { get; set; }

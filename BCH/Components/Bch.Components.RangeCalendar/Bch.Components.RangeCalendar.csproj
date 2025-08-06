@@ -18,6 +18,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15"/>
     </ItemGroup>
 
@@ -26,8 +30,8 @@
         <ProjectReference Include="..\Bch.Components.Calendar\Bch.Components.Calendar.csproj"/>
         <ProjectReference Include="..\Bch.Components.Modal\Bch.Components.Modal.csproj"/>
     </ItemGroup>
-    <ItemGroup>
-      <Folder Include="wwwroot\" />
-    </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj"/>
+    </ItemGroup>
 </Project>

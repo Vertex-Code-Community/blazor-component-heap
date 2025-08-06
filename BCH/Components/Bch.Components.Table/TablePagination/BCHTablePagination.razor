@@ -1,4 +1,5 @@
 @using Bch.Components.Select
+
 @{
     var items = GetPages(CurrentPage, _totalPages);
 }
@@ -7,7 +8,7 @@
 {
     <div id="@_containerId" class="bch-pagination-container">
         <div class="select-page-size">
-            <BCHSelect TItem="int"
+            <BchSelect TItem="int"
                        Height="40"
                        Width="60"
                        ContentHeight="201"

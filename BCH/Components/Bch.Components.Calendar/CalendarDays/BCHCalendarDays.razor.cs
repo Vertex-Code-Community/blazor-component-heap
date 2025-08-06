@@ -5,7 +5,7 @@ using WeekDay = Bch.Components.Calendar.Models.WeekDay;
 
 namespace Bch.Components.Calendar.CalendarDays;
 
-public partial class BCHCalendarDays
+public partial class BchCalendarDays
 {
     [Parameter] public string Id { get; set; } = string.Empty;
     

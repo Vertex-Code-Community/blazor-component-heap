@@ -6,61 +6,59 @@
 
 @typeparam TItem
 
-
-    <div class="bch-tabs-container">
-        <BCHTabPanelScroller TItem="TItem"
-                             Gap="Gap"
-                             Items="Items"
-                             DraggableContext="_draggableContext"
-                             TabWidthPredicate="TabWidthPredicate"
-                             ScrollToSelected="ScrollToSelected"
-                             ScrollTabWidth="ScrollTabWidth"
-                             TabHeight="TabHeight"
-                             Selected="_selectedValue">
-
-            <BCHTabPanel TItem="TItem"
-                         @bind-Selected="Selected"
+<div class="bch-tabs-container">
+    <BchTabPanelScroller TItem="TItem"
                          Gap="Gap"
                          Items="Items"
                          DraggableContext="_draggableContext"
-                         MinimalTabCount="MinimalTabCount"
-                         Draggable="_draggable"
                          TabWidthPredicate="TabWidthPredicate"
-                         OnItemDragStart="OnItemDragStartAsync"
-                         OnItemDragEnd="OnItemDragEnd"
-                         OnItemDrag="OnItemDragAsync">
+                         ScrollToSelected="ScrollToSelected"
+                         ScrollTabWidth="ScrollTabWidth"
+                         TabHeight="TabHeight"
+                         Selected="_selectedValue">
 
-                <ItemTemplate Context="item">
+        <BchTabPanel TItem="TItem"
+                     @bind-Selected="Selected"
+                     Gap="Gap"
+                     Items="Items"
+                     DraggableContext="_draggableContext"
+                     MinimalTabCount="MinimalTabCount"
+                     Draggable="_draggable"
+                     TabWidthPredicate="TabWidthPredicate"
+                     OnItemDragStart="OnItemDragStartAsync"
+                     OnItemDragEnd="OnItemDragEnd"
+                     OnItemDrag="OnItemDragAsync">
 
-                    @if (TabTemplate == null)
-                    {
-                        <BCHDefaultTab TItem="TItem"
-                                       Item="@item"
-                                       DefaultTabText="DefaultTabText"
-                                       SelectedItem="_selectedValue"
-                                       ShowCloseButton="@(Items.Count > 1 && ShowCloseOnDefaultTab)"
-                                       OnClose="OnCloseItem"/>
-                    }
-                    else
-                    {
-                        @TabTemplate(item)
-                    }
+            <ItemTemplate Context="item">
 
-                </ItemTemplate>
+                @if (TabTemplate == null)
+                {
+                    <BchDefaultTab TItem="TItem"
+                                   Item="@item"
+                                   DefaultTabText="DefaultTabText"
+                                   SelectedItem="_selectedValue"
+                                   ShowCloseButton="@(Items.Count > 1 && ShowCloseOnDefaultTab)"
+                                   OnClose="OnCloseItem"/>
+                }
+                else
+                {
+                    @TabTemplate(item)
+                }
 
-            </BCHTabPanel>
+            </ItemTemplate>
 
-        </BCHTabPanelScroller>
+        </BchTabPanel>
 
-        <div id="@_contentId" class="bch-tabs-content">
-            @if (_draggableContext.DraggingItem != _selectedValue && ContentTemplate is not null)
-            {
-                @ContentTemplate(_selectedValue)
-                @* TODO: Default template *@
-            }
-        </div>
+    </BchTabPanelScroller>
+
+    <div id="@_contentId" class="bch-tabs-content">
+        @if (_draggableContext.DraggingItem != _selectedValue && ContentTemplate is not null)
+        {
+            @ContentTemplate(_selectedValue)
+            @* TODO: Default template *@
+        }
     </div>
-
+</div>
 
 <BchModal @ref="_modalComponent"
           Width="@($"{_width}px")"
@@ -70,14 +68,14 @@
           Y="@($"{(_draggableContext.DraggingPosition.Y - _draggableContext.StartOffset.Y).ToString(_nF)}px")"
           CssStyles="pointer-events: none;"
           Show="@(_draggableContext.DraggingItem != null && _isDragging)">
-    <BCHTabDraggingContent TItem="TItem"
+    <BchTabDraggingContent TItem="TItem"
                            Item="_draggableContext.DraggingItem"
                            TabHeight="TabHeight"
                            TabWidthPredicate="TabWidthPredicate">
         <TabTemplate Context="item">
             @if (TabTemplate == null)
             {
-                <BCHDefaultTab TItem="TItem"
+                <BchDefaultTab TItem="TItem"
                                Item="item"
                                DefaultTabText="DefaultTabText"
                                SelectedItem="_selectedValue"
@@ -95,5 +93,5 @@
                 @ContentTemplate(item)
             }
         </ContentTemplate>
-    </BCHTabDraggingContent>
+    </BchTabDraggingContent>
 </BchModal>

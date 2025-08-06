@@ -12,7 +12,7 @@
 
             @if (ShowDatePicker)
             {
-                <BCHCalendar Value="_calendarDateTime" ValueChanged="OnDateChanged"/>
+                <BchCalendar Value="_calendarDateTime" ValueChanged="OnDateChanged"/>
             }
 
             @if (ShowTodayButton)
@@ -108,7 +108,7 @@
                                     {
                                         var appointment = group.Appointments[i];
 
-                                        <div class="appointment"
+                                        <div @key="appointment" class="appointment"
                                              style="@($"top: calc(4.1667% * {GetTimeNumber(appointment.Start).ToString(_numberFormatWithDot)});" + $"left: calc(14.285714% * {k} + ({i} * (14.285714% / {group.Appointments.Count})));" + $"width: calc(14.285714% / {group.Appointments.Count});" + $"height: calc(4.1667% * {(GetTimeNumber(appointment.End) - GetTimeNumber(appointment.Start)).ToString(_numberFormatWithDot)});" + $"margin: calc({Gap} * 0.5);")">
                                             <div class="appointment-content"
                                                  style="@($"width: calc(100% - {Gap});" + $"height: calc(100% - {Gap});")">

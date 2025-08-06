@@ -9,7 +9,7 @@ using TimeIntersectionGroup = Bch.Components.Scheduler.Models.TimeIntersectionGr
 
 namespace Bch.Components.Scheduler;
 
-public partial class BCHScheduler
+public partial class BchScheduler
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
 
@@ -35,7 +35,7 @@ public partial class BCHScheduler
     private DateTime _calendarDateTime;
     private int _scrollIndex = 0;
 
-    private Dictionary<string, BCHAppointmentItem> _appointmentTemplates = new();
+    private Dictionary<string, BchAppointmentItem> _appointmentTemplates = new();
     private Dictionary<DateTime, Day> _days = new();
 
     private readonly NumberFormatInfo _numberFormatWithDot = new() { NumberDecimalSeparator = "." };
@@ -113,7 +113,7 @@ public partial class BCHScheduler
         StateHasChanged();
     }
 
-    internal void AddAppointmentItem(BCHAppointmentItem item)
+    internal void AddAppointmentItem(BchAppointmentItem item)
     {
         _appointmentTemplates.Add(item.Key, item);
         StateHasChanged();

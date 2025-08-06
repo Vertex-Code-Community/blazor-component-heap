@@ -7,7 +7,7 @@ using Bch.Components.Modal;
 
 namespace Bch.Components.DraggingModal;
 
-public partial class BCHDraggingModal : IAsyncDisposable
+public partial class BchDraggingModal : IAsyncDisposable
 {
     private static int _globalZIndex = 999999;
 

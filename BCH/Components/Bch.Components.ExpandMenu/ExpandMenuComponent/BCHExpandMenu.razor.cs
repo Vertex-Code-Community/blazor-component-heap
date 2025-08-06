@@ -4,11 +4,11 @@ using Bch.Modules.DomInterop.Services;
 
 namespace Bch.Components.ExpandMenu.ExpandMenuComponent;
 
-public partial class BCHExpandMenu : IDisposable
+public partial class BchExpandMenu : IDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
 
-    [CascadingParameter(Name = "BCHExpandMenuContainer")] public BCHExpandMenuContainer OwnerContainer { get; set; } = null!;
+    [CascadingParameter(Name = "BCHExpandMenuContainer")] public BchExpandMenuContainer OwnerContainer { get; set; } = null!;
     
     [Parameter] public string Title { get; set; } = string.Empty;
     [Parameter] public string Description { get; set; } = string.Empty;

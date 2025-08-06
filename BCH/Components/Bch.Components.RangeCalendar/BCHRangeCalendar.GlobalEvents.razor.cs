@@ -3,7 +3,7 @@ using Bch.Modules.GlobalEvents.Models;
 
 namespace Bch.Components.RangeCalendar;
 
-public partial class BCHRangeCalendar
+public partial class BchRangeCalendar
 {
     private Task SubscribeOnGlobalScrollAsync()
     {

@@ -2,7 +2,7 @@
 
 namespace Bch.Components.Table.TableData;
 
-public partial class BCHTableData<TRowData> : ComponentBase where TRowData : class
+public partial class BchTableData<TRowData> : ComponentBase where TRowData : class
 {
     [Parameter] public Func<TRowData, object> Expression { get; set; } = null!;
     [Parameter] public TRowData Item { get; set; } = null!;

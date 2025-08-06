@@ -1,0 +1,23 @@
+﻿@page "/toggle"
+@using Bch.Components.Toggle
+
+<div class="toggle-page">
+    <p>
+        <BchToggle @bind-Value="@_value" Disabled="true" Label="disabled"/>
+    </p>
+    <p>
+        <BchToggle Label="Some text 1"/>
+    </p>
+    <p>
+        <BchToggle Label="Changed color"
+                   CheckedBackgroundColor="red"
+                   CheckedCircleColor="blue"
+                   DefaultBackgroundColor="black"
+                   DefaultCircleColor="pink"/>
+    </p>
+
+</div>
+
+<div class="">
+    <button @onclick="OnClick">Show Info</button>
+</div>

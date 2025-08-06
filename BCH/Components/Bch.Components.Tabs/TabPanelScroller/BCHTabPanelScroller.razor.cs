@@ -5,7 +5,7 @@ using Bch.Modules.DomInterop.Services;
 
 namespace Bch.Components.Tabs.TabPanelScroller;
 
-public partial class BCHTabPanelScroller<TItem> : ComponentBase, IDisposable where TItem : class
+public partial class BchTabPanelScroller<TItem> : ComponentBase, IDisposable where TItem : class
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     

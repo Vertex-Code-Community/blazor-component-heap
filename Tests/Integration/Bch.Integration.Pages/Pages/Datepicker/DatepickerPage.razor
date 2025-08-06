@@ -1,0 +1,67 @@
+﻿@page "/datepicker"
+@using Bch.Components.Calendar.Models
+@using Bch.Components.RangeCalendar
+
+@*<div style="display: flex;">
+    
+    <button @onclick="ShowDate">show</button>
+</div>*@
+
+<div>
+    Selected date @dateTime
+</div>
+
+<div>
+    Selected date range @dateRange.Start - @dateRange.End
+</div>
+
+<div class="calendar-container">
+    <div class="wrapper">
+        @* <BCHCalendar @bind-Value='dateTime' Culture="en-US" CssClass="test"/> *@
+        <BchRangeCalendar @bind-Values="dateRange" Culture="en-US" Format="MM/dd/yyyy HH:mm" />
+    </div>
+</div>
+
+
+@code
+{
+    DateTime dateTime = DateTime.Now;
+    DateRange dateRange = new();
+
+    private void ShowDate()
+    {
+        Console.WriteLine(dateTime);
+        Console.WriteLine($"Start - {dateRange.Start}");
+        Console.WriteLine($"End - {dateRange.End}");
+    }
+}
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+    
+    .calendar-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        overflow: auto;
+    }
+    
+        .calendar-container > .wrapper {
+            display: flex;
+            width: 100%;
+            padding: 0 16px;
+            height: 2000px;
+            flex-direction: column;
+            gap: 20px;
+        }
+</style>

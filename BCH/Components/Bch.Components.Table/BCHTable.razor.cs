@@ -1,11 +1,11 @@
-﻿using Bch.Components.Table.Models;
+﻿using Microsoft.AspNetCore.Components;
+using Bch.Components.Table.Models;
 using Bch.Components.Table.TableColumn;
 using Bch.Modules.GlobalEvents.Events;
-using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.Table;
 
-public partial class BCHTable<TRowData> : ComponentBase
+public partial class BchTable<TRowData> : ComponentBase
     where TRowData : class
 {
     [Parameter] public ICollection<TRowData> Items { get; set; } = new List<TRowData>();
@@ -46,10 +46,10 @@ public partial class BCHTable<TRowData> : ComponentBase
 
     private List<TRowData> _items { get; set; } = new List<TRowData>();
 
-    private readonly List<BCHTableColumn<TRowData>> columns = new List<BCHTableColumn<TRowData>>();
+    private readonly List<BchTableColumn<TRowData>> columns = new List<BchTableColumn<TRowData>>();
     private readonly string _containerId = $"_id_{Guid.NewGuid()}";
     
-    internal void AddColumn(BCHTableColumn<TRowData> column)
+    internal void AddColumn(BchTableColumn<TRowData> column)
     {
         columns.Add(column);
     }

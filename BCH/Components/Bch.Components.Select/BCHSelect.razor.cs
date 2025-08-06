@@ -10,7 +10,7 @@ using Bch.Modules.Maths.Models;
 
 namespace Bch.Components.Select;
 
-public partial class BCHSelect<TItem> : ComponentBase, IAsyncDisposable
+public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }

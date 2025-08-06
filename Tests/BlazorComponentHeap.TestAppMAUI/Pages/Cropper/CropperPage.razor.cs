@@ -4,7 +4,7 @@ namespace BlazorComponentHeap.TestAppMAUI.Pages.Cropper;
 
 public partial class CropperPage
 {
-    private BCHCropper _bchCropper = null!;
+    private BchCropper _bchCropper = null!;
 
     private string _resultImage = string.Empty;
     

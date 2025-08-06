@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.Tabs.TabDraggingContent;
 
-public partial class BCHTabDraggingContent<TItem> : ComponentBase where TItem : class
+public partial class BchTabDraggingContent<TItem> : ComponentBase where TItem : class
 {
     [Parameter] public int TabHeight { get; set; }
     [Parameter] public TItem Item { get; set; } = null!;

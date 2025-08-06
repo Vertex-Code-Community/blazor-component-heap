@@ -10,7 +10,7 @@
     @* <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/"); }'> Index link</a> *@
     @* <a href="javascript:void(0)" @onclick='OnReloadData'> Reload data</a> *@
 
-    <BCHTable @ref="_tableRef"
+    <BchTable @ref="_tableRef"
               TRowData="UserModel"
               MinWidth="670px"
               PageSize="10"
@@ -22,21 +22,21 @@
               OnSortData="OnSortData"
               @bind-CurrentPage="_currentPage">
 
-        <BCHTableColumn TRowData="UserModel"
+        <BchTableColumn TRowData="UserModel"
                         IsSorted="true"
                         Expression="c => c.Name"
                         Title="Name"
                         FilterProperty="Name"
                         FilterType="ColumnFilterType.TextSearch"/>
 
-        <BCHTableColumn TRowData="UserModel"
+        <BchTableColumn TRowData="UserModel"
                         IsSorted="true"
                         Expression="c => c.Age"
                         Title="Age"
                         FilterProperty="Age"
                         FilterType="ColumnFilterType.NumberSearch"/>
 
-        <BCHTableColumn TRowData="UserModel"
+        <BchTableColumn TRowData="UserModel"
                         IsSorted="true"
                         Expression="c => c.Sex"
                         Title="Sex"
@@ -44,7 +44,7 @@
                         FilterType="ColumnFilterType.Select"
                         SelectData="@_sex"/>
 
-        <BCHTableColumn TRowData="UserModel"
+        <BchTableColumn TRowData="UserModel"
                         IsSorted="true"
                         Expression="c => c.Country"
                         Title="Country"
@@ -52,7 +52,7 @@
                         FilterType="ColumnFilterType.MultiSelect"
                         SelectData="@_countries"/>
 
-        <BCHTableColumn TRowData="UserModel"
+        <BchTableColumn TRowData="UserModel"
                         Expression="c => c.Birthday"
                         FilterProperty="Birthday"
                         FilterType="ColumnFilterType.Date">
@@ -73,18 +73,18 @@
                 @context.Birthday.ToString("yyyy/MM/dd")
             </TdTemplate>
 
-        </BCHTableColumn>
+        </BchTableColumn>
 
-        <BCHTableColumn TRowData="UserModel"
+        <BchTableColumn TRowData="UserModel"
                         Title="Report"
                         FilterProperty="Report"
                         FilterType="ColumnFilterType.DateRange">
             <TdTemplate>
                 @context.ReportDate.ToString("yyyy-MM-dd")
             </TdTemplate>
-        </BCHTableColumn>
+        </BchTableColumn>
 
-    </BCHTable>
+    </BchTable>
 </div>
 
 <style>

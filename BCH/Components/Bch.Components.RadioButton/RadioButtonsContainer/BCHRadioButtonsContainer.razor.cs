@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.RadioButton.RadioButtonsContainer;
 
-public partial class BCHRadioButtonsContainer<TItem> : ComponentBase where TItem : class
+public partial class BchRadioButtonsContainer<TItem> : ComponentBase where TItem : class
 {
     [Parameter] public RenderFragment ChildContent { get; set; } = null!;
     [Parameter] public EventCallback<TItem> SelectedChanged { get; set; }
@@ -28,7 +28,7 @@ public partial class BCHRadioButtonsContainer<TItem> : ComponentBase where TItem
     }
 
     private TItem _selectedValue = null!;
-    private readonly List<BCHRadioButton<TItem>> _radioButtons = new();
+    private readonly List<BchRadioButton<TItem>> _radioButtons = new();
     private bool _firstRender = false;
 
     protected override void OnAfterRender(bool firstRender)
@@ -55,9 +55,9 @@ public partial class BCHRadioButtonsContainer<TItem> : ComponentBase where TItem
         SelectButton(rb);
     }
 
-    internal BCHRadioButton<TItem>? SelectedRb { get; set; } = null!;
+    internal BchRadioButton<TItem>? SelectedRb { get; set; } = null!;
 
-    internal void AddRadioButton(BCHRadioButton<TItem> radioButton)
+    internal void AddRadioButton(BchRadioButton<TItem> radioButton)
     {
         var rb = _radioButtons.FirstOrDefault(x => x.Key == radioButton.Key);
         if (rb != null) throw new Exception($"BCHRadioButton text duplication, {radioButton.Key}.");
@@ -65,7 +65,7 @@ public partial class BCHRadioButtonsContainer<TItem> : ComponentBase where TItem
         _radioButtons.Add(radioButton);
     }
 
-    internal void SelectButton(BCHRadioButton<TItem> radioButton)
+    internal void SelectButton(BchRadioButton<TItem> radioButton)
     {
         SelectRb(radioButton);
 
@@ -75,7 +75,7 @@ public partial class BCHRadioButtonsContainer<TItem> : ComponentBase where TItem
         }
     }
 
-    private void SelectRb(BCHRadioButton<TItem> radioButton)
+    private void SelectRb(BchRadioButton<TItem> radioButton)
     {
         SelectedRb = radioButton;
         _selectedValue = radioButton.Key;

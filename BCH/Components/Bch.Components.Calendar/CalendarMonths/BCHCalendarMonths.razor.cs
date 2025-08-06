@@ -4,7 +4,7 @@ using Month = Bch.Components.Calendar.Models.Month;
 
 namespace Bch.Components.Calendar.CalendarMonths;
 
-public partial class BCHCalendarMonths
+public partial class BchCalendarMonths
 {
     private class Year
     {
@@ -80,8 +80,9 @@ public partial class BCHCalendarMonths
         await IsShowDate.InvokeAsync(true);
     }
 
-    private async Task OnSelectYearAsync(Year year)
+    private Task OnSelectYearAsync(Year? year)
     {
-        await YearChanged.InvokeAsync(year.Number);
+        if (year is null) return Task.CompletedTask; // TODO: have a look on the condition
+        return YearChanged.InvokeAsync(year.Number);
     }
 }

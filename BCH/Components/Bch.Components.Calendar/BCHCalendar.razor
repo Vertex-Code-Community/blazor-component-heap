@@ -1,4 +1,6 @@
 ﻿@using Bch.Components.Modal
+@using Bch.Components.Calendar.CalendarDays
+@using Bch.Components.Calendar.CalendarMonths
 
 <div class="bch-datepicker-wrapper @CssClass" id="@_containerId" tabindex="-1">
 
@@ -9,7 +11,7 @@
                autocomplete="unrechable-filter-to-autocomplete"
                value="@_value.ToString(Format)"
                @ref="@_inputRef"/>
-        <img class="bch-datepicker-img" src="_content/BlazorComponentHeap.Core/bch-img/datepicker/calendar-icon.svg"/>
+        <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon.svg"/>
     </div>
 
     <BchModal CssClass="@($"bch-calendar-days-modal-wrapper {CssClass}")"
@@ -19,7 +21,7 @@
               Y="@($"{_containerPos.Y.ToString(_nF)}px")"
               Show="_showDate"
               ShowChanged="OnDateChanged">
-        <BCHCalendarDays Id="@_calendarDaysId"
+        <BchCalendarDays Id="@_calendarDaysId"
                          OnDateSelected=" e => { Value = e; _showDate = false; return OnShowModeChangedAsync(); }"
                          Culture="@Culture"
                          DefaultMonth="_selectedMonth"
@@ -36,7 +38,7 @@
               Y="@($"{_containerPos.Y.ToString(_nF)}px")"
               Show="_showMonth"
               ShowChanged="OnMonthChanged">
-        <BCHCalendarMonths Id="@_calendarMonthsId"
+        <BchCalendarMonths Id="@_calendarMonthsId"
                            YearsSelectContentId="@_yearsSelectContentId"
                            SelectedMonth="_selectedMonth"
                            SelectedYear="_selectedYear"

@@ -2,7 +2,7 @@
 <div id="@Id" class="bch-datepicker-list-month">
     <div class="bch-datepicker-button-of-open-years">
         <div>
-            <BCHSelect TItem="Year"
+            <BchSelect TItem="Year"
                        ContentId="@YearsSelectContentId"
                        Options="_years"
                        ContentHeight="186"
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </OptionTemplate>
-            </BCHSelect>
+            </BchSelect>
         </div>
 
         <div style="height: 100%; width: 100%;" @onclick="async () => { await OnFocusOut.InvokeAsync(); }"></div>
@@ -156,7 +156,7 @@
 
             .bch-datepicker-button-of-open-years .bch-select-container .bch-button span {
                 transition: none !important;
-                background: url("_content/BlazorComponentHeap.Core/bch-img/datepicker/arrow-top-bottom-icon.svg") center no-repeat !important;
+                background: url("img/arrow-top-bottom-icon.svg") center no-repeat !important;
                 width: 14px !important;
                 height: 12px !important;
                 transform: none !important;

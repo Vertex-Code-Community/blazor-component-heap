@@ -11,7 +11,7 @@ using ZoomContext = Bch.Components.Zoom.Models.ZoomContext;
 
 namespace Bch.Components.Zoom;
 
-public partial class BCHZoom : IAsyncDisposable
+public partial class BchZoom : IAsyncDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }

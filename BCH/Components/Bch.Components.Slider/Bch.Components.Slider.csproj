@@ -24,4 +24,8 @@
     <ItemGroup>
         <ProjectReference Include="..\Bch.Components.Modal\Bch.Components.Modal.csproj"/>
     </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj"/>
+    </ItemGroup>
 </Project>

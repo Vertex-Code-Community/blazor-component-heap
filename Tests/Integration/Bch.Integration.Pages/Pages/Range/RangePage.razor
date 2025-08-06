@@ -1,0 +1,37 @@
+﻿@page "/range"
+@using Bch.Components.Range
+
+<div class="range-page">
+
+    <div class="first">
+        <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" />
+        <p></p>
+    </div>
+
+    <div>
+        <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" />
+    </div>
+    <div style="height: 400px;">
+        <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" @bind-Value="_value" Vertical="true" />
+    </div>
+</div>
+
+
+<style>
+
+    .first > .bch-horizontal-range-container{
+        /*margin-left: 250px;*/
+    }
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+</style>

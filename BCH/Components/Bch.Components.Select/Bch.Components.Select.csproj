@@ -1,33 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Version>1.0.0</Version>
+        <Title>Bch.Components.Select</Title>
+        <Authors>VertexCode</Authors>
+        <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
+        <Description>An exceptional Blazor component library featuring unique components you won't find anywhere else. Part of the BlazorComponentHeap collection of components</Description>
+        <Company>VertexCode</Company>
+        <RootNamespace>Bch.Components.Select</RootNamespace>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
 
-	  <Version>1.0.0</Version>
-	  <Title>Bch.Components.Select</Title>
-	  <Authors>VertexCode</Authors>
-	  <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
-	  <Description>An exceptional Blazor component library featuring unique components you won't find anywhere else. Part of the BlazorComponentHeap collection of components</Description>
-	  <Company>VertexCode</Company>
-	  <RootNamespace>Bch.Components.Select</RootNamespace>
-  </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15"/>
+    </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.DomInterop\Bch.Modules.DomInterop.csproj"/>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.GlobalEvents\Bch.Modules.GlobalEvents.csproj"/>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Maths\Bch.Modules.Maths.csproj"/>
+        <ProjectReference Include="..\Bch.Components.Modal\Bch.Components.Modal.csproj"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Modules\Bch.Modules.DomInterop\Bch.Modules.DomInterop.csproj" />
-    <ProjectReference Include="..\..\Modules\Bch.Modules.GlobalEvents\Bch.Modules.GlobalEvents.csproj" />
-    <ProjectReference Include="..\..\Modules\Bch.Modules.Maths\Bch.Modules.Maths.csproj" />
-    <ProjectReference Include="..\Bch.Components.Modal\Bch.Components.Modal.csproj" />
-  </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
+    </ItemGroup>
 </Project>

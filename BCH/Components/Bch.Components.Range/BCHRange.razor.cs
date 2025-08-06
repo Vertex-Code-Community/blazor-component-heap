@@ -8,7 +8,7 @@ using Bch.Modules.GlobalEvents.Services;
 
 namespace Bch.Components.Range;
 
-public partial class BCHRange
+public partial class BchRange
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }

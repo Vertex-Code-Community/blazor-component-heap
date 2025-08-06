@@ -1,6 +1,6 @@
 namespace Bch.Components.RangeCalendar;
 
-public partial class BCHRangeCalendar
+public partial class BchRangeCalendar
 {
     private Task OnDateChanged(bool showDate)
     {

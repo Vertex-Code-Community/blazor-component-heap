@@ -7,7 +7,7 @@
          style="@($"background: {BackgroundColor}; pointer-events: {(_processingData ? "none" : "all")};")"
          class="bch-cropper-container bch-no-mobile-selection @(_loaded ? "bch-loaded" : "")">
 
-        <BCHZoom @ref="_bchZoom"
+        <BchZoom @ref="_bchZoom"
                  ZoomContext="_zoomContext"
                  BoundsByParent="false"
                  ZoomOnMouseWheel="@ScaleOnMouseWheel"
@@ -26,7 +26,7 @@
                      @onload="async () => { await _bchZoom!.CenterContentAsync(); _loaded = true; StateHasChanged(); }"
                      src="@Base64Image"/>
             </div>
-        </BCHZoom>
+        </BchZoom>
 
         @switch (CropperType)
         {

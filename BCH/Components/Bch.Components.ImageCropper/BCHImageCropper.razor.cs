@@ -6,7 +6,7 @@ using Bch.Modules.GlobalEvents.Services;
 
 namespace Bch.Components.ImageCropper;
 
-public partial class BCHImageCropper : IAsyncDisposable
+public partial class BchImageCropper : IAsyncDisposable
 {
     [Inject] public required IJSRuntime JsRuntime { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
@@ -28,8 +28,8 @@ public partial class BCHImageCropper : IAsyncDisposable
     [Parameter] public EventCallback OnCancelClicked { get; set; }
 
     private readonly string _key = $"_id_{Guid.NewGuid()}";
-    private BCHCropper _bchCropper = null!;
-    private BCHRange _bchRange = null!;
+    private BchCropper _bchCropper = null!;
+    private BchRange _bchRange = null!;
 
     private bool _rotateCropper = false;
     private bool _isServerSide = false;

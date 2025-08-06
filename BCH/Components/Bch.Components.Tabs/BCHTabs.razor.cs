@@ -8,12 +8,12 @@ using Bch.Modules.Maths.Models;
 
 namespace Bch.Components.Tabs;
 
-public partial class BCHTabs<TItem> : ComponentBase where TItem : class
+public partial class BchTabs<TItem> : ComponentBase where TItem : class
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     
     [CascadingParameter(Name = $"BCHTabsDraggableContext{nameof(TItem)}")] 
-    public BCHTabsDraggableContext<TItem>? OwnerContainer { get; set; }
+    public BchTabsDraggableContext<TItem>? OwnerContainer { get; set; }
 
     [Parameter] public int Gap { get; set; } = 4;
     [Parameter] public int TabHeight { get; set; } = 35;

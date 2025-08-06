@@ -3,10 +3,10 @@ using Bch.Components.RadioButton.RadioButtonsContainer;
 
 namespace Bch.Components.RadioButton.RadioButtonComponent;
 
-public partial class BCHRadioButton<TItem> : ComponentBase where TItem : class
+public partial class BchRadioButton<TItem> : ComponentBase where TItem : class
 {
     [CascadingParameter(Name = $"BCHRadioButtonContainer{nameof(TItem)}")] 
-    public BCHRadioButtonsContainer<TItem>? OwnerContainer { get; set; } = null!;
+    public BchRadioButtonsContainer<TItem>? OwnerContainer { get; set; } = null!;
 
     [Parameter] public TItem Key { get; set; } = null!;
 

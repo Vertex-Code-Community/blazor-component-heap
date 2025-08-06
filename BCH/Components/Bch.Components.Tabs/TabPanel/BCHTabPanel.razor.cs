@@ -8,7 +8,7 @@ using Bch.Modules.Maths.Models;
 
 namespace Bch.Components.Tabs.TabPanel;
 
-public partial class BCHTabPanel<TItem> : ComponentBase, IAsyncDisposable where TItem : class
+public partial class BchTabPanel<TItem> : ComponentBase, IAsyncDisposable where TItem : class
 {
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
 

@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.Table.TablePagination;
 
-public partial class BCHTablePagination : ComponentBase
+public partial class BchTablePagination : ComponentBase
 {
     [Parameter] public int CurrentPage { get; set; }
     [Parameter] public int PageSize

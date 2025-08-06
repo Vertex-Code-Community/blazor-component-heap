@@ -12,7 +12,7 @@ using Microsoft.JSInterop;
 
 namespace Bch.Components.Cropper;
 
-public partial class BCHCropper : IAsyncDisposable
+public partial class BchCropper : IAsyncDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
@@ -36,7 +36,7 @@ public partial class BCHCropper : IAsyncDisposable
     [Parameter] public Func<float, Task>? OnUpdateScale { get; set; }
 
     private readonly ZoomContext _zoomContext = new();
-    private BCHZoom? _bchZoom;
+    private BchZoom? _bchZoom;
     private bool _processingData = false;
 
     private readonly string _cropperId = $"_id_{Guid.NewGuid()}";

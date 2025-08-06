@@ -16,8 +16,9 @@
     <ProjectReference Include="..\..\BCH\Components\Bch.Components.Cropper\Bch.Components.Cropper.csproj" />
     <ProjectReference Include="..\..\BCH\Components\Bch.Components.DraggingModal\Bch.Components.DraggingModal.csproj" />
     <ProjectReference Include="..\..\BCH\Components\Bch.Components.ExpandMenu\Bch.Components.ExpandMenu.csproj" />
+    <ProjectReference Include="..\..\BCH\Components\Bch.Components.FileDrop\Bch.Components.FileDrop.csproj" />
     <ProjectReference Include="..\..\BCH\Components\Bch.Components.ImageCropper\Bch.Components.ImageCropper.csproj" />
-    <ProjectReference Include="..\..\BCH\Components\Bch.Components.Input\Bch.Components.Input.csproj" />
+    <ProjectReference Include="..\..\BCH\Components\Bch.Components.InputFile\Bch.Components.InputFile.csproj" />
     <ProjectReference Include="..\..\BCH\Components\Bch.Components.Modal\Bch.Components.Modal.csproj" />
     <ProjectReference Include="..\..\BCH\Components\Bch.Components.RadioButton\Bch.Components.RadioButton.csproj" />
     <ProjectReference Include="..\..\BCH\Components\Bch.Components.RangeCalendar\Bch.Components.RangeCalendar.csproj" />

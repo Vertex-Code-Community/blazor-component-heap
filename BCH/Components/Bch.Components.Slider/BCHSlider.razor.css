@@ -22,12 +22,12 @@
         }
 
         .bch-slider-container > .bch-scroll-btn.bch-left > .bch-icon-wrapper {
-            background: url(bch-img/slider/arrow-right.svg) center no-repeat;
+            background: url(img/arrow-right.svg) center no-repeat;
             transform: rotate(180deg);
         }
 
         .bch-slider-container > .bch-scroll-btn.bch-right > .bch-icon-wrapper {
-            background: url(bch-img/slider/arrow-right.svg) center no-repeat;
+            background: url(img/arrow-right.svg) center no-repeat;
         }
 
         .bch-slider-container > .bch-scroll-btn.bch-right > .bch-icon-wrapper:hover {

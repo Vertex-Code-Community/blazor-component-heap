@@ -3,7 +3,6 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-
         <Version>1.0.0</Version>
         <Title>Bch.Components.Scheduler</Title>
         <Authors>VertexCode</Authors>
@@ -23,5 +22,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Bch.Components.Calendar\Bch.Components.Calendar.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj"/>
     </ItemGroup>
 </Project>

@@ -77,7 +77,7 @@
             }
 
                 .bch-calendar-container > .bch-dateline > .scroll-btn.left > span {
-                    background: url(bch-img/scheduler/left-scroll-btn.svg) center no-repeat;
+                    background: url(img/left-scroll-btn.svg) center no-repeat;
                 }
 
             .bch-calendar-container > .bch-dateline > .scroll-btn.right {
@@ -85,7 +85,7 @@
             }
 
                 .bch-calendar-container > .bch-dateline > .scroll-btn.right > span {
-                    background: url(bch-img/scheduler/right-scroll-btn.svg) center no-repeat;
+                    background: url(img/right-scroll-btn.svg) center no-repeat;
                 }
 
         .bch-calendar-container > .bch-dateline > .bch-corner {
@@ -150,7 +150,7 @@
         overflow-x: hidden;
         position: relative;
         flex: 1 1;
-        width: 100%;
+        width: calc(100% + 18px);
         border-bottom: 1px solid #eeeeee;
         border-right: 1px solid #eeeeee;
     }
@@ -172,8 +172,17 @@
                 .bch-calendar-container > .calendar-data > .bch-scroller > .timeline > .hour {
                     width: 100%;
                     display: flex;
-                    border-bottom: 1px solid #eeeeee;
+                    position: relative;
                 }
+
+                    .bch-calendar-container > .calendar-data > .bch-scroller > .timeline > .hour::after {
+                        width: 100%;
+                        content: ' ';
+                        display: flex;
+                        position: absolute;
+                        left: 0;
+                        border-bottom: 1px solid #eeeeee;
+                    }
 
                     .bch-calendar-container > .calendar-data > .bch-scroller > .timeline > .hour:last-child {
                         border-bottom: none;

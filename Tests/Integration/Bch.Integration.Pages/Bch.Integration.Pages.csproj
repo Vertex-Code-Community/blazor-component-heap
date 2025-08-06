@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Calendar\Bch.Components.Calendar.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Cropper\Bch.Components.Cropper.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.DraggingModal\Bch.Components.DraggingModal.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.ExpandMenu\Bch.Components.ExpandMenu.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.FileDrop\Bch.Components.FileDrop.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.ImageCropper\Bch.Components.ImageCropper.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.InputFile\Bch.Components.InputFile.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Modal\Bch.Components.Modal.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.RadioButton\Bch.Components.RadioButton.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.RangeCalendar\Bch.Components.RangeCalendar.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Range\Bch.Components.Range.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Scheduler\Bch.Components.Scheduler.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Select\Bch.Components.Select.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Slider\Bch.Components.Slider.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Table\Bch.Components.Table.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Tabs\Bch.Components.Tabs.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Toggle\Bch.Components.Toggle.csproj"/>
+        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Zoom\Bch.Components.Zoom.csproj"/>
+    </ItemGroup>
+
+</Project>

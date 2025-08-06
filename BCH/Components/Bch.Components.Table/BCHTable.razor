@@ -1,73 +1,74 @@
-﻿@using Bch.Components.Table.TablePagination
+﻿@using Bch.Components.Table.TableHead
+@using Bch.Components.Table.TablePagination
+@using Bch.Components.Table.TableData
 @typeparam TRowData
 
+<CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
 
-    <CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
-
-    <div id="@_containerId" class="bch-table-container">
-        <table class="bch-table-wrapper" style="@(string.IsNullOrWhiteSpace(MinWidth) ? "" : $"min-width:{MinWidth};")">
-            <thead class="bch-thead">
-            <tr>
-                @foreach (var column in columns)
-                {
-                    <th @key="column"
-                        style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width};") ">
-
-                        <BCHTableHead TRowData="TRowData"
-                                      Column="column"
-                                      OnFilterData="async (e) => { await OnFilterData.InvokeAsync(e); }"
-                                      OnClickSorted="async (e) => { await OnSortData.InvokeAsync(e); }"/>
-                    </th>
-                }
-            </tr>
-            </thead>
-            <tbody class="bch-tbody" @onbchtablescroll="OnScroll">
-            @{
-                if (Items != null)
-                {
-                    foreach (var item in _items)
-                    {
-                        @* Use @key to help the diff algorithm when updating the collection *@
-                        <tr @key="item.GetHashCode()">
-                            @foreach (var column in columns)
-                            {
-                                if (column.TdTemplate != null)
-                                {
-                                    <td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
-                                        class="@column.TdClass">
-                                        @column.TdTemplate(item)
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
-                                        style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width};") ">
-                                        <BCHTableData Item="item" TRowData="TRowData" Expression="column.Expression"/>
-                                    </td>
-                                }
-                            }
-                        </tr>
-                    }
-                }
-            }
-            </tbody>
-            <tfoot class="@(IsPagination && !IsScrollPagination ? "bch-tfoot" : "")">
-            @if (IsPagination && !IsScrollPagination)
+<div id="@_containerId" class="bch-table-container">
+    <table class="bch-table-wrapper" style="@(string.IsNullOrWhiteSpace(MinWidth) ? "" : $"min-width:{MinWidth};")">
+        <thead class="bch-thead">
+        <tr>
+            @foreach (var column in columns)
             {
-                <BCHTablePagination @bind-PageSize="@_pageSize"
-                               CurrentPage="@CurrentPage"
-                               TotalItems="@_totalItems"
-                               Sizes="Sizes"
-                               PageSizeSelectChanged="() => { OnPagination(1); }"
-                               OnPageNumber="OnPagination"/>
+                <th @key="column"
+                    style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width};") ">
+
+                    <BchTableHead TRowData="TRowData"
+                                  Column="column"
+                                  OnFilterData="async (e) => { await OnFilterData.InvokeAsync(e); }"
+                                  OnClickSorted="async (e) => { await OnSortData.InvokeAsync(e); }"/>
+                </th>
             }
-            </tfoot>
-        </table>
-    </div>
+        </tr>
+        </thead>
+        <tbody class="bch-tbody" @onbchtablescroll="OnScroll">
+        @{
+            if (Items != null)
+            {
+                foreach (var item in _items)
+                {
+                    @* Use @key to help the diff algorithm when updating the collection *@
+                    <tr @key="item.GetHashCode()">
+                        @foreach (var column in columns)
+                        {
+                            if (column.TdTemplate != null)
+                            {
+                                <td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
+                                    class="@column.TdClass">
+                                    @column.TdTemplate(item)
+                                </td>
+                            }
+                            else
+                            {
+                                <td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
+                                    style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width};") ">
+                                    <BchTableData Item="item" TRowData="TRowData" Expression="column.Expression"/>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        }
+        </tbody>
+        <tfoot class="@(IsPagination && !IsScrollPagination ? "bch-tfoot" : "")">
+        @if (IsPagination && !IsScrollPagination)
+        {
+            <BchTablePagination @bind-PageSize="@_pageSize"
+                                CurrentPage="@CurrentPage"
+                                TotalItems="@_totalItems"
+                                Sizes="Sizes"
+                                PageSizeSelectChanged="() => { OnPagination(1); }"
+                                OnPageNumber="OnPagination"/>
+        }
+        </tfoot>
+    </table>
+</div>
 
 
 <style>
-    .bch-table-container#@_containerId .bch-pagination-container {
+    .bch-table-container#@_containerId .bch-pagination-container > .select-page-number {
         padding-right: 10px;
     }
 

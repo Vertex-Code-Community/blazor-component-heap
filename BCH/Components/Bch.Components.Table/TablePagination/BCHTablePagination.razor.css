@@ -21,11 +21,11 @@
 }
 
 .bch-pagination-container .select-page-number .prev-page {
-    background: url(bch-img/table/arrow-left.svg) center no-repeat;
+    background: url(img/arrow-left.svg) center no-repeat;
 }
 
 .bch-pagination-container .select-page-number .next-page {
-    background: url(bch-img/table/arrow-right.svg) center no-repeat;
+    background: url(img/arrow-right.svg) center no-repeat;
 }
 
 .bch-pagination-container .select-page-number .prev-page,

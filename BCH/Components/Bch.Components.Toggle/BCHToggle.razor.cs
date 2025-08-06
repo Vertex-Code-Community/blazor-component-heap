@@ -2,7 +2,7 @@
 
 namespace Bch.Components.Toggle;
 
-public partial class BCHToggle
+public partial class BchToggle
 {
     [Parameter] public string Label { get; set; } = string.Empty;
     [Parameter] public bool Disabled { get; set; }

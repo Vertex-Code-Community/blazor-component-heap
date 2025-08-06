@@ -8,7 +8,7 @@ using Bch.Modules.Maths.Models;
 
 namespace Bch.Components.RangeCalendar;
 
-public partial class BCHRangeCalendar : IAsyncDisposable
+public partial class BchRangeCalendar : IAsyncDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.Slider;
 
-public partial class BCHSlider<TItem> : ComponentBase where TItem : class
+public partial class BchSlider<TItem> : ComponentBase where TItem : class
 {
     [Parameter] public List<TItem> Items { get; set; } = new();
     [Parameter] public bool ButtonsOnTopOfContent { get; set; } = false;

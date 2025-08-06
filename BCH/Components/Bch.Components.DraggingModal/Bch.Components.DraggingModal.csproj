@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
-
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
@@ -24,13 +23,16 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="wwwroot\"/>
+    </ItemGroup>
+    
+    <ItemGroup>
         <ProjectReference Include="..\..\Modules\Bch.Modules.GlobalEvents\Bch.Modules.GlobalEvents.csproj"/>
         <ProjectReference Include="..\..\Modules\Bch.Modules.Maths\Bch.Modules.Maths.csproj"/>
         <ProjectReference Include="..\Bch.Components.Modal\Bch.Components.Modal.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot\"/>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
     </ItemGroup>
-
 </Project>
