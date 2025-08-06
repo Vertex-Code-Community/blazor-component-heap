@@ -36,7 +36,3 @@ function bchOnCropImage(canvasId, canvasHolderId, imageId, pos, imgBounds, angle
     // let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     return canvas.toDataURL(resultFormat, quality);
 }
-
-function bchGetPixelRatio() {
-    return window.devicePixelRatio;
-}

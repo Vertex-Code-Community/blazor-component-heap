@@ -8,27 +8,28 @@
              ZoomOnMouseWheel="true"
              MinScale="0.5f"
              ZoomContext="_zoomContext">
-        <BchScheduler Appointments="_appointments"
-                      ShowDatePicker="true"
-                      ShowTodayButton="true"
-                      Gap="8px">
-
-            <BchAppointmentItem Key="type-1" Context="appointment">
-                <div class="type-1">
-                    <div class="start">Start: @appointment.Start</div>
-                    <div class="end">End: @appointment.End</div>
-                    <div class="name">Name: @((string)appointment.Payload)</div>
-                </div>
-            </BchAppointmentItem>
-
-            <BchAppointmentItem Key="type-2" Context="appointment">
-                <div class="type-2">
-                    <div class="difference">Diff: @(appointment.End - appointment.Start)</div>
-                    <div class="count">Count: @((int)appointment.Payload)</div>
-                </div>
-            </BchAppointmentItem>
-
-        </BchScheduler>
+        <div class="square">Red Square</div>
+        @* <BchScheduler Appointments="_appointments" *@
+        @*               ShowDatePicker="true" *@
+        @*               ShowTodayButton="true" *@
+        @*               Gap="8px"> *@
+        @* *@
+        @*     <BchAppointmentItem Key="type-1" Context="appointment"> *@
+        @*         <div class="type-1"> *@
+        @*             <div class="start">Start: @appointment.Start</div> *@
+        @*             <div class="end">End: @appointment.End</div> *@
+        @*             <div class="name">Name: @((string)appointment.Payload)</div> *@
+        @*         </div> *@
+        @*     </BchAppointmentItem> *@
+        @* *@
+        @*     <BchAppointmentItem Key="type-2" Context="appointment"> *@
+        @*         <div class="type-2"> *@
+        @*             <div class="difference">Diff: @(appointment.End - appointment.Start)</div> *@
+        @*             <div class="count">Count: @((int)appointment.Payload)</div> *@
+        @*         </div> *@
+        @*     </BchAppointmentItem> *@
+        @* *@
+        @* </BchScheduler> *@
     </BchZoom>
 </div>
 
