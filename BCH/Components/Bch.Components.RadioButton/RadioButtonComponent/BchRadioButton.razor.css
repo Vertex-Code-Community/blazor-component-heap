@@ -1,0 +1,63 @@
+﻿.bch-rb-item {
+    display: flex;
+}
+
+    .bch-rb-item.disabled{
+        pointer-events: none;
+    }
+
+        .bch-rb-item.disabled .circle {
+            border: 1px solid #ACACAC;
+        }
+
+            .bch-rb-item.disabled .circle .inner.selected {
+                background: #ACACAC;
+            }
+
+    .bch-rb-item .circle.selected:hover {
+        border: 1px solid #439766;
+        transition: 0.2s;
+    }
+
+    .bch-rb-item .circle .inner.selected:hover {
+        background: #439766;
+        transition: 0.2s;
+    }
+
+    .bch-rb-item:not(.custom) {
+        justify-content: flex-start;
+        margin-top: 5px;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .bch-rb-item > .circle {
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        border: 1px solid #33B469;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+        .bch-rb-item > .circle > .inner {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+        }
+
+            .bch-rb-item > .circle > .inner.selected {
+                background: #33B469;
+            }
+
+    .bch-rb-item > .text {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 23px;
+        color: #131212;
+        cursor: pointer;
+    }

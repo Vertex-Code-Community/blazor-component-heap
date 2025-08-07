@@ -1,0 +1,136 @@
+﻿@using Bch.Components.Calendar
+
+<CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
+
+<div class="bch-calendar-container">
+
+    @if (ShowDatePicker || ShowTodayButton)
+    {
+        <div class="bch-date-picker">
+
+            <div lass="bch-month bch-no-selectable-text">@MonthLabel.Invoke(_currentWeekStart.AddDays(_scrollIndex * 7))</div>
+
+            @if (ShowDatePicker)
+            {
+                <BchCalendar Value="_calendarDateTime" ValueChanged="OnDateChanged"/>
+            }
+
+            @if (ShowTodayButton)
+            {
+                <div class="today-btn bch-no-selectable-text" @onclick="OnTodayClicked">Today</div>
+            }
+
+        </div>
+    }
+
+    <div class="bch-dateline">
+
+        <div class="bch-corner"></div>
+
+        <div class="dates-holder">
+            <div class="bch-scroller" style="@($"left: {_scrollIndex * -100}%;")">
+                @{
+                    var j = -7 + (_scrollIndex * 7);
+
+                    for (
+                        var date = _currentWeekStart.AddDays(-7 + (_scrollIndex * 7));
+                        date < _currentWeekStart.AddDays(14 + (_scrollIndex * 7));
+                        date = date.AddDays(1), j++)
+                    {
+                        <div class="date"
+                             style="@($"left: calc({j} * (100% / 7));")">
+                            <div class="day bch-no-selectable-text">@date.Day</div>
+                            <div class="month bch-no-selectable-text">@DayLabel.Invoke(date)</div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="scroll-btn left">
+            <span @onclick="() => { OnWeekButtonClicked(false); }"></span>
+        </div>
+
+        <div class="scroll-btn right">
+            <span @onclick="() => { OnWeekButtonClicked(true); }"></span>
+        </div>
+
+    </div>
+
+    <div id="@_contentScrollId"
+         class="calendar-data scroll">
+
+        <div class="bch-scroller">
+
+            <div class="timeline">
+                @for (var i = 0; i < 24; i++)
+                {
+                    <div class="hour" style="@($"height: {ItemHeight};")">
+                        <div class="time">
+                            <div class="text bch-no-selectable-text">@TimeLabel.Invoke(i)</div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="calendar" style="@($"background: {BackgroundColor};")">
+
+                <div id="@_contentScrollerId" class="bch-scroller" style="@($"left: {_scrollIndex * -100}%;")">
+
+                    <div class="bch-working-area"
+                         style="background: @WorkingAreaColor; top: calc(@ItemHeight * @WorkingAreaStartHour); height: calc(@ItemHeight * @(WorkingAreaEndHour - WorkingAreaStartHour)); left: @(_scrollIndex * 100 - 100)%;">
+                    </div>
+
+                    @for (var i = 0; i < 23; i++)
+                    {
+                        <div class="delimiter-horizontal"
+                             style="@($"height: {ItemHeight};" + $"top: calc({ItemHeight} * {i});" + $"left: {_scrollIndex * 100 - 100}%;")">
+                        </div>
+                    }
+
+                    @for (var i = -7 + (_scrollIndex * 7); i < 14 + (_scrollIndex * 7); i++)
+                    {
+                        <div class="delimiter-vertical"
+                             style="@($"width: 14.285714%;" + $"left: calc(14.285714% * {i});")">
+                        </div>
+                    }
+
+                    @{
+                        var k = -7 + (_scrollIndex * 7);
+
+                        for (var date = _currentWeekStart.AddDays(-7 + (_scrollIndex * 7)); date < _currentWeekStart.AddDays(14 + (_scrollIndex * 7)); date = date.AddDays(1), k++)
+                        {
+                            if (_days.TryGetValue(date.Date, out var day))
+                            {
+                                foreach (var group in day.Groups)
+                                {
+                                    for (var i = 0; i < group.Appointments.Count; i++)
+                                    {
+                                        var appointment = group.Appointments[i];
+
+                                        <div @key="appointment" class="appointment"
+                                             style="@($"top: calc(4.1667% * {GetTimeNumber(appointment.Start).ToString(_numberFormatWithDot)});" + $"left: calc(14.285714% * {k} + ({i} * (14.285714% / {group.Appointments.Count})));" + $"width: calc(14.285714% / {group.Appointments.Count});" + $"height: calc(4.1667% * {(GetTimeNumber(appointment.End) - GetTimeNumber(appointment.Start)).ToString(_numberFormatWithDot)});" + $"margin: calc({Gap} * 0.5);")">
+                                            <div class="appointment-content"
+                                                 style="@($"width: calc(100% - {Gap});" + $"height: calc(100% - {Gap});")">
+
+                                                <div class="bch-border"
+                                                     style="@($"background: {appointment.LineColor};")"></div>
+                                                <div class="bch-template"
+                                                     style="@($"background: {appointment.BackgroundColor};" + $"opacity: {appointment.Opacity.ToString(_numberFormatWithDot)}")">
+                                                    @if (_appointmentTemplates.TryGetValue(appointment.Key, out var appointmentItem))
+                                                    {
+                                                        @appointmentItem.ChildContent(appointment)
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

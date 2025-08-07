@@ -1,0 +1,113 @@
+﻿
+.bch-datepicker-list-month {
+    min-width: 230px;
+    width: 250px;
+    height: 230px;
+    background: #FEFEFE;
+    box-shadow: 1px 0px 3px rgba(203, 203, 203, 0.25), 0px 1px 3px rgba(203, 203, 203, 0.25);
+    border-radius: 10px;
+    border: none;
+    justify-content: space-between;
+    margin-top: 5px;
+    z-index: 999;
+}
+
+    .bch-datepicker-list-month .bch-datepicker-button-of-open-years {
+        text-align: start;
+        padding: 9px 15px;
+        height: 45px;
+        border-bottom: 1px solid #F7F7F7;
+        display: flex;
+        align-items: center;
+    }
+
+.bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper {
+    width: calc(100% - 12px);
+    height: calc(100% - 4px);
+    margin: 2px 6px;
+    display: flex;
+}
+
+    .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item {
+        z-index: 2;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+        color: #33B469 !important;
+        border: 1px solid #33B469;
+        border-radius: 5px;
+    }
+
+        .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper > .year-item{
+            color: #fff !important;
+        }
+
+
+        .bch-datepicker-list-month .bch-list-of-month {
+            display: grid;
+            min-width: 250px;
+            height: calc(100% - 45px);
+            width: auto;
+            grid-template-columns: repeat(3, 50px);
+            justify-content: space-evenly;
+            padding: 10px 0;
+            color: #5B5B5B;
+        }
+
+    .bch-datepicker-list-month .bch-list-of-month label {
+        margin: 1px;
+        width: 57px;
+        height: 37px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        color: #131212;
+    }
+
+    .bch-datepicker-list-month .bch-list-of-month .current-month {
+        color: #33B469 !important;
+        border: 1px solid #33B469;
+        border-radius: 5px;
+    }
+
+    .bch-datepicker-list-month .bch-list-of-month .selected-month {
+        background: #33B469 !important;
+        border: 1px solid transparent;
+        border-radius: 5px !important;
+        color: #FEFEFE !important;
+    }
+
+    .bch-datepicker-list-month .bch-list-of-month label {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+        .bch-datepicker-list-month .bch-list-of-month label:hover {
+            background: #E1F4E9;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+.bch-datepicker-list-month .shadow-opened-select {
+    width: 100%;
+    height: calc(100% - 50px);
+    background: #5B5B5B;
+    opacity: 0.1;
+    z-index: 1;
+    position: absolute;
+    border-radius: 0px 0px 10px 10px;
+}

@@ -1,0 +1,33 @@
+@typeparam TItem
+
+<div id="@_panelContainerId"
+     class="bch-tabs-panel"
+     style="height: @(TabHeight)px;">
+
+    <div id="@_panelScrollerId" class="bch-scroller" 
+         style="@($"transform: translateX({_scrollStr}px);")">
+        @ChildContent
+    </div>
+
+    @if (_showLeft)
+    {
+        <div class="bch-tab-btn bch-left"
+             style="@(DraggableContext.DraggingItem != null ? "pointer-events: none;" : "")"
+             @onclick="() => { }"
+             @onclick:stopPropagation
+             @onclick:preventDefault>
+            <div @onclick="OnLeftClickAsync" class="bch-icon"></div>
+        </div>
+    }
+
+    @if (_showRight)
+    {
+        <div class="bch-tab-btn bch-right"
+             style="@(DraggableContext.DraggingItem != null ? "pointer-events: none;" : "")"
+             @onclick="() => { }"
+             @onclick:stopPropagation
+             @onclick:preventDefault>
+            <div @onclick="OnRightClickAsync" class="bch-icon"></div>
+        </div>
+    }
+</div>

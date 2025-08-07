@@ -1,0 +1,113 @@
+﻿
+/*horizontal*/
+.bch-horizontal-range-container {
+    background: #EAEAEA;
+    width: 100%;
+    height: 15px;
+    border-radius: 50px;
+    position: relative;
+    touch-action: none;
+}
+
+    .bch-horizontal-range-container .bch-range-circle {
+        width: 25px;
+        height: 25px;
+        background: #FEFEFE;
+        border: 1px solid #EAEAEA;
+        border-radius: 50%;
+        position: relative;
+        left: 0;
+        top: -5px;
+        cursor: pointer;
+        z-index: 1;
+
+        touch-action: none;
+    }
+
+        .bch-horizontal-range-container .bch-range-circle .bch-range-tooltip {
+            position: absolute;
+            top: 0;
+            left: -6px;
+            border: 1px solid #33B469;
+            width: fit-content;
+            padding: 2px 5px;
+            display: flex;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+            .bch-horizontal-range-container .bch-range-circle .bch-range-tooltip label {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 10px;
+                color: #33B469;
+            }
+
+            .bch-horizontal-range-container .bch-fill-color {
+                position: absolute;
+                background: #33B469;
+                height: 100%;
+                top: 0;
+                left: 0;
+                border-bottom-left-radius: 10px;
+                border-top-left-radius: 10px;
+                z-index: 0;
+            }
+/*horizontal*/
+
+/*vertical*/
+
+.bch-vertical-range-container {
+    background: #EAEAEA;
+    height: 100%;
+    min-height: 1px;
+    width: 15px;
+    position: relative;
+    border-radius: 50px;
+    touch-action: none;
+}
+
+    .bch-vertical-range-container .bch-range-circle {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        position: relative;
+        right: -1px;
+        top: 0;
+        background: #FEFEFE;
+        cursor: pointer;
+        border: 1px solid #EAEAEA;
+        z-index: 1;
+        touch-action: none;
+    }
+
+        .bch-vertical-range-container .bch-range-circle .bch-range-tooltip {
+            position: absolute;
+            border: 1px solid red;
+            width: 30px;
+            height: 30px;
+        }
+
+    .bch-vertical-range-container .bch-fill-color {
+        background: #33B469;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        position: absolute;
+        z-index: 0;
+    }
+
+/*vertical*/
+
+.bch-no-selectable-text {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /*Internet Explorer/Edge */
+    user-select: none; /*Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
