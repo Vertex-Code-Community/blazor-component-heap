@@ -164,9 +164,9 @@ public partial class BchScheduler
         return dateTime.Hour + (dateTime.Minute / 60.0f) + (dateTime.Second / 60.0f) * 0.1f;
     }
 
-    private void OnDateChanged(DateTime dateTime)
+    private void OnDateChanged(DateTime? dateTime)
     {
-        _calendarDateTime = dateTime;
+        _calendarDateTime = dateTime ?? DateTime.Now;
         _scrollIndex = (_calendarDateTime.StartOfWeek() - _currentWeekStart.StartOfWeek()).Days / 7;
 
         StateHasChanged();

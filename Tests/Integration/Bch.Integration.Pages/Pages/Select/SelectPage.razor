@@ -1,89 +1,48 @@
 ﻿@page "/select"
 @using Bch.Components.Select
 
-<div class="select-container">
-    <div class="wrapper">
+<div>
+    <h3>Select Component Test</h3>
+    
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Test Case 1: Basic Select with Integer Options</h4>
+            <p>Selected value: @(_selectedInt.ToString())</p>
+            <BchSelect TItem="int"
+                       Options="_itemsInts"
+                       @bind-Selected="_selectedInt" />
+        </div>
 
-        @* <BCHSelect TItem="string" *@
-        @*            Options="_emptyList" *@
-        @*            ElementNamePredicate="x => x"/> *@
+        <div class="test-case">
+            <h4>Test Case 2: Select with Custom Height and Opened State</h4>
+            <p>Is opened: @_isOpened</p>
+            <BchSelect TItem="int"
+                       Options="_itemsInts"
+                       Height="70"
+                       @bind-IsOpened="_isOpened" />
+        </div>
 
-        @* <BCHSelect TItem="string"/> *@
+        <div class="test-case">
+            <h4>Test Case 3: String Select with Binding</h4>
+            <p>Selected value: @(_selectedString ?? "No value selected")</p>
+            <BchSelect TItem="string"
+                       Options="_items"
+                       @bind-Selected="_selectedString" />
+        </div>
 
-        @* <BCHSelect TItem="string" *@
-        @*            Options="_items"/> *@
-
-        <div>@_isOpened</div>
-
-        <BchSelect TItem="int"
-                   Options="_itemsInts"/>
-
-        <BchSelect TItem="int"
-                   Options="_itemsInts"
-                   Height="70"
-                   @bind-IsOpened="_isOpened"/>
-
-        <BchSelect TItem="string"
-                   Options="_items"
-                   @bind-Selected="_selected"/>
-
-        @* <BCHSelect TItem="int" *@
-        @*            Filtering="true" *@
-        @*            Options="_itemsInts"/> *@
-        @* *@
-        @* <BCHSelect TItem="int?" *@
-        @*            DefaultValue="35" *@
-        @*            Options="_itemsInts2"/> *@
-        @* *@
-        @* <BCHSelect TItem="string" *@
-        @*            Options="_items"/> *@
-        @* *@
-        @* <BCHSelect TItem="int" *@
-        @*            DefaultValue="5" *@
-        @*            Options="_itemsInts"/> *@
-
-
-        @* <BCHSelect TItem="string" *@
-        @*            Options="_items" *@
-        @*            Height="300" *@
-        @*            Filtering="true" *@
-        @*            Grouping="true" *@
-        @*            ScrollToSelected="true" *@
-        @*            ElementNamePredicate="x => x" *@
-        @*            GroupPredicate='x => x.Contains("s") ? "Even" : (x.Contains("tt") ? "TT" : "Odd")' *@
-        @*            GroupNamePredicate='x => x.Contains("s") ? "Even" : (x.Contains("tt") ? "TT" : "Odd")'/> *@
-
-        @* <BCHSelect TItem="string" *@
-        @*            Options="_items" *@
-        @*            Height="300" *@
-        @*            Filtering="false" *@
-        @*            Grouping="true" *@
-        @*            ElementNamePredicate="x => x" *@
-        @*            GroupPredicate='x => x.Contains("s")' *@
-        @*            GroupNamePredicate='x => x.Contains("s") ? "Even" : "Odd"'/> *@
-
-        @* <BCHSelect TItem="string" *@
-        @*            Options="_items" *@
-        @*            Height="300" *@
-        @*            Filtering="true" *@
-        @*            Grouping="true" *@
-        @*            MultipleSelect="true" *@
-        @*            ElementNamePredicate="x => x" *@
-        @*            GroupPredicate='x => x.Contains("s")' *@
-        @*            GroupNamePredicate='x => x.Contains("s") ? "Even" : "Odd"' *@
-        @*            SelectedItems="_selectedItems"/> *@
-
-        <BchSelect TItem="string"
-                   Options="_items"
-                   ContentHeight="300"
-                   Filtering="false"
-                   MultipleValues="true"
-                   OptionNamePredicate="x => x"
-                   GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"'
-                   SelectedItems="_selectedItems"/>
-
+        <div class="test-case">
+            <h4>Test Case 4: Multiple Selection with Grouping</h4>
+            <p>Selected items: @(_selectedItems.Count > 0 ? string.Join(", ", _selectedItems) : "No items selected")</p>
+            <BchSelect TItem="string"
+                       Options="_items"
+                       ContentHeight="300"
+                       Filtering="false"
+                       MultipleValues="true"
+                       OptionNamePredicate="x => x"
+                       GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"'
+                       SelectedItems="_selectedItems" />
+        </div>
     </div>
-
 </div>
 
 <style>

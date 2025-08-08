@@ -15,8 +15,8 @@ public partial class BchCalendar : IAsyncDisposable
     [Parameter] public string CssClass { get; set; } = string.Empty;
     [Parameter] public string Format { get; set; } = string.Empty;
     [Parameter] public string Culture { get; set; } = CultureInfo.CurrentCulture.Name;
-    [Parameter] public EventCallback<DateTime> ValueChanged { get; set; }
-    [Parameter] public DateTime Value
+    [Parameter] public EventCallback<DateTime?> ValueChanged { get; set; }
+    [Parameter] public DateTime? Value
     {
         get => _value;
         set
@@ -28,7 +28,9 @@ public partial class BchCalendar : IAsyncDisposable
         }
     }
 
-    private DateTime _value = DateTime.Now;
+    [Parameter] public bool ShowClearButton { get; set; } = false;
+
+    private DateTime? _value = null;
     private bool _showDate = false;
     private bool _showMonth = false;
     private readonly string _containerId = $"_id_{Guid.NewGuid()}";
@@ -121,8 +123,9 @@ public partial class BchCalendar : IAsyncDisposable
         
         _containerPos.Set(containerRect.X, containerRect.Y);
         
-        if (Value.Year != _selectedYear) _selectedYear = Value.Year;
-        if (Value.Month != _selectedMonth) _selectedMonth = Value.Month;
+        var currentDate = Value ?? DateTime.Now;
+        if (currentDate.Year != _selectedYear) _selectedYear = currentDate.Year;
+        if (currentDate.Month != _selectedMonth) _selectedMonth = currentDate.Month;
         
         _showDate = !_showMonth && !_showDate;
         _showMonth = false;
@@ -149,6 +152,28 @@ public partial class BchCalendar : IAsyncDisposable
             await UnsubscribeFromGlobalScrollAsync();
         }
         
+        StateHasChanged();
+    }
+
+    private string GetPlaceholderText()
+    {
+        return Format switch
+        {
+            "MM/dd/yyyy" => "MM-DD-YYYY",
+            "dd/MM/yyyy" => "DD-MM-YYYY",
+            "yyyy-MM-dd" => "YYYY-MM-DD",
+            _ => Culture switch
+            {
+                "en-US" => "MM-DD-YYYY",
+                "en-GB" => "DD-MM-YYYY",
+                _ => "YYYY-MM-DD"
+            }
+        };
+    }
+
+    private void ClearValue()
+    {
+        Value = null;
         StateHasChanged();
     }
 }

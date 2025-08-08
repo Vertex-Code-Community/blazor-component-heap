@@ -47,3 +47,7 @@
         cursor: pointer;
     }
 
+    .bch-datepicker:hover {
+        border-color: #D1D5DB;
+    }
+

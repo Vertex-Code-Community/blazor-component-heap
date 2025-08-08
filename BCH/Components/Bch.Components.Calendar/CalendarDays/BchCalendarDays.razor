@@ -42,7 +42,7 @@
                                     <div class="bch-item-day
                                         @(item.IsOtherDay ? "bch-datepicker-other-day" : "")
                                         @(DateTime.Now.Date == item.Date.Date ? "current-day" : "")
-                                        @(SelectedDate == item.Date ? "bch-selected-day" : "")">
+                                        @(SelectedDate?.Date == item.Date.Date ? "bch-selected-day" : "")">
                                         <label>@item.Date.Day</label>
                                     </div>
                                 }
@@ -69,7 +69,14 @@
     @if (IsDateRange)
     {
         <div class="bch-apply-button">
+            <button @onclick="ClearDatesAsync" class="bch-clear-button">Clear</button>
             <button @onclick="ApplyDatesAsync">Apply</button>
+        </div>
+    }
+    else if (ShowClearButton)
+    {
+        <div class="bch-apply-button">
+            <button @onclick="ClearSingleDate" class="bch-clear-button">Clear</button>
         </div>
     }
 </div>

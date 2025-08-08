@@ -1,13 +1,9 @@
-﻿namespace Bch.Integration.Pages.Pages.Select;
+﻿using Microsoft.AspNetCore.Components;
 
-public partial class SelectPage
+namespace Bch.Integration.Pages.Pages.Select;
+
+public partial class SelectPage : ComponentBase
 {
-    class SelectItem
-    {
-        public string Name { get; set; } = string.Empty;
-        public int Type { get; set; }
-    }
-
     private List<string> _emptyList = new List<string>();
     private readonly List<int> _itemsInts = Enumerable.Range(0, 20).ToList();
     private readonly List<int?> _itemsInts2 = new() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
@@ -44,9 +40,9 @@ public partial class SelectPage
     };
 
     private List<string> _selectedItems = new();
-
     private bool _isOpened = false;
-    private string? _selected;
+    private string? _selectedString;
+    private int _selectedInt;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -54,7 +50,5 @@ public partial class SelectPage
         {
             Console.Write($"{selected} ");
         }
-
-        // Console.WriteLine("_ OnAfterRender _");
     }
 }

@@ -1,0 +1,40 @@
+@page "/calendar"
+@using Bch.Components.Calendar
+
+<div>
+    <h3>Calendar Component Test</h3>
+    
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Test Case 1: Null Default Value</h4>
+            <p>Selected date: @(_selectedDate1?.ToString("MM/dd/yyyy") ?? "No date selected")</p>
+            <BchCalendar @bind-Value="_selectedDate1" Culture="en-US" Format="MM/dd/yyyy" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 2: DateTime.Now Default Value</h4>
+            <p>Selected date: @(_selectedDate2?.ToString("MM/dd/yyyy") ?? "No date selected")</p>
+            <BchCalendar @bind-Value="_selectedDate2" Culture="en-US" Format="MM/dd/yyyy" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 3: With Clear Button</h4>
+            <p>Selected date: @(_selectedDate3?.ToString("MM/dd/yyyy") ?? "No date selected")</p>
+            <BchCalendar @bind-Value="_selectedDate3" Culture="en-US" Format="MM/dd/yyyy" ShowClearButton="true" />
+        </div>
+    </div>
+</div>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+</style>

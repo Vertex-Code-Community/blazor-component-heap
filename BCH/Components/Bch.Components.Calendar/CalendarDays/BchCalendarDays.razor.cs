@@ -31,7 +31,10 @@ public partial class BchCalendarDays
     public EventCallback OnFocusOut { get; set; }
 
     [Parameter]
-    public DateTime SelectedDate { get; set; }
+    public EventCallback OnDateCleared { get; set; }
+
+    [Parameter]
+    public DateTime? SelectedDate { get; set; }
 
     [Parameter]
     public EventCallback<DateTime> SelectedStartDay { get; set; }
@@ -64,6 +67,9 @@ public partial class BchCalendarDays
     [Parameter]
     public EventCallback<DateRange> TrustedValues { get; set; }
 
+    [Parameter]
+    public bool ShowClearButton { get; set; } = false;
+
     private List<string> _weekDays = new();
     private List<WeekDay> _days = new();
     private int _rowsCount = 0;
@@ -82,10 +88,10 @@ public partial class BchCalendarDays
         _startDay = StartDay;
         _endDay = EndDay;
 
-        if (SelectedDate.Month > _month)
+        if (SelectedDate.HasValue)
         {
-            _month = SelectedDate.Month;
-            _year = SelectedDate.Year;
+            _month = SelectedDate.Value.Month;
+            _year = SelectedDate.Value.Year;
         }
         else
         {
@@ -273,6 +279,17 @@ public partial class BchCalendarDays
         await OnCloseDate.InvokeAsync();
     }
 
+    private async Task ClearDatesAsync()
+    {
+        _startDay = DateTime.MinValue;
+        _endDay = DateTime.MinValue;
+        Values.Start = DateTime.MinValue;
+        Values.End = DateTime.MinValue;
+
+        await TrustedValues.InvokeAsync(Values);
+        StateHasChanged();
+    }
+
     private async Task SelectRangeDateAsync(DateTime date)
     {
 
@@ -313,6 +330,12 @@ public partial class BchCalendarDays
     private async Task OnClickByMonthAsync()
     {
         await IsShowMonth.InvokeAsync(true);
+    }
+
+    private void ClearSingleDate()
+    {
+        OnDateCleared.InvokeAsync();
+        StateHasChanged();
     }
 
 }
