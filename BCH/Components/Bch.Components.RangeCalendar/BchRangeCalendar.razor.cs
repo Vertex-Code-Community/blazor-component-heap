@@ -56,9 +56,6 @@ public partial class BchRangeCalendar : IAsyncDisposable
     {
         _culture = new CultureInfo(Culture);
 
-        _values.Start = DateTime.MinValue;
-        _values.End = DateTime.MinValue;
-
         if (string.IsNullOrWhiteSpace(Format))
             Format = "MM/dd/yyyy";
 
@@ -128,32 +125,38 @@ public partial class BchRangeCalendar : IAsyncDisposable
 
     private string GetValues()
     {
+        if (Values.Start == null && Values.End == null)
+        {
+            return $"{Format} - {Format}";
+        }
+
         if (Values.Start == DateTime.MinValue && Values.End == DateTime.MinValue)
         {
             return $"{Format} - {Format}";
         }
 
-        if (Values.Start != DateTime.MinValue && Values.End != DateTime.MinValue)
+        if (Values.Start != null && Values.End != null)
         {
-            _defaultStartDay = Values.Start;
-            _defaultEndDay = Values.End;
-            return $"{Values.Start.ToString(Format)} - {Values.End.ToString(Format)}";
+            _defaultStartDay = Values.Start.Value;
+            _defaultEndDay = Values.End.Value;
+            return $"{Values.Start.Value.ToString(Format)} - {Values.End.Value.ToString(Format)}";
         }
 
-        if (Values.Start != DateTime.MinValue)
+        if (Values.Start != null)
         {
-            _defaultStartDay = Values.Start;
-            return $"{Values.Start.ToString(Format)} - {Format}";
+            _defaultStartDay = Values.Start.Value;
+            return $"{Values.Start.Value.ToString(Format)} - {Format}";
         }
 
-        if (Values.End != DateTime.MinValue)
+        if (Values.End != null)
         {
-            _defaultEndDay = Values.End;
-            return $"{Format} - {Values.End.ToString(Format)}";
+            _defaultEndDay = Values.End.Value;
+            return $"{Format} - {Values.End.Value.ToString(Format)}";
         }
 
         return $"{Format} - {Format}";
     }
+
 
     private async Task OnCalendarClickedAsync()
     {
