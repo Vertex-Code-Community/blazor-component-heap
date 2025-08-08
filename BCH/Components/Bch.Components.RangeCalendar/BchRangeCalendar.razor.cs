@@ -60,7 +60,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
         _values.End = DateTime.MinValue;
 
         if (string.IsNullOrWhiteSpace(Format))
-            Format = _culture.DateTimeFormat.ShortDatePattern;
+            Format = "MM/dd/yyyy";
 
         return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey,
             OnDocumentMouseDownAsync);
@@ -128,21 +128,31 @@ public partial class BchRangeCalendar : IAsyncDisposable
 
     private string GetValues()
     {
-        var value = $"{DateTime.Now.ToString(Format)} - {DateTime.Now.ToString(Format)}";
+        if (Values.Start == DateTime.MinValue && Values.End == DateTime.MinValue)
+        {
+            return $"{Format} - {Format}";
+        }
+
+        if (Values.Start != DateTime.MinValue && Values.End != DateTime.MinValue)
+        {
+            _defaultStartDay = Values.Start;
+            _defaultEndDay = Values.End;
+            return $"{Values.Start.ToString(Format)} - {Values.End.ToString(Format)}";
+        }
 
         if (Values.Start != DateTime.MinValue)
         {
-            value = $"{Values.Start.ToString(Format)}";
             _defaultStartDay = Values.Start;
+            return $"{Values.Start.ToString(Format)} - {Format}";
         }
 
         if (Values.End != DateTime.MinValue)
         {
-            value += $" - {Values.End.ToString(Format)}";
             _defaultEndDay = Values.End;
+            return $"{Format} - {Values.End.ToString(Format)}";
         }
 
-        return value;
+        return $"{Format} - {Format}";
     }
 
     private async Task OnCalendarClickedAsync()

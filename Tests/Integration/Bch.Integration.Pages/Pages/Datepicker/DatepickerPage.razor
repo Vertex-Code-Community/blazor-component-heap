@@ -8,17 +8,17 @@
 </div>*@
 
 <div>
-    Selected date @dateTime
+    Selected date @dateTime.ToString("MM-dd-yyyy")
 </div>
 
 <div>
-    Selected date range @dateRange.Start - @dateRange.End
+    Selected date range @dateRange.Start.ToString("MM-dd-yyyy") - @dateRange.End.ToString("MM-dd-yyyy")
 </div>
 
 <div class="calendar-container">
     <div class="wrapper">
         @* <BCHCalendar @bind-Value='dateTime' Culture="en-US" CssClass="test"/> *@
-        <BchRangeCalendar @bind-Values="dateRange" Culture="en-US" Format="MM/dd/yyyy HH:mm" />
+        <BchRangeCalendar @bind-Values="dateRange" Culture="en-US" Format="MM/dd/yyyy" />
     </div>
 </div>
 
