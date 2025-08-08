@@ -1,47 +1,148 @@
 ﻿@page "/"
 
-<div style="height:400px; display: flex; flex-direction: column;">
-    @* <div>@JsRuntime.GetType().Name</div> *@
+<div class="index-container">
+    <div class="header">
+        <h1>Blazor Component Heap</h1>
+        <p class="subtitle">A comprehensive collection of reusable Blazor components</p>
+    </div>
 
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/modal"); }'> Modal</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/select"); }'> Select</a>
-    
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/table"); }'> Table link</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/table-custom-td"); }'> Table Custom Td link</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/datepicker"); }'> Datepicker link</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/calendar"); }'> Calendar</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/tabs"); }'> Tabs link</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/new-tabs"); }'> New Tabs link</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/scheduler"); }'> Scheduler link</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/radio-buttons"); }'> Radio-Buttons link</a>
-    <a href="javascript:void(0)" @onclick='() => { NavigationManager.NavigateTo("/dragging-modal"); }'> Dragging Modal</a>
-    <a href="/zoom"> Zoom</a>
-    <a href="/cropper"> Cropper</a>
-    <a href="/image-cropper"> Cropper Image</a>
-    <a href="/test"> Test</a>
-    <a href="/slider"> Slider</a>
-    <a href="/expanded-menu"> Expanded Menu</a>
-    <a href="/toggle"> Toggle</a>
-    <a href="/range"> Range</a>
-    <a href="/inputs"> FileInputs</a>
+    <div class="components-grid">
+        <!-- Data Entry Components -->
+        <div class="category-section">
+            <h2>Data Entry Components</h2>
+            <div class="cards-grid">
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/select"); }'>
+                    <div class="card-icon">📋</div>
+                    <h3>Select</h3>
+                    <p>Dropdown selection component with filtering and grouping</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/calendar"); }'>
+                    <div class="card-icon">📅</div>
+                    <h3>Calendar</h3>
+                    <p>Date picker component with nullable support</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/datepicker"); }'>
+                    <div class="card-icon">📆</div>
+                    <h3>Date Range Picker</h3>
+                    <p>Date range selection with clear functionality</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/toggle"); }'>
+                    <div class="card-icon">🔘</div>
+                    <h3>Toggle</h3>
+                    <p>Switch component for boolean values</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/range"); }'>
+                    <div class="card-icon">🎚️</div>
+                    <h3>Range Slider</h3>
+                    <p>Range selection with custom styling</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/slider"); }'>
+                    <div class="card-icon">🎛️</div>
+                    <h3>Slider</h3>
+                    <p>Single value slider component</p>
+                </div>
+            </div>
+        </div>
 
+        <!-- Display Components -->
+        <div class="category-section">
+            <h2>Display Components</h2>
+            <div class="cards-grid">
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/table"); }'>
+                    <div class="card-icon">📊</div>
+                    <h3>Table</h3>
+                    <p>Data table with sorting and pagination</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/table-custom-td"); }'>
+                    <div class="card-icon">📋</div>
+                    <h3>Custom Table</h3>
+                    <p>Table with custom cell rendering</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/tabs"); }'>
+                    <div class="card-icon">📑</div>
+                    <h3>Tabs</h3>
+                    <p>Tabbed interface component</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/new-tabs"); }'>
+                    <div class="card-icon">📄</div>
+                    <h3>New Tabs</h3>
+                    <p>Enhanced tab component</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/radio-buttons"); }'>
+                    <div class="card-icon">🔘</div>
+                    <h3>Radio Buttons</h3>
+                    <p>Radio button group component</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/expanded-menu"); }'>
+                    <div class="card-icon">📂</div>
+                    <h3>Expand Menu</h3>
+                    <p>Expandable menu component</p>
+                </div>
+            </div>
+        </div>
 
-    @* <a href="/table"> Table link</a> *@
-    @* <a href="/datepicker"> Datepicker link</a> *@
-    @* <a href="/select"> Select link</a> *@
-    @* <a href="/tabs"> Tabs link</a> *@
-    @* <a href="/new-tabs"> New Tabs link</a> *@
-    @* <a href="/scheduler"> Scheduler link</a> *@
-    @* $1$ <a href="/carousel"> Carousel link</a> #1# *@
-    @* <a href="/radio-buttons"> Radio-Buttons link</a> *@
-    @* <a href="/dragging-modal"> Dragging Modal</a> *@
-    @* <a href="/modal"> Modal</a> *@
-    @* <a href="/zoom"> Zoom</a> *@
-    @* <a href="/cropper"> Cropper</a> *@
-    @* <a href="/image-cropper"> Cropper Image</a> *@
-    @* <a href="/test"> Test</a> *@
-    @* <a href="/slider"> Slider</a> *@
-    @* <a href="/expanded-menu"> Expanded Menu</a> *@
-    @* <a href="/toggle"> Toggle</a> *@
-    @* <a href="/range"> Range</a> *@
+        <!-- Interactive Components -->
+        <div class="category-section">
+            <h2>Interactive Components</h2>
+            <div class="cards-grid">
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/modal"); }'>
+                    <div class="card-icon">🪟</div>
+                    <h3>Modal</h3>
+                    <p>Modal dialog component</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/dragging-modal"); }'>
+                    <div class="card-icon">🖱️</div>
+                    <h3>Dragging Modal</h3>
+                    <p>Draggable modal component</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/scheduler"); }'>
+                    <div class="card-icon">📅</div>
+                    <h3>Scheduler</h3>
+                    <p>Calendar scheduling component</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/zoom"); }'>
+                    <div class="card-icon">🔍</div>
+                    <h3>Zoom</h3>
+                    <p>Image zoom component</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Media Components -->
+        <div class="category-section">
+            <h2>Media Components</h2>
+            <div class="cards-grid">
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/cropper"); }'>
+                    <div class="card-icon">✂️</div>
+                    <h3>Cropper</h3>
+                    <p>Image cropping component</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/image-cropper"); }'>
+                    <div class="card-icon">🖼️</div>
+                    <h3>Image Cropper</h3>
+                    <p>Advanced image cropping</p>
+                </div>
+                
+                <div class="card" @onclick='() => { NavigationManager.NavigateTo("/inputs"); }'>
+                    <div class="card-icon">📁</div>
+                    <h3>File Inputs</h3>
+                    <p>File upload components</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
