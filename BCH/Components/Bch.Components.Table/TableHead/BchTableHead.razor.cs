@@ -89,6 +89,15 @@ public partial class BchTableHead<TRowData> : ComponentBase where TRowData : cla
         });
     }
 
+    private Task OnSelectDateAsync(DateTime? date, string columnName)
+    {
+        return OnFilterData.InvokeAsync(new TableFilterParameters
+        {
+            PropertyName = columnName,
+            Date = date
+        });
+    }
+
     private async Task OnSelectDateAsync(DateRange date, string columnName)
     {
         await OnFilterData.InvokeAsync(new TableFilterParameters

@@ -1,0 +1,81 @@
+@page "/calendar"
+@using Bch.Components.Calendar
+
+<div>
+    <h3>Calendar Component Test</h3>
+    
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Test Case 1: Null Default Value</h4>
+            <p>Selected date: @(selectedDate1?.ToString("MM/dd/yyyy") ?? "No date selected")</p>
+            <BchCalendar @bind-Value="selectedDate1" Culture="en-US" Format="MM/dd/yyyy" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 2: DateTime.Now Default Value</h4>
+            <p>Selected date: @(selectedDate2?.ToString("MM/dd/yyyy") ?? "No date selected")</p>
+            <BchCalendar @bind-Value="selectedDate2" Culture="en-US" Format="MM/dd/yyyy" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 3: With Clear Button</h4>
+            <p>Selected date: @(selectedDate3?.ToString("MM/dd/yyyy") ?? "No date selected")</p>
+            <BchCalendar @bind-Value="selectedDate3" Culture="en-US" Format="MM/dd/yyyy" ShowClearButton="true" />
+        </div>
+    </div>
+</div>
+
+@code
+{
+    private DateTime? selectedDate1 = null;
+    private DateTime? selectedDate2 = DateTime.Now;
+    private DateTime? selectedDate3 = DateTime.Now;
+
+    private void ShowDate()
+    {
+        Console.WriteLine($"Selected date 1: {selectedDate1}");
+        Console.WriteLine($"Selected date 2: {selectedDate2}");
+        Console.WriteLine($"Selected date 3: {selectedDate3}");
+    }
+}
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+    
+    .test-cases {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .test-case {
+        border: 1px solid #E5E7EB;
+        border-radius: 8px;
+        padding: 20px;
+        background: #FFFFFF;
+    }
+
+    .test-case h4 {
+        margin: 0 0 10px 0;
+        color: #374151;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .test-case p {
+        margin: 0 0 15px 0;
+        color: #6B7280;
+        font-size: 14px;
+    }
+</style>

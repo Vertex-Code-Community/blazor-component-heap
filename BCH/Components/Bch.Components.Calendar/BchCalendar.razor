@@ -3,13 +3,12 @@
 @using Bch.Components.Calendar.CalendarMonths
 
 <div class="bch-datepicker-wrapper @CssClass" id="@_containerId" tabindex="-1">
-
     <div class="bch-datepicker" @onclick="OnCalendarClickedAsync">
         <input id="@_inputId"
                class="bch-datepicker-input"
                readonly
                autocomplete="unrechable-filter-to-autocomplete"
-               value="@_value.ToString(Format)"
+               value="@(Value?.ToString(Format) ?? GetPlaceholderText())"
                @ref="@_inputRef"/>
         <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon.svg"/>
     </div>
@@ -21,14 +20,20 @@
               Y="@($"{_containerPos.Y.ToString(_nF)}px")"
               Show="_showDate"
               ShowChanged="OnDateChanged">
+
         <BchCalendarDays Id="@_calendarDaysId"
-                         OnDateSelected=" e => { Value = e; _showDate = false; return OnShowModeChangedAsync(); }"
                          Culture="@Culture"
                          DefaultMonth="_selectedMonth"
                          DefaultYear="_selectedYear"
-                         OnFocusOut="() => _inputRef.FocusAsync()"
                          SelectedDate="Value"
+                         OnFocusOut="() => _inputRef.FocusAsync()"
+                         IsDateRange="false"
+                         ShowClearButton="ShowClearButton"
+                         OnDateSelected="e => { Value = e; _showDate = false; return OnShowModeChangedAsync(); }"
+                         OnDateCleared="() => { Value = null; _showDate = false; return OnShowModeChangedAsync(); }"
+                         OnCloseDate="() => { _showDate = false; return OnShowModeChangedAsync(); }"
                          IsShowMonth="e => { _showMonth = e; _showDate = false; return OnShowModeChangedAsync(); }"/>
+
     </BchModal>
 
     <BchModal CssClass="@($"bch-calendar-months-modal-wrapper {CssClass}")"
@@ -38,15 +43,17 @@
               Y="@($"{_containerPos.Y.ToString(_nF)}px")"
               Show="_showMonth"
               ShowChanged="OnMonthChanged">
+
         <BchCalendarMonths Id="@_calendarMonthsId"
                            YearsSelectContentId="@_yearsSelectContentId"
                            SelectedMonth="_selectedMonth"
                            SelectedYear="_selectedYear"
-                           MonthChanged="e => { _selectedMonth = e; return OnShowModeChangedAsync(); }"
-                           YearChanged="e => { _selectedYear = e; return OnShowModeChangedAsync(); }"
+                           MonthChanged="e => { _selectedMonth = e; StateHasChanged(); }"
+                           YearChanged="e=> { _selectedYear = e; StateHasChanged(); }"
                            IsShowDate="e => { _showMonth = false; _showDate = e; return OnShowModeChangedAsync(); }"
                            OnFocusOut="() => _inputRef.FocusAsync()"/>
     </BchModal>
+
 </div>
 
 <style>
