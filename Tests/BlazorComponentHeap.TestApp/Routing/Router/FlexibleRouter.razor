@@ -1,8 +1,0 @@
-@if (NavigationManager.CurrentPage is null)
-{
-    @NotFound
-}
-else
-{
-    @Found?.Invoke(NavigationManager.CurrentPage)
-}
