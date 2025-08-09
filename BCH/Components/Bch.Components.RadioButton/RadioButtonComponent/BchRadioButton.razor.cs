@@ -10,9 +10,9 @@ public partial class BchRadioButton<TItem> : ComponentBase where TItem : class
 
     [Parameter] public TItem Key { get; set; } = null!;
 
-    [Parameter] public RenderFragment<bool>? ContentTemplate { get; set; } = null!;
-    [Parameter] public RenderFragment<bool>? CircleTemplate { get; set; } = null!;
-    [Parameter] public RenderFragment<bool>? DataTemplate { get; set; } = null!;
+    [Parameter] public RenderFragment<bool>? ContentTemplate { get; set; }
+    [Parameter] public RenderFragment<bool>? CircleTemplate { get; set; }
+    [Parameter] public RenderFragment<bool>? DataTemplate { get; set; }
 
     [Parameter] public bool Disabled { get; set; }
     

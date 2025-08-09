@@ -1,21 +1,28 @@
 ﻿@page "/modal"
 @using Bch.Components.Modal
+@using Bch.Integration.Pages.Pages.Modal.Test
 
 <div class="page-cnt">
     <button @onclick="OnModal1SwitchClicked">Open Modal 1</button>
     <button @onclick="OnModal2SwitchClicked">Open Modal 2</button>
 </div>
 
-<BchModal Width="20%"
-          Height="20%"
-          CloseOnOverlayClicked="true"
-          @bind-Show="_showModal1">
-    <div class="data-cnt">
-        <div>Text 1</div>
-        <div>Text 2</div>
-        <div>Text 3</div>
-    </div>
-</BchModal>
+
+<CascadingValue Name="TesModalParameter" Value="@_text">
+
+    <TestComponent/>
+    <BchModal Width="20%"
+              Height="20%"
+              CloseOnOverlayClicked="true"
+              @bind-Show="_showModal1">
+        <div class="data-cnt">
+            <div>Text 1</div>
+            <div>Text 2</div>
+            <div>Text 3</div>
+            <TestComponent/>
+        </div>
+    </BchModal>
+</CascadingValue>
 
 <BchModal Width="20%"
           Height="20%"

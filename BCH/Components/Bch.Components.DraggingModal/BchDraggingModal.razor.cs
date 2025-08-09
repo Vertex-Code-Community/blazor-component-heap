@@ -19,7 +19,7 @@ public partial class BchDraggingModal : IAsyncDisposable
     [Parameter] public string Height { get; set; } = "100px";
     [Parameter] public int InitialX { get; set; }
     [Parameter] public int InitialY { get; set; }
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public required RenderFragment ChildContent { get; set; }
     [Parameter] public EventCallback<bool> ShowChanged { get; set; }
     [Parameter] public bool Show
     {

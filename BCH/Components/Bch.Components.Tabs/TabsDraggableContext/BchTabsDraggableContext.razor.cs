@@ -5,7 +5,7 @@ namespace Bch.Components.Tabs.TabsDraggableContext;
 
 public partial class BchTabsDraggableContext<TItem> : ComponentBase where TItem : class
 {
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public required RenderFragment ChildContent { get; set; }
     internal readonly TabsDraggableContextModel<TItem> DraggableContext = new();
 
     protected override void OnAfterRender(bool firstRender)

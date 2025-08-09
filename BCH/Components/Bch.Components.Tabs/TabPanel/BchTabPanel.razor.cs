@@ -15,7 +15,7 @@ public partial class BchTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
     [Parameter] public int Gap { get; set; }
     [Parameter] public string CssClass { get; set; } = string.Empty;
     [Parameter] public List<TItem> Items { get; set; } = new();
-    [Parameter] public RenderFragment<TItem> ItemTemplate { get; set; } = null!;
+    [Parameter] public required RenderFragment<TItem> ItemTemplate { get; set; }
     [Parameter] public TabsDraggableContextModel<TItem> DraggableContext { get; set; } = null!;
     [Parameter] public Func<TItem, int> TabWidthPredicate { get; set; } = x => 100;
     [Parameter] public Func<Vec2, Task>? OnItemDrag { get; set; }

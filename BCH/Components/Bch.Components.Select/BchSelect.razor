@@ -2,7 +2,7 @@
 @typeparam TItem
 
 <div id="@_containerId"
-     class="@("bch-select-container bch-no-selectable-text " + $"{(IsOpened ? "show" : "")} " + $"{(_selectedValue != null! ? "has-selected" : "")} " + $"{(UpperSide ? "bch-upper-side" : "")} " + $"{CssClass}")"
+     class="@($"bch-select-container bch-no-selectable-text {GetThemeCssClass()} { (IsOpened ? "show" : "") } { (_selectedValue != null! ? "has-selected" : "") } { (UpperSide ? "bch-upper-side" : "") } {CssClass}")"
      style="@($"width: {Width}px; height: {Height}px;")"
      tabindex="-1">
 

@@ -9,7 +9,7 @@ public partial class BchTable<TRowData> : ComponentBase
     where TRowData : class
 {
     [Parameter] public ICollection<TRowData> Items { get; set; } = new List<TRowData>();
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public required RenderFragment ChildContent { get; set; }
     [Parameter] public EventCallback<TableFilterParameters> OnFilterData { get; set; }
     [Parameter] public EventCallback<TableSortParameters> OnSortData { get; set; }
     [Parameter] public string MinWidth { get; set; } = "670px";

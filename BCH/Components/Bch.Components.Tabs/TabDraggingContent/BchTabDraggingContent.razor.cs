@@ -6,7 +6,7 @@ public partial class BchTabDraggingContent<TItem> : ComponentBase where TItem : 
 {
     [Parameter] public int TabHeight { get; set; }
     [Parameter] public TItem Item { get; set; } = null!;
-    [Parameter] public RenderFragment<TItem> TabTemplate { get; set; } = null!;
-    [Parameter] public RenderFragment<TItem> ContentTemplate { get; set; } = null!;
+    [Parameter] public required RenderFragment<TItem> TabTemplate { get; set; }
+    [Parameter] public required RenderFragment<TItem> ContentTemplate { get; set; }
     [Parameter] public Func<TItem, int>? TabWidthPredicate { get; set; } = x => 100;
 }

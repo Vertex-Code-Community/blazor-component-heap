@@ -16,4 +16,6 @@ public partial class ModalPage
         _showModal2 = !_showModal2;
         StateHasChanged();
     }
+
+    private string _text = "TEXT TO MODAL";
 }

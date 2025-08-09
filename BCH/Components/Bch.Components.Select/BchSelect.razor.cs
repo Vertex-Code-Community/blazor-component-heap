@@ -7,6 +7,9 @@ using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Models;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.Maths.Models;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Select;
 
@@ -88,8 +91,14 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     [Parameter] public IList<TItem> SelectedItems { get; set; } = new List<TItem>();
     [Parameter] public EventCallback<TItem> OnSelectItem { get; set; }
     [Parameter] public EventCallback<TItem> OnDeselectItem { get; set; }
-    [Parameter] public RenderFragment<TItem> OptionTemplate { get; set; } = null!;
-    [Parameter] public RenderFragment<object> GroupTemplate { get; set; } = null!;
+    [Parameter] public RenderFragment<TItem>? OptionTemplate { get; set; }
+    [Parameter] public RenderFragment<object>? GroupTemplate { get; set; }
+
+    // Theme support (cascading + explicit override)
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
 
     private readonly string _containerId = $"_id_{Guid.NewGuid()}";
     private readonly string _inputId = $"_id_{Guid.NewGuid()}";
@@ -363,5 +372,11 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     {
         var renderGroupCount = GroupPredicate is null ? 0 : 1;
         return _groups.Sum(group => group.Elements.Count + renderGroupCount) * ItemHeight;
+    }
+
+    private string GetThemeCssClass()
+    {
+        // read CssName attribute from EffectiveTheme
+        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
     }
 }

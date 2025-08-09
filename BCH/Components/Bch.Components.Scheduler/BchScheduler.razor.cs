@@ -17,7 +17,7 @@ public partial class BchScheduler
     [Parameter] public string ItemHeight { get; set; } = "90px";
     [Parameter] public DateTime WeekDate { get; set; } = DateTime.Now;
     [Parameter] public List<Appointment> Appointments { get; set; } = new();
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public required RenderFragment ChildContent { get; set; }
     [Parameter] public bool ShowDatePicker { get; set; } = false;
     [Parameter] public bool ShowTodayButton { get; set; } = false;
 

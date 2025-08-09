@@ -5,7 +5,7 @@ namespace Bch.Components.RadioButton.RadioButtonsContainer;
 
 public partial class BchRadioButtonsContainer<TItem> : ComponentBase where TItem : class
 {
-    [Parameter] public RenderFragment ChildContent { get; set; } = null!;
+    [Parameter] public required RenderFragment ChildContent { get; set; }
     [Parameter] public EventCallback<TItem> SelectedChanged { get; set; }
     [Parameter] public TItem Selected
     {
