@@ -56,11 +56,8 @@ public partial class BchRangeCalendar : IAsyncDisposable
     {
         _culture = new CultureInfo(Culture);
 
-        _values.Start = DateTime.MinValue;
-        _values.End = DateTime.MinValue;
-
         if (string.IsNullOrWhiteSpace(Format))
-            Format = _culture.DateTimeFormat.ShortDatePattern;
+            Format = "MM/dd/yyyy";
 
         return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey,
             OnDocumentMouseDownAsync);
@@ -128,22 +125,38 @@ public partial class BchRangeCalendar : IAsyncDisposable
 
     private string GetValues()
     {
-        var value = $"{DateTime.Now.ToString(Format)} - {DateTime.Now.ToString(Format)}";
-
-        if (Values.Start != DateTime.MinValue)
+        if (Values.Start == null && Values.End == null)
         {
-            value = $"{Values.Start.ToString(Format)}";
-            _defaultStartDay = Values.Start;
+            return $"{Format} - {Format}";
         }
 
-        if (Values.End != DateTime.MinValue)
+        if (Values.Start == DateTime.MinValue && Values.End == DateTime.MinValue)
         {
-            value += $" - {Values.End.ToString(Format)}";
-            _defaultEndDay = Values.End;
+            return $"{Format} - {Format}";
         }
 
-        return value;
+        if (Values.Start != null && Values.End != null)
+        {
+            _defaultStartDay = Values.Start.Value;
+            _defaultEndDay = Values.End.Value;
+            return $"{Values.Start.Value.ToString(Format)} - {Values.End.Value.ToString(Format)}";
+        }
+
+        if (Values.Start != null)
+        {
+            _defaultStartDay = Values.Start.Value;
+            return $"{Values.Start.Value.ToString(Format)} - {Format}";
+        }
+
+        if (Values.End != null)
+        {
+            _defaultEndDay = Values.End.Value;
+            return $"{Format} - {Values.End.Value.ToString(Format)}";
+        }
+
+        return $"{Format} - {Format}";
     }
+
 
     private async Task OnCalendarClickedAsync()
     {
