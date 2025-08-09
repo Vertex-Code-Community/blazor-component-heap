@@ -24,3 +24,27 @@
     color: #6B7280;
     font-size: 14px;
 }
+
+.themes-section {
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 20px;
+    background: #FFFFFF;
+}
+
+    .themes-section > .themes-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 12px;
+    }
+
+        .themes-section > .themes-row > .theme-col {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+            .themes-section > .themes-row > .theme-col > .bch-select-container {
+                width: 100%;
+        }

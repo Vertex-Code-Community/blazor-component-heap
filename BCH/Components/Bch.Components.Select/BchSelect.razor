@@ -43,7 +43,7 @@
     @bind-Show="IsOpened">
 
     <div id="@ContentId"
-         class="bch-content @(UpperSide ? "bch-upper-side" : "") bch-no-selectable-text"
+         class="bch-content @GetThemeCssClass() @(UpperSide ? "bch-upper-side" : "") bch-no-selectable-text"
          style="@($"max-height: {ContentHeight}px; width: {Width}px;")">
         <div id="@ScrollerId" class="bch-scroller bch-no-selectable-text">
 

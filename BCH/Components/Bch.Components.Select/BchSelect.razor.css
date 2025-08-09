@@ -109,12 +109,16 @@
     .bch-select-container.show > .bch-button > span {
         transform: rotate(180deg);
     }
+.bch-theme-dark.bch-select-container > .bch-button > span {
+    background: url(img/select-arrow-white.svg) center no-repeat;
+}
+
 
 
     .bch-content {
         z-index: 3000;
         background: #FFFFFF;
-        border-top: 1px solid #33B469;
+        border-top: 1px solid transparent; /* themed */
         border-radius: 0px 0px 10px 10px;
         display: flex;
         flex-direction: column;
@@ -126,7 +130,7 @@
 
         .bch-content.bch-upper-side {
             border-top: none;
-            border-bottom: 1px solid #33B469;
+            border-bottom: 1px solid transparent; /* themed */
             border-radius: 10px 10px 0px 0px;
         }
 
@@ -152,14 +156,14 @@
                 }
 
             .bch-content > .bch-scroller::-webkit-scrollbar-thumb {
-                background: #33B469;
+                background: transparent; /* themed */
                 border: 0.7px solid transparent;
                 border-radius: 12px;
                 background-clip: content-box;
             }
 
                 .bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
-                    background: #33B469bb;
+                    background: transparent; /* themed */
                     border: 0.7px solid transparent;
                     border-radius: 12px;
                     background-clip: content-box;
@@ -205,14 +209,14 @@
                 }
 
                 .bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
-                    background: rgba(51, 180, 105, 0.1);
-                    border-left: 2px solid #33B469;
+                    background: transparent; /* themed */
+                    border-left: 2px solid transparent; /* themed */
                     padding-left: 15px;
                 }
 
                 .bch-content > .bch-scroller > .bch-group > .bch-option.selected {
-                    background: rgba(51, 180, 105, 0.8);
-                    color: #FEFEFE;
+                    background: transparent; /* themed */
+                    color: #FEFEFE; /* themed in dark/light blocks if needed */
                 }
 
             .bch-content > .bch-scroller > .bch-group {
@@ -234,6 +238,12 @@
                         margin-right: 10px;
                         transition: all 0.25s ease;
                     }
+.bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span {
+    background: url(img/select-arrow-green.svg) center no-repeat;
+}
+.bch-theme-light-green.bch-select-container > .bch-button > span {
+    background: url(img/select-arrow-green.svg) center no-repeat;
+}
 
                 .bch-content > .bch-scroller > .bch-group.expanded > .bch-group-wrapper > span {
                     transform: rotate(180deg);
@@ -268,4 +278,74 @@
     -ms-user-select: none; /*Internet Explorer/Edge */
     user-select: none; /*Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
+}
+.bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span {
+    background: url(img/select-arrow-white.svg) center no-repeat;
+}
+
+/* THEME: LightGreen (current) */
+.bch-theme-light-green.bch-content {
+    border-top-color: #33B469;
+}
+.bch-theme-light-green.bch-content.bch-upper-side {
+    border-bottom-color: #33B469;
+}
+.bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb {
+    background: #33B469;
+}
+.bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+    background: #33B469bb;
+}
+.bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+    background: rgba(51, 180, 105, 0.1);
+    border-left-color: #33B469;
+}
+.bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-option.selected {
+    background: rgba(51, 180, 105, 0.8);
+    color: #FEFEFE;
+}
+
+/* THEME: Light (silver monochrome) */
+.bch-theme-light.bch-select-container {
+    background: #FFFFFF;
+}
+.bch-theme-light.bch-content {
+    background: #FFFFFF;
+    border-top-color: #BDBDBD;
+}
+.bch-theme-light.bch-content.bch-upper-side { border-bottom-color: #BDBDBD; }
+.bch-theme-light.bch-content > .bch-scroller::-webkit-scrollbar-thumb { background: #AFAFAF; }
+.bch-theme-light.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover { background: #9A9A9A; }
+.bch-theme-light.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+    background: rgba(0, 0, 0, 0.06);
+    border-left-color: #BDBDBD;
+}
+.bch-theme-light.bch-content > .bch-scroller > .bch-group > .bch-option.selected {
+    background: #BDBDBD;
+    color: #1F2937;
+}
+
+/* THEME: Dark */
+.bch-theme-dark.bch-select-container { background: #1F2937; }
+.bch-theme-dark.bch-select-container > .bch-button > input,
+.bch-theme-dark.bch-select-container > .bch-button > label { color: #E5E7EB; caret-color: #E5E7EB; }
+.bch-theme-dark.bch-select-container > .bch-button > input::placeholder { color: rgba(229,231,235,0.7); }
+
+.bch-theme-dark.bch-content {
+    background: #111827;
+    border-top-color: #4B5563;
+    filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.35));
+}
+.bch-theme-dark.bch-content.bch-upper-side { border-bottom-color: #4B5563; }
+.bch-theme-dark.bch-content > .bch-scroller::-webkit-scrollbar-thumb { background: #6B7280; }
+.bch-theme-dark.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+.bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option { color: #D1D5DB; }
+.bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > .name { color: #D1D5DB; }
+.bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-left-color: #9CA3AF;
+}
+.bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option.selected {
+    background: rgba(255,255,255,0.18);
+    color: #F9FAFB;
 }
