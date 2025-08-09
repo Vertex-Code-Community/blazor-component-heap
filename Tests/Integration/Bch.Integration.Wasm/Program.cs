@@ -10,7 +10,7 @@ using Bch.Integration.Wasm;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.RootComponents.Add<BchRootModal>("body::after");
+builder.RootComponents.Add<BchRootModal>("#bch-modal");
 
 var services = builder.Services;
 
