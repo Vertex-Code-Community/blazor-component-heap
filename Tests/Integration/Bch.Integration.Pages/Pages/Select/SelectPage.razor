@@ -5,43 +5,42 @@
 <div>
     <h3>Select Component Test</h3>
 
-    <div class="themes-section">
-        <h3>Themed Variants</h3>
-        <div class="themes-row">
-            <div class="theme-col">
-                <h4>Light Green</h4>
-                <BchSelect TItem="int" Options="_itemsInts" Theme="BchTheme.LightGreen" />
-                <BchSelect TItem="string" Options="_items" Theme="BchTheme.LightGreen" />
-                <BchSelect TItem="string"
-                           Options="_items"
-                           Theme="BchTheme.LightGreen"
-                           OptionNamePredicate="x => x"
-                           GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"' />
-            </div>
-            <div class="theme-col">
-                <h4>Light</h4>
-                <BchSelect TItem="int" Options="_itemsInts" Theme="BchTheme.Light" />
-                <BchSelect TItem="string" Options="_items" Theme="BchTheme.Light" />
-                <BchSelect TItem="string"
-                           Options="_items"
-                           Theme="BchTheme.Light"
-                           OptionNamePredicate="x => x"
-                           GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"' />
-            </div>
-            <div class="theme-col">
-                <h4>Dark</h4>
-                <BchSelect TItem="int" Options="_itemsInts" Theme="BchTheme.Dark" />
-                <BchSelect TItem="string" Options="_items" Theme="BchTheme.Dark" />
-                <BchSelect TItem="string"
-                           Options="_items"
-                           Theme="BchTheme.Dark"
-                           OptionNamePredicate="x => x"
-                           GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"' />
+    <div class="test-cases">
+        <div class="themes-section test-case">
+            <h3>Themed Variants</h3>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h4>Light Green</h4>
+                    <BchSelect TItem="int" Options="_itemsInts" Theme="BchTheme.LightGreen" />
+                    <BchSelect TItem="string" Options="_items" Theme="BchTheme.LightGreen" />
+                    <BchSelect TItem="string"
+                               Options="_items"
+                               Theme="BchTheme.LightGreen"
+                               OptionNamePredicate="x => x"
+                               GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"' />
+                </div>
+                <div class="theme-col">
+                    <h4>Light</h4>
+                    <BchSelect TItem="int" Options="_itemsInts" Theme="BchTheme.Light" />
+                    <BchSelect TItem="string" Options="_items" Theme="BchTheme.Light" />
+                    <BchSelect TItem="string"
+                               Options="_items"
+                               Theme="BchTheme.Light"
+                               OptionNamePredicate="x => x"
+                               GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"' />
+                </div>
+                <div class="theme-col">
+                    <h4>Dark</h4>
+                    <BchSelect TItem="int" Options="_itemsInts" Theme="BchTheme.Dark" />
+                    <BchSelect TItem="string" Options="_items" Theme="BchTheme.Dark" />
+                    <BchSelect TItem="string"
+                               Options="_items"
+                               Theme="BchTheme.Dark"
+                               OptionNamePredicate="x => x"
+                               GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"' />
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class="test-cases">
         <div class="test-case">
             <h4>Test Case 1: Basic Select with Integer Options</h4>
             <p>Selected value: @(_selectedInt.ToString())</p>
