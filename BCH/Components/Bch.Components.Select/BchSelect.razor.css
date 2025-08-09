@@ -291,10 +291,10 @@
     border-bottom-color: #33B469;
 }
 .bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb {
-    background: #33B469;
+    background: rgba(51, 180, 105, 0.6);
 }
 .bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
-    background: #33B469bb;
+    background: rgba(51, 180, 105, 0.85);
 }
 .bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
     background: rgba(51, 180, 105, 0.1);
