@@ -4,6 +4,9 @@ using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.Maths.Models;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Calendar;
 
@@ -29,6 +32,18 @@ public partial class BchCalendar : IAsyncDisposable
     }
 
     [Parameter] public bool ShowClearButton { get; set; } = false;
+
+    // Theme support (cascading + explicit override)
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() 
+    {
+        var cssClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        Console.WriteLine($"BchCalendar EffectiveTheme: {EffectiveTheme}, CSS Class: '{cssClass}'");
+        return cssClass;
+    }
 
     private DateTime? _value = null;
     private bool _showDate = false;

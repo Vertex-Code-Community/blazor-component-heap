@@ -2,7 +2,7 @@
 @using Bch.Components.Calendar.CalendarDays
 @using Bch.Components.Calendar.CalendarMonths
 
-<div class="bch-datepicker-wrapper @CssClass" id="@_containerId" tabindex="-1">
+<div class="bch-datepicker-wrapper @CssClass @GetThemeCssClass()" id="@_containerId" tabindex="-1">
     <div class="bch-datepicker" @onclick="OnCalendarClickedAsync">
         <input id="@_inputId"
                class="bch-datepicker-input"
@@ -26,6 +26,7 @@
                          DefaultMonth="_selectedMonth"
                          DefaultYear="_selectedYear"
                          SelectedDate="Value"
+                         Theme="@EffectiveTheme"
                          OnFocusOut="() => _inputRef.FocusAsync()"
                          IsDateRange="false"
                          ShowClearButton="ShowClearButton"
@@ -46,6 +47,8 @@
 
         <BchCalendarMonths Id="@_calendarMonthsId"
                            YearsSelectContentId="@_yearsSelectContentId"
+                           Culture="@Culture"
+                           Theme="@EffectiveTheme"
                            SelectedMonth="_selectedMonth"
                            SelectedYear="_selectedYear"
                            MonthChanged="e => { _selectedMonth = e; StateHasChanged(); }"

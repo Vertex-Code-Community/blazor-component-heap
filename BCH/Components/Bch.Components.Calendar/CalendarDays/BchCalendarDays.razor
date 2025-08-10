@@ -1,4 +1,4 @@
-﻿<div id="@Id" class="dch-datepicker-table" @onclick="async () => { await OnFocusOut.InvokeAsync(); }">
+﻿<div id="@Id" class="bch-datepicker-container @GetThemeCssClass()" @onclick="async () => { await OnFocusOut.InvokeAsync(); }">
     <div class="bch-datepicker-header-info">
 
         <div class="selected-month-year" @onclick="async () => { await OnClickByMonthAsync(); }">

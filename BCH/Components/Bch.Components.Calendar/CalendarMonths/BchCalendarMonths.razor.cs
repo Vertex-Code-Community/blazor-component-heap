@@ -1,6 +1,9 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using Month = Bch.Components.Calendar.Models.Month;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Calendar.CalendarMonths;
 
@@ -20,6 +23,10 @@ public partial class BchCalendarMonths
     [Parameter] public EventCallback<int> MonthChanged { get; set; }
     [Parameter] public EventCallback<int> YearChanged { get; set; }
     [Parameter] public EventCallback OnFocusOut { get; set; }
+
+    // Theme support
+    [Parameter] public BchTheme? Theme { get; set; }
+    private string GetThemeCssClass() => Theme?.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     private int _monthValue;
     private int _yearValue;

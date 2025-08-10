@@ -1,8 +1,29 @@
 @page "/calendar"
 @using Bch.Components.Calendar
+@using Bch.Modules.Themes.Models
 
 <div>
     <h3>Calendar Component Test</h3>
+    
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Themed Variants</h4>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy" Theme="BchTheme.LightGreen" />
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy" Theme="BchTheme.Light" />
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy" Theme="BchTheme.Dark" />
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="test-cases">
         <div class="test-case">

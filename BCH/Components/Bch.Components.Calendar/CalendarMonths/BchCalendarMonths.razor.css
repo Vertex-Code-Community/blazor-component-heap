@@ -2,7 +2,7 @@
 .bch-datepicker-list-month {
     min-width: 230px;
     width: 250px;
-    height: 230px;
+    height: auto;
     background: #FEFEFE;
     box-shadow: 1px 0px 3px rgba(203, 203, 203, 0.25), 0px 1px 3px rgba(203, 203, 203, 0.25);
     border-radius: 10px;
@@ -39,8 +39,7 @@
     }
 
     .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
-        color: #33B469 !important;
-        border: 1px solid #33B469;
+        border: 1px solid;
         border-radius: 5px;
     }
 
@@ -48,57 +47,53 @@
             color: #fff !important;
         }
 
-
         .bch-datepicker-list-month .bch-list-of-month {
             display: grid;
-            min-width: 250px;
-            height: calc(100% - 45px);
-            width: auto;
-            grid-template-columns: repeat(3, 50px);
-            justify-content: space-evenly;
-            padding: 10px 0;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, auto);
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 15px;
             color: #5B5B5B;
         }
 
     .bch-datepicker-list-month .bch-list-of-month label {
-        margin: 1px;
-        width: 57px;
-        height: 37px;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        min-height: 40px;
         font-family: 'Inter';
         font-style: normal;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 22px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.2;
         color: #131212;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        transition: 0.2s;
+        cursor: pointer;
     }
 
     .bch-datepicker-list-month .bch-list-of-month .current-month {
-        color: #33B469 !important;
-        border: 1px solid #33B469;
-        border-radius: 5px;
+        border: 1px solid;
+        border-radius: 8px;
     }
 
     .bch-datepicker-list-month .bch-list-of-month .selected-month {
-        background: #33B469 !important;
         border: 1px solid transparent;
-        border-radius: 5px !important;
+        border-radius: 8px !important;
         color: #FEFEFE !important;
     }
 
-    .bch-datepicker-list-month .bch-list-of-month label {
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 300;
-        font-size: 18px;
-        line-height: 22px;
-    }
-
         .bch-datepicker-list-month .bch-list-of-month label:hover {
-            background: #E1F4E9;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -111,4 +106,81 @@
     z-index: 1;
     position: absolute;
     border-radius: 0px 0px 10px 10px;
+}
+
+/* Theme-specific styles */
+.bch-theme-light-green.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+    color: #33B469 !important;
+    border: 1px solid #33B469 !important;
+}
+
+.bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month .current-month {
+    color: #33B469 !important;
+    border: 1px solid #33B469 !important;
+}
+
+.bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month .selected-month {
+    background: #33B469 !important;
+}
+
+.bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month label:hover {
+    background: #E1F4E9 !important;
+}
+
+.bch-theme-light.bch-datepicker-list-month {
+    background: #F8F9FA !important;
+    box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2) !important;
+}
+.bch-theme-light.bch-datepicker-list-month .bch-datepicker-button-of-open-years {
+    border-bottom: 1px solid #E9ECEF !important;
+}
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month {
+    color: #495057 !important;
+}
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month label {
+    color: #212529 !important;
+}
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month .current-month {
+    color: #6C757D !important;
+    border: 1px solid #6C757D !important;
+}
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month .selected-month {
+    background: #6C757D !important;
+    color: #FFFFFF !important;
+}
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month label:hover {
+    background: #E9ECEF !important;
+}
+.bch-theme-light.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+    color: #6C757D !important;
+    border: 1px solid #6C757D !important;
+}
+
+.bch-theme-dark.bch-datepicker-list-month {
+    background: #111827 !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35) !important;
+}
+.bch-theme-dark.bch-datepicker-list-month .bch-datepicker-button-of-open-years {
+    border-bottom: 1px solid #374151 !important;
+}
+.bch-theme-dark.bch-datepicker-list-month .bch-list-of-month {
+    color: #9CA3AF !important;
+}
+.bch-theme-dark.bch-datepicker-list-month .bch-list-of-month label {
+    color: #E5E7EB !important;
+}
+.bch-theme-dark.bch-datepicker-list-month .bch-list-of-month .current-month {
+    color: #9CA3AF !important;
+    border: 1px solid #9CA3AF !important;
+}
+.bch-theme-dark.bch-datepicker-list-month .bch-list-of-month .selected-month {
+    background: #4B5563 !important;
+    color: #E5E7EB !important;
+}
+.bch-theme-dark.bch-datepicker-list-month .bch-list-of-month label:hover {
+    background: #374151 !important;
+}
+.bch-theme-dark.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+    color: #9CA3AF !important;
+    border: 1px solid #9CA3AF !important;
 }

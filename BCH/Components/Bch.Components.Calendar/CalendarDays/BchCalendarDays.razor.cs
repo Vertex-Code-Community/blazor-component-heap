@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Components;
 using DateRange = Bch.Components.Calendar.Models.DateRange;
 using WeekDay = Bch.Components.Calendar.Models.WeekDay;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Calendar.CalendarDays;
 
@@ -69,6 +72,15 @@ public partial class BchCalendarDays
 
     [Parameter]
     public bool ShowClearButton { get; set; } = false;
+
+    // Theme support
+    [Parameter] public BchTheme? Theme { get; set; }
+    private string GetThemeCssClass() 
+    {
+        var cssClass = Theme?.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        Console.WriteLine($"BchCalendarDays Theme: {Theme}, CSS Class: '{cssClass}'");
+        return cssClass;
+    }
 
     private List<string> _weekDays = new();
     private List<WeekDay> _days = new();
