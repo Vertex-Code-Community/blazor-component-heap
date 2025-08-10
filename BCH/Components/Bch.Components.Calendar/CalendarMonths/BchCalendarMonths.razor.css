@@ -128,33 +128,16 @@
 }
 
 .bch-theme-light.bch-datepicker-list-month {
-    background: #F8F9FA !important;
+    background: #FFFFFF !important;
     box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2) !important;
 }
-.bch-theme-light.bch-datepicker-list-month .bch-datepicker-button-of-open-years {
-    border-bottom: 1px solid #E9ECEF !important;
-}
-.bch-theme-light.bch-datepicker-list-month .bch-list-of-month {
-    color: #495057 !important;
-}
-.bch-theme-light.bch-datepicker-list-month .bch-list-of-month label {
-    color: #212529 !important;
-}
-.bch-theme-light.bch-datepicker-list-month .bch-list-of-month .current-month {
-    color: #6C757D !important;
-    border: 1px solid #6C757D !important;
-}
-.bch-theme-light.bch-datepicker-list-month .bch-list-of-month .selected-month {
-    background: #6C757D !important;
-    color: #FFFFFF !important;
-}
-.bch-theme-light.bch-datepicker-list-month .bch-list-of-month label:hover {
-    background: #E9ECEF !important;
-}
-.bch-theme-light.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
-    color: #6C757D !important;
-    border: 1px solid #6C757D !important;
-}
+.bch-theme-light.bch-datepicker-list-month .bch-datepicker-button-of-open-years { border-bottom: 1px solid #BDBDBD !important; }
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month { color: #495057 !important; }
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month label { color: #212529 !important; }
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month .current-month { color: #6C757D !important; border: 1px solid #6C757D !important; }
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month .selected-month { background: #6C757D !important; color: #FFFFFF !important; }
+.bch-theme-light.bch-datepicker-list-month .bch-list-of-month label:hover { background: #E9ECEF !important; }
+.bch-theme-light.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year { color: #6C757D !important; border: 1px solid #6C757D !important; }
 
 .bch-theme-dark.bch-datepicker-list-month {
     background: #111827 !important;

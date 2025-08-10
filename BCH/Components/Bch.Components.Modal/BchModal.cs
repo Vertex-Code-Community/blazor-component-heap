@@ -2,6 +2,7 @@
 using Bch.Components.Modal.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using Bch.Modules.Themes.Models;
 
 namespace Bch.Components.Modal;
 
@@ -24,6 +25,10 @@ public class BchModal : ComponentBase, IDisposable
     [Parameter] public string CssStyles { get; set; } = string.Empty;
     [Parameter] public bool CloseOnOverlayClicked { get; set; }
     [Parameter] public bool ShowOverlay { get; set; }
+
+    // Theme parameters (follow BchSelect pattern)
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
 
     private ModalModel _modalModel = new();
 
@@ -107,6 +112,8 @@ public class BchModal : ComponentBase, IDisposable
         _modalModel.CssStyles = CssStyles;
         _modalModel.Overlay = ShowOverlay;
         _modalModel.ZIndex = ZIndex;
+        // Pass through either explicit Theme or cascading Theme; no fallback to keep null when unspecified
+        _modalModel.Theme = Theme ?? ThemeCascading;
 
         _prevX = _modalModel.X;
         _prevY = _modalModel.Y;

@@ -1,6 +1,7 @@
 ﻿@using Bch.Components.Modal
 @using Bch.Components.Calendar.CalendarDays
 @using Bch.Components.Calendar.CalendarMonths
+@using Bch.Modules.Themes.Models
 
 <div class="bch-datepicker-wrapper @CssClass @GetThemeCssClass()" id="@_containerId" tabindex="-1">
     <div class="bch-datepicker" @onclick="OnCalendarClickedAsync">
@@ -10,7 +11,18 @@
                autocomplete="unrechable-filter-to-autocomplete"
                value="@(Value?.ToString(Format) ?? GetPlaceholderText())"
                @ref="@_inputRef"/>
-        <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon.svg"/>
+        @if (EffectiveTheme == BchTheme.Dark)
+        {
+            <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon-white.svg" />
+        }
+        else if (EffectiveTheme == BchTheme.Light)
+        {
+            <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon-gray.svg" />
+        }
+        else
+        {
+            <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon.svg" />
+        }
     </div>
 
     <BchModal CssClass="@($"bch-calendar-days-modal-wrapper {CssClass}")"

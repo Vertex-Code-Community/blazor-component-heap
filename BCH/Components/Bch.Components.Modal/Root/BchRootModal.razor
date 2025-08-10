@@ -1,6 +1,10 @@
 ﻿@using Bch.Components.Modal.Content
+@using Bch.Components.Modal.Models
+@using Bch.Modules.Themes.Models
 
 @foreach (var modalModel in ModalService.Modals)
 {
-    <BchModalContent @key="@modalModel" ModalModel="modalModel"/>
+    <CascadingValue Value="@modalModel.Theme">
+        <BchModalContent @key="@modalModel" ModalModel="modalModel" />
+    </CascadingValue>
 }

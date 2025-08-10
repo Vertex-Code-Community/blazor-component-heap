@@ -355,62 +355,56 @@
     color: #33B469 !important;
 }
 
+/* Adjust Light theme to match BchSelect Light */
 .bch-theme-light.bch-datepicker-container {
-    background: #F8F9FA !important;
+    background: #FFFFFF !important;
     box-shadow: -2px 0px 4px rgba(200, 200, 200, 0.1), 0px -2px 4px rgba(200, 200, 200, 0.1), 2px 0px 4px rgba(200, 200, 200, 0.1), 0px 2px 4px rgba(200, 200, 200, 0.1) !important;
 }
-.bch-theme-light.bch-datepicker-container .bch-datepicker-header-info {
-    border-bottom: 1px solid #E9ECEF !important;
-}
+.bch-theme-light.bch-datepicker-container .bch-datepicker-header-info { border-bottom: 1px solid #BDBDBD !important; }
 .bch-theme-light.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-year,
-.bch-theme-light.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-month {
-    color: #212529 !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-header-info .change-month .next-month:hover,
-.bch-theme-light.bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month:hover {
-    background: #E9ECEF !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-name-week-day {
-    color: #6C757D !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day {
-    color: #212529 !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day {
-    background: #6C757D !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day {
-    background: #6C757D !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day {
-    background: #6C757D !important;
-}
+.bch-theme-light.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-month { color: #212529 !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-name-week-day { color: #6C757D !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day { color: #212529 !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day { background: #6C757D !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day { background: #6C757D !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day { background: #6C757D !important; }
 .bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover {
-    background: #E9ECEF !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates {
-    background: #E9ECEF !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.rang-dates:hover {
-    background: #DEE2E6 !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-number-day {
-    color: #495057 !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day {
-    color: #ADB5BD !important;
-}
-.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day {
-    border: 1px solid #6C757D !important;
-    color: #6C757D !important;
-}
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover { background: #E9ECEF !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates { background: #E9ECEF !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.rang-dates:hover { background: #DEE2E6 !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-number-day { color: #495057 !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day { color: #ADB5BD !important; }
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day { border: 1px solid #6C757D !important; color: #6C757D !important; }
 .bch-theme-light.bch-datepicker-container .bch-apply-button button,
-.bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button {
-    background: #6C757D !important;
-}
+.bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button { background: #6C757D !important; }
 .bch-theme-light.bch-datepicker-container .bch-apply-button button:hover,
-.bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button:hover {
-    border: 1px solid #6C757D !important;
-    color: #6C757D !important;
+.bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button:hover { border: 1px solid #6C757D !important; color: #6C757D !important; }
+
+/* Icon containers */
+.bch-datepicker-container .selected-month-year .bch-month-toggle-icon {
+    display: inline-block;
+    width: 14px;
+    height: 12px;
+    margin-left: 5px;
+    background-repeat: no-repeat;
+    background-position: center;
 }
+.bch-datepicker-container .change-month .previous-month .icon,
+.bch-datepicker-container .change-month .next-month .icon {
+    width: 26px;
+    height: 26px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Themed icons */
+.bch-theme-light-green.bch-datepicker-container .selected-month-year .bch-month-toggle-icon { background-image: url("img/arrow-top-bottom-icon-green.svg"); }
+.bch-theme-dark.bch-datepicker-container .selected-month-year .bch-month-toggle-icon { background-image: url("img/arrow-top-bottom-icon-white.svg"); }
+.bch-theme-light.bch-datepicker-container .selected-month-year .bch-month-toggle-icon { background-image: url("img/arrow-top-bottom-icon-gray.svg"); }
+
+.bch-theme-light-green.bch-datepicker-container .change-month .previous-month .icon { background-image: url("img/arrow-up-icon.svg"); }
+.bch-theme-light-green.bch-datepicker-container .change-month .next-month .icon { background-image: url("img/arrow-bottom-icon.svg"); }
+.bch-theme-dark.bch-datepicker-container .change-month .previous-month .icon { background-image: url("img/arrow-up-icon-white.svg"); }
+.bch-theme-dark.bch-datepicker-container .change-month .next-month .icon { background-image: url("img/arrow-bottom-icon-white.svg"); }
+.bch-theme-light.bch-datepicker-container .change-month .previous-month .icon { background-image: url("img/arrow-up-icon-gray.svg"); }
+.bch-theme-light.bch-datepicker-container .change-month .next-month .icon { background-image: url("img/arrow-bottom-icon-gray.svg"); }

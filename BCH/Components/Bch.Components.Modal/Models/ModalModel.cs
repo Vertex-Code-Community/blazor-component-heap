@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Bch.Modules.Themes.Models;
 
 namespace Bch.Components.Modal.Models;
 
@@ -16,4 +17,7 @@ public class ModalModel
     public int ZIndex { get; set; } = 999999;
     public RenderFragment Fragment { get; set; } = null!;
     public Action? OnUpdate { get; set; }
+
+    // Theme (nullable). If not set on the modal, descendants will receive null.
+    public BchTheme? Theme { get; set; }
 }
