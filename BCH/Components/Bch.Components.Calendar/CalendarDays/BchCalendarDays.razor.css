@@ -466,3 +466,9 @@
     background: transparent !important;
     border: none !important;
 }
+
+/* Light theme: selected day text should be white for contrast */
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day > label {
+    color: #FFFFFF !important;
+}
