@@ -408,3 +408,61 @@
 .bch-theme-dark.bch-datepicker-container .change-month .next-month .icon { background-image: url("img/arrow-bottom-icon-white.svg"); }
 .bch-theme-light.bch-datepicker-container .change-month .previous-month .icon { background-image: url("img/arrow-up-icon-gray.svg"); }
 .bch-theme-light.bch-datepicker-container .change-month .next-month .icon { background-image: url("img/arrow-bottom-icon-gray.svg"); }
+
+/* Light theme: emphasize current day circle */
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day {
+    border: 1px solid #6C757D !important;
+    border-radius: 5px !important;
+    color: #6C757D !important;
+    background: transparent !important;
+}
+
+/* LightGreen: selected day text must remain visible over green */
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day > label {
+    color: #FFFFFF !important;
+}
+
+/* Theme-specific button styling updates */
+/* Light theme: outline by default, fill on hover */
+.bch-theme-light.bch-datepicker-container .bch-apply-button button,
+.bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button {
+    background: transparent !important;
+    color: #6C757D !important;
+    border: 1px solid #6C757D !important;
+}
+.bch-theme-light.bch-datepicker-container .bch-apply-button button:hover,
+.bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button:hover {
+    background: #6C757D !important;
+    color: #FFFFFF !important;
+    border: 1px solid #6C757D !important;
+}
+
+/* Dark theme: filled by default, slightly lighter on hover */
+.bch-theme-dark.bch-datepicker-container .bch-apply-button button,
+.bch-theme-dark.bch-datepicker-container .bch-apply-button .bch-clear-button {
+    background: #4B5563 !important;
+    color: #FFFFFF !important;
+    border: 1px solid transparent !important;
+}
+.bch-theme-dark.bch-datepicker-container .bch-apply-button button:hover,
+.bch-theme-dark.bch-datepicker-container .bch-apply-button .bch-clear-button:hover {
+    background: #6B7280 !important;
+    color: #FFFFFF !important;
+    border: 1px solid #9CA3AF !important;
+}
+
+/* LightGreen: selected day adjustments - no outer outline */
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day {
+    background: #33B469 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+/* If any td range classes are present in single mode, neutralize them */
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day {
+    background: transparent !important;
+    border: none !important;
+}

@@ -31,7 +31,7 @@ public partial class BchCalendar : IAsyncDisposable
         }
     }
 
-    [Parameter] public bool ShowClearButton { get; set; } = false;
+    [Parameter] public bool ShowClearButton { get; set; } = true;
 
     // Theme support (cascading + explicit override)
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
