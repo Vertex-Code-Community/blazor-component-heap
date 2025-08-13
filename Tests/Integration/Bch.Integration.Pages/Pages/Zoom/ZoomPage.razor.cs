@@ -7,6 +7,7 @@ public partial class ZoomPage
 {
     private List<Appointment> _appointments = new();
     private ZoomContext _zoomContext = new();
+    private ZoomContext _zoomContext2 = new();
 
     protected override void OnInitialized()
     {

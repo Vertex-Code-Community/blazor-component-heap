@@ -1,48 +1,48 @@
 @page "/zoom"
-@using Bch.Components.Scheduler.AppointmentItem
 @using Bch.Components.Zoom
-@using Bch.Components.Scheduler
 
-<div class="page-cnt">
-    <BchZoom BoundsByParent="true"
-             ZoomOnMouseWheel="true"
-             MinScale="0.5f"
-             ZoomContext="_zoomContext">
-        <div class="square">Red Square</div>
-        @* <BchScheduler Appointments="_appointments" *@
-        @*               ShowDatePicker="true" *@
-        @*               ShowTodayButton="true" *@
-        @*               Gap="8px"> *@
-        @* *@
-        @*     <BchAppointmentItem Key="type-1" Context="appointment"> *@
-        @*         <div class="type-1"> *@
-        @*             <div class="start">Start: @appointment.Start</div> *@
-        @*             <div class="end">End: @appointment.End</div> *@
-        @*             <div class="name">Name: @((string)appointment.Payload)</div> *@
-        @*         </div> *@
-        @*     </BchAppointmentItem> *@
-        @* *@
-        @*     <BchAppointmentItem Key="type-2" Context="appointment"> *@
-        @*         <div class="type-2"> *@
-        @*             <div class="difference">Diff: @(appointment.End - appointment.Start)</div> *@
-        @*             <div class="count">Count: @((int)appointment.Payload)</div> *@
-        @*         </div> *@
-        @*     </BchAppointmentItem> *@
-        @* *@
-        @* </BchScheduler> *@
-    </BchZoom>
+<div>
+    <h3>Zoom Component Test</h3>
+
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Basic</h4>
+            <div class="demo-box">
+                <div class="demo-area">
+                    <BchZoom BoundsByParent="true"
+                             ZoomOnMouseWheel="true"
+                             MinScale="0.5f"
+                             MaxScale="6f"
+                             ViewMode="Bch.Components.Zoom.Models.ViewMode.StretchToBorders"
+                             ZoomContext="_zoomContext">
+                        <div class="img-wrapper" mousewheel-prevent-default="true" mousewheel-stop-propagation="true">
+                            <img src="_content/Bch.Integration.Pages/img/slider-test-image.svg" 
+                                 style="width:100%;height:auto;display:block;pointer-events: none;" />
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>With Custom Factor</h4>
+            <p>Similar to Cropper parameters</p>
+            <div class="demo-box">
+                <div class="demo-area">
+                    <BchZoom BoundsByParent="true"
+                             ZoomOnMouseWheel="true"
+                             MinScale="0.5f"
+                             MaxScale="8f"
+                             Factor="0.009f"
+                             ViewMode="Bch.Components.Zoom.Models.ViewMode.StretchToBorders"
+                             ZoomContext="_zoomContext2">
+                        <div class="img-wrapper" mousewheel-prevent-default="true" mousewheel-stop-propagation="true">
+                            <img src="_content/Bch.Integration.Pages/img/slider-test-image.svg" 
+                                 style="width:100%;height:auto;display:block;pointer-events: none;" />
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<style>
-    html {
-        height: 100%;
-    }
-
-    body {
-        height: 100%;
-    }
-
-    #app {
-        height: 100%;
-    }
-</style>

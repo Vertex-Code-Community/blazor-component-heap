@@ -39,23 +39,32 @@ public partial class BchPanzoom : ComponentBase
         _x = Options.InitialX;
         _y = Options.InitialY;
 
-        // Subscribe here (like BchSelect), not in OnAfterRender
-        // No global subscription needed when using custom element event
-        return Task.CompletedTask;
+        // Subscribe wheel via GlobalEventsService (non-passive)
+        return GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>(
+            "mousewheel", _containerId, OnMouseWheelAsync);
     }
-
-    private void OnScrollCustom(BchWheelEventArgs e)
+    
+    private Task OnMouseWheelAsync(BchWheelEventArgs e)
     {
+        var container = e.PathCoordinates.FirstOrDefault(x => x.ClassList.Contains("bch-panzoom-container"));
+        if (container == null) return Task.CompletedTask;
+
         var delta = e.DeltaY;
         var wheel = (float)Math.Exp(-Options.ZoomWheelSpeed * delta);
         var newScale = Clamp(_scale * wheel, Options.MinScale, Options.MaxScale);
-        ZoomToPoint(e.X, e.Y, newScale);
+        _originX = e.X;
+        _originY = e.Y;
+        ZoomToPoint(_originX, _originY, newScale);
+        
+        return Task.CompletedTask;
     }
+
+    private void OnScrollCustom(BchWheelEventArgs e) { }
     
     private string GetTransformStyle()
     {
         var nfi = new NumberFormatInfo { NumberDecimalSeparator = "." };
-        return $"transform: translate({_x.ToString(nfi)}px, {_y.ToString(nfi)}px) scale({_scale.ToString(nfi)}); transform-origin: {_lastLocalX.ToString(nfi)}px {_lastLocalY.ToString(nfi)}px;";
+        return $"transform: translate({_x.ToString(nfi)}px, {_y.ToString(nfi)}px) scale({_scale.ToString(nfi)}); transform-origin: {_originX.ToString(nfi)}px {_originY.ToString(nfi)}px;";
     }
 
     private void OnMouseDown(MouseEventArgs e)
@@ -92,10 +101,10 @@ public partial class BchPanzoom : ComponentBase
     {
         if (!Options.EnableDoubleClick || Options.DisableZoom) return;
         var newScale = Clamp(_scale + Options.Step * MathF.Max(1f, Options.ZoomDoubleClickSpeed), Options.MinScale, Options.MaxScale);
-        _lastLocalX = (float)e.OffsetX;
-        _lastLocalY = (float)e.OffsetY;
+        _originX = (float)e.OffsetX;
+        _originY = (float)e.OffsetY;
         Console.WriteLine($"[BchPanzoom] DoubleClick at offset=({e.OffsetX}, {e.OffsetY}) scale {_scale} -> {newScale} scale={_scale}");
-        ZoomToPoint(_lastLocalX, _lastLocalY, newScale);
+        ZoomToPoint(_originX, _originY, newScale);
     }
 
     private void OnWheel(WheelEventArgs e)
@@ -105,9 +114,9 @@ public partial class BchPanzoom : ComponentBase
         var wheel = (float)Math.Exp(-Options.ZoomWheelSpeed * delta);
         var newScale = Clamp(_scale * wheel, Options.MinScale, Options.MaxScale);
         Console.WriteLine($"[BchPanzoom] Wheel deltaY={delta}, scale {_scale} -> {newScale} at offset=({e.OffsetX}, {e.OffsetY}) scale={_scale}");
-        _lastLocalX = (float)e.OffsetX;
-        _lastLocalY = (float)e.OffsetY;
-        ZoomToPoint(_lastLocalX, _lastLocalY, newScale);
+        _originX = (float)e.OffsetX;
+        _originY = (float)e.OffsetY;
+        ZoomToPoint(_originX, _originY, newScale);
     }
 
     private void OnTouchStartCustom(BchTouchEventArgs e)
@@ -147,9 +156,9 @@ public partial class BchPanzoom : ComponentBase
             var newScale = Clamp(_pinchStartScale * scaleFactor, Options.MinScale, Options.MaxScale);
             var centerLocalX = (e.Touches[0].X + e.Touches[1].X) / 2.0f;
             var centerLocalY = (e.Touches[0].Y + e.Touches[1].Y) / 2.0f;
-            _lastLocalX = centerLocalX;
-            _lastLocalY = centerLocalY;
-            ZoomToPoint(_lastLocalX, _lastLocalY, newScale);
+            _originX = centerLocalX;
+            _originY = centerLocalY;
+            ZoomToPoint(_originX, _originY, newScale);
             Console.WriteLine($"[BchPanzoom] Pinch move distance={dist}, newScale={newScale}");
             StateHasChanged();
             return;
@@ -190,6 +199,8 @@ public partial class BchPanzoom : ComponentBase
 
     private float _lastLocalX;
     private float _lastLocalY;
+    private float _originX;
+    private float _originY;
 
     private static float Clamp(float v, float min, float max)
     {

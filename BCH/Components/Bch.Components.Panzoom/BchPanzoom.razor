@@ -2,7 +2,8 @@
 
 <div id="@_containerId"
      class="bch-panzoom-container"
-     @onbchpanzoomscroll="OnScrollCustom"
+     mousewheel-prevent-default
+     mousewheel-stop-propagation
      @ondblclick="OnDoubleClick"
      @onmousedown="OnMouseDown"
      @onmouseup="OnMouseUp"
@@ -13,7 +14,11 @@
      @onbchpanzoomtouchend="OnTouchEndCustom"
      tabindex="0"
      @ref="_containerRef">
-    <div id="@_contentId" class="bch-panzoom-content" style="@GetTransformStyle()">
+    <div id="@_contentId" 
+         class="bch-panzoom-content"
+         mousewheel-prevent-default
+         mousewheel-stop-propagation
+         style="@GetTransformStyle()">
         @if (ChildContent is null)
         {
             <div class="bch-panzoom-default"></div>
