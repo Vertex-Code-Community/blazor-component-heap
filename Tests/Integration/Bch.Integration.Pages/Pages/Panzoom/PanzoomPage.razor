@@ -1,0 +1,34 @@
+@page "/panzoom"
+@using Bch.Components.Panzoom
+@using Bch.Components.Panzoom.Models
+
+<div>
+    <h3>Panzoom Component Test</h3>
+
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Basic</h4>
+            <div class="demo-box">
+                <div class="demo-area">
+                    <BchPanzoom>
+                        <div style="width:100%;height:100%;background:#ff2d2d;"></div>
+                    </BchPanzoom>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>With Options</h4>
+            <p>Pan only when zoomed, clamp scale to 0.5-4x</p>
+            <div class="demo-box">
+                <div class="demo-area">
+                    <BchPanzoom Options="new PanzoomOptions{ MinScale=0.5f, MaxScale=4f, PanOnlyWhenZoomed=true, InitialScale=1f }">
+                        <div style="width:100%;height:100%;background:#ff2d2d;"></div>
+                    </BchPanzoom>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
