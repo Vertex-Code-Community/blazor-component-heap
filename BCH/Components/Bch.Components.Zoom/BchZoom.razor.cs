@@ -29,6 +29,8 @@ public partial class BchZoom : IAsyncDisposable
     [Parameter] public bool ZoomOnMouseWheel { get; set; } = false;
     [Parameter] public bool ShowScrollbars { get; set; } = false;
     [Parameter] public Action<Vec2, Vec2, Vec2, Vec2, float, float>? ConstraintPredicate { get; set; }
+    // Keep content covering the viewport and prevent panning outside
+    [Parameter] public bool ContainOutside { get; set; } = false;
     [Parameter] public ViewMode ViewMode { get; set; }
 
     private readonly string _wrapperId = $"_id_{Guid.NewGuid()}";
@@ -139,6 +141,11 @@ public partial class BchZoom : IAsyncDisposable
         if (BoundsByParent)
             _size.Set(wrapperRect.Width, wrapperRect.Height);
 
+        if (ContainOutside)
+        {
+            ApplyContainment();
+        }
+
         Update();
     }
 
@@ -181,7 +188,14 @@ public partial class BchZoom : IAsyncDisposable
 
         _pos.Set(x, y);
         _scale = (float) Math.Log(scale) + 4;
+        
+        // TODO: change it
+        MinScale = _scale;
         _outerContentChanged = true;
+        if (ContainOutside)
+        {
+            ApplyContainment();
+        }
         
         // Console.WriteLine($"wrapperWidth = {_viewPortSize.X}, navigationWidth = {_navigationSize.X}");
         // Console.WriteLine($"newHeight = {newHeight}, _viewPortSize.Y = {_viewPortSize.Y}");
@@ -214,6 +228,10 @@ public partial class BchZoom : IAsyncDisposable
 
     private void Update()
     {
+        if (ContainOutside)
+        {
+            ApplyContainment();
+        }
         ConstraintPredicate?.Invoke(_pos, _navigationSize, _navigationOffsetSize, _viewPortSize, Scale, _scale);
 
         UpdateContextData();
@@ -268,9 +286,68 @@ public partial class BchZoom : IAsyncDisposable
             -_zoomTarget.Y * Scale + _zoomPoint.Y
         );
 
+        if (ContainOutside)
+        {
+            ApplyContainment();
+        }
+
         _changePerformed = true;
 
         Update();
+    }
+
+    private void ApplyContainment()
+    {
+        if (_navigationSize.X <= 0 || _navigationSize.Y <= 0 || _viewPortSize.X <= 0 || _viewPortSize.Y <= 0) return;
+
+        // Use un-transformed content size (offset) to compute cover scale
+        var baseContentW = _navigationOffsetSize.X > 0 ? _navigationOffsetSize.X : _navigationSize.X;
+        var baseContentH = _navigationOffsetSize.Y > 0 ? _navigationOffsetSize.Y : _navigationSize.Y;
+        var minCoverScaleX = _viewPortSize.X / baseContentW;
+        var minCoverScaleY = _viewPortSize.Y / baseContentH;
+        var minCoverScale = MathF.Max(minCoverScaleX, minCoverScaleY);
+
+        // Convert to internal _scale domain: _scaleLinear = ln(Scale) + 4
+        var minCoverInternal = (float)Math.Log(Math.Max(minCoverScale, 0.0001f)) + 4.0f;
+
+        // Raise MinScale if needed
+        if (minCoverInternal > MinScale)
+        {
+            MinScale = Math.Min(minCoverInternal, MaxScale);
+        }
+
+        // Clamp current _scale to at least MinScale
+        if (_scale < MinScale) _scale = MinScale;
+
+        // Clamp translation so content never leaves viewport
+        var currentScale = Scale; // linear
+        var contentW = baseContentW * currentScale;
+        var contentH = baseContentH * currentScale;
+
+        var minX = _viewPortSize.X - contentW; // most negative allowed (content right edge flush)
+        var minY = _viewPortSize.Y - contentH; // most negative allowed (content bottom edge flush)
+        if (float.IsNaN(minX) || float.IsNaN(minY)) return;
+
+        // If content smaller (due to rounding), center it
+        if (contentW <= _viewPortSize.X + 0.5f)
+        {
+            _pos.X = (_viewPortSize.X - contentW) * 0.5f;
+        }
+        else
+        {
+            // Clamp to keep both left (<=0) and right (>=minX) edges within viewport
+            _pos.X = MathF.Max(minX, MathF.Min(0, _pos.X));
+        }
+
+        if (contentH <= _viewPortSize.Y + 0.5f)
+        {
+            _pos.Y = (_viewPortSize.Y - contentH) * 0.5f;
+        }
+        else
+        {
+            // Clamp to keep both top (<=0) and bottom (>=minY) edges within viewport
+            _pos.Y = MathF.Max(minY, MathF.Min(0, _pos.Y));
+        }
     }
 
     private void OnMouseDown(MouseEventArgs e)
