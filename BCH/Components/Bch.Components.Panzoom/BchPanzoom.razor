@@ -2,16 +2,17 @@
 
 <div id="@_containerId"
      class="bch-panzoom-container"
-     @onwheel="OnWheel"
+     @onbchpanzoomscroll="OnScrollCustom"
      @ondblclick="OnDoubleClick"
      @onmousedown="OnMouseDown"
      @onmouseup="OnMouseUp"
      @onmouseleave="OnMouseUp"
      @onmousemove="OnMouseMove"
-     @ontouchstart="OnTouchStart"
-     @ontouchmove="OnTouchMove"
-     @ontouchend="OnTouchEnd"
-     tabindex="0">
+     @onbchpanzoomtouchstart="OnTouchStartCustom"
+     @onbchpanzoomtouchmove="OnTouchMoveCustom"
+     @onbchpanzoomtouchend="OnTouchEndCustom"
+     tabindex="0"
+     @ref="_containerRef">
     <div id="@_contentId" class="bch-panzoom-content" style="@GetTransformStyle()">
         @if (ChildContent is null)
         {
