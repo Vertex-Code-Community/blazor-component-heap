@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\Bch.Modules.GlobalEvents\Bch.Modules.GlobalEvents.csproj" />
     <ProjectReference Include="..\..\Modules\Bch.Modules.DomInterop\Bch.Modules.DomInterop.csproj" />
+    <ProjectReference Include="..\Bch.Components.Zoom\Bch.Components.Zoom.csproj" />
   </ItemGroup>
 </Project>
 

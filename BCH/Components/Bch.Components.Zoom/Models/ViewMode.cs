@@ -4,5 +4,6 @@ public enum ViewMode
 {
     Default,
     // FillSpace,
-    StretchToBorders
+    StretchToBorders,
+    StretchByWidth
 }

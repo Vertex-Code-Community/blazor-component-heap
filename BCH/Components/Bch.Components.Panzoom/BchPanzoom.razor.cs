@@ -1,217 +1,92 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Bch.Components.Panzoom.Models;
-using Microsoft.JSInterop;
+using Bch.Components.Zoom;
+using Bch.Components.Zoom.Models;
+using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.GlobalEvents.Events;
+using Bch.Modules.Maths.Models;
 
 namespace Bch.Components.Panzoom;
 
-public partial class BchPanzoom : ComponentBase
+public partial class BchPanzoom : ComponentBase, IAsyncDisposable
 {
-    [Inject] private IJSRuntime Js { get; set; } = default!;
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
-    [Parameter] public RenderFragment? ChildContent { get; set; }
-    [Parameter] public PanzoomOptions Options { get; set; } = new();
 
-    private string _containerId = $"_pz_cnt_{Guid.NewGuid()}";
-    private string _contentId = $"_pz_c_{Guid.NewGuid()}";
-    private ElementReference _containerRef;
+    [Parameter] public ViewMode ViewMode { get; set; } = ViewMode.StretchToBorders;
+    [Parameter] public string BackgroundColor { get; set; } = "#ffffff";
+    [Parameter] public required string ImageUrl { get; set; }
+    [Parameter] public float MinScale { get; set; } = 2.0f;
+    [Parameter] public float MaxScale { get; set; } = 6.0f;
+    [Parameter] public int MinRectangleWidth { get; set; } = 80;
+    [Parameter] public int MinRectangleHeight { get; set; } = 80;
+    [Parameter] public float ScaleFactor { get; set; } = 0.009f;
+    [Parameter] public bool ScaleOnMouseWheel { get; set; } = false;
+    [Parameter] public bool UseTouchRotation { get; set; } = false;
+    [Parameter] public Func<float, Task>? OnUpdateScale { get; set; }
 
-    private float _scale;
-    private float _x;
-    private float _y;
+    private readonly ZoomContext _zoomContext = new();
+    private BchZoom? _bchZoom;
+    private bool _processingData = false;
 
-    private bool _isPanning = false;
-    private float _startX;
-    private float _startY;
-    private float _startPanX;
-    private float _startPanY;
+    private readonly string _cropperId = $"_id_{Guid.NewGuid()}";
+    private readonly string _imageId = $"_id_{Guid.NewGuid()}";
+    private readonly string _key = $"_id_{Guid.NewGuid()}";
 
-    private bool _isPinching = false;
-    private float _pinchStartDistance;
-    private float _pinchStartScale;
+    private readonly NumberFormatInfo _nF = new() { NumberDecimalSeparator = "." };
+    private readonly Vec2 _lastMousePosition = new();
+    private readonly Vec2 _change = new();
+    private readonly MouseEventArgs _eventObj = new();
 
+    private bool _loaded = false;
+    private float _scaleLinear = -1;
+    
     protected override Task OnInitializedAsync()
     {
-        _scale = Options.InitialScale;
-        _x = Options.InitialX;
-        _y = Options.InitialY;
-
-        // Subscribe wheel via GlobalEventsService (non-passive)
-        return GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>(
-            "mousewheel", _containerId, OnMouseWheelAsync);
+        _zoomContext.OnUpdate += OnUpdateZoom;
+        
+        return GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key, OnMouseWheel, 
+            false, false, false);
     }
     
-    private Task OnMouseWheelAsync(BchWheelEventArgs e)
+    public async ValueTask DisposeAsync()
     {
-        var container = e.PathCoordinates.FirstOrDefault(x => x.ClassList.Contains("bch-panzoom-container"));
-        if (container == null) return Task.CompletedTask;
+        // IJSUtilsService.OnResize -= OnResizeAsync;
+        _zoomContext.OnUpdate -= OnUpdateZoom;
+        await GlobalEventsService.RemoveDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key);
+    }
+    
+    private Task OnMouseWheel(BchWheelEventArgs e)
+    {
+        if (!ScaleOnMouseWheel || _bchZoom is null) return Task.CompletedTask;
 
-        var delta = e.DeltaY;
-        var wheel = (float)Math.Exp(-Options.ZoomWheelSpeed * delta);
-        var newScale = Clamp(_scale * wheel, Options.MinScale, Options.MaxScale);
-        _originX = e.X;
-        _originY = e.Y;
-        ZoomToPoint(_originX, _originY, newScale);
-        
+        var wrapper = e.PathCoordinates.FirstOrDefault(x => x.Id == _cropperId);
+        if (wrapper is null) return Task.CompletedTask;
+
+        _bchZoom.Transform(wrapper.X, wrapper.Y, -(float)e.DeltaY, 0);
         return Task.CompletedTask;
     }
 
-    private void OnScrollCustom(BchWheelEventArgs e) { }
+    private async Task OnUpdateZoom()
+    {
+        if (_scaleLinear != _zoomContext.ScaleLinear)
+        {
+            _scaleLinear = _zoomContext.ScaleLinear;
+            if (OnUpdateScale is not null)
+            {
+                await OnUpdateScale.Invoke(_zoomContext.ScaleLinear);
+            }
+        }
+        
+        StateHasChanged();
+    }
     
-    private string GetTransformStyle()
+    protected override void OnParametersSet()
     {
-        var nfi = new NumberFormatInfo { NumberDecimalSeparator = "." };
-        return $"transform: translate({_x.ToString(nfi)}px, {_y.ToString(nfi)}px) scale({_scale.ToString(nfi)}); transform-origin: {_originX.ToString(nfi)}px {_originY.ToString(nfi)}px;";
-    }
-
-    private void OnMouseDown(MouseEventArgs e)
-    {
-        Console.WriteLine($"[BchPanzoom] MouseDown at ({e.ClientX}, {e.ClientY}) scale={_scale}");
-        if (Options.DisablePan) return;
-        // Allow pan when zoomed out (< 1). Only block when exactly at 1x if PanOnlyWhenZoomed is true
-        if (Options.PanOnlyWhenZoomed && IsApproximatelyOne(_scale)) return;
-        _isPanning = true;
-        _startX = (float)e.ClientX;
-        _startY = (float)e.ClientY;
-        _startPanX = _x;
-        _startPanY = _y;
-    }
-
-    private void OnMouseUp(MouseEventArgs e)
-    {
-        Console.WriteLine($"[BchPanzoom] MouseUp at ({e.ClientX}, {e.ClientY}) panningWas={_isPanning} scale={_scale}");
-        _isPanning = false;
-    }
-
-    private void OnMouseMove(MouseEventArgs e)
-    {
-        if (!_isPanning || Options.DisablePan) return;
-        var dx = (float)e.ClientX - _startX;
-        var dy = (float)e.ClientY - _startY;
-        _x = _startPanX + dx;
-        _y = _startPanY + dy;
-        Console.WriteLine($"[BchPanzoom] MouseMove dx={dx}, dy={dy}, pos=({_x}, {_y}) scale={_scale}");
-        StateHasChanged();
-    }
-
-    private void OnDoubleClick(MouseEventArgs e)
-    {
-        if (!Options.EnableDoubleClick || Options.DisableZoom) return;
-        var newScale = Clamp(_scale + Options.Step * MathF.Max(1f, Options.ZoomDoubleClickSpeed), Options.MinScale, Options.MaxScale);
-        _originX = (float)e.OffsetX;
-        _originY = (float)e.OffsetY;
-        Console.WriteLine($"[BchPanzoom] DoubleClick at offset=({e.OffsetX}, {e.OffsetY}) scale {_scale} -> {newScale} scale={_scale}");
-        ZoomToPoint(_originX, _originY, newScale);
-    }
-
-    private void OnWheel(WheelEventArgs e)
-    {
-        if (!Options.EnableWheel || Options.DisableZoom) return;
-        var delta = e.DeltaY;
-        var wheel = (float)Math.Exp(-Options.ZoomWheelSpeed * delta);
-        var newScale = Clamp(_scale * wheel, Options.MinScale, Options.MaxScale);
-        Console.WriteLine($"[BchPanzoom] Wheel deltaY={delta}, scale {_scale} -> {newScale} at offset=({e.OffsetX}, {e.OffsetY}) scale={_scale}");
-        _originX = (float)e.OffsetX;
-        _originY = (float)e.OffsetY;
-        ZoomToPoint(_originX, _originY, newScale);
-    }
-
-    private void OnTouchStartCustom(BchTouchEventArgs e)
-    {
-        Console.WriteLine($"[BchPanzoom] TouchStart touches={e.Touches.Count} scale={_scale}");
-        if (!Options.EnableTouch) return;
-        if (e.Touches.Count == 1)
-        {
-            if (Options.DisablePan || (Options.PanOnlyWhenZoomed && IsApproximatelyOne(_scale))) return;
-            var t = e.Touches[0];
-            _isPanning = true;
-            _startX = t.ClientX;
-            _startY = t.ClientY;
-            _startPanX = _x;
-            _startPanY = _y;
-        }
-        else if (e.Touches.Count >= 2 && !Options.DisableZoom)
-        {
-            var dx = e.Touches[1].ClientX - e.Touches[0].ClientX;
-            var dy = e.Touches[1].ClientY - e.Touches[0].ClientY;
-            _pinchStartDistance = MathF.Sqrt(dx * dx + dy * dy);
-            _pinchStartScale = _scale;
-            _isPinching = true;
-            Console.WriteLine($"[BchPanzoom] Pinch start distance={_pinchStartDistance}, scale={_pinchStartScale} scale={_scale}");
-        }
-    }
-
-    private void OnTouchMoveCustom(BchTouchEventArgs e)
-    {
-        if (!Options.EnableTouch) return;
-        if (_isPinching && e.Touches.Count >= 2)
-        {
-            var dx = e.Touches[1].ClientX - e.Touches[0].ClientX;
-            var dy = e.Touches[1].ClientY - e.Touches[0].ClientY;
-            var dist = MathF.Sqrt(dx * dx + dy * dy);
-            var scaleFactor = dist / _pinchStartDistance;
-            var newScale = Clamp(_pinchStartScale * scaleFactor, Options.MinScale, Options.MaxScale);
-            var centerLocalX = (e.Touches[0].X + e.Touches[1].X) / 2.0f;
-            var centerLocalY = (e.Touches[0].Y + e.Touches[1].Y) / 2.0f;
-            _originX = centerLocalX;
-            _originY = centerLocalY;
-            ZoomToPoint(_originX, _originY, newScale);
-            Console.WriteLine($"[BchPanzoom] Pinch move distance={dist}, newScale={newScale}");
-            StateHasChanged();
-            return;
-        }
-        if (_isPanning && e.Touches.Count == 1)
-        {
-            var t = e.Touches[0];
-            var dx = t.ClientX - _startX;
-            var dy = t.ClientY - _startY;
-            _x = _startPanX + dx;
-            _y = _startPanY + dy;
-            Console.WriteLine($"[BchPanzoom] Touch pan dx={dx}, dy={dy}, pos=({_x}, {_y})");
-            StateHasChanged();
-        }
-    }
-
-    private void OnTouchEndCustom(BchTouchEventArgs e)
-    {
-        Console.WriteLine($"[BchPanzoom] TouchEnd touches={e.Touches.Count} panning={_isPanning} pinching={_isPinching}");
-        _isPanning = false;
-        _isPinching = false;
-    }
-
-    private void ZoomToPoint(float localX, float localY, float newScale)
-    {
-        var oldScale = _scale;
-        if (Math.Abs(newScale - oldScale) < 0.0001f) return;
-        var contentX = (localX - _x) / oldScale;
-        var contentY = (localY - _y) / oldScale;
-
-        _scale = newScale;
-        // Keep the zoom target anchored under the cursor
-        _x = localX - contentX * _scale;
-        _y = localY - contentY * _scale;
-        Console.WriteLine($"[BchPanzoom] ZoomToPoint ({localX}, {localY}) oldScale={oldScale} newScale={newScale} pos=({_x}, {_y})");
-        StateHasChanged();
-    }
-
-    private float _lastLocalX;
-    private float _lastLocalY;
-    private float _originX;
-    private float _originY;
-
-    private static float Clamp(float v, float min, float max)
-    {
-        if (v < min) return min;
-        if (v > max) return max;
-        return v;
-    }
-
-    private static bool IsApproximatelyOne(float value)
-    {
-        return MathF.Abs(value - 1.0f) <= 0.0001f;
+        if (MinRectangleWidth < 50) MinRectangleWidth = 50;
+        if (MinRectangleHeight < 50) MinRectangleHeight = 50;
     }
 }
 

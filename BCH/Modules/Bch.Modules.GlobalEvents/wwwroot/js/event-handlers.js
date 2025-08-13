@@ -27,13 +27,14 @@ if (!("path" in MouseEvent.prototype)) {
 }
 
 function getPathCoordinates(event) {
-    const pageX = event.pageX | 0;
-    const pageY = event.pageY | 0;
-
+    const pageX = event.clientX | 0;
+    const pageY = event.clientY | 0;
+    
     return event.path.map(element => {
         if (element.getBoundingClientRect) {
             const viewportOffset = element.getBoundingClientRect();
-
+            console.log('left = ' + viewportOffset.left + ', top = ' + viewportOffset.top + ', tagName = ' + element.classList);
+            
             return {
                 x: pageX - viewportOffset.left,
                 y: pageY - viewportOffset.top,
@@ -125,8 +126,8 @@ function bchAddDocumentListener(key, eventName, dotnetReference, methodName,
             }
             case "mousewheel":
             {
-                const x = event.clientX - event.target.offsetLeft;
-                const y = event.clientY - event.target.offsetTop;
+                const x = event.pageX - event.target.offsetLeft;
+                const y = event.pageY - event.target.offsetTop;
                 const pathCoordinates = getPathCoordinates(event);
 
                 response = {

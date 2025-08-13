@@ -1,4 +1,5 @@
 using System.Globalization;
+using Bch.Components.Zoom.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
@@ -6,7 +7,6 @@ using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.Maths.Models;
-using ViewMode = Bch.Components.Zoom.Models.ViewMode;
 using ZoomContext = Bch.Components.Zoom.Models.ZoomContext;
 
 namespace Bch.Components.Zoom;
@@ -29,7 +29,7 @@ public partial class BchZoom : IAsyncDisposable
     [Parameter] public bool ZoomOnMouseWheel { get; set; } = false;
     [Parameter] public bool ShowScrollbars { get; set; } = false;
     [Parameter] public Action<Vec2, Vec2, Vec2, Vec2, float, float>? ConstraintPredicate { get; set; }
-    [Parameter] public ViewMode ViewMode { get; set; } = ViewMode.Default;
+    [Parameter] public ViewMode ViewMode { get; set; }
 
     private readonly string _wrapperId = $"_id_{Guid.NewGuid()}";
     private readonly string _navigationId = $"_id_{Guid.NewGuid()}";
@@ -148,6 +148,7 @@ public partial class BchZoom : IAsyncDisposable
         
         var wrapperRect = await DomInteropService.GetBoundingClientRectAsync(_wrapperId);
         var navigationRect = await DomInteropService.GetBoundingClientRectAsync(_navigationId);
+        if (wrapperRect is null || navigationRect is null) return;
         
         _viewPortSize.Set(wrapperRect.Width, wrapperRect.Height);
         _navigationSize.Set(navigationRect.Width, navigationRect.Height);
@@ -159,20 +160,24 @@ public partial class BchZoom : IAsyncDisposable
         var newHeight = _navigationSize.Y * scale;
         
         var x = 0.0f;
-        var y = _viewPortSize.Y * 0.5f - newHeight * 0.5f;
-
-        var heightCondition = ViewMode == ViewMode.StretchToBorders
-            ? newHeight > _viewPortSize.Y
-            : newHeight < _viewPortSize.Y;
-        
-        if (heightCondition)
-        {
-            scale = _viewPortSize.Y / _navigationSize.Y;
-            var newWidth = _navigationSize.X * scale;
-            
-            x = _viewPortSize.X * 0.5f - newWidth * 0.5f;
-            y = 0;
-        }
+        var y = 0.0f;
+        // var y = _viewPortSize.Y * 0.5f - newHeight * 0.5f;
+        //
+        // var heightCondition = ViewMode == ViewMode.StretchToBorders
+        //     ? newHeight > _viewPortSize.Y
+        //     : newHeight < _viewPortSize.Y;
+        //
+        // if (heightCondition)
+        // {
+        //     scale = _viewPortSize.Y / _navigationSize.Y;
+        //     var newWidth = _navigationSize.X * scale;
+        //     
+        //     x = _viewPortSize.X * 0.5f - newWidth * 0.5f;
+        //     y = 0;
+        // }
+        //
+        // if (ViewMode == ViewMode.StretchByWidth)
+            // y = 0;
 
         _pos.Set(x, y);
         _scale = (float) Math.Log(scale) + 4;
@@ -186,10 +191,10 @@ public partial class BchZoom : IAsyncDisposable
         StateHasChanged();
     }
 
-    private async Task OnZoomDownAsync(float zoomDelta)
+    private Task OnZoomDownAsync(float zoomDelta)
     {
         _zoomKeep = true;
-        await OnZoomHoldAsync(zoomDelta);
+        return OnZoomHoldAsync(zoomDelta);
     }
 
     private async Task OnZoomHoldAsync(float zoomDelta)

@@ -1,33 +1,28 @@
-@using Bch.Components.Panzoom.Models
+@using Bch.Components.Zoom
 
-<div id="@_containerId"
-     class="bch-panzoom-container"
-     mousewheel-prevent-default
-     mousewheel-stop-propagation
-     @ondblclick="OnDoubleClick"
-     @onmousedown="OnMouseDown"
-     @onmouseup="OnMouseUp"
-     @onmouseleave="OnMouseUp"
-     @onmousemove="OnMouseMove"
-     @onbchpanzoomtouchstart="OnTouchStartCustom"
-     @onbchpanzoomtouchmove="OnTouchMoveCustom"
-     @onbchpanzoomtouchend="OnTouchEndCustom"
-     tabindex="0"
-     @ref="_containerRef">
-    <div id="@_contentId" 
-         class="bch-panzoom-content"
-         mousewheel-prevent-default
-         mousewheel-stop-propagation
-         style="@GetTransformStyle()">
-        @if (ChildContent is null)
-        {
-            <div class="bch-panzoom-default"></div>
-        }
-        else
-        {
-            @ChildContent
-        }
-    </div>
+<div id="@_cropperId"
+     style="@($"background: {BackgroundColor}; pointer-events: {(_processingData ? "none" : "all")};")"
+     class="bch-cropper-container bch-no-mobile-selection @(_loaded ? "bch-loaded" : "")">
+
+    <BchZoom @ref="_bchZoom"
+             ZoomContext="_zoomContext"
+             BoundsByParent="false"
+             ZoomOnMouseWheel="@ScaleOnMouseWheel"
+             UseTouchRotation="@UseTouchRotation"
+             MinScale="@MinScale"
+             MaxScale="@MaxScale"
+             ViewMode="@ViewMode"
+             Factor="ScaleFactor">
+        <div class="bch-image-wrapper bch-no-selectable-text"
+             draggable="false"
+             mousewheel-prevent-default="@ScaleOnMouseWheel"
+             mousewheel-stop-propagation="@ScaleOnMouseWheel">
+            <img id="@_imageId"
+                 class="bch-no-selectable-text"
+                 draggable="false"
+                 @onload="async () => { await _bchZoom!.CenterContentAsync(); _loaded = true; StateHasChanged(); }"
+                 src="@ImageUrl"/>
+        </div>
+    </BchZoom>
 </div>
-
 
