@@ -109,6 +109,7 @@
     .bch-select-container.show > .bch-button > span {
         transform: rotate(180deg);
     }
+    
 .bch-theme-dark.bch-select-container > .bch-button > span {
     background: url(img/select-arrow-white.svg) center no-repeat;
 }

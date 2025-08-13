@@ -106,9 +106,6 @@
                     justify-content: center;
                 }
 
-                    .bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day > label {
-                    }
-
                         .bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day > label:hover {
                             cursor: pointer;
                         }
@@ -147,8 +144,7 @@
                     color: #131212 !important;
                 }
 
-                .bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates {
-                }
+                /* range cells wrapper styles are handled by theme rules below */
 
                     .bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates:first-child{
                         border-top-left-radius: 5px;
@@ -166,6 +162,16 @@
                         transition: 0.2s;
                         color: #5B5B5B !important;
                     }
+/* Added: keep endpoints solid when hovered to avoid inner light box over dark endpoint */
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day.rang-dates:hover,
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day.rang-dates:hover {
+    background: transparent !important;
+}
+/* Ensure text stays readable on hover at endpoints */
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover > label,
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover > label {
+    color: #FFFFFF !important;
+}
 
         .bch-datepicker-container .bch-datepicker-days .bch-datepicker-table {
             border-collapse: inherit;
@@ -471,4 +477,65 @@
 .bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
 .bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day > label {
     color: #FFFFFF !important;
+}
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Theme endpoint hover fixes */
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover {
+    background: transparent !important;
+}
+
+.bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+.bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover {
+    background: transparent !important;
+}
+
+/* Endpoint visual normalization: remove inner box styling so td background shows through */
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day,
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ensure labels remain readable on endpoints across themes */
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day > label,
+.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day > label {
+    color: #FFFFFF !important;
+}
+
+/* LightGreen: endpoints solid green and responsive hover */
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day {
+    background: #33B469 !important;
+}
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+.bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover {
+    background: #2FAF62 !important; /* slight darken on hover */
+}
+
+/* Light: subtle hover on endpoints */
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+.bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover {
+    background: #5F6770 !important;
+}
+
+/* Dark: subtle hover on endpoints */
+.bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+.bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover {
+    background: #566074 !important;
 }

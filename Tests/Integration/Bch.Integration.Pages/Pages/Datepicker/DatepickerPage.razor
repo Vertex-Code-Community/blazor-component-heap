@@ -1,67 +1,54 @@
 ﻿@page "/datepicker"
-@using Bch.Components.Calendar.Models
 @using Bch.Components.RangeCalendar
-
-@*<div style="display: flex;">
-    
-    <button @onclick="ShowDate">show</button>
-</div>*@
+@using Bch.Modules.Themes.Models
+@using Bch.Components.Calendar.Models
 
 <div>
-    Selected date @dateTime.ToString("MM-dd-yyyy")
-</div>
+    <h3>Range Calendar Component Test</h3>
 
-<div>
-    Selected date range @dateRange.Start?.ToString("MM-dd-yyyy") - @dateRange.End?.ToString("MM-dd-yyyy")
-</div>
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Themed Variants</h4>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" Theme="BchTheme.LightGreen" />
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" Theme="BchTheme.Light" />
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" Theme="BchTheme.Dark" />
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="calendar-container">
-    <div class="wrapper">
-        @* <BCHCalendar @bind-Value='dateTime' Culture="en-US" CssClass="test"/> *@
-        <BchRangeCalendar @bind-Values="dateRange" Culture="en-US" Format="MM/dd/yyyy" />
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Test Case 1: Empty Range</h4>
+            <p>Selected range: @(FormatRange(_range1))</p>
+            <BchRangeCalendar @bind-Values="_range1" Culture="en-US" Format="MM/dd/yyyy" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 2: Preselected Start</h4>
+            <p>Selected range: @(FormatRange(_range2))</p>
+            <BchRangeCalendar @bind-Values="_range2" Culture="en-US" Format="MM/dd/yyyy" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 3: Preselected Full Range</h4>
+            <p>Selected range: @(FormatRange(_range3))</p>
+            <BchRangeCalendar @bind-Values="_range3" Culture="en-US" Format="MM/dd/yyyy" />
+        </div>
     </div>
 </div>
 
-
-@code
-{
-    DateTime dateTime = DateTime.Now;
-    DateRange dateRange = new();
-
-    private void ShowDate()
-    {
-        Console.WriteLine(dateTime);
-        Console.WriteLine($"Start - {dateRange.Start}");
-        Console.WriteLine($"End - {dateRange.End}");
-    }
-}
-
 <style>
-    html {
-        height: 100%;
-    }
-
-    body {
-        height: 100%;
-    }
-
-    #app {
-        height: 100%;
-    }
-    
-    .calendar-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        overflow: auto;
-    }
-    
-        .calendar-container > .wrapper {
-            display: flex;
-            width: 100%;
-            padding: 0 16px;
-            height: 2000px;
-            flex-direction: column;
-            gap: 20px;
-        }
+    html { height: 100%; }
+    body { height: 100%; }
+    #app { height: 100%; }
 </style>

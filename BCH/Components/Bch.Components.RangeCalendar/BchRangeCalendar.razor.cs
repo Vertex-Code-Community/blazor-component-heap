@@ -5,6 +5,9 @@ using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.Maths.Models;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.RangeCalendar;
 
@@ -17,6 +20,11 @@ public partial class BchRangeCalendar : IAsyncDisposable
     [Parameter] public string Format { get; set; } = string.Empty;
     [Parameter] public string Culture { get; set; } = CultureInfo.CurrentCulture.Name;
     [Parameter] public EventCallback<DateRange> ValuesChanged { get; set; }
+
+    // Theme support (cascading + explicit override)
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
 
     [Parameter]
     public DateRange Values
@@ -202,5 +210,10 @@ public partial class BchRangeCalendar : IAsyncDisposable
     private async Task TrustedValuesAsync(DateRange date)
     {
         await ValuesChanged.InvokeAsync(date);
+    }
+
+    private string GetThemeCssClass()
+    {
+        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
     }
 }
