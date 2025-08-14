@@ -9,8 +9,7 @@
             <h4>Basic</h4>
             <div class="demo-box">
                 <div class="demo-area">
-                    <BchZoom BoundsByParent="true"
-                             ZoomOnMouseWheel="true"
+                    <BchZoom ZoomOnMouseWheel="true"
                              MinScale="0.5f"
                              MaxScale="6f"
                              ViewMode="Bch.Components.Zoom.Models.ViewMode.StretchToBorders"
@@ -25,15 +24,14 @@
         </div>
 
         <div class="test-case">
-            <h4>With Custom Factor</h4>
+            <h4>With Custom ScaleFactor</h4>
             <p>Similar to Cropper parameters</p>
             <div class="demo-box">
                 <div class="demo-area">
-                    <BchZoom BoundsByParent="true"
-                             ZoomOnMouseWheel="true"
+                    <BchZoom ZoomOnMouseWheel="true"
                              MinScale="0.5f"
                              MaxScale="8f"
-                             Factor="0.009f"
+                             ScaleFactor="0.009f"
                              ViewMode="Bch.Components.Zoom.Models.ViewMode.StretchToBorders"
                              ZoomContext="_zoomContext2">
                         <div class="img-wrapper" mousewheel-prevent-default="true" mousewheel-stop-propagation="true">

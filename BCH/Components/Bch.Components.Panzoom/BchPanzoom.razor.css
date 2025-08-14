@@ -12,6 +12,10 @@
     visibility: visible;
 }
 
+.bch-cropper-container.top-or-bottom-constrained {
+    touch-action: auto;
+}
+
 .bch-cropper-container .bch-image-wrapper {
     display: flex;
     width: fit-content;

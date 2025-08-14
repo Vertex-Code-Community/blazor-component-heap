@@ -2,23 +2,35 @@
 
 <div id="@_cropperId"
      style="@($"background: {BackgroundColor}; pointer-events: {(_processingData ? "none" : "all")};")"
-     class="bch-cropper-container bch-no-mobile-selection @(_loaded ? "bch-loaded" : "")">
+     class="bch-cropper-container bch-no-mobile-selection @(_loaded ? "bch-loaded" : "") @((_topLock && _bottomLock && _leftLock && _rightLock) ? "top-or-bottom-constrained" : "")">
 
     <BchZoom @ref="_bchZoom"
-             ZoomContext="_zoomContext"
-             BoundsByParent="false"
              ZoomOnMouseWheel="@ScaleOnMouseWheel"
              UseTouchRotation="@UseTouchRotation"
              MinScale="@MinScale"
              MaxScale="@MaxScale"
-             ViewMode="@ViewMode"
              ContainOutside="true"
-             Factor="ScaleFactor">
+             ScaleFactor="ScaleFactor"
+             @bind-IsTopConstrained="_topLock"
+             @bind-IsBottomConstrained="_bottomLock"
+             @bind-IsLeftConstrained="_leftLock"
+             @bind-IsRightConstrained="_rightLock">
+        @* <div mousewheel-prevent-default *@
+        @*      mousewheel-stop-propagation> *@
+        @*     <img id="@_imageId" *@
+        @*          mousewheel-prevent-default *@
+        @*          mousewheel-stop-propagation *@
+        @*          class="bch-no-selectable-text" *@
+        @*          draggable="false" *@
+        @*          @onload="async () => { await _bchZoom!.CenterContentAsync(); _loaded = true; StateHasChanged(); }" *@
+        @*          src="@ImageUrl"/> *@
+        @* </div> *@
+        
         <div class="bch-image-wrapper bch-no-selectable-text"
-             draggable="false"
-             mousewheel-prevent-default="@ScaleOnMouseWheel"
-             mousewheel-stop-propagation="@ScaleOnMouseWheel">
+             draggable="false">
             <img id="@_imageId"
+                 mousewheel-prevent-default
+                 mousewheel-stop-propagation
                  class="bch-no-selectable-text"
                  draggable="false"
                  @onload="async () => { await _bchZoom!.CenterContentAsync(); _loaded = true; StateHasChanged(); }"

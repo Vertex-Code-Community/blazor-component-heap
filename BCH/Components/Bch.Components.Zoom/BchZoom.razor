@@ -1,5 +1,6 @@
-<div class="bch-navigation-cnt">
-         @* @onextmousewheel="OnMouseWheel" *@
+@using Bch.Components.Zoom.Models
+
+<div class="bch-navigation-cnt @(_isTopConstrained && _isBottomConstrained && _isLeftConstrained && _isRightConstrained ? "bch-all-constrained" : "")">
     <div id="@_wrapperId"
          class="bch-scroll-cnt bch-navigation-cs-container"
          @ontouchstart="OnTouchStartAsync"
@@ -19,21 +20,16 @@
              class="bch-scroller bch-navigation-cs-panel"
              style="@GetNavigationStyle()">
 
-            @ChildContent(ZoomContext)
+            @ChildContent(new ZoomUpdateSnapshot
+            {
+                PosX = _pos.X,
+                PosY = _pos.Y,
+                Scale = Scale,
+                ScaleLinear = _scale,
+                AngleInRadians = _rotationAngle,
+                UserInteracttion = _userInteraction
+            })
 
         </div>
-
-        @* @if (ShowScrollbars) *@
-        @* { *@
-        @*     <div *@
-        @*         class="bch-scrollbar bch-horizontal @((_viewPortSize.X / (_size.X * _scale)) >= 1.0f ? "bch-full" : "")" *@
-        @*         style="@($"width: calc((100% - 20px) * ({(_viewPortSize.X / (_size.X * _scale)).ToString(_nF)})); left: calc(10px + (100% - 20px) * {((-_pos.X / _scale) / _size.X).ToString(_nF)});")"> *@
-        @*     </div> *@
-        @*     <div *@
-        @*         class="bch-scrollbar bch-vertical @((_viewPortSize.Y / (_size.Y * _scale)) >= 1.0f ? "bch-full" : "")" *@
-        @*         style="@($"height: calc((100% - 20px) * ({(_viewPortSize.Y / (_size.Y * _scale)).ToString(_nF)})); top: calc(10px + (100% - 20px) * {((-_pos.Y / _scale) / _size.Y).ToString(_nF)});")"> *@
-        @*     </div> *@
-        @* } *@
-
     </div>
 </div>

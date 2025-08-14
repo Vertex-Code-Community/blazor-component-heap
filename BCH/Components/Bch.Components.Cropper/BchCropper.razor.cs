@@ -20,7 +20,7 @@ public partial class BchCropper : IAsyncDisposable
 
     [Parameter] public string Base64Image { get; set; } = string.Empty;
     [Parameter] public CropperType CropperType { get; set; } = CropperType.MovableRectangle;
-    [Parameter] public ViewMode ViewMode { get; set; } = ViewMode.StretchToBorders;
+    // [Parameter] public ConstraintType ViewMode { get; set; } = ConstraintType.StretchToBorders;
     [Parameter] public string BackgroundColor { get; set; } = "#ffffff";
     [Parameter] public string ResultFormat { get; set; } = "image/jpeg";
     [Parameter] public float CroppedWidth { get; set; } = 400;
@@ -35,7 +35,7 @@ public partial class BchCropper : IAsyncDisposable
     [Parameter] public bool UseTouchRotation { get; set; } = false;
     [Parameter] public Func<float, Task>? OnUpdateScale { get; set; }
 
-    private readonly ZoomContext _zoomContext = new();
+    // private readonly ZoomContext _zoomContext = new();
     private BchZoom? _bchZoom;
     private bool _processingData = false;
 
@@ -67,7 +67,7 @@ public partial class BchCropper : IAsyncDisposable
     {
         // IJSUtilsService.OnResize += OnResizeAsync;
         _isServerSide = JsRuntime.GetType().Name.Contains("Remote"); // JsRuntime is IJSInProcessRuntime - webassembly, WebViewJsRuntime - MAUI
-        _zoomContext.OnUpdate += OnUpdateZoom;
+        // _zoomContext.OnUpdate += OnUpdateZoom;
         
         return GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key, OnMouseWheel, 
             false, false, false);
@@ -76,7 +76,7 @@ public partial class BchCropper : IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         // IJSUtilsService.OnResize -= OnResizeAsync;
-        _zoomContext.OnUpdate -= OnUpdateZoom;
+        // _zoomContext.OnUpdate -= OnUpdateZoom;
         await GlobalEventsService.RemoveDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key);
     }
     
@@ -98,14 +98,14 @@ public partial class BchCropper : IAsyncDisposable
 
     private async Task OnUpdateZoom()
     {
-        if (_scaleLinear != _zoomContext.ScaleLinear)
-        {
-            _scaleLinear = _zoomContext.ScaleLinear;
-            if (OnUpdateScale is not null)
-            {
-                await OnUpdateScale.Invoke(_zoomContext.ScaleLinear);
-            }
-        }
+        // if (_scaleLinear != _zoomContext.ScaleLinear)
+        // {
+        //     _scaleLinear = _zoomContext.ScaleLinear;
+        //     if (OnUpdateScale is not null)
+        //     {
+        //         await OnUpdateScale.Invoke(_zoomContext.ScaleLinear);
+        //     }
+        // }
         
         StateHasChanged();
     }
@@ -266,19 +266,21 @@ public partial class BchCropper : IAsyncDisposable
         _processingData = true;
         StateHasChanged();
         
-        var imageRect = await DomInteropService.GetBoundingClientRectAsync(_imageId);
-        if (imageRect is null) return string.Empty;
-        
-        var imgBounds = new Vec2 { X = imageRect.OffsetWidth,Y = imageRect.OffsetHeight };
-        // TODO: make as file stream
-        var base64Result = await JsRuntime.InvokeAsync<string>("bchOnCropImage", _canvasId, 
-            _canvasHolderId, _imageId, _zoomContext.TopLeftPos, imgBounds, _zoomContext.AngleInRadians, 
-            _zoomContext.Scale, ResultFormat, 1.0f, BackgroundColor, CroppedWidth, _rectPos, _rectSize);
+        // var imageRect = await DomInteropService.GetBoundingClientRectAsync(_imageId);
+        // if (imageRect is null) return string.Empty;
+        //
+        // var imgBounds = new Vec2 { X = imageRect.OffsetWidth,Y = imageRect.OffsetHeight };
+        // // TODO: make as file stream
+        // var base64Result = await JsRuntime.InvokeAsync<string>("bchOnCropImage", _canvasId, 
+        //     _canvasHolderId, _imageId, _zoomContext.TopLeftPos, imgBounds, _zoomContext.AngleInRadians, 
+        //     _zoomContext.Scale, ResultFormat, 1.0f, BackgroundColor, CroppedWidth, _rectPos, _rectSize);
+        //
+        // _processingData = false;
+        // StateHasChanged();
+        //
+        // return base64Result;
 
-        _processingData = false;
-        StateHasChanged();
-        
-        return base64Result;
+        return string.Empty;
     }
 
     public void Rotate(float angleDelta)
@@ -288,8 +290,8 @@ public partial class BchCropper : IAsyncDisposable
 
     public void ScaleTo(float scale)
     {
-        var scaleDelta = (scale - _zoomContext.ScaleLinear) / ScaleFactor;
-        _bchZoom?.Transform(_rectPos.X + _rectSize.X * 0.5f, _rectPos.Y + _rectSize.Y * 0.5f, scaleDelta, 0);
+        // var scaleDelta = (scale - _zoomContext.ScaleLinear) / ScaleFactor;
+        // _bchZoom?.Transform(_rectPos.X + _rectSize.X * 0.5f, _rectPos.Y + _rectSize.Y * 0.5f, scaleDelta, 0);
     }
 
     public async Task SetRectangleRatioAsync(float ratio)

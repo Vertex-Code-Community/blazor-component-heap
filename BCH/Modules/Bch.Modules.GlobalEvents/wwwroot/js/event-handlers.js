@@ -73,12 +73,9 @@ function bchAddDocumentListener(key, eventName, dotnetReference, methodName,
                                 passive = true) {
 
     const callback = function (event) {
-
-        const preventDefaultAttr = event.target && event.target.hasAttribute(`${eventName}-prevent-default`);
-        const stopPropagationAttr = event.target && event.target.hasAttribute(`${eventName}-stop-propagation`);
-
-        if (preventDefault || preventDefaultAttr) event.preventDefault();
-        if (stopPropagation || stopPropagationAttr) event.stopPropagation();
+        
+        if (preventDefault || event.target?.closest(`[${eventName}-prevent-default]`)) event.preventDefault();
+        if (stopPropagation || event.target?.closest(`[${eventName}-stop-propagation]`)) event.stopPropagation();
 
         let response = {};
 

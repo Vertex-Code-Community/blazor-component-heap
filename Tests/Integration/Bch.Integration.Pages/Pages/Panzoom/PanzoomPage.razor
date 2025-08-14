@@ -1,9 +1,8 @@
 @page "/panzoom"
-@using Bch.Components.Panzoom
-@using Bch.Components.Panzoom.Models
 @using Bch.Components.Cropper
 @using Bch.Components.Cropper.Models
 @using Bch.Components.Zoom.Models
+@using Bch.Components.Zoom
 
 <div>
     <h3>Panzoom Component Test</h3>
@@ -17,13 +16,39 @@
                     @*     <div style="width:100%;height:100%;background:#ff2d2d;"></div> *@
                     @* </BchPanzoom> *@
 
-                    <BchPanzoom ImageUrl="_content/Bch.Integration.Pages/img/slider-test-image.svg"
-                                BackgroundColor="green"
-                                ScaleOnMouseWheel="true"
-                                ViewMode="ViewMode.StretchByWidth"
-                                MinRectangleWidth="100"
-                                MinRectangleHeight="100"/>
-  
+                    <BchZoom @ref="_bchZoom1"
+                             ZoomOnMouseWheel="true"
+                             InitialScale="@(308.0f / 413.0f)"
+                             Constraint="ConstraintType.Outside">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>Basic 2</h4>
+            <div class="demo-box">
+                <div class="demo-area">
+                    @* <BchPanzoom> *@
+                    @*     <div style="width:100%;height:100%;background:#ff2d2d;"></div> *@
+                    @* </BchPanzoom> *@
+
+                    <BchZoom @ref="_bchZoom2"
+                             ZoomOnMouseWheel="true"
+                             Constraint="ConstraintType.Outside">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 @onload="async () => { await _bchZoom2!.CenterContentAsync(); StateHasChanged(); }"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
+                        </div>
+                    </BchZoom>
+
                 </div>
             </div>
         </div>
@@ -43,7 +68,6 @@
                                 CroppedWidth="200"
                                 Base64Image="_content/Bch.Integration.Pages/img/slider-test-image.svg"
                                 Ratio="@(16.0f / 9.0f)"
-                                ViewMode="ViewMode.Default"
                                 MinRectangleWidth="100"
                                 MinRectangleHeight="100"/>
   

@@ -15,7 +15,6 @@ public partial class BchPanzoom : ComponentBase, IAsyncDisposable
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
 
-    [Parameter] public ViewMode ViewMode { get; set; } = ViewMode.StretchToBorders;
     [Parameter] public string BackgroundColor { get; set; } = "#ffffff";
     [Parameter] public required string ImageUrl { get; set; }
     [Parameter] public float MinScale { get; set; } = 2.0f;
@@ -27,7 +26,6 @@ public partial class BchPanzoom : ComponentBase, IAsyncDisposable
     [Parameter] public bool UseTouchRotation { get; set; } = false;
     [Parameter] public Func<float, Task>? OnUpdateScale { get; set; }
 
-    private readonly ZoomContext _zoomContext = new();
     private BchZoom? _bchZoom;
     private bool _processingData = false;
 
@@ -39,14 +37,18 @@ public partial class BchPanzoom : ComponentBase, IAsyncDisposable
     private readonly Vec2 _lastMousePosition = new();
     private readonly Vec2 _change = new();
     private readonly MouseEventArgs _eventObj = new();
+    
+    private bool _isZoomConstrained = false;
+    private bool _leftLock = false;
+    private bool _rightLock = false;
+    private bool _topLock = false;
+    private bool _bottomLock = false;
 
     private bool _loaded = false;
     private float _scaleLinear = -1;
     
     protected override Task OnInitializedAsync()
     {
-        _zoomContext.OnUpdate += OnUpdateZoom;
-        
         return GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key, OnMouseWheel, 
             false, false, false);
     }
@@ -54,7 +56,6 @@ public partial class BchPanzoom : ComponentBase, IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         // IJSUtilsService.OnResize -= OnResizeAsync;
-        _zoomContext.OnUpdate -= OnUpdateZoom;
         await GlobalEventsService.RemoveDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key);
     }
     
@@ -69,19 +70,6 @@ public partial class BchPanzoom : ComponentBase, IAsyncDisposable
         return Task.CompletedTask;
     }
 
-    private async Task OnUpdateZoom()
-    {
-        if (_scaleLinear != _zoomContext.ScaleLinear)
-        {
-            _scaleLinear = _zoomContext.ScaleLinear;
-            if (OnUpdateScale is not null)
-            {
-                await OnUpdateScale.Invoke(_zoomContext.ScaleLinear);
-            }
-        }
-        
-        StateHasChanged();
-    }
     
     protected override void OnParametersSet()
     {
