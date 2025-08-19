@@ -5,6 +5,9 @@ using Microsoft.JSInterop;
 using Bch.Modules.DomInterop.Models;
 using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Services;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Range;
 
@@ -44,6 +47,8 @@ public partial class BchRange
             ValueChanged.InvokeAsync(value);
         }
     }
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
 
     private string _circleId = $"_id_{Guid.NewGuid()}";
     private string _containerId = $"_id_{Guid.NewGuid()}";
@@ -70,6 +75,8 @@ public partial class BchRange
 
     private float _prevPageY;
     private float _prevPageX;
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -391,4 +398,7 @@ public partial class BchRange
         _value = value;
         await OnUpdateAsync();
     }
+
+    private string GetThemeCssClass() => 
+        EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 }
