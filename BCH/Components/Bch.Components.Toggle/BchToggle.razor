@@ -1,4 +1,4 @@
-﻿<div class="bch-toggle" id="@_toggleId">
+﻿<div class="bch-toggle @GetThemeCssClass()" id="@_toggleId">
     <input type="checkbox"
            class="toggle-button @(Disabled ? "toggle-disabled" : "")"
            style=""
@@ -9,18 +9,18 @@
 
 <style>
     .bch-toggle#@_toggleId > .toggle-button {
-        background: @(string.IsNullOrWhiteSpace(DefaultBackgroundColor) ? "#D7D7D7" : DefaultBackgroundColor);
+        background: @ResolveDefaultBackgroundColor();
     }
 
     .bch-toggle#@_toggleId > .toggle-button::after {
-        background-color: @(string.IsNullOrWhiteSpace(DefaultCircleColor) ? "#FFFFFF" : DefaultCircleColor);
+        background-color: @ResolveDefaultCircleColor();
     }
 
     .bch-toggle#@_toggleId > .toggle-button:checked::after {
-        background-color: @(string.IsNullOrWhiteSpace(CheckedCircleColor) ? "#fff" : CheckedCircleColor);
+        background-color: @ResolveCheckedCircleColor();
     }
 
     .bch-toggle#@_toggleId > .toggle-button:checked {
-        background-color: @(string.IsNullOrWhiteSpace(CheckedBackgroundColor) ? "#33B469" : CheckedBackgroundColor);
+        background-color: @ResolveCheckedBackgroundColor();
     }
 </style>
