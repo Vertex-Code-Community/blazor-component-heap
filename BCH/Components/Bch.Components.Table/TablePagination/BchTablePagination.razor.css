@@ -71,6 +71,10 @@
     font-size: 12px;
     cursor: pointer;
 }
+.bch-theme-dark .bch-pagination-container .select-page-number .page-number-item,
+.bch-theme-dark.bch-pagination-container .select-page-number .page-number-item { color: #E5E7EB; }
+.bch-theme-dark .bch-pagination-container .select-page-number .page-number-item.active,
+.bch-theme-dark.bch-pagination-container .select-page-number .page-number-item.active { background: #4B5563; color: #FFFFFF; }
 
 .bch-pagination-container .select-page-number .page-number-item.bch-pagination-dots {
     border: none;
@@ -97,3 +101,17 @@
     user-select: none; /*Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+/* Theme overrides */
+.bch-theme-light .bch-pagination-container { border-top-color: #CED4DA; }
+.bch-theme-light .bch-pagination-container .select-page-number .page-number-item { border-color: #CED4DA; }
+.bch-theme-light .bch-pagination-container .select-page-number .prev-page,
+.bch-theme-light .bch-pagination-container .select-page-number .next-page { border-color: #CED4DA; }
+.bch-theme-light .bch-pagination-container .select-page-number .page-number-item.active { background: #6C757D; }
+
+.bch-theme-dark .bch-pagination-container { border-top-color: #374151; }
+.bch-theme-dark .bch-pagination-container .select-page-number .page-number-item { border-color: #374151; color: #E5E7EB; }
+.bch-theme-dark .bch-pagination-container .select-page-number .prev-page,
+.bch-theme-dark .bch-pagination-container .select-page-number .next-page { border-color: #374151; }
+.bch-theme-dark .bch-pagination-container .select-page-number .page-number-item.active { background: #4B5563; }
+.bch-theme-dark .bch-pagination-container .select-page-size .bch-select-container .bch-button label { color: #E5E7EB; }

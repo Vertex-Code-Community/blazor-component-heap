@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Components;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Table.TablePagination;
 
@@ -22,6 +25,12 @@ public partial class BchTablePagination : ComponentBase
     [Parameter] public int TotalItems { get; set; }
     [Parameter] public EventCallback<int> OnPageNumber { get; set; }
     [Parameter] public List<uint> Sizes { get; set; } = new() { 5, 10, 20 };
+
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     private int _pageSize = 5;
     private int _prevCurrentPage = -1;

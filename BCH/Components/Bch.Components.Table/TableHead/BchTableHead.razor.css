@@ -35,6 +35,9 @@
                 color: #515358;
             }
 
+.bch-theme-dark .bch-table-head-container > .head-name-container > .head-name .example-table-birthday-text,
+.bch-theme-dark.bch-table-head-container > .head-name-container > .head-name .example-table-birthday-text { color: #E5E7EB; }
+
     .bch-table-head-container .head-filtering {
         height: 70px;
         align-items: center;
@@ -82,3 +85,16 @@
         .bch-table-head-container .head-filtering .bch-select-data:focus{
             outline: none;
         }
+
+/* Theme overrides */
+.bch-theme-light .bch-table-head-container > .head-name-container > .head-name { background: #F1F3F5; }
+.bch-theme-light .bch-table-head-container > .head-name-container > .head-name > .title { color: #212529; }
+.bch-theme-light .bch-table-head-container .head-filtering .bch-input-text,
+.bch-theme-light .bch-table-head-container .head-filtering .bch-input-number { border-color: #CED4DA; }
+
+.bch-theme-dark .bch-table-head-container > .head-name-container.bch-filtering { border-bottom-color: #374151; }
+.bch-theme-dark .bch-table-head-container > .head-name-container > .head-name { background: #111827; }
+.bch-theme-dark .bch-table-head-container > .head-name-container > .head-name > .title { color: #E5E7EB; }
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-input-text,
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-input-number { border-color: #374151; color: #E5E7EB; background: #111827; }
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-select-data { border-color: #374151; color: #E5E7EB; background: #111827; }

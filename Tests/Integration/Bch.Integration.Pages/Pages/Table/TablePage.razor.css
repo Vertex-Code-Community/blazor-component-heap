@@ -1,0 +1,53 @@
+.test-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.test-case {
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 20px;
+    background: #FFFFFF;
+}
+
+.test-case h4 {
+    margin: 0 0 10px 0;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.themes-row { /* deprecated grid, left for reference */ }
+
+.theme-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.example-table-birthday-text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+    .example-table-birthday-text > .b { color: #ff3399; }
+    .example-table-birthday-text > .i { color: #66ccff; }
+    .example-table-birthday-text > .r { color: #ff9933; }
+    .example-table-birthday-text > .t { color: #66ff66; }
+    .example-table-birthday-text > .h { color: #ff6666; }
+    .example-table-birthday-text > .d { color: #ffcc66; }
+    .example-table-birthday-text > .a { color: #9933cc; }
+    .example-table-birthday-text > .y { color: #ff9999; }
+
+
