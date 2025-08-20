@@ -2,35 +2,37 @@
 
 @if (OwnerContainer != null)
 {
-    <div class="bch-rb-item @(ContentTemplate is not null ? "custom" : "") @(Disabled ? "disabled" : "")" 
-         @onclick="OnClick">
+    <div class="@GetThemeCssClass()">
+        <div class="bch-rb-item @(ContentTemplate is not null ? "custom" : "") @(Disabled ? "disabled" : "")" 
+             @onclick="OnClick">
 
-        @if (ContentTemplate is null)
-        {
-            if (CircleTemplate is null)
+            @if (ContentTemplate is null)
             {
-                <div class="circle">
-                    <div class="inner @(OwnerContainer.SelectedRb == this ? "selected" : "")"></div>
-                </div>
+                if (CircleTemplate is null)
+                {
+                    <div class="circle">
+                        <div class="inner @(OwnerContainer.SelectedRb == this ? "selected" : "")"></div>
+                    </div>
+                }
+                else
+                {
+                    @CircleTemplate(OwnerContainer.SelectedRb == this)
+                }
+
+                if (DataTemplate is null)
+                {
+                    <label class="text">@Key</label>
+                }
+                else
+                {
+                    @DataTemplate(OwnerContainer.SelectedRb == this)
+                }
             }
             else
             {
-                @CircleTemplate(OwnerContainer.SelectedRb == this)
+                @ContentTemplate(OwnerContainer.SelectedRb == this)
             }
 
-            if (DataTemplate is null)
-            {
-                <label class="text">@Key</label>
-            }
-            else
-            {
-                @DataTemplate(OwnerContainer.SelectedRb == this)
-            }
-        }
-        else
-        {
-            @ContentTemplate(OwnerContainer.SelectedRb == this)
-        }
-
+        </div>
     </div>
 }

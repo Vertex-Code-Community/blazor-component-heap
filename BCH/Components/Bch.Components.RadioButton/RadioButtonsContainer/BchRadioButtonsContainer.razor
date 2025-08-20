@@ -1,5 +1,9 @@
 ﻿@typeparam TItem
 
-<CascadingValue IsFixed="true" Name="@($"BCHRadioButtonContainer{nameof(TItem)}")" Value="this">
-    @ChildContent
-</CascadingValue>
+<div class="@GetThemeCssClass()">
+    <CascadingValue Value="EffectiveTheme" IsFixed="true">
+        <CascadingValue IsFixed="true" Name="@($"BCHRadioButtonContainer{nameof(TItem)}")" Value="this">
+            @ChildContent
+        </CascadingValue>
+    </CascadingValue>
+</div>
