@@ -97,4 +97,9 @@
 .bch-theme-dark .bch-table-head-container > .head-name-container > .head-name > .title { color: #E5E7EB; }
 .bch-theme-dark .bch-table-head-container .head-filtering .bch-input-text,
 .bch-theme-dark .bch-table-head-container .head-filtering .bch-input-number { border-color: #374151; color: #E5E7EB; background: #111827; }
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-select-container .bch-button label { color: #E5E7EB; }
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-select-container .bch-button input { color: #E5E7EB; }
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-select-container .bch-button input::placeholder { color: rgba(229,231,235,0.7); }
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-input-text::placeholder,
+.bch-theme-dark .bch-table-head-container .head-filtering .bch-input-number::placeholder { color: rgba(229, 231, 235, 0.7); }
 .bch-theme-dark .bch-table-head-container .head-filtering .bch-select-data { border-color: #374151; color: #E5E7EB; background: #111827; }
