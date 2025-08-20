@@ -1,5 +1,8 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Components;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Slider;
 
@@ -14,8 +17,23 @@ public partial class BchSlider<TItem> : ComponentBase where TItem : class
     [Parameter] public bool ShowCircleButtons { get; set; } = false;
     [Parameter] public bool CircleButtonsAboveContent { get; set; } = false;
 
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    
+    [Parameter] public string ButtonBackgroundColor { get; set; } = string.Empty;
+    [Parameter] public string ButtonBorderColor { get; set; } = string.Empty;
+    [Parameter] public string ButtonHoverBackgroundColor { get; set; } = string.Empty;
+    [Parameter] public string ButtonHoverBorderColor { get; set; } = string.Empty;
+    [Parameter] public string CircleBorderColor { get; set; } = string.Empty;
+    [Parameter] public string CircleSelectedColor { get; set; } = string.Empty;
+    [Parameter] public string CircleHoverBorderColor { get; set; } = string.Empty;
+
     private int _scrollIndex = 0;
     private NumberFormatInfo _numberFormatWithDot = new () { NumberDecimalSeparator = "." };
+    private string _sliderId = $"_slider_{Guid.NewGuid()}";
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     protected override void OnInitialized()
     {
@@ -52,4 +70,74 @@ public partial class BchSlider<TItem> : ComponentBase where TItem : class
     }
 
     private int CirclesCount => Items.Count - (!CircularScroll ? RenderItemCount - 1 : 0);
+
+    private string ResolveButtonBackgroundColor()
+        => string.IsNullOrWhiteSpace(ButtonBackgroundColor)
+            ? EffectiveTheme switch
+            {
+                BchTheme.Dark => "#374151",
+                BchTheme.Light => "#F3F4F6",
+                _ => "#FFFFFF"
+            }
+            : ButtonBackgroundColor;
+
+    private string ResolveButtonBorderColor()
+        => string.IsNullOrWhiteSpace(ButtonBorderColor)
+            ? EffectiveTheme switch
+            {
+                BchTheme.Dark => "#6B7280",
+                BchTheme.Light => "#D1D5DB",
+                _ => "#33B469"
+            }
+            : ButtonBorderColor;
+
+    private string ResolveButtonHoverBackgroundColor()
+        => string.IsNullOrWhiteSpace(ButtonHoverBackgroundColor)
+            ? EffectiveTheme switch
+            {
+                BchTheme.Dark => "#4B5563",
+                BchTheme.Light => "#E5E7EB",
+                _ => "#F0F9F4"
+            }
+            : ButtonHoverBackgroundColor;
+
+    private string ResolveButtonHoverBorderColor()
+        => string.IsNullOrWhiteSpace(ButtonHoverBorderColor)
+            ? EffectiveTheme switch
+            {
+                BchTheme.Dark => "#9CA3AF",
+                BchTheme.Light => "#9CA3AF",
+                _ => "#2FAF62"
+            }
+            : ButtonHoverBorderColor;
+
+    private string ResolveCircleBorderColor()
+        => string.IsNullOrWhiteSpace(CircleBorderColor)
+            ? EffectiveTheme switch
+            {
+                BchTheme.Dark => "#6B7280",
+                BchTheme.Light => "#9CA3AF",
+                _ => "#33B469"
+            }
+            : CircleBorderColor;
+
+    private string ResolveCircleSelectedColor()
+        => string.IsNullOrWhiteSpace(CircleSelectedColor)
+            ? EffectiveTheme switch
+            {
+                BchTheme.Dark => "#9CA3AF",
+                BchTheme.Light => "#6B7280",
+                _ => "#33B469"
+            }
+            : CircleSelectedColor;
+
+    private string ResolveCircleHoverBorderColor()
+        => string.IsNullOrWhiteSpace(CircleHoverBorderColor)
+            ? EffectiveTheme switch
+            {
+                BchTheme.Dark => "#9CA3AF",
+                BchTheme.Light => "#6B7280",
+                _ => "#2FAF62"
+            }
+            : CircleHoverBorderColor;
 }

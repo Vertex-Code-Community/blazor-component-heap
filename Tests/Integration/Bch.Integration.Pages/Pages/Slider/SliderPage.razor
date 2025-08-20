@@ -1,48 +1,135 @@
 ﻿@page "/slider"
 @using Bch.Components.Slider
+@using Bch.Modules.Themes.Models
 
 <div class="page-cnt">
-
-    <div class="slider">
-        <BchSlider TItem="string"
-                   Items="_items"
-                   RenderItemCount="2"
-                   CircularScroll="false"
-                   ShowCircleButtons="true"
-                   ButtonsAboveContent="true"
-                   CircleButtonsAboveContent="true">
-            <ItemTemplate Context="item">
-                <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
-            </ItemTemplate>
-        </BchSlider>
+    <div class="page-header">
+        <h1>Slider Component</h1>
+        <p>Demonstration of the Slider component with different themes and configurations</p>
     </div>
 
-    <div class="slider">
-        <BchSlider TItem="string"
-                   Items="_items"
-                   RenderItemCount="1"
-                   CircularScroll="false"
-                   ShowCircleButtons="true"
-                   ButtonsAboveContent="true">
-            <ItemTemplate Context="item">
-                <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
-            </ItemTemplate>
-        </BchSlider>
+    <div class="themes-section">
+        <h2>Theme Variants</h2>
+        <div class="themes-row">
+            <div class="theme-col">
+                <h3>Light Green Theme</h3>
+                <div class="slider-demo">
+                    <BchSlider TItem="string"
+                               Items="_items"
+                               RenderItemCount="2"
+                               CircularScroll="false"
+                               ShowCircleButtons="true"
+                               ButtonsAboveContent="true"
+                               CircleButtonsAboveContent="true"
+                               Theme="BchTheme.LightGreen">
+                        <ItemTemplate Context="item">
+                            <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
+                        </ItemTemplate>
+                    </BchSlider>
+                </div>
+            </div>
+            
+            <div class="theme-col">
+                <h3>Light Theme</h3>
+                <div class="slider-demo">
+                    <BchSlider TItem="string"
+                               Items="_items"
+                               RenderItemCount="2"
+                               CircularScroll="false"
+                               ShowCircleButtons="true"
+                               ButtonsAboveContent="true"
+                               CircleButtonsAboveContent="true"
+                               Theme="BchTheme.Light">
+                        <ItemTemplate Context="item">
+                            <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
+                        </ItemTemplate>
+                    </BchSlider>
+                </div>
+            </div>
+            
+            <div class="theme-col">
+                <h3>Dark Theme</h3>
+                <div class="slider-demo">
+                    <BchSlider TItem="string"
+                               Items="_items"
+                               RenderItemCount="2"
+                               CircularScroll="false"
+                               ShowCircleButtons="true"
+                               ButtonsAboveContent="true"
+                               CircleButtonsAboveContent="true"
+                               Theme="BchTheme.Dark">
+                        <ItemTemplate Context="item">
+                            <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
+                        </ItemTemplate>
+                    </BchSlider>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="slider">
-        <BchSlider TItem="string"
-                   Items="_items"
-                   RenderItemCount="3"
-                   CircularScroll="true"
-                   ShowCircleButtons="false"
-                   ButtonsAboveContent="false">
-            <ItemTemplate Context="item">
-                <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
-            </ItemTemplate>
-        </BchSlider>
+    <div class="configurations-section">
+        <h2>Different Configurations</h2>
+        
+        <div class="config-row">
+            <div class="config-col">
+                <h3>Single Item with Circles</h3>
+                <div class="slider-demo">
+                    <BchSlider TItem="string"
+                               Items="_items"
+                               RenderItemCount="1"
+                               CircularScroll="false"
+                               ShowCircleButtons="true"
+                               ButtonsAboveContent="true"
+                               Theme="BchTheme.LightGreen">
+                        <ItemTemplate Context="item">
+                            <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
+                        </ItemTemplate>
+                    </BchSlider>
+                </div>
+            </div>
+            
+            <div class="config-col">
+                <h3>Circular Scroll</h3>
+                <div class="slider-demo">
+                    <BchSlider TItem="string"
+                               Items="_items"
+                               RenderItemCount="3"
+                               CircularScroll="true"
+                               ShowCircleButtons="false"
+                               ButtonsAboveContent="false"
+                               Theme="BchTheme.LightGreen">
+                        <ItemTemplate Context="item">
+                            <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
+                        </ItemTemplate>
+                    </BchSlider>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="custom-colors-section">
+        <h2>Custom Colors</h2>
+        <div class="slider-demo">
+            <BchSlider TItem="string"
+                       Items="_items"
+                       RenderItemCount="2"
+                       CircularScroll="false"
+                       ShowCircleButtons="true"
+                       ButtonsAboveContent="true"
+                       CircleButtonsAboveContent="true"
+                       ButtonBackgroundColor="#FF6B6B"
+                       ButtonBorderColor="#E74C3C"
+                       ButtonHoverBackgroundColor="#FF5252"
+                       ButtonHoverBorderColor="#C0392B"
+                       CircleBorderColor="#E74C3C"
+                       CircleSelectedColor="#C0392B"
+                       CircleHoverBorderColor="#A93226">
+                <ItemTemplate Context="item">
+                    <div class="item-cnt" style="@($"background: url({item}) center no-repeat;")"></div>
+                </ItemTemplate>
+            </BchSlider>
+        </div>
+    </div>
 </div>
 
 <style>
@@ -58,32 +145,3 @@
         height: 100%;
     }
 </style>
-
-
-@*<div class="slider-page">
-    <div class="conteudo">
-        <div class="carrousel">
-            <article class="card">
-                <h1>HTML</h1>
-            </article>
-            <article class="card">
-                <h1>CSS</h1>
-            </article>
-            <article class="card">
-                <h1>JS</h1>
-            </article>
-            <article class="card">
-                <h1>React JS</h1>
-            </article>
-            <article class="card">
-                <h1>GIT</h1>
-            </article>
-            <article class="card">
-                <h1>LÓGICA</h1>
-            </article>
-            <article class="card">
-                <h1>SEGUE NA BASE!</h1>
-            </article>
-        </div>
-    </div>
-</div>*@

@@ -1,7 +1,8 @@
 ﻿@typeparam TItem
 
 <div
-    class="@("bch-slider-container " + $"{(CircleButtonsAboveContent ? "bch-circle-buttons-above-content" : "")} " + $"{(CircularScroll ? "bch-circular" : "")}")">
+    class="@("bch-slider-container " + $"{(CircleButtonsAboveContent ? "bch-circle-buttons-above-content" : "")} " + $"{(CircularScroll ? "bch-circular" : "")} " + GetThemeCssClass())"
+    id="@_sliderId">
     <div
         class="@("bch-scroll-btn bch-left " + $"{(ButtonsAboveContent ? "bch-above-content" : "")} " + $"{(ShowCircleButtons ? "bch-circle-buttons" : "")} " + $"{(_scrollIndex == 0 ? "bch-disabled" : "")}")">
         <div class="bch-icon-wrapper" @onclick="() => { OnNextClicked(1); }"></div>
@@ -52,3 +53,27 @@
         <div class="bch-icon-wrapper" @onclick="() => { OnNextClicked(-1); }"></div>
     </div>
 </div>
+
+<style>
+    #@_sliderId > .bch-scroll-btn > .bch-icon-wrapper {
+        background-color: @ResolveButtonBackgroundColor();
+        border: 1px solid @ResolveButtonBorderColor();
+    }
+
+    #@_sliderId > .bch-scroll-btn > .bch-icon-wrapper:hover {
+        background-color: @ResolveButtonHoverBackgroundColor();
+        border-color: @ResolveButtonHoverBorderColor();
+    }
+
+    #@_sliderId > .bch-circles-wrapper > .bch-circle {
+        border-color: @ResolveCircleBorderColor();
+    }
+
+    #@_sliderId > .bch-circles-wrapper > .bch-circle > .bch-selected {
+        background: @ResolveCircleSelectedColor();
+    }
+
+    #@_sliderId > .bch-circles-wrapper > .bch-circle:hover {
+        border-color: @ResolveCircleHoverBorderColor();
+    }
+</style>
