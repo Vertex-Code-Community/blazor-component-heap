@@ -94,3 +94,7 @@
 .bch-theme-dark.bch-rb-item .circle > .inner.selected:hover { background: #6B7280; }
 .bch-theme-dark .bch-rb-item > .text,
 .bch-theme-dark.bch-rb-item > .text { color: #131212; }
+
+.bch-rb-item.disabled > .circle { border-color: #ACACAC !important; }
+.bch-rb-item.disabled > .circle > .inner.selected { background: #ACACAC !important; }
+.bch-rb-item.disabled > .text { color: #ACACAC !important; }
