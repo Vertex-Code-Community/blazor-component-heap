@@ -1,31 +1,66 @@
 @page "/table-custom-td"
 @using Bch.Components.Table
 @using Bch.Components.Table.TableColumn
+@using Bch.Modules.Themes.Models
 
-<div style="height:400px; display: flex; flex-direction: column; padding: 30px;">
-    
-    <BchTable TRowData="UserModel"
-              Items="_users">
-        <BchTableColumn TRowData="UserModel"
-                        Expression="c => c.Id"
-                        Title="Id"/>
-        <BchTableColumn TRowData="UserModel"
-                        Expression="c => c.Name"
-                        Title="Name"/>
-        <BchTableColumn TRowData="UserModel"
-                        Expression="c => c.Email"
-                        Title="Email">
-            <TdTemplate>
-                <div>
-                    Custom td in table
-                </div>
-                <div>
-                    @context.Email
-                </div>
-            </TdTemplate>
-        </BchTableColumn>
-    </BchTable>
-    
+<div style="display: flex; flex-direction: column; gap: 40px; padding: 30px;">
+
+    <div>
+        <h5>Light Green</h5>
+        <CascadingValue Value="BchTheme.LightGreen">
+            <BchTable TRowData="UserModel"
+                      Items="_users">
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
+                    <TdTemplate>
+                        <div class="bch-td-content">
+                            <div>Custom td</div>
+                            <div>@context.Email</div>
+                        </div>
+                    </TdTemplate>
+                </BchTableColumn>
+            </BchTable>
+        </CascadingValue>
+    </div>
+
+    <div>
+        <h5>Light</h5>
+        <CascadingValue Value="BchTheme.Light">
+            <BchTable TRowData="UserModel"
+                      Items="_users">
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
+                    <TdTemplate>
+                        <div class="bch-td-content">
+                            <div>Custom td</div>
+                            <div>@context.Email</div>
+                        </div>
+                    </TdTemplate>
+                </BchTableColumn>
+            </BchTable>
+        </CascadingValue>
+    </div>
+
+    <div>
+        <h5>Dark</h5>
+        <CascadingValue Value="BchTheme.Dark">
+            <BchTable TRowData="UserModel"
+                      Items="_users">
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
+                <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
+                    <TdTemplate>
+                        <div class="bch-td-content">
+                            <div>Custom td</div>
+                            <div>@context.Email</div>
+                        </div>
+                    </TdTemplate>
+                </BchTableColumn>
+            </BchTable>
+        </CascadingValue>
+    </div>
 </div>
 
 @code {
@@ -33,48 +68,13 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string  Email { get; set; }
-        public DateTime Birthday { get; set; }
+        public string Email { get; set; }
     }
 
-    private List<UserModel> _users = new List<UserModel>
+    private List<UserModel> _users = new()
     {
-        new UserModel
-        {
-            Id = 1,
-            Name = $"FirstName 1",
-            Email = $"email1@gmail.com",
-        },
-        new UserModel
-        {
-            Id = 2,
-            Name = $"FirstName 2",
-            Email = $"email2@gmail.com",
-        },
-        new UserModel
-        {
-            Id = 3,
-            Name = $"FirstName 3",
-            Email = $"email3@gmail.com",
-        },
-        new UserModel
-        {
-            Id = 4,
-            Name = $"FirstName 4",
-            Email = $"email4@gmail.com",
-        },
-        new UserModel
-        {
-            Id = 5,
-            Name = $"FirstName 5",
-            Email = $"email5@gmail.com",
-        },
-        new UserModel
-        {
-            Id = 6,
-            Name = $"FirstName 6",
-            Email = $"email6@gmail.com",
-        }
+        new UserModel { Id = 1, Name = "FirstName 1", Email = "email1@gmail.com" },
+        new UserModel { Id = 2, Name = "FirstName 2", Email = "email2@gmail.com" },
+        new UserModel { Id = 3, Name = "FirstName 3", Email = "email3@gmail.com" },
     };
 }
-
