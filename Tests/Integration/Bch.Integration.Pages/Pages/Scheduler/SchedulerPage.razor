@@ -1,29 +1,94 @@
 ﻿@page "/scheduler"
 @using Bch.Components.Scheduler.AppointmentItem
 @using Bch.Components.Scheduler
+@using Bch.Modules.Themes.Models
 
-<div class="page-cnt">
-    <BchScheduler Appointments="_appointments"
-                  ShowDatePicker="true"
-                  ShowTodayButton="true"
-                  Gap="8px">
+<div class="scheduler-demo-page">
+    <div class="themes-row">
+        <div class="theme-col">
+            <h4>Light Green Theme</h4>
+            <div class="scheduler-container">
+                <BchScheduler Appointments="_appointments"
+                              ShowDatePicker="true"
+                              ShowTodayButton="true"
+                              Gap="8px"
+                              Theme="BchTheme.LightGreen">
 
-        <BchAppointmentItem Key="type-1" Context="appointment">
-            <div class="type-1">
-                <div class="start">Start: @appointment.Start</div>
-                <div class="end">End: @appointment.End</div>
-                <div class="name">Name: @((string)appointment.Payload)</div>
+                    <BchAppointmentItem Key="type-1" Context="appointment">
+                        <div class="type-1">
+                            <div class="start">Start: @appointment.Start.ToString("HH:mm")</div>
+                            <div class="end">End: @appointment.End.ToString("HH:mm")</div>
+                            <div class="name">Name: @((string)appointment.Payload)</div>
+                        </div>
+                    </BchAppointmentItem>
+
+                    <BchAppointmentItem Key="type-2" Context="appointment">
+                        <div class="type-2">
+                            <div class="difference">Diff: @(appointment.End - appointment.Start)</div>
+                            <div class="count">Count: @((int)appointment.Payload)</div>
+                        </div>
+                    </BchAppointmentItem>
+
+                </BchScheduler>
             </div>
-        </BchAppointmentItem>
+        </div>
+        
+        <div class="theme-col">
+            <h4>Light Theme</h4>
+            <div class="scheduler-container">
+                <BchScheduler Appointments="_appointments"
+                              ShowDatePicker="true"
+                              ShowTodayButton="true"
+                              Gap="8px"
+                              Theme="BchTheme.Light">
 
-        <BchAppointmentItem Key="type-2" Context="appointment">
-            <div class="type-2">
-                <div class="difference">Diff: @(appointment.End - appointment.Start)</div>
-                <div class="count">Count: @((int)appointment.Payload)</div>
+                    <BchAppointmentItem Key="type-1" Context="appointment">
+                        <div class="type-1">
+                            <div class="start">Start: @appointment.Start.ToString("HH:mm")</div>
+                            <div class="end">End: @appointment.End.ToString("HH:mm")</div>
+                            <div class="name">Name: @((string)appointment.Payload)</div>
+                        </div>
+                    </BchAppointmentItem>
+
+                    <BchAppointmentItem Key="type-2" Context="appointment">
+                        <div class="type-2">
+                            <div class="difference">Diff: @(appointment.End - appointment.Start)</div>
+                            <div class="count">Count: @((int)appointment.Payload)</div>
+                        </div>
+                    </BchAppointmentItem>
+
+                </BchScheduler>
             </div>
-        </BchAppointmentItem>
+        </div>
+        
+        <div class="theme-col">
+            <h4>Dark Theme</h4>
+            <div class="scheduler-container">
+                <BchScheduler Appointments="_appointments"
+                              ShowDatePicker="true"
+                              ShowTodayButton="true"
+                              Gap="8px"
+                              Theme="BchTheme.Dark">
 
-    </BchScheduler>
+                    <BchAppointmentItem Key="type-1" Context="appointment">
+                        <div class="type-1">
+                            <div class="start">Start: @appointment.Start.ToString("HH:mm")</div>
+                            <div class="end">End: @appointment.End.ToString("HH:mm")</div>
+                            <div class="name">Name: @((string)appointment.Payload)</div>
+                        </div>
+                    </BchAppointmentItem>
+
+                    <BchAppointmentItem Key="type-2" Context="appointment">
+                        <div class="type-2">
+                            <div class="difference">Diff: @(appointment.End - appointment.Start)</div>
+                            <div class="count">Count: @((int)appointment.Payload)</div>
+                        </div>
+                    </BchAppointmentItem>
+
+                </BchScheduler>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style>
