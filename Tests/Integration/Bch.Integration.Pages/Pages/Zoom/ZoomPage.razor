@@ -51,7 +51,7 @@
                 <div class="demo-area" style="width: calc(300px); height: calc(100px)">
                     <BchZoom ContainerSize="_zoomContainerSize3"
                              ContentSize="_imageSize1"
-                             Constraint="ConstraintType.None"
+                             Constraint="ConstraintType.Outside"
                              InitialPositioning="InitialZoomPositioning.FitOutsideCentered"
                              MaxScale="6.0f"
                              ZoomOnMouseWheel="true">
@@ -84,6 +84,68 @@
                 </div>
             </div>
         </div>
+
+        @* --------- *@
+        
+        <div class="test-case">
+            <h4>Container size is 300x100 | ConstraintType.None | InitialZoomPositioning.FitInsideCentered</h4>
+            <div class="demo-box">
+                <div class="demo-area" style="width: calc(300px); height: calc(100px)">
+                    <BchZoom ContainerSize="_zoomContainerSize3"
+                             ContentSize="_imageSize1"
+                             Constraint="ConstraintType.None"
+                             InitialPositioning="InitialZoomPositioning.FitInsideCentered"
+                             MaxScale="6.0f"
+                             ZoomOnMouseWheel="true">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>Container size is 100x400 | ConstraintType.Outside | InitialZoomPositioning.FitInsideCentered</h4>
+            <div class="demo-box">
+                <div class="demo-area" style="width: calc(100px); height: calc(400px)">
+                    <BchZoom ContainerSize="_zoomContainerSize4"
+                             ContentSize="_imageSize1"
+                             Constraint="ConstraintType.Inside"
+                             InitialPositioning="InitialZoomPositioning.FitInsideCentered"
+                             MaxScale="6.0f"
+                             ZoomOnMouseWheel="true">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>Container size fits content | ConstraintType.Outside | InitialZoomPositioning.None</h4>
+            <div class="demo-box">
+                <div class="demo-area">
+                    <BchZoom ContainerSize="_zoomContainerSize1"
+                             ContentSize="_imageSize1"
+                             InitialPositioning="InitialZoomPositioning.FitInsideCentered"
+                             Constraint="ConstraintType.Inside"
+                             ZoomOnMouseWheel="true">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+        @* --------- *@
 
         @* <div class="test-case"> *@
         @*     <h4>Basic 2</h4> *@

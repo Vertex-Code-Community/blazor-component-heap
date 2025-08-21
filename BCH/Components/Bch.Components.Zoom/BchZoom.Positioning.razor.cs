@@ -59,6 +59,27 @@ public partial class BchZoom
 
     private void ApplyInsidePositioning()
     {
+        var navigationSizeX = ContentSize.X;
+        var navigationSizeY = ContentSize.Y;
         
+        var scale = _viewPortSize.X / navigationSizeX;
+        var newHeight = navigationSizeY * scale;
+
+        var x = 0.0f;
+        var y = _viewPortSize.Y * 0.5f - newHeight * 0.5f;
+        
+        var heightCondition = newHeight > _viewPortSize.Y;
+        
+        if (heightCondition)
+        {
+            scale = _viewPortSize.Y / navigationSizeY;
+            var newWidth = navigationSizeX * scale;
+            
+            x = _viewPortSize.X * 0.5f - newWidth * 0.5f;
+            y = 0;
+        }
+        
+        _pos.Set(x, y);
+        _scale = (float) Math.Log(scale) + 4;
     }
 }
