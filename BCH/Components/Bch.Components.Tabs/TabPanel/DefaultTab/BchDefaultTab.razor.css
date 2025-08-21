@@ -85,13 +85,12 @@
         user-select: none;
     }
 
-/* Light Green Theme */
 .bch-theme-light-green .bch-default-tab-container {
-    background: #E8F5E8;
+    background: #FEFEFE;
 }
 
 .bch-theme-light-green .bch-default-tab-container > .bch-name {
-    color: #4A5568;
+    color: #131212;
 }
 
 .bch-theme-light-green .bch-default-tab-container.bch-selected {
@@ -106,13 +105,16 @@
     background: #33B469;
 }
 
-/* Light Theme */
+.bch-theme-light-green .bch-default-tab-container > .bch-close {
+    color: #33B469;
+}
+
 .bch-theme-light .bch-default-tab-container {
-    background: #F7FAFC;
+    background: #FFFFFF;
 }
 
 .bch-theme-light .bch-default-tab-container > .bch-name {
-    color: #4A5568;
+    color: #212529;
 }
 
 .bch-theme-light .bch-default-tab-container.bch-selected {
@@ -127,17 +129,20 @@
     background: #6C757D;
 }
 
-/* Dark Theme */
+.bch-theme-light .bch-default-tab-container > .bch-close {
+    color: #6C757D;
+}
+
 .bch-theme-dark .bch-default-tab-container {
-    background: #2D3748;
+    background: #111827;
 }
 
 .bch-theme-dark .bch-default-tab-container > .bch-name {
-    color: #E2E8F0;
+    color: #E5E7EB;
 }
 
 .bch-theme-dark .bch-default-tab-container.bch-selected {
-    background: #4A5568;
+    background: #374151;
 }
 
 .bch-theme-dark .bch-default-tab-container.bch-selected > .bch-name {
@@ -148,8 +153,12 @@
     background: #9CA3AF;
 }
 
+.bch-theme-dark .bch-default-tab-container > .bch-close {
+    color: #9CA3AF;
+}
+
 .bch-theme-light-green .bch-default-tab-container:hover:not(.bch-selected) {
-    background: #D4EDDA;
+    background: #E1F4E9;
 }
 
 .bch-theme-light .bch-default-tab-container:hover:not(.bch-selected) {
@@ -157,5 +166,5 @@
 }
 
 .bch-theme-dark .bch-default-tab-container:hover:not(.bch-selected) {
-    background: #4A5568;
+    background: #374151;
 }

@@ -49,17 +49,14 @@
                 transform: scale(1.2);
             }
 
-/* Light Green Theme */
 .bch-theme-light-green .bch-tabs-panel > .bch-tab-btn {
-    background: linear-gradient(270deg, #E8F5E8 50%, rgba(232, 245, 232, 0) 97.3%);
+    background: linear-gradient(270deg, #FEFEFE 50%, rgba(254, 254, 254, 0) 97.3%);
 }
 
-/* Light Theme */
 .bch-theme-light .bch-tabs-panel > .bch-tab-btn {
-    background: linear-gradient(270deg, #F7FAFC 50%, rgba(247, 250, 252, 0) 97.3%);
+    background: linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 97.3%);
 }
 
-/* Dark Theme */
 .bch-theme-dark .bch-tabs-panel > .bch-tab-btn {
-    background: linear-gradient(270deg, #2D3748 50%, rgba(45, 55, 72, 0) 97.3%);
+    background: linear-gradient(270deg, #111827 50%, rgba(17, 24, 39, 0) 97.3%);
 }
