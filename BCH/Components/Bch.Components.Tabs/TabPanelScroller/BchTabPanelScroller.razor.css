@@ -12,7 +12,7 @@
         transition: 0.2s all ease;
         transform: translateX(0);
     }
-    
+
     .bch-tabs-panel > .bch-tab-btn {
         position: absolute;
         top: 0;
@@ -27,16 +27,16 @@
         align-items: center;
         cursor: pointer;
     }
-        
+
         .bch-tabs-panel > .bch-tab-btn.bch-left {
             left: 0;
             transform: rotateZ(180deg);
         }
-        
+
         .bch-tabs-panel > .bch-tab-btn.bch-right {
             right: 0;
         }
-        
+
         .bch-tabs-panel > .bch-tab-btn .bch-icon {
             width: 20px;
             height: 100%;
@@ -44,7 +44,22 @@
             background: url(bch-img/tabs/arrow-right.svg) center no-repeat;
             transition: 0.2s all ease;
         }
-        
-        .bch-tabs-panel > .bch-tab-btn .bch-icon:hover {
-            transform: scale(1.2);
-        }
+
+            .bch-tabs-panel > .bch-tab-btn .bch-icon:hover {
+                transform: scale(1.2);
+            }
+
+/* Light Green Theme */
+.bch-theme-light-green .bch-tabs-panel > .bch-tab-btn {
+    background: linear-gradient(270deg, #E8F5E8 50%, rgba(232, 245, 232, 0) 97.3%);
+}
+
+/* Light Theme */
+.bch-theme-light .bch-tabs-panel > .bch-tab-btn {
+    background: linear-gradient(270deg, #F7FAFC 50%, rgba(247, 250, 252, 0) 97.3%);
+}
+
+/* Dark Theme */
+.bch-theme-dark .bch-tabs-panel > .bch-tab-btn {
+    background: linear-gradient(270deg, #2D3748 50%, rgba(45, 55, 72, 0) 97.3%);
+}

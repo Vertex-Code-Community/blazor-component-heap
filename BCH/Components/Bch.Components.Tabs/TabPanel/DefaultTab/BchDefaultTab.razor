@@ -1,6 +1,6 @@
 @typeparam TItem
 
-<div class="bch-default-tab-container @(IsSelected ? "bch-selected" : "")">
+<div class="bch-default-tab-container @(IsSelected ? "bch-selected" : "") @GetThemeCssClass()">
     <div class="bch-icon">
         <img src="@(IsSelected ? _selectedIconImage : _iconImage)" 
              draggable="false"/>

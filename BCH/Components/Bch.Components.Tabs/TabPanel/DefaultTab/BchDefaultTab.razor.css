@@ -84,3 +84,78 @@
         -ms-user-select: none;
         user-select: none;
     }
+
+/* Light Green Theme */
+.bch-theme-light-green .bch-default-tab-container {
+    background: #E8F5E8;
+}
+
+.bch-theme-light-green .bch-default-tab-container > .bch-name {
+    color: #4A5568;
+}
+
+.bch-theme-light-green .bch-default-tab-container.bch-selected {
+    background: #FFFFFF;
+}
+
+.bch-theme-light-green .bch-default-tab-container.bch-selected > .bch-name {
+    color: #33B469;
+}
+
+.bch-theme-light-green .bch-default-tab-container.bch-selected > .bch-bottom-line {
+    background: #33B469;
+}
+
+/* Light Theme */
+.bch-theme-light .bch-default-tab-container {
+    background: #F7FAFC;
+}
+
+.bch-theme-light .bch-default-tab-container > .bch-name {
+    color: #4A5568;
+}
+
+.bch-theme-light .bch-default-tab-container.bch-selected {
+    background: #FFFFFF;
+}
+
+.bch-theme-light .bch-default-tab-container.bch-selected > .bch-name {
+    color: #6C757D;
+}
+
+.bch-theme-light .bch-default-tab-container.bch-selected > .bch-bottom-line {
+    background: #6C757D;
+}
+
+/* Dark Theme */
+.bch-theme-dark .bch-default-tab-container {
+    background: #2D3748;
+}
+
+.bch-theme-dark .bch-default-tab-container > .bch-name {
+    color: #E2E8F0;
+}
+
+.bch-theme-dark .bch-default-tab-container.bch-selected {
+    background: #4A5568;
+}
+
+.bch-theme-dark .bch-default-tab-container.bch-selected > .bch-name {
+    color: #FFFFFF;
+}
+
+.bch-theme-dark .bch-default-tab-container.bch-selected > .bch-bottom-line {
+    background: #9CA3AF;
+}
+
+.bch-theme-light-green .bch-default-tab-container:hover:not(.bch-selected) {
+    background: #D4EDDA;
+}
+
+.bch-theme-light .bch-default-tab-container:hover:not(.bch-selected) {
+    background: #E9ECEF;
+}
+
+.bch-theme-dark .bch-default-tab-container:hover:not(.bch-selected) {
+    background: #4A5568;
+}

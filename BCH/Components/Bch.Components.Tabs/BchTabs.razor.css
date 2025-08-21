@@ -10,3 +10,18 @@
         width: 100%;
         flex: 1 1;
     }
+
+/* Light Green Theme */
+.bch-theme-light-green .bch-tabs-container {
+    background: #E8F5E8;
+}
+
+/* Light Theme */
+.bch-theme-light .bch-tabs-container {
+    background: #F7FAFC;
+}
+
+/* Dark Theme */
+.bch-theme-dark .bch-tabs-container {
+    background: #2D3748;
+}

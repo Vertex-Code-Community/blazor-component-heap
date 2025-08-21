@@ -5,6 +5,9 @@ using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Models;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.Maths.Models;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Tabs.TabPanel;
 
@@ -23,6 +26,8 @@ public partial class BchTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
     [Parameter] public Action? OnItemDragEnd { get; set; }
     [Parameter] public int MinimalTabCount { get; set; }
     [Parameter] public bool Draggable { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
 
     [Parameter] public EventCallback<TItem> SelectedChanged { get; set; }
     [Parameter] public TItem Selected
@@ -52,6 +57,9 @@ public partial class BchTabPanel<TItem> : ComponentBase, IAsyncDisposable where 
     private TItem? _pressedItem = null;
     private int _minimalTabCount = 1;
     private int _prevItemsCount = 0;
+    
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     protected override void OnInitialized()
     {
