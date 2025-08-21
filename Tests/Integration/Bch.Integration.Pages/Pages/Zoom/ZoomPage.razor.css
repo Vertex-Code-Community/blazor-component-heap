@@ -1,4 +1,3 @@
-
 .test-cases {
     display: flex;
     flex-direction: column;
@@ -33,7 +32,8 @@
 }
 
 .demo-area {
-    width: 100%;
+    width: 308px;
+    height: 206px;
     max-width: 100%;
     aspect-ratio: 10 / 7;
     border: 1px solid #E5E7EB;
@@ -41,4 +41,9 @@
     overflow: hidden;
 }
 
-.demo-area > * { width: 100%; height: 100%; }
+.demo-area > * {
+    width: 100%;
+    height: 100%;
+}
+
+

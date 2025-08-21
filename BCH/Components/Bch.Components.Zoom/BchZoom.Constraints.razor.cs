@@ -23,9 +23,9 @@ public partial class BchZoom
     
     private void ApplyConstraints()
     {
-        if (Constraint == ConstraintType.None) return;
+        if (_constraint == ConstraintType.None) return;
 
-        switch (Constraint)
+        switch (_constraint)
         {
             case ConstraintType.Outside:
                 ApplyOutsideConstraints();
@@ -38,11 +38,14 @@ public partial class BchZoom
 
     private void ApplyOutsideConstraints()
     {
-        if (_navigationSize.X <= 0 || _navigationSize.Y <= 0 || _viewPortSize.X <= 0 || _viewPortSize.Y <= 0) return;
+        // if (_navigationSize.X <= 0 || _navigationSize.Y <= 0 || _viewPortSize.X <= 0 || _viewPortSize.Y <= 0) return;
 
+        var navigationSizeX = _navigationOffsetSize.X * Scale;
+        var navigationSizeY = _navigationOffsetSize.Y * Scale;
+        
         // Use un-transformed content size (offset) to compute cover scale
-        var baseContentW = _navigationOffsetSize.X > 0 ? _navigationOffsetSize.X : _navigationSize.X;
-        var baseContentH = _navigationOffsetSize.Y > 0 ? _navigationOffsetSize.Y : _navigationSize.Y;
+        var baseContentW = _navigationOffsetSize.X > 0 ? _navigationOffsetSize.X : navigationSizeX;
+        var baseContentH = _navigationOffsetSize.Y > 0 ? _navigationOffsetSize.Y : navigationSizeY;
         var minCoverScaleX = _viewPortSize.X / baseContentW;
         var minCoverScaleY = _viewPortSize.Y / baseContentH;
         var minCoverScale = MathF.Max(minCoverScaleX, minCoverScaleY);
@@ -51,13 +54,13 @@ public partial class BchZoom
         var minCoverInternal = (float)Math.Log(Math.Max(minCoverScale, 0.0001f)) + 4.0f;
 
         // Raise MinScale if needed
-        if (minCoverInternal > MinScale)
+        if (minCoverInternal > _minScale)
         {
-            MinScale = Math.Min(minCoverInternal, MaxScale);
+            _minScale = Math.Min(minCoverInternal, _maxScale);
         }
 
         // Clamp current _scale to at least MinScale
-        if (_scale < MinScale) _scale = MinScale;
+        if (_scale < _minScale) _scale = _minScale;
 
         // Clamp translation so content never leaves viewport
         var currentScale = Scale; // linear

@@ -16,8 +16,7 @@
          mousewheel-prevent-default="@ZoomOnMouseWheel"
          mousewheel-stop-propagation="@ZoomOnMouseWheel">
 
-        <div id="@_navigationId"
-             class="bch-scroller bch-navigation-cs-panel"
+        <div class="bch-scroller bch-navigation-cs-panel"
              style="@GetNavigationStyle()">
 
             @ChildContent(new ZoomUpdateSnapshot
@@ -27,7 +26,7 @@
                 Scale = Scale,
                 ScaleLinear = _scale,
                 AngleInRadians = _rotationAngle,
-                UserInteracttion = _userInteraction
+                UserInteraction = _userInteraction
             })
 
         </div>

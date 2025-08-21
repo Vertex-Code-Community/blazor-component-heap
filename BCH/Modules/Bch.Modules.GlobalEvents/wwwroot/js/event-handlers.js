@@ -33,7 +33,6 @@ function getPathCoordinates(event) {
     return event.path.map(element => {
         if (element.getBoundingClientRect) {
             const viewportOffset = element.getBoundingClientRect();
-            console.log('left = ' + viewportOffset.left + ', top = ' + viewportOffset.top + ', tagName = ' + element.classList);
             
             return {
                 x: pageX - viewportOffset.left,

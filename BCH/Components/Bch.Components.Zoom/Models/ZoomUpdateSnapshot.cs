@@ -7,5 +7,5 @@ public struct ZoomUpdateSnapshot
     public float Scale { get; set; }
     public float ScaleLinear { get; set; }
     public float AngleInRadians { get; set; }
-    public bool UserInteracttion { get; set; }
+    public bool UserInteraction { get; set; }
 }

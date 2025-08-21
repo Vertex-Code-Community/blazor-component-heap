@@ -19,7 +19,6 @@
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Cropper\Bch.Components.Cropper.csproj"/>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.DraggingModal\Bch.Components.DraggingModal.csproj"/>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.ExpandMenu\Bch.Components.ExpandMenu.csproj"/>
-        <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.Panzoom\Bch.Components.Panzoom.csproj"/>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.FileDrop\Bch.Components.FileDrop.csproj"/>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.ImageCropper\Bch.Components.ImageCropper.csproj"/>
         <ProjectReference Include="..\..\..\BCH\Components\Bch.Components.InputFile\Bch.Components.InputFile.csproj"/>

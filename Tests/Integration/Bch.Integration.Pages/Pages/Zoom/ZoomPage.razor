@@ -1,4 +1,5 @@
 @page "/zoom"
+@using Bch.Components.Zoom.Models
 @using Bch.Components.Zoom
 
 <div>
@@ -6,17 +7,38 @@
 
     <div class="test-cases">
         <div class="test-case">
-            <h4>Basic</h4>
+            <h4>Container size fits content | ConstraintType.Outside | InitialZoomPositioning.None</h4>
             <div class="demo-box">
                 <div class="demo-area">
-                    <BchZoom ZoomOnMouseWheel="true"
-                             MinScale="0.5f"
-                             MaxScale="6f"
-                             ViewMode="Bch.Components.Zoom.Models.ViewMode.StretchToBorders"
-                             ZoomContext="_zoomContext">
-                        <div class="img-wrapper" mousewheel-prevent-default="true" mousewheel-stop-propagation="true">
-                            <img src="_content/Bch.Integration.Pages/img/slider-test-image.svg" 
-                                 style="width:100%;height:auto;display:block;pointer-events: none;" />
+                    <BchZoom ContainerSize="_zoomContainerSize1"
+                             ContentSize="_imageSize1"
+                             InitialScale="@(308.0f / 413.0f)"
+                             Constraint="ConstraintType.Outside"
+                             ZoomOnMouseWheel="true">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-case">
+            <h4>Container size is 1.5 of content size | ConstraintType.Outside | InitialZoomPositioning.FitOutside</h4>
+            <div class="demo-box">
+                <div class="demo-area" style="width: calc(308px * 1.5); height: calc(206px * 1.5)">
+                    <BchZoom ContainerSize="_zoomContainerSize2"
+                             ContentSize="_imageSize1"
+                             Constraint="ConstraintType.Outside"
+                             InitialPositioning="InitialZoomPositioning.FitOutsideCentered"
+                             MaxScale="6.0f"
+                             ZoomOnMouseWheel="true">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
                         </div>
                     </BchZoom>
                 </div>
@@ -24,23 +46,121 @@
         </div>
 
         <div class="test-case">
-            <h4>With Custom ScaleFactor</h4>
-            <p>Similar to Cropper parameters</p>
+            <h4>Container size is 300x100 | ConstraintType.Outside | InitialZoomPositioning.FitOutsideCentered</h4>
             <div class="demo-box">
-                <div class="demo-area">
-                    <BchZoom ZoomOnMouseWheel="true"
-                             MinScale="0.5f"
-                             MaxScale="8f"
-                             ScaleFactor="0.009f"
-                             ViewMode="Bch.Components.Zoom.Models.ViewMode.StretchToBorders"
-                             ZoomContext="_zoomContext2">
-                        <div class="img-wrapper" mousewheel-prevent-default="true" mousewheel-stop-propagation="true">
-                            <img src="_content/Bch.Integration.Pages/img/slider-test-image.svg" 
-                                 style="width:100%;height:auto;display:block;pointer-events: none;" />
+                <div class="demo-area" style="width: calc(300px); height: calc(100px)">
+                    <BchZoom ContainerSize="_zoomContainerSize3"
+                             ContentSize="_imageSize1"
+                             Constraint="ConstraintType.None"
+                             InitialPositioning="InitialZoomPositioning.FitOutsideCentered"
+                             MaxScale="6.0f"
+                             ZoomOnMouseWheel="true">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
                         </div>
                     </BchZoom>
                 </div>
             </div>
         </div>
+
+        <div class="test-case">
+            <h4>Container size is 100x400 | ConstraintType.Outside | InitialZoomPositioning.FitOutsideCentered</h4>
+            <div class="demo-box">
+                <div class="demo-area" style="width: calc(100px); height: calc(400px)">
+                    <BchZoom ContainerSize="_zoomContainerSize4"
+                             ContentSize="_imageSize1"
+                             Constraint="ConstraintType.Outside"
+                             InitialPositioning="InitialZoomPositioning.FitOutsideCentered"
+                             MaxScale="6.0f"
+                             ZoomOnMouseWheel="true">
+                        <div style="display: flex">
+                            <img class="bch-no-selectable-text"
+                                 draggable="false"
+                                 src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/>
+                        </div>
+                    </BchZoom>
+                </div>
+            </div>
+        </div>
+
+        @* <div class="test-case"> *@
+        @*     <h4>Basic 2</h4> *@
+        @*     <div class="demo-box"> *@
+        @*         <div class="demo-area"> *@
+        @*             <BchZoom ContainerSize="_zoomContainerSize1" *@
+        @*                      ContentSize="_imageSize1" *@
+        @*                      InitialScale="@(308.0f / 413.0f)" *@
+        @*                      Constraint="ConstraintType.None" *@
+        @*                      ZoomOnMouseWheel="true"> *@
+        @*                 <div style="display: flex"> *@
+        @*                     <img class="bch-no-selectable-text" *@
+        @*                          draggable="false" *@
+        @*                          src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/> *@
+        @*                 </div> *@
+        @*             </BchZoom> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
+        @* *@
+        @* <div class="test-case"> *@
+        @*     <h4>Basic 2</h4> *@
+        @*     <div class="demo-box"> *@
+        @*         <div class="demo-area"> *@
+        @* *@
+        @*             <BchZoom @ref="_bchZoom2" *@
+        @*                      ContainerSize="_zoomContainerSize1" *@
+        @*                      ContentSize="_imageSize1" *@
+        @*                      Constraint="ConstraintType.Outside" *@
+        @*                      ZoomOnMouseWheel="true"> *@
+        @*                 <div style="display: flex"> *@
+        @*                     <img class="bch-no-selectable-text" *@
+        @*                          draggable="false" *@
+        @*                          src="_content/Bch.Integration.Pages/img/slider-test-image.svg"/> *@
+        @*                 </div> *@
+        @*             </BchZoom> *@
+        @* *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
+
+        @* <div class="test-case"> *@
+        @*     <h4>With Options</h4> *@
+        @*     <p>Pan only when zoomed, clamp scale to 0.5-4x</p> *@
+        @*     <div class="demo-box"> *@
+        @*         <div class="demo-area"> *@
+        @*             $1$ <BchPanzoom Options="new PanzoomOptions{ MinScale=0.5f, MaxScale=4f, PanOnlyWhenZoomed=true, InitialScale=1f }"> #1# *@
+        @*             $1$     <div style="width:100%;height:100%;background:#ff2d2d;"></div> #1# *@
+        @*             $1$ </BchPanzoom> #1# *@
+        @* *@
+        @*             <BchCropper BackgroundColor="green" *@
+        @*                         ScaleOnMouseWheel="true" *@
+        @*                         CropperType="CropperType.MovableRectangle" *@
+        @*                         CroppedWidth="200" *@
+        @*                         Base64Image="_content/Bch.Integration.Pages/img/slider-test-image.svg" *@
+        @*                         Ratio="@(16.0f / 9.0f)" *@
+        @*                         MinRectangleWidth="100" *@
+        @*                         MinRectangleHeight="100"/> *@
+        @* *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
     </div>
 </div>
+
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        position: absolute;
+        width: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+</style>
