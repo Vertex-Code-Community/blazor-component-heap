@@ -24,8 +24,8 @@ public partial class BchZoom
         _zoomTarget.Set((_zoomPoint.X - _pos.X) / Scale, (_zoomPoint.Y - _pos.Y) / Scale);
         
         // apply zoom
-        _scale += zoomDelta * ScaleFactor;
-        _scale = Math.Max(MinScale, Math.Min(MaxScale, _scale));
+        _scale += zoomDelta * _scaleFactor;
+        _scale = Math.Max(_minScale, Math.Min(_maxScale, _scale));
         
         // Console.WriteLine($"ZOOM _scale = {_scale}");
 
@@ -36,9 +36,6 @@ public partial class BchZoom
         );
 
         ApplyConstraints();
-
-        _changePerformed = true;
-
         Update();
     }
 }

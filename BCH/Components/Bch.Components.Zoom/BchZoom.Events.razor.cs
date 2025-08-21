@@ -72,7 +72,6 @@ public partial class BchZoom
 
         _lastMousePosition.Set(mousePosition);
         _pos.Add(change);
-        _changePerformed = true;
 
         Update();
     }

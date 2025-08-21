@@ -23,9 +23,9 @@ public partial class BchZoom
     
     private void ApplyConstraints()
     {
-        if (Constraint == ConstraintType.None) return;
+        if (_constraint == ConstraintType.None) return;
 
-        switch (Constraint)
+        switch (_constraint)
         {
             case ConstraintType.Outside:
                 ApplyOutsideConstraints();
@@ -38,11 +38,14 @@ public partial class BchZoom
 
     private void ApplyOutsideConstraints()
     {
-        if (_navigationSize.X <= 0 || _navigationSize.Y <= 0 || _viewPortSize.X <= 0 || _viewPortSize.Y <= 0) return;
+        // if (_navigationSize.X <= 0 || _navigationSize.Y <= 0 || _viewPortSize.X <= 0 || _viewPortSize.Y <= 0) return;
 
+        var navigationSizeX = _navigationOffsetSize.X * Scale;
+        var navigationSizeY = _navigationOffsetSize.Y * Scale;
+        
         // Use un-transformed content size (offset) to compute cover scale
-        var baseContentW = _navigationOffsetSize.X > 0 ? _navigationOffsetSize.X : _navigationSize.X;
-        var baseContentH = _navigationOffsetSize.Y > 0 ? _navigationOffsetSize.Y : _navigationSize.Y;
+        var baseContentW = _navigationOffsetSize.X > 0 ? _navigationOffsetSize.X : navigationSizeX;
+        var baseContentH = _navigationOffsetSize.Y > 0 ? _navigationOffsetSize.Y : navigationSizeY;
         var minCoverScaleX = _viewPortSize.X / baseContentW;
         var minCoverScaleY = _viewPortSize.Y / baseContentH;
         var minCoverScale = MathF.Max(minCoverScaleX, minCoverScaleY);
@@ -51,13 +54,13 @@ public partial class BchZoom
         var minCoverInternal = (float)Math.Log(Math.Max(minCoverScale, 0.0001f)) + 4.0f;
 
         // Raise MinScale if needed
-        if (minCoverInternal > MinScale)
+        if (minCoverInternal > _minScale)
         {
-            MinScale = Math.Min(minCoverInternal, MaxScale);
+            _minScale = Math.Min(minCoverInternal, _maxScale);
         }
 
         // Clamp current _scale to at least MinScale
-        if (_scale < MinScale) _scale = MinScale;
+        if (_scale < _minScale) _scale = _minScale;
 
         // Clamp translation so content never leaves viewport
         var currentScale = Scale; // linear
@@ -123,6 +126,74 @@ public partial class BchZoom
 
     private void ApplyInsideConstraints()
     {
-        
+        // Restrict zoom so the content always fits entirely INSIDE the viewport
+        var navigationSizeX = _navigationOffsetSize.X * Scale;
+        var navigationSizeY = _navigationOffsetSize.Y * Scale;
+
+        var baseContentW = _navigationOffsetSize.X > 0 ? _navigationOffsetSize.X : navigationSizeX;
+        var baseContentH = _navigationOffsetSize.Y > 0 ? _navigationOffsetSize.Y : navigationSizeY;
+
+        if (baseContentW <= 0 || baseContentH <= 0 || _viewPortSize.X <= 0 || _viewPortSize.Y <= 0)
+            return;
+
+        // Max scale to keep entire content visible (fit-inside)
+        var maxInsideScaleX = _viewPortSize.X / baseContentW;
+        var maxInsideScaleY = _viewPortSize.Y / baseContentH;
+        var maxInsideScale = MathF.Min(maxInsideScaleX, maxInsideScaleY);
+
+        var maxInsideInternal = (float)Math.Log(Math.Max(maxInsideScale, 0.0001f)) + 4.0f;
+
+        // Lower MaxScale if needed and clamp current scale
+        if (maxInsideInternal < _maxScale)
+        {
+            _maxScale = Math.Max(maxInsideInternal, _minScale);
+        }
+        if (_scale > _maxScale) _scale = _maxScale;
+
+        // Current scaled content size
+        var currentScale = Scale;
+        var contentW = baseContentW * currentScale;
+        var contentH = baseContentH * currentScale;
+
+        // Clamp translation so content remains fully inside viewport
+        var maxX = _viewPortSize.X - contentW; // right-most allowed position
+        var maxY = _viewPortSize.Y - contentH; // bottom-most allowed position
+
+        // Compute clamping range even in edge cases (floating rounding)
+        var clampMinX = MathF.Min(0, maxX);
+        var clampMaxX = MathF.Max(0, maxX);
+        var clampMinY = MathF.Min(0, maxY);
+        var clampMaxY = MathF.Max(0, maxY);
+
+        _pos.X = MathF.Max(clampMinX, MathF.Min(clampMaxX, _pos.X));
+        _pos.Y = MathF.Max(clampMinY, MathF.Min(clampMaxY, _pos.Y));
+
+        // Publish per-side constrained flags
+        const float eps = 0.5f;
+        bool leftLocked = MathF.Abs(_pos.X - 0) <= eps;
+        bool rightLocked = MathF.Abs(_pos.X - maxX) <= eps;
+        bool topLocked = MathF.Abs(_pos.Y - 0) <= eps;
+        bool bottomLocked = MathF.Abs(_pos.Y - maxY) <= eps;
+
+        if (leftLocked != _isLeftConstrained)
+        {
+            _isLeftConstrained = leftLocked;
+            IsLeftConstrainedChanged.InvokeAsync(_isLeftConstrained);
+        }
+        if (rightLocked != _isRightConstrained)
+        {
+            _isRightConstrained = rightLocked;
+            IsRightConstrainedChanged.InvokeAsync(_isRightConstrained);
+        }
+        if (topLocked != _isTopConstrained)
+        {
+            _isTopConstrained = topLocked;
+            IsTopConstrainedChanged.InvokeAsync(_isTopConstrained);
+        }
+        if (bottomLocked != _isBottomConstrained)
+        {
+            _isBottomConstrained = bottomLocked;
+            IsBottomConstrainedChanged.InvokeAsync(_isBottomConstrained);
+        }
     }
 }
