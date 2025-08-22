@@ -76,6 +76,12 @@ function bchAddDocumentListener(key, eventName, dotnetReference, methodName,
         if (preventDefault || event.target?.closest(`[${eventName}-prevent-default]`)) event.preventDefault();
         if (stopPropagation || event.target?.closest(`[${eventName}-stop-propagation]`)) event.stopPropagation();
 
+        // const preventDefaultAttr = event.target && event.target.hasAttribute(`${eventName}-prevent-default`);
+        // const stopPropagationAttr = event.target && event.target.hasAttribute(`${eventName}-stop-propagation`);
+        //
+        // if (preventDefault || preventDefaultAttr) event.preventDefault();
+        // if (stopPropagation || stopPropagationAttr) event.stopPropagation();
+
         let response = {};
 
         switch (eventName) {

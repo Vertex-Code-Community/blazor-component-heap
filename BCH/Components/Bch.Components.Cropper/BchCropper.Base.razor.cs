@@ -34,8 +34,7 @@ public partial class BchCropper : IAsyncDisposable
     [Parameter] public Func<float, Task>? OnUpdateScale { get; set; }
 
     // private readonly ZoomContext _zoomContext = new();
-    //private BchZoom? _bchZoom;
-    private bool _processingData = false;
+    private BchZoom? _bchZoom;
 
     private readonly string _cropperId = $"_id_{Guid.NewGuid()}";
     private readonly string _imageId = $"_id_{Guid.NewGuid()}";
@@ -75,22 +74,6 @@ public partial class BchCropper : IAsyncDisposable
         // _zoomContext.OnUpdate -= OnUpdateZoom;
         await GlobalEventsService.RemoveDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key);
     }
-    
-    private Task OnMouseWheel(BchWheelEventArgs e)
-    {
-        if (!ScaleOnMouseWheel) return Task.CompletedTask;
-
-        var movableId = CropperType == CropperType.Circle ? _circleId : _rectId;
-        
-        var rectWrapper = e.PathCoordinates.FirstOrDefault(x => x.Id == movableId);
-        if (rectWrapper is null) return Task.CompletedTask;
-        
-        var wrapper = e.PathCoordinates.FirstOrDefault(x => x.Id == _cropperId);
-        if (wrapper is null) return Task.CompletedTask;
-
-        //_bchZoom.Transform(wrapper.X, wrapper.Y, -(float)e.DeltaY, 0);
-        return Task.CompletedTask;
-    }
 
     private async Task OnUpdateZoom()
     {
@@ -119,162 +102,6 @@ public partial class BchCropper : IAsyncDisposable
             _rectPos.X = (_cropperWidth - _circleSize) * 0.5f;
             _rectPos.Y = (_cropperHeight - _circleSize) * 0.5f;
         }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        // if (!firstRender) return;
-        // await OnResizeAsync();
-        //
-        // if (StretchCropArea)
-        // {
-        //     _rectSize.X = _circleSize;
-        //     _rectSize.Y = _circleSize;
-        //
-        //     _rectPos.X = (_cropperWidth - _circleSize) * 0.5f;
-        //     _rectPos.Y = (_cropperHeight - _circleSize) * 0.5f;
-        //     
-        //     StateHasChanged();
-        // }
-    }
-
-    private async Task OnResizeAsync()
-    {
-        var rect = await DomInteropService.GetBoundingClientRectAsync(_cropperId);
-
-        if (rect is not null)
-        {
-            _cropperWidth = (int) rect.Width;
-            _cropperHeight = (int) rect.Height;
-            _circleSize = Math.Min(_cropperWidth, _cropperHeight);
-        }
-
-        if (CropperType == CropperType.Circle)
-        {
-            _rectSize.X = _circleSize;
-            _rectSize.Y = _circleSize;
-
-            _rectPos.X = (_cropperWidth - _circleSize) * 0.5f;
-            _rectPos.Y = (_cropperHeight - _circleSize) * 0.5f;
-        }
-        
-        if (CropperType == CropperType.FixedRectangle)
-        {
-            var ratio = Ratio > 0 ? Ratio : 1.0f;
-
-            var h2 = 1.0f;
-            var w2 = ratio;
-
-            var vertScale = _cropperHeight / h2;
-            var horScale = _cropperWidth / w2;
-            
-            var scale = Math.Min(vertScale, horScale);
-
-            var nH2 = scale * h2;
-            var nW2 = scale * w2;
-            
-            _rectSize.X = nW2;
-            _rectSize.Y = nH2;
-
-            _rectPos.X = (_cropperWidth - nW2) * 0.5f;
-            _rectPos.Y = (_cropperHeight - nH2) * 0.5f;
-        }
-
-        StateHasChanged();
-    }
-
-    private Task OnTouchStartAsync(TouchEventArgs args, bool rectDragged)
-    {
-        return OnMouseDownAsync(new MouseEventArgs
-        {
-            PageX = args.Touches[0].PageX,
-            PageY = args.Touches[0].PageY
-        }, rectDragged);
-    }
-    
-    private async Task OnMouseDownAsync(MouseEventArgs e, bool rectDragged)
-    {
-        await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mouseup", _key, OnMouseLeaveUpAsync);
-        await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("touchend", _key, OnMouseLeaveUpAsync);
-        await GlobalEventsService.AddDocumentListenerAsync<MouseEventArgs>("mousemove", _key, OnMouseMoveAsync);
-        await GlobalEventsService.AddDocumentListenerAsync<TouchEventArgs>("touchmove", _key, OnTouchMoveAsync);
-        
-        _lastMousePosition.Set(e.PageX, e.PageY);
-        _rectDragged = rectDragged;
-        _rectHandleDragged = !rectDragged;
-        
-        StateHasChanged();
-    }
-    
-    private async Task OnMouseLeaveUpAsync(MouseEventArgs _)
-    {
-        await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mouseup", _key);
-        await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("touchend", _key);
-        await GlobalEventsService.RemoveDocumentListenerAsync<MouseEventArgs>("mousemove", _key);
-        await GlobalEventsService.RemoveDocumentListenerAsync<TouchEventArgs>("touchmove", _key);
-        
-        if (!_rectDragged && !_rectHandleDragged) return;
-        
-        _rectDragged = false;
-        _rectHandleDragged = false;
-        
-        if (_rectSize.X < MinRectangleWidth) _rectSize.X = MinRectangleWidth;
-        if (_rectSize.Y < MinRectangleHeight) _rectSize.Y = MinRectangleHeight;
-        
-        StateHasChanged();
-    }
-
-    private Task OnTouchMoveAsync(TouchEventArgs args)
-    {
-        if (args.Touches.Length != 1) return OnMouseLeaveUpAsync(new MouseEventArgs());
-        
-        _eventObj.PageX = args.Touches[0].PageX;
-        _eventObj.PageY = args.Touches[0].PageY;
-        
-        return OnMouseMoveAsync(_eventObj);
-    }
-    
-    private Task OnMouseMoveAsync(MouseEventArgs e)
-    {
-        if (!_rectDragged && !_rectHandleDragged) return Task.CompletedTask;
-        
-        _change.Set(
-            e.PageX - _lastMousePosition.X,
-            e.PageY - _lastMousePosition.Y
-        );
-
-        _lastMousePosition.Set(e.PageX, e.PageY);
-
-        if (_change is { X: 0, Y: 0 }) return Task.CompletedTask;
-
-        var valueToChange = _rectDragged ? _rectPos : _rectSize;
-        valueToChange.Add(_change);
-
-        StateHasChanged();
-        
-        return Task.CompletedTask;
-    }
-
-    public async Task<string> GetBase64ResultAsync()
-    {
-        _processingData = true;
-        StateHasChanged();
-        
-        // var imageRect = await DomInteropService.GetBoundingClientRectAsync(_imageId);
-        // if (imageRect is null) return string.Empty;
-        //
-        // var imgBounds = new Vec2 { X = imageRect.OffsetWidth,Y = imageRect.OffsetHeight };
-        // // TODO: make as file stream
-        // var base64Result = await JsRuntime.InvokeAsync<string>("bchOnCropImage", _canvasId, 
-        //     _canvasHolderId, _imageId, _zoomContext.TopLeftPos, imgBounds, _zoomContext.AngleInRadians, 
-        //     _zoomContext.Scale, ResultFormat, 1.0f, BackgroundColor, CroppedWidth, _rectPos, _rectSize);
-        //
-        // _processingData = false;
-        // StateHasChanged();
-        //
-        // return base64Result;
-
-        return string.Empty;
     }
 
     public void Rotate(float angleDelta)

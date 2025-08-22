@@ -33,6 +33,8 @@ function bchOnCropImage(canvasId, canvasHolderId, imageId, pos, imgBounds, angle
     ctx.save();
     ctx.drawImage(img, 0, 0, imgBounds.x * scale * scl, imgBounds.y * scale * scl);
 
-    // let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL(resultFormat, quality);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    console.log(imageData);
+    // return canvas.toDataURL(resultFormat, quality);
+    return '';
 }

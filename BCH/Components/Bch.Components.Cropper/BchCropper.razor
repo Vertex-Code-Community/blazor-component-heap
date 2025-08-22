@@ -1,21 +1,21 @@
 @using Bch.Components.Cropper.Models
 @using Bch.Components.Zoom
-@using Bch.Components.Zoom.Models
 
 <div id="@_cropperId"
-     style="@($"background: {BackgroundColor}; pointer-events: {(_processingData ? "none" : "all")};")"
+     style="@($"background: {BackgroundColor}; pointer-events: {(_processing ? "none" : "all")};")"
      class="bch-cropper-container bch-no-mobile-selection @(_loaded ? "bch-loaded" : "bch-loading")">
 
     <div class="bch-hidden-image-preview">
         <img class="bch-no-selectable-text"
              draggable="false"
-             @onimageloaded="OnImageLoadedAsync"
+             @onimageloaded="OnPreviewImageLoadedAsync"
              src="@ImageUrl"/>
     </div>
 
     @if (_loaded)
     {
-        <BchZoom ContainerSize="_containerSize"
+        <BchZoom @ref="_bchZoom" 
+                 ContainerSize="_containerSize"
                  ContentSize="_contentSize"
                  ZoomOnMouseWheel="@ScaleOnMouseWheel"
                  UseTouchRotation="@UseTouchRotation"
