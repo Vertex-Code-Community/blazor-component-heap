@@ -121,14 +121,14 @@
 
 .bch-theme-light.bch-horizontal-range-container,
 .bch-theme-light.bch-vertical-range-container { background: #E9ECEF; }
-.bch-theme-light .bch-fill-color { background: #6C757D; }
+.bch-theme-light .bch-fill-color { background: #979797; }
 .bch-theme-light .bch-range-circle { border-color: #CED4DA; background: #FFFFFF; }
 .bch-theme-light .bch-range-tooltip { border-color: #6C757D; }
 .bch-theme-light .bch-range-tooltip label { color: #6C757D; }
 
 .bch-theme-dark.bch-horizontal-range-container,
 .bch-theme-dark.bch-vertical-range-container { background: #EAEAEA; }
-.bch-theme-dark .bch-fill-color { background: #4B5563; }
-.bch-theme-dark .bch-range-circle { border-color: #4B5563; background: #111827; }
+.bch-theme-dark .bch-fill-color { background: #6C757D; }
+.bch-theme-dark .bch-range-circle { border-color: #4B5563; background: #384250; }
 .bch-theme-dark .bch-range-tooltip { border-color: #9CA3AF; }
 .bch-theme-dark .bch-range-tooltip label { color: #9CA3AF; }
