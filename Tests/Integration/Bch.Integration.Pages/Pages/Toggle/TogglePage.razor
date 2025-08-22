@@ -2,34 +2,60 @@
 @using Bch.Components.Toggle
 @using Bch.Modules.Themes.Models
 
-<div class="toggle-page">
-    <p>
-        <BchToggle @bind-Value="@_value" Disabled="true" Label="disabled"/>
-    </p>
-    <p>
-        <h4>Theme variants</h4>
-        <div class="theme-variants">
-            <div>
-                <BchToggle Label="Light Green" Theme="BchTheme.LightGreen" />
-            </div>
-            <div>
-                <BchToggle Label="Light" Theme="BchTheme.Light" />
-            </div>
-            <div>
-                <BchToggle Label="Dark" Theme="BchTheme.Dark" />
+<div>
+    <h3>Toggle Component Test</h3>
+
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Test Case 1: Disabled Toggle</h4>
+            <p>This toggle is disabled and cannot be changed</p>
+            <BchToggle @bind-Value="@_value" Disabled="true" Label="disabled"/>
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 2: Theme Variants</h4>
+            <p>Different theme options for the toggle component</p>
+            <div class="theme-variants">
+                <div>
+                    <BchToggle Label="Light Green" Theme="BchTheme.LightGreen" />
+                </div>
+                <div>
+                    <BchToggle Label="Light" Theme="BchTheme.Light" />
+                </div>
+                <div>
+                    <BchToggle Label="Dark" Theme="BchTheme.Dark" />
+                </div>
             </div>
         </div>
-    </p>
-    <p>
-        <BchToggle Label="Changed color"
-                   CheckedBackgroundColor="red"
-                   CheckedCircleColor="blue"
-                   DefaultBackgroundColor="black"
-                   DefaultCircleColor="pink"/>
-    </p>
 
+        <div class="test-case">
+            <h4>Test Case 3: Custom Colors</h4>
+            <p>Toggle with custom background and circle colors</p>
+            <BchToggle Label="Changed color"
+                       CheckedBackgroundColor="red"
+                       CheckedCircleColor="blue"
+                       DefaultBackgroundColor="black"
+                       DefaultCircleColor="pink"/>
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 4: Debug Information</h4>
+            <p>Click the button to see the current toggle value in console</p>
+            <button @onclick="OnClick">Show Info</button>
+        </div>
+    </div>
 </div>
 
-<div class="">
-    <button @onclick="OnClick">Show Info</button>
-</div>
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+</style>
