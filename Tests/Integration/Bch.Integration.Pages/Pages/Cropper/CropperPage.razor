@@ -2,27 +2,36 @@
 @using Bch.Components.Cropper
 @using Bch.Components.Cropper.Models
 
-@* Base64Image="_content/BlazorComponentHeap.Components/img/cropper/an225_mriya.jpg" *@
+<div>
+    <h3>Cropper Component Test</h3>
 
-<div class="page-cnt">
-    <div class="cropper-wrapper">
-        <BchCropper @ref="_bchCropper"
-                    BackgroundColor="#fdf1d8"
-                    ScaleOnMouseWheel="true"
-                    CropperType="CropperType.MovableRectangle"
-                    ImageUrl="_content/Bch.Integration.Pages/img/slider-test-image.svg"
-                    Ratio="@(16.0f / 9.0f)"
-                    MinRectangleWidth="100"
-                    MinRectangleHeight="100"/>
-    </div>
-
-    <button @onclick="OnGetResultAsync">Get Result</button>
-
-    <div class="example-cropped-image">
-        @if (!string.IsNullOrWhiteSpace(_previewImageUrl))
-        {
-            <img src="@_previewImageUrl" alt=""/>
-        }
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Basic Cropper</h4>
+            <div class="row">
+                <div class="demo-box">
+                    <div class="demo-area">
+                        <BchCropper @ref="_bchCropper"
+                                    BackgroundColor="#fdf1d8"
+                                    ScaleOnMouseWheel="true"
+                                    CropperType="CropperType.MovableRectangle"
+                                    ImageUrl="_content/Bch.Integration.Pages/img/slider-test-image.svg"
+                                    Ratio="@(16.0f / 9.0f)"
+                                    MinRectangleWidth="100"
+                                    MinRectangleHeight="100"/>
+                    </div>
+                    <button @onclick="OnGetResultAsync">Get Result</button>
+                </div>
+                <div class="demo-box">
+                    <div class="demo-area preview-area">
+                        @if (!string.IsNullOrWhiteSpace(_previewImageUrl))
+                        {
+                            <img src="@_previewImageUrl" alt=""/>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -37,13 +46,5 @@
 
     #app {
         height: 100%;
-    }
-    
-    .example-cropped-image {
-        width: 200px; 
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 </style>
