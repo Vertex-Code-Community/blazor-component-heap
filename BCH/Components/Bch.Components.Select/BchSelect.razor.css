@@ -328,7 +328,7 @@
 }
 
 /* THEME: Dark */
-.bch-theme-dark.bch-select-container { background: #1F2937; }
+.bch-theme-dark.bch-select-container { background: #111827 }
 .bch-theme-dark.bch-select-container > .bch-button > input,
 .bch-theme-dark.bch-select-container > .bch-button > label { color: #E5E7EB; caret-color: #E5E7EB; }
 .bch-theme-dark.bch-select-container > .bch-button > input::placeholder { color: rgba(229,231,235,0.7); }
