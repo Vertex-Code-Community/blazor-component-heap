@@ -180,3 +180,20 @@
     user-select: none; /*Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.bch-cropper-container > .bch-hidden-image-preview {
+    display: none;
+    width: 100%;
+    height: 0;
+    visibility: hidden;
+    position: relative;
+    overflow: hidden;
+}
+
+.bch-cropper-container.bch-loading > .bch-hidden-image-preview {
+    display: block;
+}
+
+.bch-cropper-container > .bch-hidden-image-preview > img {
+    width: 100px;
+}

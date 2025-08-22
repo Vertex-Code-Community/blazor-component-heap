@@ -1,12 +1,10 @@
-using Bch.Components.Zoom.Models;
 using Microsoft.AspNetCore.Components;
+using Bch.Components.Zoom.Models;
 
 namespace Bch.Components.Zoom;
 
 public partial class BchZoom
 {
-    // Expose whether current transform is constrained by containment
-    // Per-side constrained flags (true when the respective edge touches the viewport)
     [Parameter] public EventCallback<bool> IsLeftConstrainedChanged { get; set; }
     [Parameter] public bool IsLeftConstrained { get => _isLeftConstrained; set { } }
     [Parameter] public EventCallback<bool> IsRightConstrainedChanged { get; set; }
@@ -38,8 +36,6 @@ public partial class BchZoom
 
     private void ApplyOutsideConstraints()
     {
-        // if (_navigationSize.X <= 0 || _navigationSize.Y <= 0 || _viewPortSize.X <= 0 || _viewPortSize.Y <= 0) return;
-
         var navigationSizeX = _navigationOffsetSize.X * Scale;
         var navigationSizeY = _navigationOffsetSize.Y * Scale;
         

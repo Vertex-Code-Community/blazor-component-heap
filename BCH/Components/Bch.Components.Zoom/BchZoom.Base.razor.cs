@@ -49,24 +49,14 @@ public partial class BchZoom : IAsyncDisposable
         _maxScale = Math.Clamp(MaxScale, 0.01f, 50f);
         _scaleFactor = Math.Clamp(ScaleFactor, 0.001f, 1.0f);
         _constraint = Constraint;
-
+    
         _viewPortSize.Set(ContainerSize);
         _navigationOffsetSize.Set(ContentSize);
-        
-        // calculate min/max limits in case of using constraints
-        // var xLimitScale = ContainerSize.X / ContentSize.X;
-        // var yLimitScale = ContainerSize.Y / ContentSize.Y;
-        
-        // if (_constraint == ConstraintType.Outside)
-        //     _minScale = (float) Math.Log(Math.Max(xLimitScale, yLimitScale)) + 4;
-        //
-        // if (_constraint == ConstraintType.Inside)
-        //     _maxScale = (float) Math.Log(Math.Min(xLimitScale, yLimitScale)) + 4;
         
         ApplyInitialPositioning();
         
         Update();
-
+    
         return GlobalEventsService.AddDocumentListenerAsync<BchWheelEventArgs>("mousewheel", _key, OnMouseWheelAsync, 
             false, false, false);
     }
@@ -82,14 +72,14 @@ public partial class BchZoom : IAsyncDisposable
         _dppx = await JsRuntime.InvokeAsync<float>("bchGetPixelRatio");
     }
     
-    protected override void OnParametersSet()
-    {
-        Update();
-    }
+    // protected override void OnParametersSet()
+    // {
+    //     Update();
+    // }
 
     private void Update()
     {
-        ApplyConstraints();
+        //ApplyConstraints();
         InvokeUpdateCallback();
         
         StateHasChanged();
