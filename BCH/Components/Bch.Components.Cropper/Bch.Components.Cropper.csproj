@@ -26,5 +26,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Files\Bch.Modules.Files.csproj" />
     </ItemGroup>
 </Project>

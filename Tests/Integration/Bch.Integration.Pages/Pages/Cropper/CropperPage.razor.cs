@@ -1,16 +1,18 @@
 using Bch.Components.Cropper;
+using Bch.Modules.Files.Extensions;
 
 namespace Bch.Integration.Pages.Pages.Cropper;
 
 public partial class CropperPage
 {
-    private BchCropper _bchCropper = null!;
-
-    private string _resultImage = string.Empty;
+    private BchCropper? _bchCropper;
+    private string? _previewImageUrl = null;
     
     private async Task OnGetResultAsync()
     {
-        _resultImage = await _bchCropper.GetBase64ResultAsync();
-        Console.WriteLine(_resultImage);
+        if (_bchCropper is null) return;
+        
+        var fileContext = await _bchCropper.GetFileResultAsync();
+        _previewImageUrl = fileContext.Files.FirstOrDefault()?.GetImagePreview();
     }
 }

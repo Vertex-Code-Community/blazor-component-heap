@@ -93,6 +93,7 @@ public partial class BchImageCropper : IAsyncDisposable
     // TODO: make as file stream
     public Task<string> GetBase64ResultAsync()
     {
-        return _bchCropper.GetBase64ResultAsync();
+        // return _bchCropper.GetBase64ResultAsync();
+        return Task.FromResult("");
     }
 }

@@ -21,7 +21,6 @@ public partial class BchCropper : IAsyncDisposable
     [Parameter] public CropperType CropperType { get; set; } = CropperType.MovableRectangle;
     [Parameter] public string BackgroundColor { get; set; } = "#ffffff";
     [Parameter] public string ResultFormat { get; set; } = "image/jpeg";
-    [Parameter] public float CroppedWidth { get; set; } = 400;
     [Parameter] public float Ratio { get; set; } = 1;
     [Parameter] public float MinScale { get; set; } = 2.0f;
     [Parameter] public float MaxScale { get; set; } = 6.0f;

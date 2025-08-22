@@ -1,7 +1,6 @@
 @page "/cropper"
 @using Bch.Components.Cropper
 @using Bch.Components.Cropper.Models
-@using Bch.Components.Zoom.Models
 
 @* Base64Image="_content/BlazorComponentHeap.Components/img/cropper/an225_mriya.jpg" *@
 
@@ -10,8 +9,7 @@
         <BchCropper @ref="_bchCropper"
                     BackgroundColor="#fdf1d8"
                     ScaleOnMouseWheel="true"
-                    CropperType="CropperType.FixedRectangle"
-                    CroppedWidth="200"
+                    CropperType="CropperType.MovableRectangle"
                     ImageUrl="_content/Bch.Integration.Pages/img/slider-test-image.svg"
                     Ratio="@(16.0f / 9.0f)"
                     MinRectangleWidth="100"
@@ -21,9 +19,9 @@
     <button @onclick="OnGetResultAsync">Get Result</button>
 
     <div class="example-cropped-image">
-        @if (!string.IsNullOrWhiteSpace(_resultImage))
+        @if (!string.IsNullOrWhiteSpace(_previewImageUrl))
         {
-            <img src="@_resultImage" alt=""/>
+            <img src="@_previewImageUrl" alt=""/>
         }
     </div>
 </div>
