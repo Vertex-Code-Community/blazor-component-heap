@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Bch.Components.Table.Models;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Table.TableColumn;
 
@@ -20,6 +23,12 @@ public partial class BchTableColumn<TRowData> : ComponentBase where TRowData : c
     [Parameter] public string ThClass { get; set; } = string.Empty;
     [Parameter] public string TdClass { get; set; } = string.Empty;
     [Parameter] public List<string> SelectData { get; set; } = new();
+    
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
     
     protected override void OnInitialized()
     {

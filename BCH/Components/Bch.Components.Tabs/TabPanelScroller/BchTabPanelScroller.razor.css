@@ -12,7 +12,7 @@
         transition: 0.2s all ease;
         transform: translateX(0);
     }
-    
+
     .bch-tabs-panel > .bch-tab-btn {
         position: absolute;
         top: 0;
@@ -27,16 +27,16 @@
         align-items: center;
         cursor: pointer;
     }
-        
+
         .bch-tabs-panel > .bch-tab-btn.bch-left {
             left: 0;
             transform: rotateZ(180deg);
         }
-        
+
         .bch-tabs-panel > .bch-tab-btn.bch-right {
             right: 0;
         }
-        
+
         .bch-tabs-panel > .bch-tab-btn .bch-icon {
             width: 20px;
             height: 100%;
@@ -44,7 +44,19 @@
             background: url(bch-img/tabs/arrow-right.svg) center no-repeat;
             transition: 0.2s all ease;
         }
-        
-        .bch-tabs-panel > .bch-tab-btn .bch-icon:hover {
-            transform: scale(1.2);
-        }
+
+            .bch-tabs-panel > .bch-tab-btn .bch-icon:hover {
+                transform: scale(1.2);
+            }
+
+.bch-theme-light-green .bch-tabs-panel > .bch-tab-btn {
+    background: linear-gradient(270deg, #FEFEFE 50%, rgba(254, 254, 254, 0) 97.3%);
+}
+
+.bch-theme-light .bch-tabs-panel > .bch-tab-btn {
+    background: linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 97.3%);
+}
+
+.bch-theme-dark .bch-tabs-panel > .bch-tab-btn {
+    background: linear-gradient(270deg, #111827 50%, rgba(17, 24, 39, 0) 97.3%);
+}

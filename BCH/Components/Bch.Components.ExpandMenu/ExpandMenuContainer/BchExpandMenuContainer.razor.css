@@ -3,3 +3,18 @@
     border: 1px solid #E4E4E4;
     border-radius: 5px;
 }
+
+.bch-theme-light-green.expaned-menu-container {
+    background: #FFFFFF;
+    border: 1px solid #E4E4E4;
+}
+
+.bch-theme-light.expaned-menu-container {
+    background: #FFFFFF;
+    border: 1px solid #E9ECEF;
+}
+
+.bch-theme-dark.expaned-menu-container {
+    background: #1F2937;
+    border: 1px solid #4B5563;
+}

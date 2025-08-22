@@ -5,6 +5,9 @@ using Bch.Components.Tabs.Models;
 using Bch.Components.Tabs.TabsDraggableContext;
 using Bch.Modules.DomInterop.Services;
 using Bch.Modules.Maths.Models;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Tabs;
 
@@ -25,6 +28,8 @@ public partial class BchTabs<TItem> : ComponentBase where TItem : class
     [Parameter] public bool Draggable { get; set; } = false;
     [Parameter] public bool ScrollToSelected { get; set; } = true;
     [Parameter] public bool ShowCloseOnDefaultTab { get; set; } = true;
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     
     [Parameter] public RenderFragment<TItem>? TabTemplate { get; set; }
     [Parameter] public RenderFragment<TItem>? ContentTemplate { get; set; }
@@ -52,6 +57,9 @@ public partial class BchTabs<TItem> : ComponentBase where TItem : class
     private int _height;
     private bool _isDragging = false;
     private bool _draggable = false;
+    
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     protected override void OnInitialized()
     {

@@ -1,7 +1,7 @@
 @typeparam TItem
 
 <div id="@_panelId"
-     class="@($"bch-draggable-panel {CssClass} {(_startDrag ? "bch-start-drag" : "")} {DraggableContext.ContextIdentifier}")"
+     class="@($"bch-draggable-panel {CssClass} {(_startDrag ? "bch-start-drag" : "")} {DraggableContext.ContextIdentifier} {GetThemeCssClass()}")"
      style="@($"gap: {Gap}px;")">
 
     @for (var i = 0; i < Items.Count; i++)

@@ -2,6 +2,9 @@ using System.Globalization;
 using Bch.Components.Tabs.Models;
 using Microsoft.AspNetCore.Components;
 using Bch.Modules.DomInterop.Services;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Tabs.TabPanelScroller;
 
@@ -18,6 +21,8 @@ public partial class BchTabPanelScroller<TItem> : ComponentBase, IDisposable whe
     [Parameter] public Func<TItem, int> TabWidthPredicate { get; set; } = x => 100;
     [Parameter] public TItem? Selected { get; set; }
     [Parameter] public List<TItem> Items { get; set; } = new();
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     
     private readonly string _panelContainerId = $"_id_{Guid.NewGuid()}";
     private readonly string _panelScrollerId = $"_id_{Guid.NewGuid()}";
@@ -28,6 +33,9 @@ public partial class BchTabPanelScroller<TItem> : ComponentBase, IDisposable whe
     private bool _showLeft = false;
     private bool _showRight = false;
     private TItem? _prevSelected = null;
+    
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     // protected override void OnInitialized()
     // {

@@ -2,6 +2,9 @@
 using Bch.Components.Table.Models;
 using Bch.Components.Table.TableColumn;
 using Microsoft.AspNetCore.Components;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Table.TableHead;
 
@@ -11,12 +14,16 @@ public partial class BchTableHead<TRowData> : ComponentBase where TRowData : cla
     [Parameter] public BchTableColumn<TRowData> Column { get; set; } = null!;
     [Parameter] public EventCallback<TableFilterParameters> OnFilterData { get; set; }
     [Parameter] public EventCallback<TableSortParameters> OnClickSorted { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
 
     private readonly string _containerId = $"_id_{Guid.NewGuid()}";
     private readonly string _calendarTableClass = $"_class_{Guid.NewGuid()}";
     private readonly string _selectTableClass = $"_class_{Guid.NewGuid()}";
     private List<string> _selectedItems = new();
     private List<DateTime> _selectedDates = new();
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     private async Task OnFilterAsync(ChangeEventArgs changeEvent, string columnName, bool isMultiple = false)
     {

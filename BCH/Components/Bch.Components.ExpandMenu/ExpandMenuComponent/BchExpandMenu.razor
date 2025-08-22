@@ -1,4 +1,4 @@
-﻿<div class="bch-expand-menu @(Disabled ? "bch-disabled" : "") @(OwnerContainer.SelectedMenu == this ? "bch-selected" : "")" @onclick="OnClick">
+﻿<div class="bch-expand-menu @GetThemeCssClass() @(Disabled ? "bch-disabled" : "") @(OwnerContainer.SelectedMenu == this ? "bch-selected" : "")" @onclick="OnClick">
     <div class="head-block">
         <div class="title bch-no-selectable-text">@Title</div>
         <div class="bch-no-selectable-text" style="@(OwnerContainer.SelectedMenu == this ? "transform: rotate(180deg); transition: 0.2s;" : "transition: 0.2s;")">

@@ -1,3 +1,9 @@
-﻿.toggle-page{
+﻿.toggle-page {
     padding: 40px;
 }
+
+    .toggle-page .theme-variants {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }

@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Components;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Tabs.TabPanel.DefaultTab;
 
@@ -9,6 +12,8 @@ public partial class BchDefaultTab<TItem> : ComponentBase where TItem : class
     [Parameter] public bool ShowCloseButton { get; set; }
     [Parameter] public EventCallback<TItem> OnClose { get; set; }
     [Parameter] public Func<TItem, string>? DefaultTabText { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
 
     private bool IsSelected => Item == SelectedItem;
     
@@ -18,6 +23,9 @@ public partial class BchDefaultTab<TItem> : ComponentBase where TItem : class
     private readonly string _closeIconSelected = "_content/Bch.Components.Tabs/img/close-tab-selected.svg";
 
     private Func<TItem, string> _defaultTabText = x => $"{x}";
+    
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
     
     protected override void OnInitialized()
     {

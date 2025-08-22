@@ -3,18 +3,108 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 16px;
+    gap: 20px;
+    padding: 20px;
+    background: #F9FAFB;
 }
 
-.page-cnt > .slider {
+.page-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    margin: 0 0 10px 0;
+    color: #111827;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin: 0;
+    color: #6B7280;
+    font-size: 16px;
+}
+
+.themes-section,
+.configurations-section,
+.custom-colors-section {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.themes-section h2,
+.configurations-section h2,
+.custom-colors-section h2 {
+    margin: 0 0 20px 0;
+    color: #111827;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.themes-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.theme-col h3,
+.config-col h3 {
+    margin: 0 0 12px 0;
+    color: #374151;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.config-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.slider-demo {
     width: 100%;
-    flex: 1 1;
-    display: flex;
+    height: 200px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.page-cnt > .slider .item-cnt {
+.slider-demo .item-cnt {
     width: 100%;
     height: 100%;
     background-size: 90% !important;
+    background-color: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #6B7280;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .themes-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .config-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .page-cnt {
+        padding: 16px;
+    }
+    
+    .themes-section,
+    .configurations-section,
+    .custom-colors-section {
+        padding: 16px;
+    }
 }

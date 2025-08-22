@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Components;
 using Bch.Components.Scheduler.AppointmentItem;
 using Bch.Modules.DomInterop.Services;
 using Bch.Modules.Maths.Extensions;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 using Appointment = Bch.Components.Scheduler.Models.Appointment;
 using Day = Bch.Components.Scheduler.Models.Day;
 using TimeIntersectionGroup = Bch.Components.Scheduler.Models.TimeIntersectionGroup;
@@ -31,6 +34,9 @@ public partial class BchScheduler
     [Parameter] public int WorkingAreaStartHour { get; set; } = 10;
     [Parameter] public int WorkingAreaEndHour { get; set; } = 19;
 
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+
     private DateTime _currentWeekStart;
     private DateTime _calendarDateTime;
     private int _scrollIndex = 0;
@@ -39,6 +45,14 @@ public partial class BchScheduler
     private Dictionary<DateTime, Day> _days = new();
 
     private readonly NumberFormatInfo _numberFormatWithDot = new() { NumberDecimalSeparator = "." };
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() 
+    {
+        var cssClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return cssClass;
+    }
+    
     private readonly string _contentScrollId = $"_id_{Guid.NewGuid()}";
     private readonly string _contentScrollerId = $"_id_{Guid.NewGuid()}";
 

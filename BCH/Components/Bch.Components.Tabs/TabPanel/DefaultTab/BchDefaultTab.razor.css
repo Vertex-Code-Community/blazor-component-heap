@@ -84,3 +84,87 @@
         -ms-user-select: none;
         user-select: none;
     }
+
+.bch-theme-light-green .bch-default-tab-container {
+    background: #FEFEFE;
+}
+
+.bch-theme-light-green .bch-default-tab-container > .bch-name {
+    color: #131212;
+}
+
+.bch-theme-light-green .bch-default-tab-container.bch-selected {
+    background: #FFFFFF;
+}
+
+.bch-theme-light-green .bch-default-tab-container.bch-selected > .bch-name {
+    color: #33B469;
+}
+
+.bch-theme-light-green .bch-default-tab-container.bch-selected > .bch-bottom-line {
+    background: #33B469;
+}
+
+.bch-theme-light-green .bch-default-tab-container > .bch-close {
+    color: #33B469;
+}
+
+.bch-theme-light .bch-default-tab-container {
+    background: #FFFFFF;
+}
+
+.bch-theme-light .bch-default-tab-container > .bch-name {
+    color: #212529;
+}
+
+.bch-theme-light .bch-default-tab-container.bch-selected {
+    background: #FFFFFF;
+}
+
+.bch-theme-light .bch-default-tab-container.bch-selected > .bch-name {
+    color: #6C757D;
+}
+
+.bch-theme-light .bch-default-tab-container.bch-selected > .bch-bottom-line {
+    background: #6C757D;
+}
+
+.bch-theme-light .bch-default-tab-container > .bch-close {
+    color: #6C757D;
+}
+
+.bch-theme-dark .bch-default-tab-container {
+    background: #111827;
+}
+
+.bch-theme-dark .bch-default-tab-container > .bch-name {
+    color: #E5E7EB;
+}
+
+.bch-theme-dark .bch-default-tab-container.bch-selected {
+    background: #374151;
+}
+
+.bch-theme-dark .bch-default-tab-container.bch-selected > .bch-name {
+    color: #FFFFFF;
+}
+
+.bch-theme-dark .bch-default-tab-container.bch-selected > .bch-bottom-line {
+    background: #9CA3AF;
+}
+
+.bch-theme-dark .bch-default-tab-container > .bch-close {
+    color: #9CA3AF;
+}
+
+.bch-theme-light-green .bch-default-tab-container:hover:not(.bch-selected) {
+    background: #E1F4E9;
+}
+
+.bch-theme-light .bch-default-tab-container:hover:not(.bch-selected) {
+    background: #E9ECEF;
+}
+
+.bch-theme-dark .bch-default-tab-container:hover:not(.bch-selected) {
+    background: #374151;
+}

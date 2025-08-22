@@ -6,7 +6,7 @@
 
 @if (items.Count > 0)
 {
-    <div id="@_containerId" class="bch-pagination-container">
+    <div id="@_containerId" class="bch-pagination-container @GetThemeCssClass()">
         <div class="select-page-size">
             <BchSelect TItem="int"
                        Height="40"
@@ -15,6 +15,7 @@
                        Options="Sizes.Select(x => (int) x)"
                        UpperSide="true"
                        CssClass="bch-table-pagination-select"
+                       Theme="EffectiveTheme"
                        @bind-Selected="PageSize" />
         </div>
         <div class="select-page-number bch-no-selectable-text">

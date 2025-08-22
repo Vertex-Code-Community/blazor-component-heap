@@ -1,12 +1,24 @@
 ﻿@page "/toggle"
 @using Bch.Components.Toggle
+@using Bch.Modules.Themes.Models
 
 <div class="toggle-page">
     <p>
         <BchToggle @bind-Value="@_value" Disabled="true" Label="disabled"/>
     </p>
     <p>
-        <BchToggle Label="Some text 1"/>
+        <h4>Theme variants</h4>
+        <div class="theme-variants">
+            <div>
+                <BchToggle Label="Light Green" Theme="BchTheme.LightGreen" />
+            </div>
+            <div>
+                <BchToggle Label="Light" Theme="BchTheme.Light" />
+            </div>
+            <div>
+                <BchToggle Label="Dark" Theme="BchTheme.Dark" />
+            </div>
+        </div>
     </p>
     <p>
         <BchToggle Label="Changed color"

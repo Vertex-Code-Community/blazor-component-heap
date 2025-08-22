@@ -10,3 +10,36 @@
         width: 100%;
         flex: 1 1;
     }
+
+.bch-theme-light-green .bch-tabs-container {
+    background: #FEFEFE;
+    box-shadow: 0 0 21px rgba(188, 188, 188, 0.3);
+    border-radius: 15px;
+    padding: 0 18px 18px;
+}
+
+.bch-theme-light-green .bch-tabs-container > .bch-tabs-content {
+    color: #131212;
+}
+
+.bch-theme-light .bch-tabs-container {
+    background: #FFFFFF;
+    box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2);
+    border-radius: 15px;
+    padding: 0 18px 18px;
+}
+
+.bch-theme-light .bch-tabs-container > .bch-tabs-content {
+    color: #212529;
+}
+
+.bch-theme-dark .bch-tabs-container {
+    background: #111827;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+    border-radius: 15px;
+    padding: 0 18px 18px;
+}
+
+.bch-theme-dark .bch-tabs-container > .bch-tabs-content {
+    color: #E5E7EB;
+}

@@ -1,8 +1,12 @@
 ﻿@using Bch.Components.Calendar
 
-<CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
+<CascadingValue IsFixed="true" Value="this">
+    <CascadingValue Name="ThemeCascading" Value="EffectiveTheme">
+        @ChildContent
+    </CascadingValue>
+</CascadingValue>
 
-<div class="bch-calendar-container">
+<div class="bch-calendar-container @GetThemeCssClass()">
 
     @if (ShowDatePicker || ShowTodayButton)
     {
@@ -12,7 +16,7 @@
 
             @if (ShowDatePicker)
             {
-                <BchCalendar Value="_calendarDateTime" ValueChanged="OnDateChanged"/>
+                <BchCalendar Value="_calendarDateTime" ValueChanged="OnDateChanged" Theme="EffectiveTheme"/>
             }
 
             @if (ShowTodayButton)

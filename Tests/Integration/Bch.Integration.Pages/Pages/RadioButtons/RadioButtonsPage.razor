@@ -1,26 +1,62 @@
 ﻿@page "/radio-buttons"
 @using Bch.Components.RadioButton.RadioButtonComponent
 @using Bch.Components.RadioButton.RadioButtonsContainer
+@using Bch.Modules.Themes.Models
 
 <div class="page-cnt">
 
     @* <div>Selected: @_selected</div> *@
     
-    <BchRadioButtonsContainer TItem="string">
-        <BchRadioButton TItem="string" Key="@("Item 1")" />
-        <BchRadioButton TItem="string" Key="@("Item 2")"/>
-        <BchRadioButton TItem="string" Key="@("Item 3")"/>
-        <BchRadioButton TItem="string" Key="@("Item 4")"/>
-        <BchRadioButton TItem="string" Key="@("Item 5")"/>
-    </BchRadioButtonsContainer>
-
-    <BchRadioButtonsContainer TItem="string">
-        <BchRadioButton TItem="string" Key="@("Item 5")" Disabled="true"/>
-        <BchRadioButton TItem="string" Key="@("Item 6")"/>
-        <BchRadioButton TItem="string" Key="@("Item 7")"/>
-        <BchRadioButton TItem="string" Key="@("Item 8")"/>
-    </BchRadioButtonsContainer>
-
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Themed Variants</h4>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <BchRadioButtonsContainer TItem="string" Theme="BchTheme.LightGreen">
+                        <BchRadioButton TItem="string" Key="@("Item 1")" />
+                        <BchRadioButton TItem="string" Key="@("Item 2")"/>
+                        <BchRadioButton TItem="string" Key="@("Item 3")"/>
+                    </BchRadioButtonsContainer>
+                    <h6>Disabled</h6>
+                    <BchRadioButtonsContainer TItem="string" Theme="BchTheme.LightGreen" Selected="@("Disabled Selected")">
+                        <BchRadioButton TItem="string" Key="@("Disabled Selected")" Disabled="true" />
+                        <BchRadioButton TItem="string" Key="@("Disabled Unselected")" Disabled="true" />
+                        <BchRadioButton TItem="string" Key="@("Enabled")" />
+                    </BchRadioButtonsContainer>
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <BchRadioButtonsContainer TItem="string" Theme="BchTheme.Light">
+                        <BchRadioButton TItem="string" Key="@("Item 1")" />
+                        <BchRadioButton TItem="string" Key="@("Item 2")"/>
+                        <BchRadioButton TItem="string" Key="@("Item 3")"/>
+                    </BchRadioButtonsContainer>
+                    <h6>Disabled</h6>
+                    <BchRadioButtonsContainer TItem="string" Theme="BchTheme.Light" Selected="@("Disabled Selected")">
+                        <BchRadioButton TItem="string" Key="@("Disabled Selected")" Disabled="true" />
+                        <BchRadioButton TItem="string" Key="@("Disabled Unselected")" Disabled="true" />
+                        <BchRadioButton TItem="string" Key="@("Enabled")" />
+                    </BchRadioButtonsContainer>
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <BchRadioButtonsContainer TItem="string" Theme="BchTheme.Dark">
+                        <BchRadioButton TItem="string" Key="@("Item 1")" />
+                        <BchRadioButton TItem="string" Key="@("Item 2")"/>
+                        <BchRadioButton TItem="string" Key="@("Item 3")"/>
+                    </BchRadioButtonsContainer>
+                    <h6>Disabled</h6>
+                    <BchRadioButtonsContainer TItem="string" Theme="BchTheme.Dark" Selected="@("Disabled Selected")">
+                        <BchRadioButton TItem="string" Key="@("Disabled Selected")" Disabled="true" />
+                        <BchRadioButton TItem="string" Key="@("Disabled Unselected")" Disabled="true" />
+                        <BchRadioButton TItem="string" Key="@("Enabled")" />
+                    </BchRadioButtonsContainer>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <br/>
 
     <BchRadioButtonsContainer TItem="string">

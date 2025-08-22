@@ -3,9 +3,10 @@
 @using Bch.Components.Table.TableData
 @typeparam TRowData
 
-<CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
+<CascadingValue Value="EffectiveTheme">
+    <CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
 
-<div id="@_containerId" class="bch-table-container">
+    <div id="@_containerId" class="bch-table-container @GetThemeCssClass()">
     <table class="bch-table-wrapper" style="@(string.IsNullOrWhiteSpace(MinWidth) ? "" : $"min-width:{MinWidth};")">
         <thead class="bch-thead">
         <tr>
@@ -64,7 +65,8 @@
         }
         </tfoot>
     </table>
-</div>
+    </div>
+</CascadingValue>
 
 
 <style>

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Bch.Components.RadioButton.RadioButtonsContainer;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.RadioButton.RadioButtonComponent;
 
@@ -15,6 +18,8 @@ public partial class BchRadioButton<TItem> : ComponentBase where TItem : class
     [Parameter] public RenderFragment<bool>? DataTemplate { get; set; }
 
     [Parameter] public bool Disabled { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     
     protected override void OnInitialized()
     {
@@ -29,5 +34,8 @@ public partial class BchRadioButton<TItem> : ComponentBase where TItem : class
     }
 
     public void Update() => StateHasChanged();
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 }
 

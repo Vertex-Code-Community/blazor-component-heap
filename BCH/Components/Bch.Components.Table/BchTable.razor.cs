@@ -2,6 +2,9 @@
 using Bch.Components.Table.Models;
 using Bch.Components.Table.TableColumn;
 using Bch.Modules.GlobalEvents.Events;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.Table;
 
@@ -13,6 +16,11 @@ public partial class BchTable<TRowData> : ComponentBase
     [Parameter] public EventCallback<TableFilterParameters> OnFilterData { get; set; }
     [Parameter] public EventCallback<TableSortParameters> OnSortData { get; set; }
     [Parameter] public string MinWidth { get; set; } = "670px";
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     #region Pagination
     [Parameter] public bool IsPagination { get; set; }

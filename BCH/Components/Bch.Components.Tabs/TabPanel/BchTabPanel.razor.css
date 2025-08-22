@@ -42,3 +42,15 @@
     width: fit-content;
     height: fit-content;
 }
+
+.bch-theme-light-green .bch-draggable-panel {
+    background: #FEFEFE;
+}
+
+.bch-theme-light .bch-draggable-panel {
+    background: #FFFFFF;
+}
+
+.bch-theme-dark .bch-draggable-panel {
+    background: #111827;
+}

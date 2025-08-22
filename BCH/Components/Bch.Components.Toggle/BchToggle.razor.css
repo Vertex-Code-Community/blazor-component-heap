@@ -72,3 +72,43 @@
     user-select: none; /*Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+.bch-theme-light-green .bch-toggle > .toggle-button:hover {
+    background: #E1F4E9 !important;
+}
+
+.bch-theme-light-green .bch-toggle > .toggle-button:checked { 
+    background-color: #33B469 !important;
+}
+
+.bch-theme-light-green .bch-toggle > .toggle-button:checked:hover { 
+    background: #2FAF62 !important;
+}
+
+.bch-theme-light .bch-toggle > .toggle-button:hover { 
+    background: #E9ECEF !important;
+}
+
+.bch-theme-light .bch-toggle > .toggle-button:checked { 
+    background-color: #6C757D !important;
+}
+
+.bch-theme-light .bch-toggle > .toggle-button:checked:hover { 
+    background: #5F6770 !important;
+}
+
+.bch-theme-dark .bch-toggle > .toggle-button { 
+    background: #D7D7D7 !important;
+}
+
+.bch-theme-dark .bch-toggle > .toggle-button:hover { 
+    background: #D1D0D0 !important;
+}
+
+.bch-theme-dark .bch-toggle > .toggle-button:checked { 
+    background-color: #4B5563 !important;
+}
+
+.bch-theme-dark .bch-toggle > .toggle-button:checked:hover { 
+    background: #6B7280 !important;
+}

@@ -1,5 +1,8 @@
 ﻿using Bch.Components.RadioButton.RadioButtonComponent;
 using Microsoft.AspNetCore.Components;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.RadioButton.RadioButtonsContainer;
 
@@ -7,6 +10,8 @@ public partial class BchRadioButtonsContainer<TItem> : ComponentBase where TItem
 {
     [Parameter] public required RenderFragment ChildContent { get; set; }
     [Parameter] public EventCallback<TItem> SelectedChanged { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public TItem Selected
     {
         get => _selectedValue;
@@ -30,6 +35,8 @@ public partial class BchRadioButtonsContainer<TItem> : ComponentBase where TItem
     private TItem _selectedValue = null!;
     private readonly List<BchRadioButton<TItem>> _radioButtons = new();
     private bool _firstRender = false;
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
 
     protected override void OnAfterRender(bool firstRender)
     {
