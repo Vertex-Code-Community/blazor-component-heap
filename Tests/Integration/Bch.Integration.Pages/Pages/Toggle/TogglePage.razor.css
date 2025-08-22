@@ -1,9 +1,44 @@
-﻿.toggle-page {
-    padding: 40px;
+﻿.test-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
 }
 
-    .toggle-page .theme-variants {
+.test-case {
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 20px;
+    background: #FFFFFF;
+}
+
+.test-case h4 {
+    margin: 0 0 10px 0;
+    color: #374151;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.test-case p {
+    margin: 0 0 15px 0;
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.theme-variants {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.custom-colors {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+    .custom-colors > div {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
     }

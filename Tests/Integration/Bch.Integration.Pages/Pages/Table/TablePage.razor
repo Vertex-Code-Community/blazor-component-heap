@@ -7,118 +7,110 @@
 @using Bch.Modules.Themes.Models
 @using Bch.Integration.Pages.Models
 
-<div style="display: flex; flex-direction: column; padding: 30px; gap: 30px;">
+<div>
+    <h3>Table Component Test</h3>
 
     <div class="test-cases">
         <div class="test-case">
-            <h4>Themed Variants</h4>
+            <h4>Light Green Theme</h4>
+            <p>Table with Light Green theme demonstrating all features</p>
+            <BchThemeProvider Theme="BchTheme.LightGreen">
+                <BchTable @ref="_tableRef1"
+                          TRowData="UserModel"
+                          MinWidth="670px"
+                          PageSize="10"
+                          Items="_filteredUsers1"
+                          IsPagination="true"
+                          IsScrollPagination="false"
+                          Sizes="_sizes"
+                          OnFilterData="OnFilterData1"
+                          OnSortData="OnSortData1"
+                          @bind-CurrentPage="_currentPage">
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Name" Title="Name" FilterProperty="Name" FilterType="ColumnFilterType.TextSearch"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Age" Title="Age" FilterProperty="Age" FilterType="ColumnFilterType.NumberSearch"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Sex" Title="Sex" FilterProperty="Sex" FilterType="ColumnFilterType.Select" SelectData="@_sex"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Country" Title="Country" FilterProperty="Country" FilterType="ColumnFilterType.MultiSelect" SelectData="@_countries"/>
+                    <BchTableColumn TRowData="UserModel" Expression="c => c.Birthday" FilterProperty="Birthday" FilterType="ColumnFilterType.Date">
+                        <ThTemplate>
+                            <div class="example-table-birthday-text">
+                                <span class="b">B</span><span class="i">i</span><span class="r">r</span><span class="t">t</span><span class="h">h</span><span class="d">d</span><span class="a">a</span><span class="y">y</span>
+                            </div>
+                        </ThTemplate>
+                        <TdTemplate>@context.Birthday.ToString("yyyy/MM/dd")</TdTemplate>
+                    </BchTableColumn>
+                    <BchTableColumn TRowData="UserModel" Title="Report" FilterProperty="Report" FilterType="ColumnFilterType.DateRange">
+                        <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
+                    </BchTableColumn>
+                </BchTable>
+            </BchThemeProvider>
+        </div>
 
-            <div class="theme-col">
-                <h5>Light Green</h5>
-                <BchThemeProvider Theme="BchTheme.LightGreen">
-                    @* Standard pagination *@
-                    <BchTable @ref="_tableRef1"
-                              TRowData="UserModel"
-                              MinWidth="670px"
-                              PageSize="10"
-                              Items="_filteredUsers1"
-                              IsPagination="true"
-                              IsScrollPagination="false"
-                              Sizes="_sizes"
-                              OnFilterData="OnFilterData1"
-                              OnSortData="OnSortData1"
-                              @bind-CurrentPage="_currentPage">
-                        @* columns *@
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Name" Title="Name" FilterProperty="Name" FilterType="ColumnFilterType.TextSearch"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Age" Title="Age" FilterProperty="Age" FilterType="ColumnFilterType.NumberSearch"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Sex" Title="Sex" FilterProperty="Sex" FilterType="ColumnFilterType.Select" SelectData="@_sex"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Country" Title="Country" FilterProperty="Country" FilterType="ColumnFilterType.MultiSelect" SelectData="@_countries"/>
-                        <BchTableColumn TRowData="UserModel" Expression="c => c.Birthday" FilterProperty="Birthday" FilterType="ColumnFilterType.Date">
-                            <ThTemplate>
-                                <div class="example-table-birthday-text">
-                                    <span class="b">B</span><span class="i">i</span><span class="r">r</span><span class="t">t</span><span class="h">h</span><span class="d">d</span><span class="a">a</span><span class="y">y</span>
-                                </div>
-                            </ThTemplate>
-                            <TdTemplate>@context.Birthday.ToString("yyyy/MM/dd")</TdTemplate>
-                        </BchTableColumn>
-                        <BchTableColumn TRowData="UserModel" Title="Report" FilterProperty="Report" FilterType="ColumnFilterType.DateRange">
-                            <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
-                        </BchTableColumn>
-                    </BchTable>
-                </BchThemeProvider>
-            </div>
+        <div class="test-case">
+            <h4>Light Theme</h4>
+            <p>Table with Light theme demonstrating all features</p>
+            <BchThemeProvider Theme="BchTheme.Light">
+                <BchTable @ref="_tableRef2" TRowData="UserModel"
+                          MinWidth="670px"
+                          PageSize="10"
+                          Items="_filteredUsers2"
+                          IsPagination="true"
+                          IsScrollPagination="false"
+                          Sizes="_sizes"
+                          OnFilterData="OnFilterData2"
+                          OnSortData="OnSortData2"
+                          @bind-CurrentPage="_currentPage2">
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Name" Title="Name" FilterProperty="Name" FilterType="ColumnFilterType.TextSearch"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Age" Title="Age" FilterProperty="Age" FilterType="ColumnFilterType.NumberSearch"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Sex" Title="Sex" FilterProperty="Sex" FilterType="ColumnFilterType.Select" SelectData="@_sex"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Country" Title="Country" FilterProperty="Country" FilterType="ColumnFilterType.MultiSelect" SelectData="@_countries"/>
+                    <BchTableColumn TRowData="UserModel" Expression="c => c.Birthday" FilterProperty="Birthday" FilterType="ColumnFilterType.Date">
+                        <ThTemplate>
+                            <div class="example-table-birthday-text">
+                                <span class="b">B</span><span class="i">i</span><span class="r">r</span><span class="t">t</span><span class="h">h</span><span class="d">d</span><span class="a">a</span><span class="y">y</span>
+                            </div>
+                        </ThTemplate>
+                        <TdTemplate>@context.Birthday.ToString("yyyy/MM/dd")</TdTemplate>
+                    </BchTableColumn>
+                    <BchTableColumn TRowData="UserModel" Title="Report" FilterProperty="Report" FilterType="ColumnFilterType.DateRange">
+                        <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
+                    </BchTableColumn>
+                </BchTable>
+            </BchThemeProvider>
+        </div>
 
-            <div class="theme-col">
-                <h5>Light</h5>
-                <BchThemeProvider Theme="BchTheme.Light">
-                    @* Standard pagination *@
-                    <BchTable @ref="_tableRef2" TRowData="UserModel"
-                              MinWidth="670px"
-                              PageSize="10"
-                              Items="_filteredUsers2"
-                              IsPagination="true"
-                              IsScrollPagination="false"
-                              Sizes="_sizes"
-                              OnFilterData="OnFilterData2"
-                              OnSortData="OnSortData2"
-                              @bind-CurrentPage="_currentPage2">
-                        @* columns *@
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Name" Title="Name" FilterProperty="Name" FilterType="ColumnFilterType.TextSearch"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Age" Title="Age" FilterProperty="Age" FilterType="ColumnFilterType.NumberSearch"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Sex" Title="Sex" FilterProperty="Sex" FilterType="ColumnFilterType.Select" SelectData="@_sex"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Country" Title="Country" FilterProperty="Country" FilterType="ColumnFilterType.MultiSelect" SelectData="@_countries"/>
-                        <BchTableColumn TRowData="UserModel" Expression="c => c.Birthday" FilterProperty="Birthday" FilterType="ColumnFilterType.Date">
-                            <ThTemplate>
-                                <div class="example-table-birthday-text">
-                                    <span class="b">B</span><span class="i">i</span><span class="r">r</span><span class="t">t</span><span class="h">h</span><span class="d">d</span><span class="a">a</span><span class="y">y</span>
-                                </div>
-                            </ThTemplate>
-                            <TdTemplate>@context.Birthday.ToString("yyyy/MM/dd")</TdTemplate>
-                        </BchTableColumn>
-                        <BchTableColumn TRowData="UserModel" Title="Report" FilterProperty="Report" FilterType="ColumnFilterType.DateRange">
-                            <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
-                        </BchTableColumn>
-                    </BchTable>
-                </BchThemeProvider>
-            </div>
-
-            <div class="theme-col">
-                <h5>Dark</h5>
-                <BchThemeProvider Theme="BchTheme.Dark">
-                    @* Standard pagination *@
-                    <BchTable @ref="_tableRef3" TRowData="UserModel"
-                              MinWidth="670px"
-                              PageSize="10"
-                              Items="_filteredUsers3"
-                              IsPagination="true"
-                              IsScrollPagination="false"
-                              Sizes="_sizes"
-                              OnFilterData="OnFilterData3"
-                              OnSortData="OnSortData3"
-                              @bind-CurrentPage="_currentPage3">
-                        @* columns *@
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Name" Title="Name" FilterProperty="Name" FilterType="ColumnFilterType.TextSearch"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Age" Title="Age" FilterProperty="Age" FilterType="ColumnFilterType.NumberSearch"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Sex" Title="Sex" FilterProperty="Sex" FilterType="ColumnFilterType.Select" SelectData="@_sex"/>
-                        <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Country" Title="Country" FilterProperty="Country" FilterType="ColumnFilterType.MultiSelect" SelectData="@_countries"/>
-                        <BchTableColumn TRowData="UserModel" Expression="c => c.Birthday" FilterProperty="Birthday" FilterType="ColumnFilterType.Date">
-                            <ThTemplate>
-                                <div class="example-table-birthday-text">
-                                    <span class="b">B</span><span class="i">i</span><span class="r">r</span><span class="t">t</span><span class="h">h</span><span class="d">d</span><span class="a">a</span><span class="y">y</span>
-                                </div>
-                            </ThTemplate>
-                            <TdTemplate>@context.Birthday.ToString("yyyy/MM/dd")</TdTemplate>
-                        </BchTableColumn>
-                        <BchTableColumn TRowData="UserModel" Title="Report" FilterProperty="Report" FilterType="ColumnFilterType.DateRange">
-                            <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
-                        </BchTableColumn>
-                    </BchTable>
-                </BchThemeProvider>
-            </div>
-
+        <div class="test-case">
+            <h4>Dark Theme</h4>
+            <p>Table with Dark theme demonstrating all features</p>
+            <BchThemeProvider Theme="BchTheme.Dark">
+                <BchTable @ref="_tableRef3" TRowData="UserModel"
+                          MinWidth="670px"
+                          PageSize="10"
+                          Items="_filteredUsers3"
+                          IsPagination="true"
+                          IsScrollPagination="false"
+                          Sizes="_sizes"
+                          OnFilterData="OnFilterData3"
+                          OnSortData="OnSortData3"
+                          @bind-CurrentPage="_currentPage3">
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Name" Title="Name" FilterProperty="Name" FilterType="ColumnFilterType.TextSearch"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Age" Title="Age" FilterProperty="Age" FilterType="ColumnFilterType.NumberSearch"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Sex" Title="Sex" FilterProperty="Sex" FilterType="ColumnFilterType.Select" SelectData="@_sex"/>
+                    <BchTableColumn TRowData="UserModel" IsSorted="true" Expression="c => c.Country" Title="Country" FilterProperty="Country" FilterType="ColumnFilterType.MultiSelect" SelectData="@_countries"/>
+                    <BchTableColumn TRowData="UserModel" Expression="c => c.Birthday" FilterProperty="Birthday" FilterType="ColumnFilterType.Date">
+                        <ThTemplate>
+                            <div class="example-table-birthday-text">
+                                <span class="b">B</span><span class="i">i</span><span class="r">r</span><span class="t">t</span><span class="h">h</span><span class="d">d</span><span class="a">a</span><span class="y">y</span>
+                            </div>
+                        </ThTemplate>
+                        <TdTemplate>@context.Birthday.ToString("yyyy/MM/dd")</TdTemplate>
+                    </BchTableColumn>
+                    <BchTableColumn TRowData="UserModel" Title="Report" FilterProperty="Report" FilterType="ColumnFilterType.DateRange">
+                        <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
+                    </BchTableColumn>
+                </BchTable>
+            </BchThemeProvider>
         </div>
     </div>
-
 </div>
 
 <style>

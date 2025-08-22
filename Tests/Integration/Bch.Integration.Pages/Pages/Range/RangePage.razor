@@ -2,62 +2,76 @@
 @using Bch.Components.Range
 @using Bch.Modules.Themes.Models
 
-<div class="range-page">
-    <h4>Range theme variants</h4>
-    <div class="themes-row">
-        <div>
-            <div>Light Green</div>
-            <div class="variant-col">
-                <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" Theme="BchTheme.LightGreen" />
-                <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" Theme="BchTheme.LightGreen" />
-                <div style="height: 120px; display:flex; align-items:center;">
-                    <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" Vertical="true" Theme="BchTheme.LightGreen" />
+<div>
+    <h3>Range Component Test</h3>
+
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Themed Variants</h4>
+            <p>Different theme options for the range component</p>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <div class="variant-col">
+                        <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" Theme="BchTheme.LightGreen" />
+                        <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" Theme="BchTheme.LightGreen" />
+                        <div style="height: 120px; display:flex; align-items:center;">
+                            <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" Vertical="true" Theme="BchTheme.LightGreen" />
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <div class="variant-col">
+                        <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" Theme="BchTheme.Light" />
+                        <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" Theme="BchTheme.Light" />
+                        <div style="height: 120px; display:flex; align-items:center;">
+                            <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" Vertical="true" Theme="BchTheme.Light" />
+                        </div>
+                    </div>
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <div class="variant-col">
+                        <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" Theme="BchTheme.Dark" />
+                        <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" Theme="BchTheme.Dark" />
+                        <div style="height: 120px; display:flex; align-items:center;">
+                            <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" Vertical="true" Theme="BchTheme.Dark" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <div>Light</div>
-            <div class="variant-col">
-                <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" Theme="BchTheme.Light" />
-                <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" Theme="BchTheme.Light" />
-                <div style="height: 120px; display:flex; align-items:center;">
-                    <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" Vertical="true" Theme="BchTheme.Light" />
-                </div>
+
+        <div class="test-case">
+            <h4>Test Case 1: Basic Range with Binding</h4>
+            <p>Current value: @_value</p>
+            <BchRange Min="0" Max="100" @bind-Value="_value" ShowFillColor="true" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 2: Range with Steps</h4>
+            <p>Range with step value of 20</p>
+            <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" />
+        </div>
+
+        <div class="test-case">
+            <h4>Test Case 3: Vertical Range</h4>
+            <p>Vertical orientation range component</p>
+            <div style="height: 120px; display:flex; align-items:center;">
+                <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" Vertical="true" />
             </div>
         </div>
-        <div>
-            <div>Dark</div>
-            <div class="variant-col">
-                <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" Theme="BchTheme.Dark" />
-                <BchRange Min="0" Max="100" Step="20" ShowFillColor="true" Theme="BchTheme.Dark" />
-                <div style="height: 120px; display:flex; align-items:center;">
-                    <BchRange Min="0" Max="130" AfterPointCountNumber="2" ShowFillColor="true" Vertical="true" Theme="BchTheme.Dark" />
-                </div>
-            </div>
+
+        <div class="test-case">
+            <h4>Test Case 4: Range with Percentage</h4>
+            <p>Range showing percentage values</p>
+            <BchRange Min="0" Max="100" ShowFillColor="true" TypeValue="%" />
         </div>
     </div>
 </div>
 
-
 <style>
-
-    .first > .bch-horizontal-range-container{
-        /*margin-left: 250px;*/
-    }
-
-    .themes-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin-top: 12px;
-    }
-
-    .variant-col {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
-
     html {
         height: 100%;
     }

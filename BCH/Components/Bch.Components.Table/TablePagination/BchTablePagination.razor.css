@@ -103,10 +103,10 @@
 }
 
 /* Theme overrides */
-.bch-theme-light .bch-pagination-container { border-top-color: #CED4DA; }
-.bch-theme-light .bch-pagination-container .select-page-number .page-number-item { border-color: #CED4DA; }
+.bch-theme-light .bch-pagination-container { border-top-color: #E9EAEC; }
+.bch-theme-light .bch-pagination-container .select-page-number .page-number-item { border-color: #E9EAEC; }
 .bch-theme-light .bch-pagination-container .select-page-number .prev-page,
-.bch-theme-light .bch-pagination-container .select-page-number .next-page { border-color: #CED4DA; }
+.bch-theme-light .bch-pagination-container .select-page-number .next-page { border-color: #E9EAEC; }
 .bch-theme-light .bch-pagination-container .select-page-number .page-number-item.active { background: #6C757D; }
 
 .bch-theme-dark .bch-pagination-container { border-top-color: #374151; }

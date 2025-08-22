@@ -3,63 +3,71 @@
 @using Bch.Components.Table.TableColumn
 @using Bch.Modules.Themes.Models
 
-<div style="display: flex; flex-direction: column; gap: 40px; padding: 30px;">
+<div>
+    <h3>Custom Table Component Test</h3>
 
-    <div>
-        <h5>Light Green</h5>
-        <CascadingValue Value="BchTheme.LightGreen">
-            <BchTable TRowData="UserModel"
-                      Items="_users">
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
-                    <TdTemplate>
-                        <div class="bch-td-content">
-                            <div>Custom td</div>
-                            <div>@context.Email</div>
-                        </div>
-                    </TdTemplate>
-                </BchTableColumn>
-            </BchTable>
-        </CascadingValue>
-    </div>
-
-    <div>
-        <h5>Light</h5>
-        <CascadingValue Value="BchTheme.Light">
-            <BchTable TRowData="UserModel"
-                      Items="_users">
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
-                    <TdTemplate>
-                        <div class="bch-td-content">
-                            <div>Custom td</div>
-                            <div>@context.Email</div>
-                        </div>
-                    </TdTemplate>
-                </BchTableColumn>
-            </BchTable>
-        </CascadingValue>
-    </div>
-
-    <div>
-        <h5>Dark</h5>
-        <CascadingValue Value="BchTheme.Dark">
-            <BchTable TRowData="UserModel"
-                      Items="_users">
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
-                <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
-                    <TdTemplate>
-                        <div class="bch-td-content">
-                            <div>Custom td</div>
-                            <div>@context.Email</div>
-                        </div>
-                    </TdTemplate>
-                </BchTableColumn>
-            </BchTable>
-        </CascadingValue>
+    <div class="test-cases">
+        <div class="themes-section test-case">
+            <h3>Themed Variants</h3>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h4>Light Green</h4>
+                    <CascadingValue Value="BchTheme.LightGreen">
+                        <BchTable TRowData="UserModel"
+                                  Items="_users">
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
+                                <TdTemplate>
+                                    <div class="bch-td-content">
+                                        <div>Custom td</div>
+                                        <div>@context.Email</div>
+                                    </div>
+                                </TdTemplate>
+                            </BchTableColumn>
+                        </BchTable>
+                    </CascadingValue>
+                </div>
+                
+                <div class="theme-col">
+                    <h4>Light</h4>
+                    <CascadingValue Value="BchTheme.Light">
+                        <BchTable TRowData="UserModel"
+                                  Items="_users">
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
+                                <TdTemplate>
+                                    <div class="bch-td-content">
+                                        <div>Custom td</div>
+                                        <div>@context.Email</div>
+                                    </div>
+                                </TdTemplate>
+                            </BchTableColumn>
+                        </BchTable>
+                    </CascadingValue>
+                </div>
+                
+                <div class="theme-col">
+                    <h4>Dark</h4>
+                    <CascadingValue Value="BchTheme.Dark">
+                        <BchTable TRowData="UserModel"
+                                  Items="_users">
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Id" Title="Id" />
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Name" Title="Name" />
+                            <BchTableColumn TRowData="UserModel" Expression="c => c.Email" Title="Email">
+                                <TdTemplate>
+                                    <div class="bch-td-content">
+                                        <div>Custom td</div>
+                                        <div>@context.Email</div>
+                                    </div>
+                                </TdTemplate>
+                            </BchTableColumn>
+                        </BchTable>
+                    </CascadingValue>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
