@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 20px;
 }
 
 .test-case {
@@ -18,15 +19,13 @@
     font-weight: 600;
 }
 
-.themes-row { /* deprecated grid, left for reference */ }
-
-.theme-col {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 24px;
+.test-case p {
+    margin: 0 0 15px 0;
+    color: #6B7280;
+    font-size: 14px;
 }
 
+/* Table specific styles */
 .example-table-birthday-text {
     width: 100%;
     height: 100%;
@@ -49,5 +48,16 @@
     .example-table-birthday-text > .d { color: #ffcc66; }
     .example-table-birthday-text > .a { color: #9933cc; }
     .example-table-birthday-text > .y { color: #ff9999; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .test-cases {
+        padding: 16px;
+    }
+    
+    .test-case {
+        padding: 16px;
+    }
+}
 
 
