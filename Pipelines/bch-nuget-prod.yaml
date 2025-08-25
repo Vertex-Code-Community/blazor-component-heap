@@ -85,6 +85,226 @@ steps:
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'nugetVersion'
 
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Modules.Storage'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Modules.Storage.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Modules.GlobalEvents'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Modules.GlobalEvents.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Modules.DomInterop'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Modules.DomInterop.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Modules.Files'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Modules.Files.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Modal'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Modal.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Select'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Select.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Calendar'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Calendar.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.RangeCalendar'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.RangeCalendar.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Zoom'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Zoom.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Cropper'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Cropper.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Range'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Range.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.InputFile'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.InputFile.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.FileDrop'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.FileDrop.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.DraggingModal'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.DraggingModal.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.RadioButton'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.RadioButton.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Toggle'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Toggle.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Slider'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Slider.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.ImageCropper'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.ImageCropper.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Tabs'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Tabs.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Table'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Table.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.Scheduler'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.Scheduler.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.ExpandMenu'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.ExpandMenu.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
   - script: |
       ls -a $(Build.ArtifactStagingDirectory)
     displayName: 'List Files in Artifact Staging Directory'
@@ -93,6 +313,28 @@ steps:
       dotnet nuget push 
         $(Build.ArtifactStagingDirectory)/Bch.Modules.Maths.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Modules.Themes.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Modules.Storage.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Modules.GlobalEvents.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Modules.DomInterop.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Modules.Files.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Modal.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Select.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Calendar.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.RangeCalendar.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Zoom.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Cropper.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Range.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.InputFile.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.FileDrop.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.DraggingModal.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.RadioButton.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Toggle.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Slider.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.ImageCropper.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Tabs.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Table.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.Scheduler.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.ExpandMenu.$(nugetVersion).nupkg \
         --source https://api.nuget.org/v3/index.json \
         --api-key $(nugetApiKey)
     displayName: 'Push NuGet package'
