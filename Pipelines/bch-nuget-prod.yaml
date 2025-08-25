@@ -310,7 +310,7 @@ steps:
     displayName: 'List Files in Artifact Staging Directory'
 
   - script: |
-      dotnet nuget push 
+      dotnet nuget push \
         $(Build.ArtifactStagingDirectory)/Bch.Modules.Maths.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Modules.Themes.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Modules.Storage.$(nugetVersion).nupkg \
