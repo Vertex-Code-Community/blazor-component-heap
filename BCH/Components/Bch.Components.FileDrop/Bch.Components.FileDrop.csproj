@@ -3,6 +3,13 @@
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+
+        <Title>Bch.Components.FileDrop</Title>
+        <Authors>VertexCode</Authors>
+        <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
+        <Description>A modern Blazor component set focused on performance and flexibility—original components with rich customization</Description>
+        <Company>VertexCode</Company>
+        <RootNamespace>Bch.Components.FileDrop</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,10 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Modules\Bch.Modules.Files\Bch.Modules.Files.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Files\Bch.Modules.Files.csproj"/>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj"/>
     </ItemGroup>
 </Project>

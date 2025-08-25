@@ -4,8 +4,14 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Bch.Modules.Files</RootNamespace>
-    </PropertyGroup>
 
+        <Title>Bch.Modules.Files</Title>
+        <Authors>VertexCode</Authors>
+        <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
+        <Description>A modern Blazor component set focused on performance and flexibility—original components with rich customization</Description>
+        <Company>VertexCode</Company>
+        <RootNamespace>Bch.Modules.Files</RootNamespace>
+    </PropertyGroup>
 
     <ItemGroup>
         <SupportedPlatform Include="browser"/>

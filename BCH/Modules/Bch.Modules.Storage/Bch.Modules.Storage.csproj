@@ -1,12 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
-
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+
+        <Title>Bch.Modules.Storage</Title>
+        <Authors>VertexCode</Authors>
+        <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
+        <Description>A modern Blazor component set focused on performance and flexibility—original components with rich customization</Description>
+        <Company>VertexCode</Company>
         <RootNamespace>Bch.Modules.Storage</RootNamespace>
     </PropertyGroup>
-
 
     <ItemGroup>
         <SupportedPlatform Include="browser"/>
@@ -19,5 +23,4 @@
     <ItemGroup>
       <Folder Include="wwwroot\" />
     </ItemGroup>
-
 </Project>

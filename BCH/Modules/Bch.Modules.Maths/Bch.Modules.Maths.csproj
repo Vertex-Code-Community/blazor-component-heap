@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+        <Title>Bch.Modules.Maths</Title>
+        <Authors>VertexCode</Authors>
+        <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
+        <Description>A modern Blazor component set focused on performance and flexibility—original components with rich customization</Description>
+        <Company>VertexCode</Company>
         <RootNamespace>Bch.Modules.Maths</RootNamespace>
     </PropertyGroup>
-
 </Project>
