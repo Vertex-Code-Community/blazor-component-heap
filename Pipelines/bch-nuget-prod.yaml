@@ -1,0 +1,98 @@
+trigger:
+  branches:
+    exclude:
+      - '*'
+
+pr:
+  - none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  # nugetVersion: '0.0.0'
+  # nugetApiKey: 'key'
+  
+  ProjectName: 'BlazorComponentHeap'
+  ProjectPath: |
+    **/Bch.Modules.Maths.csproj
+    **/Bch.Modules.Themes.csproj
+    **/Bch.Modules.Storage.csproj
+    **/Bch.Modules.GlobalEvents.csproj
+    **/Bch.Modules.DomInterop.csproj
+    **/Bch.Modules.Files.csproj
+    
+    **/Bch.Components.Modal.csproj
+    **/Bch.Components.Select.csproj
+    **/Bch.Components.Calendar.csproj
+    **/Bch.Components.RangeCalendar.csproj
+    **/Bch.Components.Zoom.csproj
+    **/Bch.Components.Cropper.csproj
+    **/Bch.Components.Range.csproj
+    **/Bch.Components.InputFile.csproj
+    **/Bch.Components.FileDrop.csproj
+    **/Bch.Components.DraggingModal.csproj
+    **/Bch.Components.RadioButton.csproj
+    **/Bch.Components.Toggle.csproj
+    **/Bch.Components.Slider.csproj
+    **/Bch.Components.ImageCropper.csproj
+    **/Bch.Components.Tabs.csproj
+    **/Bch.Components.Table.csproj
+    **/Bch.Components.Scheduler.csproj
+    **/Bch.Components.ExpandMenu.csproj
+steps:
+  - bash: |
+      echo "NuGet Package Version: $(nugetVersion)"
+    displayName: 'NugetVersion Value'
+
+  - task: UseDotNet@2
+    displayName: 'Install .NET Core SDK'
+    inputs:
+      packageType: 'sdk'
+      version: '6.0.x'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet restore'
+    inputs:
+      command: 'restore'
+      projects: '$(ProjectPath)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Build $(ProjectName)'
+    inputs:
+      command: 'build'
+      arguments: '--configuration $(buildConfiguration)'
+      projects: '$(ProjectPath)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Modules.Maths'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Modules.Maths.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Modules.Themes'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Modules.Themes.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+
+  - script: |
+      ls -a $(Build.ArtifactStagingDirectory)
+    displayName: 'List Files in Artifact Staging Directory'
+
+  - script: |
+      dotnet nuget push 
+        $(Build.ArtifactStagingDirectory)/Bch.Modules.Maths.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Modules.Themes.$(nugetVersion).nupkg \
+        --source https://api.nuget.org/v3/index.json \
+        --api-key $(nugetApiKey)
+    displayName: 'Push NuGet package'

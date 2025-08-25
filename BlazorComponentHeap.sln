@@ -69,6 +69,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Integration.Maui", "Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Integration.Server", "Tests\Integration\Bch.Integration.Server\Bch.Integration.Server.csproj", "{9DB36977-D22F-47AA-98FC-A781C232C57C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{CB73D43E-7D98-4CF3-9552-F010F9E0EBCF}"
+	ProjectSection(SolutionItems) = preProject
+		Pipelines\bch-nuget-prod.yaml = Pipelines\bch-nuget-prod.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
