@@ -52,6 +52,11 @@ steps:
       packageType: 'sdk'
       version: '8.0.x'
 
+  - task: NuGetToolInstaller@1
+    displayName: 'Install NuGet'
+    inputs:
+      checkLatest: true
+
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
     inputs:
@@ -336,5 +341,6 @@ steps:
         $(Build.ArtifactStagingDirectory)/Bch.Components.Scheduler.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Components.ExpandMenu.$(nugetVersion).nupkg \
         --source https://api.nuget.org/v3/index.json \
+        --skip-duplicate \
         --api-key $(nugetApiKey)
     displayName: 'Push NuGet package'
