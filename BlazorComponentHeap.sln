@@ -74,6 +74,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{
 		Pipelines\bch-nuget-prod.yaml = Pipelines\bch-nuget-prod.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{3B3A7B3D-9A8C-46E9-B6BB-FA1FC5D81D5D}"
+	ProjectSection(SolutionItems) = preProject
+		BlazorComponentHeap.nuspec = BlazorComponentHeap.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -185,7 +190,6 @@ Global
 		{9A8F5F90-D5F9-4128-928D-E30F8417715B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A8F5F90-D5F9-4128-928D-E30F8417715B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADF6D64E-E059-49C1-A158-74A127F0B052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADF6D64E-E059-49C1-A158-74A127F0B052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADF6D64E-E059-49C1-A158-74A127F0B052}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{ADF6D64E-E059-49C1-A158-74A127F0B052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADF6D64E-E059-49C1-A158-74A127F0B052}.Release|Any CPU.Build.0 = Release|Any CPU

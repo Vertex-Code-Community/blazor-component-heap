@@ -1,18 +1,40 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
-    <id>BlazorComponentHeap.Components</id>
-    <version>1.0.0</version>
-    <authors>WebSvit</authors>
-    <description>An exceptional Blazor component library featuring unique components you won't find anywhere else.</description>
+    <id>BlazorComponentHeap</id>
+    <version>0.0.0</version>
+    <authors>VertexCode</authors>
+    <description>A modern Blazor component set focused on performance and flexibility—original components with rich customization</description>
+    <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-        <dependency id="BlazorComponentHeap.Shared" version="1.0.0" />
-        <dependency id="BlazorComponentHeap.Core" version="1.0.0" />
+      <!-- Modules -->
+      <dependency id="Bch.Modules.Maths" version="0.0.0" />
+      <dependency id="Bch.Modules.Themes" version="0.0.0" />
+      <dependency id="Bch.Modules.Storage" version="0.0.0" />
+      <dependency id="Bch.Modules.GlobalEvents" version="0.0.0" />
+      <dependency id="Bch.Modules.DomInterop" version="0.0.0" />
+      <dependency id="Bch.Modules.Files" version="0.0.0" />
+
+      <!-- Components -->
+      <dependency id="Bch.Components.Modal" version="0.0.0" />
+      <dependency id="Bch.Components.Select" version="0.0.0" />
+      <dependency id="Bch.Components.Calendar" version="0.0.0" />
+      <dependency id="Bch.Components.RangeCalendar" version="0.0.0" />
+      <dependency id="Bch.Components.Zoom" version="0.0.0" />
+      <dependency id="Bch.Components.Cropper" version="0.0.0" />
+      <dependency id="Bch.Components.Range" version="0.0.0" />
+      <dependency id="Bch.Components.InputFile" version="0.0.0" />
+      <dependency id="Bch.Components.FileDrop" version="0.0.0" />
+      <dependency id="Bch.Components.DraggingModal" version="0.0.0" />
+      <dependency id="Bch.Components.RadioButton" version="0.0.0" />
+      <dependency id="Bch.Components.Toggle" version="0.0.0" />
+      <dependency id="Bch.Components.Slider" version="0.0.0" />
+      <dependency id="Bch.Components.ImageCropper" version="0.0.0" />
+      <dependency id="Bch.Components.Tabs" version="0.0.0" />
+      <dependency id="Bch.Components.Table" version="0.0.0" />
+      <dependency id="Bch.Components.Scheduler" version="0.0.0" />
+      <dependency id="Bch.Components.ExpandMenu" version="0.0.0" />
     </dependencies>
   </metadata>
-  <files>
-    <file src="BCH\BlazorComponentHeap.Components\bin\Release\net6.0\*.dll" target="lib\net6.0" />
-    <file src="BCH\BlazorComponentHeap.Components\wwwroot\**\*.*" target="content\wwwroot" />
-  </files>
 </package>

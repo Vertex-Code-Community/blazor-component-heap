@@ -6,7 +6,6 @@
 
         <Title>Bch.Components.Range</Title>
         <Authors>VertexCode</Authors>
-        <PackageLicenseFileUrl>https://blazor-component-heap.com/license</PackageLicenseFileUrl>
         <Description>A modern Blazor component set focused on performance and flexibility—original components with rich customization</Description>
         <Company>VertexCode</Company>
         <RootNamespace>Bch.Components.Range</RootNamespace>
