@@ -4,7 +4,7 @@
 @using Bch.Components.Table.Models
 @typeparam TRowData
 
-<div id="@_containerId" class="bch-table-head-container @GetThemeCssClass()">
+<div id="@_containerId" class="bch-component bch-table-head-container @GetThemeCssClass()">
     <div class="head-name-container @(Column.FilterType is not ColumnFilterType.None ? "bch-filtering" : "")">
 
         <div class="head-name">

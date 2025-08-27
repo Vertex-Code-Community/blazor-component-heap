@@ -5,7 +5,7 @@
 
 @if (!_isServerSide)
 {
-    <div class="bch-image-cropper-container @(IsMobile ? " bch-mobile" : "")">
+    <div class="bch-component bch-image-cropper-container @(IsMobile ? " bch-mobile" : "")">
 
         @if (IsMobile)
         {
@@ -120,7 +120,7 @@
 }
 else
 {
-    <div class="bch-not-supported">BCHImageCropper is not supported on Blazor Server</div>
+    <div class="bch-component bch-not-supported">BCHImageCropper is not supported on Blazor Server</div>
 }
 
 <style>

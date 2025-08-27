@@ -3,7 +3,7 @@
 @using Bch.Components.Calendar.CalendarMonths
 @using Bch.Modules.Themes.Models
 
-<div class="bch-datepicker-wrapper @CssClass @GetThemeCssClass()" id="@_containerId" tabindex="-1">
+<div class="bch-component bch-datepicker-wrapper @CssClass @GetThemeCssClass()" id="@_containerId" tabindex="-1">
     <div class="bch-datepicker" @onclick="OnCalendarClickedAsync">
         <input id="@_inputId"
                class="bch-datepicker-input"

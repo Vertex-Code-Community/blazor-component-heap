@@ -11,6 +11,7 @@
 }
 
     .bch-datepicker-container .bch-datepicker-header-info {
+        height: 45px;
         display: flex;
         justify-content: space-between;
         padding: 9px 15px;

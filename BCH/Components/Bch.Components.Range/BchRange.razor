@@ -1,7 +1,7 @@
 ﻿
 @if (Vertical)
 {
-    <div class="bch-vertical-range-container @GetThemeCssClass()"
+    <div class="bch-component bch-vertical-range-container @GetThemeCssClass()"
          id="@_containerId"
          @onmousedown="e => OnContainerVerticalDownAsync((float)e.PageY, true)"
          @ontouchstart="e => OnContainerVerticalDownAsync((float)e.Touches[0].PageY, false)">
@@ -23,7 +23,7 @@
 else
 {
     <div id="@_containerId"
-         class="bch-horizontal-range-container @GetThemeCssClass()"
+         class="bch-component bch-horizontal-range-container @GetThemeCssClass()"
          @onmousedown="async (e) => { await OnContainerHorizontalDownAsync((float)e.PageX, true); }"
          @ontouchstart="async (e) => { await OnContainerHorizontalDownAsync((float)e.Touches[0].PageX, false); }">
         <div id="@_circleId"

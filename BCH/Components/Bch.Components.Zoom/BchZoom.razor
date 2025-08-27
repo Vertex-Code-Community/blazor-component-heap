@@ -1,6 +1,6 @@
 @using Bch.Components.Zoom.Models
 
-<div class="bch-navigation-cnt @(_isTopConstrained && _isBottomConstrained && _isLeftConstrained && _isRightConstrained ? "bch-all-constrained" : "")">
+<div class="bch-component bch-navigation-cnt @(_isTopConstrained && _isBottomConstrained && _isLeftConstrained && _isRightConstrained ? "bch-all-constrained" : "")">
     <div id="@_wrapperId"
          class="bch-scroll-cnt bch-navigation-cs-container"
          @ontouchstart="OnTouchStartAsync"

@@ -1,6 +1,6 @@
 ﻿@typeparam TItem
 
-<div class="@GetThemeCssClass()">
+<div class="bch-component @GetThemeCssClass()">
     <CascadingValue Value="EffectiveTheme" IsFixed="true">
         <CascadingValue IsFixed="true" Name="@($"BCHRadioButtonContainer{nameof(TItem)}")" Value="this">
             @ChildContent

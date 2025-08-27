@@ -2,7 +2,7 @@
 
 @if (OwnerContainer != null)
 {
-    <div class="@GetThemeCssClass()">
+    <div class="bch-component @GetThemeCssClass()">
         <div class="bch-rb-item @(ContentTemplate is not null ? "custom" : "") @(Disabled ? "disabled" : "")" 
              @onclick="OnClick">
 

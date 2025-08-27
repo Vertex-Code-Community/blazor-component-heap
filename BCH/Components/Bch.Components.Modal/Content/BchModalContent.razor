@@ -4,10 +4,10 @@
 
 @if (ModalModel.Overlay)
 {
-    <div id="@ModalModel.OverlayId" class="bch-modal-overlay @ModalModel.CssClass" @onclick="OnOverlayClicked">
+    <div id="@ModalModel.OverlayId" class="bch-component bch-modal-overlay @ModalModel.CssClass" @onclick="OnOverlayClicked">
         <div @onclick:stopPropagation
              id="@ModalModel.Id"
-             class="bch-modal-content-container @ModalModel.CssClass"
+             class="bch-component bch-modal-content-container @ModalModel.CssClass"
              style="@($"width: {ModalModel.Width}; height: {ModalModel.Height}; " + $"position: {(isCentral ? "static" : "absolute")}; left: {ModalModel.X}; top: {ModalModel.Y}; {ModalModel.CssStyles}")">
             @ModalModel.Fragment
         </div>
@@ -17,7 +17,7 @@ else
 {
     <div @onclick:stopPropagation
          id="@ModalModel.Id"
-         class="@($"bch-modal-content-container bch-no-layer {(isCentral ? "bch-central" : "")} {ModalModel.CssClass}")"
+         class="@($"bch-component bch-modal-content-container bch-no-layer {(isCentral ? "bch-central" : "")} {ModalModel.CssClass}")"
          style="@($"width: {ModalModel.Width}; height: {ModalModel.Height}; z-index: {ModalModel.ZIndex}; " + $"{(!isCentral ? $"left: {ModalModel.X}; top: {ModalModel.Y};" : "")} {ModalModel.CssStyles}")">
         @ModalModel.Fragment
     </div>

@@ -1,7 +1,7 @@
 ﻿@typeparam TItem
 
 <div
-    class="@("bch-slider-container " + $"{(CircleButtonsAboveContent ? "bch-circle-buttons-above-content" : "")} " + $"{(CircularScroll ? "bch-circular" : "")} " + GetThemeCssClass())"
+    class="@("bch-component bch-slider-container " + $"{(CircleButtonsAboveContent ? "bch-circle-buttons-above-content" : "")} " + $"{(CircularScroll ? "bch-circular" : "")} " + GetThemeCssClass())"
     id="@_sliderId">
     <div
         class="@("bch-scroll-btn bch-left " + $"{(ButtonsAboveContent ? "bch-above-content" : "")} " + $"{(ShowCircleButtons ? "bch-circle-buttons" : "")} " + $"{(_scrollIndex == 0 ? "bch-disabled" : "")}")">

@@ -1,11 +1,11 @@
 ﻿@using Bch.Components.Select
-<div id="@Id" class="bch-datepicker-list-month @GetThemeCssClass()">
+<div id="@Id" class="bch-component bch-datepicker-list-month @GetThemeCssClass()">
     <div class="bch-datepicker-button-of-open-years">
         <div>
             <BchSelect TItem="Year"
                        ContentId="@YearsSelectContentId"
                        Options="_years"
-                       ContentHeight="226"
+                       ContentHeight="224"
                        ItemHeight="34"
                        Width="70"
                        ScrollToSelected="true"
@@ -49,7 +49,7 @@
 
 <style>
     .bch-calendar-year-select { z-index: 999; }
-    .bch-select-content-modal-wrapper.bch-calendar-year-select { transform: translate(-15px, 60px) !important; }
+    .bch-select-content-modal-wrapper.bch-calendar-year-select { transform: translate(-15px, 51px) !important; }
 
     /* Remove white bg/shadow from the trigger button (non-modal part), no hover */
     .bch-calendar-year-select-modal.bch-select-container { background: transparent !important; filter: none !important; border-radius: 0 !important; }
@@ -66,7 +66,7 @@
     .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option.selected,
     .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option:hover { background: none !important; padding: 0 !important; border: none !important; opacity: 1.0; }
     .bch-calendar-year-select-modal.bch-select-container .bch-button label { font-family: 'Roboto'; font-style: normal; font-weight: 500 !important; font-size: 18px !important; line-height: 32px; }
-    .bch-calendar-year-select-modal.bch-select-container .bch-button span { transition: none !important; width: 14px !important; height: 12px !important; transform: none !important; margin-top: 2px; }
+    .bch-calendar-year-select-modal.bch-select-container .bch-button span { transition: none !important; min-width: 14px !important; min-height: 12px !important; transform: none !important; margin-top: 2px; }
 
     /* Divider and themed rules remain unchanged (below) */
     /* LightGreen */
