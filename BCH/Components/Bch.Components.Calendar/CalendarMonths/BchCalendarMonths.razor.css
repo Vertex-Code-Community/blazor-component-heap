@@ -135,7 +135,7 @@
     box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2) !important;
 }
 .bch-theme-light.bch-datepicker-list-month .bch-datepicker-button-of-open-years {
-    border-bottom: 1px solid #E9ECEF !important;
+    border-bottom: 1px solid #BDBDBD !important;
 }
 .bch-theme-light.bch-datepicker-list-month .bch-list-of-month {
     color: #495057 !important;
