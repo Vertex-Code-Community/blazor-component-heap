@@ -2,7 +2,7 @@
 @typeparam TItem
 
 <div id="@_containerId"
-     class="@($"bch-component bch-select-container bch-no-selectable-text {GetThemeCssClass()} { (IsOpened ? "show" : "") } { (_selectedValue != null! ? "has-selected" : "") } { (UpperSide ? "bch-upper-side" : "") } {CssClass}")"
+     class="@($"bch-component bch-select-container bch-no-selectable-text {GetThemeCssClass()} { (IsOpened ? "show" : "") } { (_selectedValue != null! ? "has-selected" : "") } { (UpperSide ? "bch-upper-side" : "") } {CssClass} {_cssKey}")"
      style="@($"width: {Width}px; height: {Height}px;")"
      tabindex="-1">
 
@@ -43,7 +43,7 @@
     @bind-Show="IsOpened">
 
     <div id="@ContentId"
-         class="bch-content @GetThemeCssClass() @(UpperSide ? "bch-upper-side" : "") bch-no-selectable-text"
+         class="bch-content @_cssKey @GetThemeCssClass() @(UpperSide ? "bch-upper-side" : "") bch-no-selectable-text"
          style="@($"max-height: {ContentHeight}px; width: {Width}px;")">
         <div id="@ScrollerId" class="bch-scroller bch-no-selectable-text">
 
@@ -108,5 +108,176 @@
 <style>
     .@(_contentClass).bch-select-content-modal-wrapper:not(.bch-upper-side) {
         transform: translateY(@(Height)px);
+    }
+</style>
+
+<style>
+
+    /* THEME: LightGreen (current) */
+
+    .@(_cssKey).bch-theme-light-green.bch-content,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content {
+        border-top-color: #33B469;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-content.bch-upper-side,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content.bch-upper-side {
+        border-bottom-color: #33B469;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb {
+        background: rgba(51, 180, 105, 0.6);
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+        background: rgba(51, 180, 105, 0.85);
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+        background: rgba(51, 180, 105, 0.1);
+        border-left-color: #33B469;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-option.selected,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option.selected {
+        background: rgba(51, 180, 105, 0.8);
+        color: #FEFEFE;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span {
+        background: url(_content/Bch.Components.Select/img/select-arrow-green.svg) center no-repeat;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-select-container > .bch-button > span,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-select-container > .bch-button > span {
+        background: url(_content/Bch.Components.Select/img/select-arrow-green.svg) center no-repeat;
+    }
+
+    /* THEME: Light (silver monochrome) */
+
+    .@(_cssKey).bch-theme-light.bch-select-container,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-select-container {
+        background: #FFFFFF;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-content,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content {
+        background: #FFFFFF;
+        border-top-color: #BDBDBD;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-content.bch-upper-side,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content.bch-upper-side {
+        border-bottom-color: #BDBDBD;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-content > .bch-scroller::-webkit-scrollbar-thumb,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb {
+        background: #AFAFAF;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+        background: #9A9A9A;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+        background: rgba(0, 0, 0, 0.06);
+        border-left-color: #BDBDBD;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-content > .bch-scroller > .bch-group > .bch-option.selected,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option.selected {
+        background: #BDBDBD;
+        color: #1F2937;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span {
+        background: url(_content/Bch.Components.Select/img/select-arrow.svg) center no-repeat;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-select-container > .bch-button > span,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-select-container > .bch-button > span {
+        background: url(_content/Bch.Components.Select/img/select-arrow.svg) center no-repeat;
+    }
+
+    /* THEME: Dark */
+
+    .@(_cssKey).bch-theme-dark.bch-select-container,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-select-container {
+        background: #111827
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-select-container > .bch-button > input,
+    .@(_cssKey).bch-theme-dark.bch-select-container > .bch-button > label,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-select-container > .bch-button > input,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-select-container > .bch-button > label {
+        color: #E5E7EB;
+        caret-color: #E5E7EB;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-select-container > .bch-button > input::placeholder,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-select-container > .bch-button > input::placeholder {
+        color: rgba(229,231,235,0.7);
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content {
+        background: #111827;
+        border-top-color: #4B5563;
+        filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.35));
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content.bch-upper-side,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content.bch-upper-side {
+        border-bottom-color: #4B5563;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller::-webkit-scrollbar-thumb,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb {
+        background: #6B7280;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+        background: #9CA3AF;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option {
+        color: #D1D5DB;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > .name,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > .name {
+        color: #D1D5DB;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-left-color: #9CA3AF;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option.selected,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option.selected {
+        background: rgba(255,255,255,0.18);
+        color: #F9FAFB;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-group-wrapper > span {
+        background: url(_content/Bch.Components.Select/img/select-arrow-white.svg) center no-repeat;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-select-container > .bch-button > span,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-select-container > .bch-button > span {
+        background: url(_content/Bch.Components.Select/img/select-arrow-white.svg) center no-repeat;
     }
 </style>

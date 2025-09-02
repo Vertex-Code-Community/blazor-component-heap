@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Models;
@@ -17,7 +16,6 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
-    [Inject] public required IJSRuntime JsRuntime { get; set; }
 
     private class Element
     {
@@ -119,6 +117,7 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     private Vec2 _containerPos = new ();
     private float _contentWidth = 0;
     private NumberFormatInfo _nF = new () { NumberDecimalSeparator = "." };
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
 
     protected override Task OnInitializedAsync()
     {
@@ -376,7 +375,9 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 
     private string GetThemeCssClass()
     {
-        // read CssName attribute from EffectiveTheme
-        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        var themeSpecified = Theme ?? ThemeCascading;
+        
+        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) + 
+               (themeSpecified is null ? " bch-no-theme-specified" : "");
     }
 }
