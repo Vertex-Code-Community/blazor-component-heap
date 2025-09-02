@@ -120,11 +120,10 @@
     border: 1px solid #33B469 !important;
 }
 
-/* Selected month: use outline instead of solid fill */
 .bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month .selected-month {
-    background: transparent !important;
-    border: 1px solid #33B469 !important;
-    color: #33B469 !important;
+    background: #33B469 !important;
+    border: 1px solid transparent !important;
+    color: #FFFFFF !important;
 }
 
 .bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month label:hover {
