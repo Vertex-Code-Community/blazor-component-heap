@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <Title>Bch.Components.Input</Title>
+        <Authors>VertexCode</Authors>
+        <Description>A modern Blazor component set focused on performance and flexibility—original components with rich customization</Description>
+        <Company>VertexCode</Company>
+        <RootNamespace>Bch.Components.Input</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.15" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
+    </ItemGroup>
+</Project>
+
+

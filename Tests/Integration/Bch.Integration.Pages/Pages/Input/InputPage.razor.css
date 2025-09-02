@@ -1,0 +1,28 @@
+.input-page {
+    padding: 16px;
+}
+
+    .input-page .test-cases {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+    }
+
+        .input-page .test-cases .test-case {
+            background: #fff;
+            border: 1px solid #E9EAEC;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+    .input-page .theme-variants {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .input-page .enter-result {
+        margin-top: 8px;
+        font-size: 14px;
+        color: #212529;
+    }

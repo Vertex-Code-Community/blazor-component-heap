@@ -1,0 +1,157 @@
+.bch-input-container {
+    display: inline-block;
+}
+
+.bch-input-container > .bch-input-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+    .bch-input-container > .bch-input-wrapper .bch-input {
+        width: 100%;
+        height: 100%;
+        display: block;
+        box-sizing: border-box;
+        border: 1px solid #E9EAEC;
+        border-radius: 10px;
+        background: #FFFFFF;
+        padding: 0 36px 0 12px;
+        outline: none;
+    }
+
+    .bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input {
+        background: #FFFFFF url("img/search.svg") no-repeat;
+        background-position: 12px center;
+        background-size: 16px 16px;
+        padding-left: 36px;
+    }
+
+    .bch-input-container > .bch-input-wrapper .bch-input::placeholder {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 32px;
+        color: #555555;
+    }
+
+    .bch-input-container > .bch-input-wrapper .bch-clear {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border: none;
+        background: transparent url("img/clear.svg") no-repeat center;
+        cursor: pointer;
+        padding: 0;
+    }
+
+.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input,
+.bch-input-container > .bch-input-wrapper.bch-disabled .bch-clear {
+    pointer-events: none;
+}
+
+/* Disabled appearance */
+.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input {
+    background-color: #F1F3F5;
+    border-color: #E9EAEC;
+    color: #9CA3AF;
+    cursor: not-allowed;
+    box-shadow: inset 0 0 0 9999px rgba(0,0,0,0.02);
+}
+
+.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input::placeholder {
+    color: #9CA3AF;
+}
+
+.bch-input-container > .bch-input-wrapper.bch-disabled .bch-clear {
+    display: none;
+}
+
+/* Disabled with icon maintains layout but desaturates */
+.bch-input-container > .bch-input-wrapper.bch-disabled.bch-has-icon .bch-input {
+    background-color: #F1F3F5;
+    background-image: url("img/search.svg");
+    background-position: 12px center;
+    background-size: 16px 16px;
+}
+
+/* Theme overrides */
+.bch-theme-light.bch-input-container > .bch-input-wrapper .bch-input,
+.bch-theme-light .bch-input-container > .bch-input-wrapper .bch-input { border-color: #E9EAEC; background: #FFFFFF; color: #212529; }
+.bch-theme-dark.bch-input-container > .bch-input-wrapper .bch-input,
+.bch-theme-dark .bch-input-container > .bch-input-wrapper .bch-input { border-color: #E9EAEC; background: #111827; color: #E5E7EB; }
+.bch-theme-dark.bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input,
+.bch-theme-dark .bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input {
+    background: #111827 url("img/search-white.svg") no-repeat;
+    background-position: 12px center;
+    background-size: 16px 16px;
+}
+
+/* Dark theme disabled */
+.bch-theme-dark.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input,
+.bch-theme-dark .bch-input-container > .bch-input-wrapper.bch-disabled .bch-input {
+    background-color: #1F2937;
+    border-color: #374151;
+    color: #9CA3AF;
+    box-shadow: inset 0 0 0 9999px rgba(255,255,255,0.03);
+}
+
+.bch-theme-dark.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input::placeholder,
+.bch-theme-dark .bch-input-container > .bch-input-wrapper.bch-disabled .bch-input::placeholder {
+    color: #9CA3AF;
+}
+
+/* Light / LightGreen theme disabled with stronger contrast */
+.bch-theme-light.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input,
+.bch-theme-light .bch-input-container > .bch-input-wrapper.bch-disabled .bch-input,
+.bch-theme-light-green.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input,
+.bch-theme-light-green .bch-input-container > .bch-input-wrapper.bch-disabled .bch-input {
+    background-color: #F5F7F9;
+    border-color: #E0E3E7;
+    color: #9CA3AF;
+    box-shadow: inset 0 0 0 9999px rgba(0,0,0,0.02);
+}
+
+.bch-theme-light.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input::placeholder,
+.bch-theme-light .bch-input-container > .bch-input-wrapper.bch-disabled .bch-input::placeholder,
+.bch-theme-light-green.bch-input-container > .bch-input-wrapper.bch-disabled .bch-input::placeholder,
+.bch-theme-light-green .bch-input-container > .bch-input-wrapper.bch-disabled .bch-input::placeholder {
+    color: #9CA3AF;
+}
+
+/* Ensure correct icon in disabled state per theme */
+.bch-theme-dark.bch-input-container > .bch-input-wrapper.bch-disabled.bch-has-icon .bch-input,
+.bch-theme-dark .bch-input-container > .bch-input-wrapper.bch-disabled.bch-has-icon .bch-input {
+    background-color: #1F2937;
+    background-image: url("img/search-white.svg");
+    background-position: 12px center;
+    background-size: 16px 16px;
+}
+
+.bch-theme-light.bch-input-container > .bch-input-wrapper.bch-disabled.bch-has-icon .bch-input,
+.bch-theme-light .bch-input-container > .bch-input-wrapper.bch-disabled.bch-has-icon .bch-input,
+.bch-theme-light-green.bch-input-container > .bch-input-wrapper.bch-disabled.bch-has-icon .bch-input,
+.bch-theme-light-green .bch-input-container > .bch-input-wrapper.bch-disabled.bch-has-icon .bch-input {
+    background-color: #F5F7F9;
+    background-image: url("img/search.svg");
+    background-position: 12px center;
+    background-size: 16px 16px;
+}
+
+/* Dark placeholder color like table inputs */
+.bch-theme-dark.bch-input-container > .bch-input-wrapper .bch-input::placeholder,
+.bch-theme-dark .bch-input-container > .bch-input-wrapper .bch-input::placeholder {
+    color: #E5E7EB;
+}
+
+/* LightGreen theme: green-accented input */
+.bch-theme-light-green.bch-input-container > .bch-input-wrapper .bch-input,
+.bch-theme-light-green .bch-input-container > .bch-input-wrapper .bch-input {
+    border-color: #33B469;
+    background-color: #FFFFFF;
+    color: #212529;
+}

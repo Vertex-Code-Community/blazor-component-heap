@@ -1,0 +1,24 @@
+<div id="@_containerId" class="bch-component bch-input-container @GetThemeCssClass() @CssClass"
+     style="@($"width:{Width}px; height:{Height}px;")">
+    <div class="bch-input-wrapper @(Disabled ? "bch-disabled" : "") @(_showSearch ? "bch-has-icon" : "")">
+        <input id="@_inputId"
+               class="bch-input"
+               placeholder="@Placeholder"
+               value="@_currentValue"
+               type="@Type"
+               maxlength="@MaxLength"
+               @oninput="OnInputChanged"
+               @onkeydown="OnKeyDownInternal"
+               @onfocus="async _ => await OnFocus.InvokeAsync()"
+               @onblur="async _ => await OnBlur.InvokeAsync()"
+               disabled="@Disabled"
+               readonly="@ReadOnly"
+               @ref="_inputRef"
+               />
+
+        @if (ShowClearButton && !string.IsNullOrEmpty(_currentValue))
+        {
+            <button class="bch-clear" @onclick="async _ => await ClearAsync()" aria-label="Clear"></button>
+        }
+    </div>
+</div>

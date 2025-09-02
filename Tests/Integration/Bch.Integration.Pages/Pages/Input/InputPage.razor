@@ -1,0 +1,77 @@
+@page "/input"
+@using Bch.Components.Input
+@using Bch.Modules.Themes.Models
+
+<div class="input-page">
+    <h3>Input Component Test</h3>
+
+    <div class="test-cases">
+        <div class="test-case">
+            <h4>Default</h4>
+            <BchInput Placeholder="Type here..." @bind-Value="_defaultValue" />
+        </div>
+
+        <div class="test-case">
+            <h4>With Search Icon</h4>
+            <BchInput Placeholder="Search..." ShowSearchIcon="true" Width="280" Height="40" />
+        </div>
+
+        <div class="test-case">
+            <h4>Disabled</h4>
+            <div class="theme-variants">
+                <BchInput Placeholder="Disabled (Light Green)" Disabled="true" Value="Can't edit" Theme="BchTheme.LightGreen" />
+                <BchInput Placeholder="Disabled (Light)" Disabled="true" Value="Can't edit" Theme="BchTheme.Light" />
+                <BchInput Placeholder="Disabled (Dark)" Disabled="true" Value="Can't edit" Theme="BchTheme.Dark" />
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>Theme Variants</h4>
+            <div class="theme-variants">
+                <BchInput Placeholder="Light Green" Theme="BchTheme.LightGreen" />
+                <BchInput Placeholder="Light" Theme="BchTheme.Light" />
+                <BchInput Placeholder="Dark" Theme="BchTheme.Dark" />
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>Events</h4>
+            <BchInput Placeholder="Press Enter or focus/blur" @bind-Value="_eventsValue" OnInput="OnInput" OnKeyDown="OnKeyDown" OnFocus="OnFocus" OnBlur="OnBlur" />
+            @if (!string.IsNullOrEmpty(_submitted))
+            {
+                <div class="enter-result">Submitted: @_submitted</div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private string? _defaultValue;
+    private string? _eventsValue;
+    private string? _submitted;
+
+    private Task OnInput(string? value)
+    {
+        _eventsValue = value;
+        return Task.CompletedTask;
+    }
+
+    private Task OnKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            _submitted = _eventsValue;
+        }
+        return Task.CompletedTask;
+    }
+
+    private Task OnFocus()
+    {
+        return Task.CompletedTask;
+    }
+
+    private Task OnBlur()
+    {
+        return Task.CompletedTask;
+    }
+}
