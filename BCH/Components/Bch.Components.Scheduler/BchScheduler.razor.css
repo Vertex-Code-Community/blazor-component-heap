@@ -243,6 +243,10 @@
                     position: relative;
                 }
 
+                    .bch-calendar-container > .calendar-data > .bch-scroller > .timeline > .hour:first-child::after {
+                        border-bottom: none !important;
+                    }
+
                     .bch-calendar-container > .calendar-data > .bch-scroller > .timeline > .hour::after {
                         width: 100%;
                         content: ' ';
