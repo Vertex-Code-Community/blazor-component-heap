@@ -1,14 +1,13 @@
 @page "/themes"
 @using Bch.Components.Select
-@using Bch.Modules.Themes.Models
-@using Bch.Modules.Themes.Providers
 @using Bch.Components.RangeCalendar
 @using Bch.Components.Calendar
+@using Bch.Integration.Pages.Pages.Themes.ThemeControl
 
 <div>
     <h3>Themes Component Test</h3>
-
-    <BchGlobalThemeProvider Theme="BchTheme.Dark"/>
+    
+    <ThemeControlComponent />
 
     <div class="test-cases">
         <div class="themes-section test-case">
