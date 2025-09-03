@@ -9,21 +9,58 @@ public partial class TabsPage
         public string Name { get; set; } = string.Empty;
         public int Width { get; set; }
     }
-    
-    private readonly List<TabModel> _items = Enumerable.Range(0, 10)
+
+    private readonly List<TabModel> _items1 = Enumerable.Range(0, 10)
         .Select(x => new TabModel
         {
             Name = $"Item {x}",
             Width = x % 2 == 0 ? 100 : 150
         })
         .ToList();
-    
-    private readonly List<string> _items1 = Enumerable.Range(0, 10).Select(x => $"item {x}").ToList();
-    private readonly List<string> _items2 = Enumerable.Range(0, 10).Select(x => $"ITEM {x}").ToList();
+
+    private readonly List<TabModel> _items2 = Enumerable.Range(0, 10)
+        .Select(x => new TabModel
+        {
+            Name = $"Item {x}",
+            Width = x % 2 == 0 ? 100 : 150
+        })
+        .ToList();
+
+    private readonly List<TabModel> _items3 = Enumerable.Range(0, 10)
+        .Select(x => new TabModel
+        {
+            Name = $"Item {x}",
+            Width = x % 2 == 0 ? 100 : 150
+        })
+        .ToList();
+
+    private readonly List<TabModel> _items4 = Enumerable.Range(0, 10)
+        .Select(x => new TabModel
+        {
+            Name = $"Item {x}",
+            Width = x % 2 == 0 ? 100 : 150
+        })
+        .ToList();
+
+    private readonly List<TabModel> _items5 = Enumerable.Range(0, 10)
+        .Select(x => new TabModel
+        {
+            Name = $"Item {x}",
+            Width = x % 2 == 0 ? 100 : 150
+        })
+        .ToList();
+
+    private readonly List<TabModel> _items6 = Enumerable.Range(0, 10)
+        .Select(x => new TabModel
+        {
+            Name = $"Item {x}",
+            Width = x % 2 == 0 ? 100 : 150
+        })
+        .ToList();
 
     private string _selected1 = string.Empty;
     private string _selected2 = string.Empty;
-    
+
     protected override void OnAfterRender(bool firstRender)
     {
         // Console.WriteLine("TestPage OnAfterRender");
