@@ -1,9 +1,9 @@
 ﻿@using Bch.Components.Modal
 @using Bch.Components.Calendar.CalendarDays
 @using Bch.Components.Calendar.CalendarMonths
-@using Bch.Modules.Themes.Models
 
-<div class="bch-component bch-datepicker-wrapper @CssClass @GetThemeCssClass() @_cssKey" id="@_containerId" tabindex="-1">
+<div class="bch-component bch-datepicker-wrapper @CssClass @GetThemeCssClass() @_cssKey" id="@_containerId"
+     tabindex="-1">
     <div class="bch-datepicker" @onclick="OnCalendarClickedAsync">
         <input id="@_inputId"
                class="bch-datepicker-input"
@@ -80,6 +80,7 @@
         background-color: #FFFFFF;
         box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2);
     }
+
     .@(_cssKey).bch-theme-light.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input,
     html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input {
         color: #212529;
@@ -91,13 +92,11 @@
         background-color: #111827;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
     }
+
     .@(_cssKey).bch-theme-dark.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input,
     html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input {
         color: #E5E7EB;
     }
-
-    /* Calendar icon (theme-based via background) */
-    .bch-datepicker .bch-datepicker-img { width: 20px; height: 20px; background-repeat: no-repeat; background-position: center; background-size: contain; }
 
     .@(_cssKey).bch-theme-light-green.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img,
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img {
