@@ -38,11 +38,11 @@ public partial class BchCalendar : IAsyncDisposable
     [Parameter] public BchTheme? Theme { get; set; }
 
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
-    private string GetThemeCssClass() 
+    private string GetThemeCssClass()
     {
-        var cssClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
-        Console.WriteLine($"BchCalendar EffectiveTheme: {EffectiveTheme}, CSS Class: '{cssClass}'");
-        return cssClass;
+        var themeSpecified = Theme ?? ThemeCascading;
+        var themeClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return themeClass + (themeSpecified is null ? " bch-no-theme-specified" : "");
     }
 
     private DateTime? _value = null;
@@ -54,6 +54,7 @@ public partial class BchCalendar : IAsyncDisposable
     private readonly string _yearsSelectContentId = $"_id_{Guid.NewGuid()}";
     private readonly string _inputId = $"_id_{Guid.NewGuid()}";
     private readonly string _subscriptionKey = $"_key_{Guid.NewGuid()}";
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
     private ElementReference _inputRef;
     private CultureInfo _culture = null!;
     private Vec2 _containerPos = new ();

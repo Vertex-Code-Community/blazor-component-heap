@@ -2,6 +2,8 @@
 @using Bch.Components.Select
 @using Bch.Modules.Themes.Models
 @using Bch.Modules.Themes.Providers
+@using Bch.Components.RangeCalendar
+@using Bch.Components.Calendar
 
 <div>
     <h3>Themes Component Test</h3>
@@ -15,68 +17,52 @@
                 <div class="theme-col">
                     <h4>Light Green</h4>
                     <BchSelect TItem="int" Options="_itemsInts"/>
-                    <BchSelect TItem="string" Options="_items"/>
-                    <BchSelect TItem="string"
-                               Options="_items"
-                               OptionNamePredicate="x => x"
-                               GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"'/>
                 </div>
                 <div class="theme-col">
                     <h4>Light</h4>
                     <BchSelect TItem="int" Options="_itemsInts"/>
-                    <BchSelect TItem="string" Options="_items"/>
-                    <BchSelect TItem="string"
-                               Options="_items"
-                               OptionNamePredicate="x => x"
-                               GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"'/>
                 </div>
                 <div class="theme-col">
                     <h4>Dark</h4>
                     <BchSelect TItem="int" Options="_itemsInts"/>
-                    <BchSelect TItem="string" Options="_items"/>
-                    <BchSelect TItem="string"
-                               Options="_items"
-                               OptionNamePredicate="x => x"
-                               GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"'/>
                 </div>
             </div>
         </div>
+
         <div class="test-case">
-            <h4>Test Case 1: Basic Select with Integer Options</h4>
-            <p>Selected value: @(_selectedInt.ToString())</p>
-            <BchSelect TItem="int"
-                       Options="_itemsInts"
-                       @bind-Selected="_selectedInt"/>
+            <h4>Themed Variants</h4>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy"/>
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy"/>
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy"/>
+                </div>
+            </div>
         </div>
 
         <div class="test-case">
-            <h4>Test Case 2: Select with Custom Height and Opened State</h4>
-            <p>Is opened: @_isOpened</p>
-            <BchSelect TItem="int"
-                       Options="_itemsInts"
-                       Height="70"
-                       @bind-IsOpened="_isOpened"/>
-        </div>
-
-        <div class="test-case">
-            <h4>Test Case 3: String Select with Binding</h4>
-            <p>Selected value: @(_selectedString ?? "No value selected")</p>
-            <BchSelect TItem="string"
-                       Options="_items"
-                       @bind-Selected="_selectedString"/>
-        </div>
-
-        <div class="test-case">
-            <h4>Test Case 4: Multiple Selection with Grouping</h4>
-            <p>Selected items: @(_selectedItems.Count > 0 ? string.Join(", ", _selectedItems) : "No items selected")</p>
-            <BchSelect TItem="string"
-                       Options="_items"
-                       ContentHeight="300"
-                       Filtering="false"
-                       MultipleValues="true"
-                       OptionNamePredicate="x => x"
-                       GroupPredicate='x => x.Contains("s") ? "Even" : "Odd"'
-                       SelectedItems="_selectedItems"/>
+            <h4>Themed Variants</h4>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" />
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" />
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" />
+                </div>
+            </div>
         </div>
     </div>
 </div>

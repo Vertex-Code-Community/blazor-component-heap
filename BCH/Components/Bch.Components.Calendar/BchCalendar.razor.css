@@ -15,6 +15,7 @@
     padding: 0 12px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
     .bch-datepicker .bch-datepicker-input {
@@ -50,27 +51,4 @@
     .bch-datepicker:hover {
         border-color: #D1D5DB;
     }
-
-/* Theme-specific styles */
-.bch-theme-light-green .bch-datepicker {
-    box-shadow: 1px 0px 3px rgba(203, 203, 203, 0.25), 0px 1px 3px rgba(203, 203, 203, 0.25);
-}
-
-.bch-theme-light .bch-datepicker {
-    background-color: #FFFFFF;
-    box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2);
-}
-
-.bch-theme-light .bch-datepicker .bch-datepicker-input {
-    color: #212529;
-}
-
-.bch-theme-dark .bch-datepicker {
-    background-color: #111827;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
-}
-
-.bch-theme-dark .bch-datepicker .bch-datepicker-input {
-    color: #E5E7EB;
-}
 

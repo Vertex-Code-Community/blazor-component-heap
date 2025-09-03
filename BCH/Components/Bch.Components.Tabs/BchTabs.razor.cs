@@ -59,7 +59,13 @@ public partial class BchTabs<TItem> : ComponentBase where TItem : class
     private bool _draggable = false;
     
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
-    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
+    private string GetThemeCssClass()
+    {
+        var themeSpecified = Theme ?? ThemeCascading;
+        var themeClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return themeClass + (themeSpecified is null ? " bch-no-theme-specified" : "");
+    }
 
     protected override void OnInitialized()
     {

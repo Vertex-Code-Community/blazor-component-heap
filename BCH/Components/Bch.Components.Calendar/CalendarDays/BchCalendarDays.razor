@@ -1,8 +1,10 @@
-﻿<div id="@Id" class="bch-component bch-datepicker-container @GetThemeCssClass()" @onclick="async () => { await OnFocusOut.InvokeAsync(); }">
+﻿<div id="@Id" class="bch-component bch-datepicker-container @GetThemeCssClass() @_cssKey"
+     @onclick="() => OnFocusOut.InvokeAsync()">
     <div class="bch-datepicker-header-info">
 
         <div class="selected-month-year" @onclick="async () => { await OnClickByMonthAsync(); }">
-            <label class="bch-datepicker-month">@(GetMonthName(_month)[0].ToString().ToUpper() + GetMonthName(_month).Substring(1)), </label>
+            <label
+                class="bch-datepicker-month">@(GetMonthName(_month)[0].ToString().ToUpper() + GetMonthName(_month).Substring(1)), </label>
             <label class="bch-datepicker-year"> @_year</label>
             <div class="bch-month-toggle-icon"></div>
         </div>
@@ -20,46 +22,46 @@
     <div class="bch-datepicker-days">
         <table class="bch-datepicker-table">
             <thead>
-                <tr>
-                    @foreach (var day in _weekDays)
-                    {
-                        <th class="bch-name-week-day">@(day[0].ToString().ToUpper() + day.Substring(1))</th>
-                    }
-                </tr>
+            <tr>
+                @foreach (var day in _weekDays)
+                {
+                    <th @key="day" class="bch-name-week-day">@(day[0].ToString().ToUpper() + day.Substring(1))</th>
+                }
+            </tr>
             </thead>
             <tbody>
-                @for (int r = 0; r < _rowsCount; r++)
-                {
-                    <tr>
-                        @foreach (var item in _days.Skip(r * 7).Take(7))
-                        {
-                            <td @onclick="async () => { await SelectDateAsync(item.Date); }"
-                                class="@(_startDay == item.Date.Date ? "bch-start-selected-day" : "")
+            @for (int r = 0; r < _rowsCount; r++)
+            {
+                <tr>
+                    @foreach (var item in _days.Skip(r * 7).Take(7))
+                    {
+                        <td @key="item" @onclick="() => SelectDateAsync(item.Date)"
+                            class="@(_startDay == item.Date.Date ? "bch-start-selected-day" : "")
                                         @(_endDay == item.Date.Date ? "bch-end-selected-day" : "")
                                 @(_endDay != DateTime.MinValue && _startDay != DateTime.MinValue && item.Date.Date < _endDay && item.Date.Date > _startDay ? "rang-dates" : "")">
-                                @if (!IsDateRange)
-                                {
-                                    <div class="bch-item-day
+                            @if (!IsDateRange)
+                            {
+                                <div class="bch-item-day
                                         @(item.IsOtherDay ? "bch-datepicker-other-day" : "")
                                         @(DateTime.Now.Date == item.Date.Date ? "current-day" : "")
                                         @(SelectedDate?.Date == item.Date.Date ? "bch-selected-day" : "")">
-                                        <label>@item.Date.Day</label>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="bch-item-day
+                                    <label>@item.Date.Day</label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="bch-item-day
                                         @(item.IsOtherDay ? "bch-datepicker-other-day" : "")
                                         @(DateTime.Now.Date == item.Date.Date ? "current-day" : "")
                                         
                                         ">
-                                        <label>@item.Date.Day</label>
-                                    </div>
-                                }
-                            </td>
-                        }
-                    </tr>
-                }
+                                    <label>@item.Date.Day</label>
+                                </div>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
 
             </tbody>
 
@@ -80,3 +82,455 @@
         </div>
     }
 </div>
+
+<style>
+
+    /* Dark */
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container {
+        background: #111827 !important;
+        box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.2), 0px -2px 4px rgba(0, 0, 0, 0.2), 2px 0px 4px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-header-info,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info {
+        border-bottom: 1px solid #374151 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-year,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-month,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-year,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-month {
+        color: #E5E7EB !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-header-info .change-month .next-month:hover,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .change-month .next-month:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month:hover {
+        background: #374151 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-name-week-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-name-week-day {
+        color: #9CA3AF !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day {
+        color: #E5E7EB !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day {
+        background: #4B5563 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day {
+        background: #4B5563 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day {
+        background: #4B5563 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover {
+        background: #374151 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates {
+        background: #374151 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.rang-dates:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.rang-dates:hover {
+        background: #4B5563 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-number-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-number-day {
+        color: #D1D5DB !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day {
+        color: #6B7280 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day {
+        color: #6B7280 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day:hover {
+        color: #6B7280 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day {
+        border: 1px solid #9CA3AF !important;
+        color: #9CA3AF !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button button,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button .bch-clear-button,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button {
+        background: #4B5563 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button button:hover,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button .bch-clear-button:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button:hover {
+        border: 1px solid #9CA3AF !important;
+        color: #E5E7EB !important;
+    }
+
+    /* Dark: subtle hover on endpoints */
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover{
+        background: #566074 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .selected-month-year .bch-month-toggle-icon,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .selected-month-year .bch-month-toggle-icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-white.svg");
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .change-month .previous-month .icon,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .change-month .previous-month .icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-up-icon-white.svg");
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .change-month .next-month .icon,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .change-month .next-month .icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-bottom-icon-white.svg");
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button button,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button .bch-clear-button,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button{
+        background: #4B5563 !important;
+        color: #FFFFFF !important;
+        border: 1px solid transparent !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button button:hover,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-apply-button .bch-clear-button:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button:hover{
+        background: #6B7280 !important;
+        color: #FFFFFF !important;
+        border: 1px solid #9CA3AF !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover {
+        background: transparent !important;
+    }
+
+    /* Dark */
+    /* GreenLight */
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-header-info .change-month .next-month:hover,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .change-month .next-month:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month:hover {
+        background: #E1F4E9 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day {
+        background: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day {
+        background: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day {
+        background: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover {
+        background: #E1F4E9 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates {
+        background: #E1F4E9 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day {
+        border: 1px solid #33B469 !important;
+        color: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-apply-button button,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-apply-button .bch-clear-button,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button {
+        background: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-apply-button button:hover,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-apply-button .bch-clear-button:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button:hover {
+        border: 1px solid #33B469 !important;
+        color: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .selected-month-year .bch-month-toggle-icon,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .selected-month-year .bch-month-toggle-icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-green.svg");
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .change-month .previous-month .icon,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .change-month .previous-month .icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-up-icon.svg");
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .change-month .next-month .iconl,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .change-month .next-month .icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-bottom-icon.svg");
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day > label,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day > label{
+        color: #FFFFFF !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day {
+        background: #33B469 !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    /* If any td range classes are present in single mode, neutralize them */
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day{
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover{
+        background: transparent !important;
+    }
+
+    /* LightGreen: endpoints solid green and responsive hover */
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day{
+        background: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover{
+        background: #2FAF62 !important; /* slight darken on hover */
+    }
+
+    /* GreenLight */
+    /* Light */
+
+    /* Adjust Light theme to match BchSelect Light */
+    .@(_cssKey).bch-theme-light.bch-datepicker-container,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container {
+        background: #FFFFFF !important;
+        box-shadow: -2px 0px 4px rgba(200, 200, 200, 0.1), 0px -2px 4px rgba(200, 200, 200, 0.1), 2px 0px 4px rgba(200, 200, 200, 0.1), 0px 2px 4px rgba(200, 200, 200, 0.1) !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-header-info,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info {
+        border-bottom: 1px solid #BDBDBD !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-year,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-month,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-year,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-header-info .selected-month-year .bch-datepicker-month {
+        color: #212529 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-name-week-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-name-week-day {
+        color: #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day {
+        color: #212529 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day {
+        background: #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day {
+        background: #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day {
+        background: #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day:not(.bch-selected-day):not(.bch-start-selected-day):not(.bch-end-selected-day):hover{
+        background: #E9ECEF !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.rang-dates {
+        background: #E9ECEF !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.rang-dates:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.rang-dates:hover {
+        background: #DEE2E6 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-number-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-number-day {
+        color: #495057 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .bch-datepicker-other-day {
+        color: #ADB5BD !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day {
+        color: #ADB5BD !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-item-day.bch-datepicker-other-day:hover {
+        color: #ADB5BD !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day {
+        border: 1px solid #6C757D !important;
+        color: #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button button,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button{
+        background: #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button button:hover,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button:hover{
+        border: 1px solid #6C757D !important;
+        color: #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .selected-month-year .bch-month-toggle-icon,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .selected-month-year .bch-month-toggle-icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-gray.svg");
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .change-month .previous-month .icon,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .change-month .previous-month .icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-up-icon-gray.svg");
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .change-month .next-month .icon,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .change-month .next-month .icon {
+        background-image: url("_content/Bch.Components.Calendar/img/arrow-bottom-icon-gray.svg");
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table .current-day {
+        border: 1px solid #6C757D !important;
+        border-radius: 5px !important;
+        color: #6C757D !important;
+        background: transparent !important;
+    }
+    
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button button,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button{
+        background: transparent !important;
+        color: #6C757D !important;
+        border: 1px solid #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button button:hover,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-apply-button .bch-clear-button:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button button:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-apply-button .bch-clear-button:hover{
+        background: #6C757D !important;
+        color: #FFFFFF !important;
+        border: 1px solid #6C757D !important;
+    }
+    
+    /* Light theme: selected day text should be white for contrast */
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day > label,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td .bch-selected-day > label{
+        color: #FFFFFF !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day .bch-item-day:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day .bch-item-day:hover {
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    /* Light: subtle hover on endpoints */
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+    .@(_cssKey).bch-theme-light.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-start-selected-day:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-container .bch-datepicker-days .bch-datepicker-table tbody > tr > td.bch-end-selected-day:hover{
+        background: #5F6770 !important;
+    }
+
+    /* Light */
+</style>

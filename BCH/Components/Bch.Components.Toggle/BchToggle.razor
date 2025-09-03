@@ -1,4 +1,4 @@
-﻿<div class="bch-component bch-toggle @GetThemeCssClass()" id="@_toggleId">
+﻿<div class="bch-component bch-toggle @GetThemeCssClass() @_cssKey" id="@_toggleId">
     <input type="checkbox"
            class="toggle-button @(Disabled ? "toggle-disabled" : "")"
            style=""
@@ -22,5 +22,25 @@
 
     .bch-toggle#@_toggleId > .toggle-button:checked {
         background-color: @ResolveCheckedBackgroundColor();
+    }
+</style>
+
+<style>
+    /* THEME: LightGreen */
+    .@(_cssKey).bch-theme-light-green.bch-toggle > .toggle-button,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-toggle > .toggle-button {
+        /* colors resolved via inline style helpers; keep hover/focus if needed */
+    }
+
+    /* THEME: Light */
+    .@(_cssKey).bch-theme-light.bch-toggle > .text,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-toggle > .text {
+        color: #212529;
+    }
+
+    /* THEME: Dark */
+    .@(_cssKey).bch-theme-dark.bch-toggle > .text,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-toggle > .text {
+        color: #E5E7EB;
     }
 </style>
