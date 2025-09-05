@@ -13,6 +13,10 @@ public partial class FileInputsPage
     private bool _isDraggingOver;
     private string? _draggedImage;
 
+    private string? _previewLightGreen;
+    private string? _previewLight;
+    private string? _previewDark;
+
     private async Task OnRequestFileAsync()
     {
         var fileContext = await BchFilesService.RequestFileDialogAsync(multiple: true, createImagePreview: true);
@@ -33,6 +37,27 @@ public partial class FileInputsPage
             Console.WriteLine($"Image Preview: {imagePreview}");
         }
 
+        return Task.CompletedTask;
+    }
+
+    private Task OnChangeLightGreen(BchFilesContext context)
+    {
+        _previewLightGreen = context.Files.FirstOrDefault()?.GetImagePreview();
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private Task OnChangeLight(BchFilesContext context)
+    {
+        _previewLight = context.Files.FirstOrDefault()?.GetImagePreview();
+        StateHasChanged();
+        return Task.CompletedTask;
+    }
+
+    private Task OnChangeDark(BchFilesContext context)
+    {
+        _previewDark = context.Files.FirstOrDefault()?.GetImagePreview();
+        StateHasChanged();
         return Task.CompletedTask;
     }
 

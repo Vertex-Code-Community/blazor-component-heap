@@ -1,4 +1,81 @@
-<input type="file" 
-       class="bch-component"
-       @attributes="AdditionalAttributes" 
-       @onbchonfilechange="OnChangedAsync"/>
+<div id="@_containerId"
+     class="@($"bch-component bch-inputfile-container bch-no-selectable-text {GetThemeCssClass()} {(_hasFile ? "has-selected" : "")} {CssClass} {_cssKey}")"
+     style="@($"width: {Width}px; height: {Height}px;")"
+     tabindex="-1">
+
+    <div class="bch-button bch-no-selectable-text"
+         @onclick="OnSelectClickedAsync">
+
+        <input id="@_inputId"
+               @key="@_inputKey"
+               class="bch-file-input"
+               type="file"
+               @ref="_fileInputRef"
+               @attributes="_inputAttributes"
+               @onbchonfilechange="OnChangedInternalAsync" />
+
+        <div class="bch-upload"></div>
+
+        @if (!_hasFile)
+        {
+            <label class="bch-no-selectable-text">@Placeholder</label>
+        }
+        else
+        {
+            <span class="bch-filename">@_fileName</span>
+        }
+
+        @if (_hasFile)
+        {
+            <button type="button" class="bch-clear" @onclick:stopPropagation @onclick="OnClearClickedAsync"></button>
+        }
+        else
+        {
+            <span class="bch-arrow"></span>
+        }
+    </div>
+
+</div>
+
+<style>
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > label,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > label,
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filename,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filename {
+        color: #E5E7EB;
+        caret-color: #E5E7EB;
+    }
+
+    /* THEME: LightGreen (current) */
+
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-arrow,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-arrow {
+        background: url(_content/Bch.Components.InputFile/img/select-arrow-green.svg) center no-repeat;
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-clear,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-clear {
+        background-image: url(_content/Bch.Components.InputFile/img/clear-green.svg);
+    }
+
+    /* THEME: Light (silver monochrome) */
+
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-arrow,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-arrow {
+        background: url(_content/Bch.Components.InputFile/img/select-arrow.svg) center no-repeat;
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-clear,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-clear {
+        background-image: url(_content/Bch.Components.InputFile/img/clear.svg);
+    }
+
+    /* THEME: Dark */
+
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-arrow,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-arrow {
+        background: url(_content/Bch.Components.InputFile/img/select-arrow-white.svg) center no-repeat;
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-clear,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-clear {
+        background-image: url(_content/Bch.Components.InputFile/img/clear-white.svg);
+    }
+</style>

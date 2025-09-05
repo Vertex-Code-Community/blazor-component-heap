@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using Bch.Modules.Files;
 using Bch.Modules.Files.Models;
+using Bch.Modules.Themes.Models;
+using Bch.Modules.Themes.Attributes;
+using Bch.Modules.Themes.Extensions;
 
 namespace Bch.Components.InputFile;
 
@@ -13,11 +16,53 @@ public partial class BchInputFile : ComponentBase
     [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object>? AdditionalAttributes { get; set; }
     [Parameter] public EventCallback<BchFilesContext> OnChange { get; set; }
 
-    private Task OnChangedAsync(BchFilesOnChangeEvent e)
+    [Parameter] public string CssClass { get; set; } = string.Empty;
+    [Parameter] public int Height { get; set; } = 56;
+    [Parameter] public int Width { get; set; } = 290;
+    [Parameter] public string Placeholder { get; set; } = "Choose file";
+    [Parameter] public bool CreateImagePreview { get; set; } = false;
+
+    [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
+    [Parameter] public BchTheme? Theme { get; set; }
+
+    private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+
+    private readonly string _containerId = $"_id_{Guid.NewGuid()}";
+    private readonly string _inputId = $"_id_{Guid.NewGuid()}";
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
+    private string _inputKey = Guid.NewGuid().ToString();
+
+    private ElementReference _fileInputRef;
+    private IDictionary<string, object> _inputAttributes = new Dictionary<string, object>();
+
+    private bool _hasFile = false;
+    private string _fileName = string.Empty;
+
+    protected override void OnParametersSet()
     {
-        return OnChange.InvokeAsync(new BchFilesContext
+        _inputAttributes = AdditionalAttributes is null
+            ? new Dictionary<string, object>()
+            : new Dictionary<string, object>(AdditionalAttributes);
+
+        if (_inputAttributes.ContainsKey("multiple"))
+            _inputAttributes.Remove("multiple");
+
+        if (CreateImagePreview)
+            _inputAttributes["create-image-preview"] = string.Empty;
+        else if (_inputAttributes.ContainsKey("create-image-preview"))
+            _inputAttributes.Remove("create-image-preview");
+    }
+
+    private async Task OnChangedInternalAsync(BchFilesOnChangeEvent e)
+    {
+        var files = e.Files;
+        if (files is { Count: > 0 })
         {
-            Files = e.Files.Select(x => (IBrowserFile) new BchBrowserFile
+            var x = files[0];
+            _hasFile = true;
+            _fileName = x.Name;
+
+            var selected = new BchBrowserFile
             {
                 JsRuntime = JsRuntime,
                 Id = x.Id,
@@ -26,7 +71,42 @@ public partial class BchInputFile : ComponentBase
                 Size = x.Size,
                 LastModified = x.LastModified,
                 ImagePreviewUrl = x.ImagePreviewUrl
-            }).ToList()
-        });
+            } as IBrowserFile;
+
+            await OnChange.InvokeAsync(new BchFilesContext
+            {
+                Files = new List<IBrowserFile> { selected }
+            });
+        }
+        else
+        {
+            _hasFile = false;
+            _fileName = string.Empty;
+            await OnChange.InvokeAsync(new BchFilesContext { Files = new List<IBrowserFile>() });
+        }
+
+        StateHasChanged();
+    }
+
+    private Task OnSelectClickedAsync()
+    {
+        return Task.CompletedTask;
+    }
+
+    private Task OnClearClickedAsync()
+    {
+        _hasFile = false;
+        _fileName = string.Empty;
+
+        _inputKey = Guid.NewGuid().ToString();
+
+        return OnChange.InvokeAsync(new BchFilesContext { Files = new List<IBrowserFile>() });
+    }
+
+    private string GetThemeCssClass()
+    {
+        var themeSpecified = Theme ?? ThemeCascading;
+        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) +
+               (themeSpecified is null ? " bch-no-theme-specified" : "");
     }
 }

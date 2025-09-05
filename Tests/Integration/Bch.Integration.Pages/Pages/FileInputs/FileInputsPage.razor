@@ -1,14 +1,43 @@
 @page "/inputs"
 @using Bch.Components.InputFile
 @using Bch.Components.FileDrop
+@using Bch.Modules.Themes.Models
 
 <div class="inputs-page">
     @* 1. request dialog *@
     <button @onclick="OnRequestFileAsync">Request File Dialog</button>
-    @* 2. input type="file" *@
-    <BchInputFile OnChange="e => OnChangeAsync(e)" multiple create-image-preview/>
+    
+    @* 2. InputFile themed variants *@
+    <div class="themes-section">
+        <div class="themes-row">
+            <div class="theme-col">
+                <h4>Light Green</h4>
+                <BchInputFile OnChange="OnChangeLightGreen" Theme="BchTheme.LightGreen" Placeholder="Choose file" CreateImagePreview="true" />
+                @if (!string.IsNullOrEmpty(_previewLightGreen))
+                {
+                    <img class="preview" src="@_previewLightGreen" alt="preview" />
+                }
+            </div>
+            <div class="theme-col">
+                <h4>Light</h4>
+                <BchInputFile OnChange="OnChangeLight" Theme="BchTheme.Light" Placeholder="Choose file" CreateImagePreview="true" />
+                @if (!string.IsNullOrEmpty(_previewLight))
+                {
+                    <img class="preview" src="@_previewLight" alt="preview" />
+                }
+            </div>
+            <div class="theme-col">
+                <h4>Dark</h4>
+                <BchInputFile OnChange="OnChangeDark" Theme="BchTheme.Dark" Placeholder="Choose file" CreateImagePreview="true" />
+                @if (!string.IsNullOrEmpty(_previewDark))
+                {
+                    <img class="preview" src="@_previewDark" alt="preview" />
+                }
+            </div>
+        </div>
+    </div>
+    
     @* 3. drag and drop *@
-
     <BchFileDrop @bind-IsDragging="_isDraggingOver"
                  OnFileDrop="OnFileDropAsync" class="file-drop-area" create-image-preview>
         <div class="text">@(_isDraggingOver ? "Drop it here" : "Drop files in")</div>
@@ -24,6 +53,11 @@
 </div>
 
 <style>
+    .themes-section { margin: 20px 0; }
+    .themes-row { display: flex; gap: 20px; flex-wrap: wrap; }
+    .theme-col { display: flex; flex-direction: column; gap: 10px; }
+    .preview { width: 160px; height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid #E9EAEC; }
+
     .file-drop-area {
         width: 200px;
         height: 200px;

@@ -23,4 +23,14 @@
         <ProjectReference Include="..\..\Modules\Bch.Modules.Files\Bch.Modules.Files.csproj"/>
         <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="wwwroot\img\browse.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\clear.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\clear-white.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\clear-green.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\select-arrow.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\select-arrow-white.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\select-arrow-green.svg" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
 </Project>

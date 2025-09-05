@@ -1,0 +1,83 @@
+.bch-inputfile-container {
+    width: 290px;
+    display: flex;
+    position: relative;
+    will-change: filter;
+    background: #FFFFFF;
+    filter: drop-shadow(0px 4px 8px rgba(183, 183, 183, 0.2));
+    border-radius: 10px;
+    outline: none;
+}
+
+.bch-inputfile-container > .bch-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.bch-inputfile-container > .bch-button > .bch-upload {
+    width: 20px;
+    height: 20px;
+    background: url(_content/Bch.Components.InputFile/img/upload.svg) center no-repeat;
+    background-size: 20px 20px;
+    margin-right: 8px;
+}
+
+.bch-inputfile-container > .bch-button > .bch-file-input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.bch-inputfile-container > .bch-button > label,
+.bch-inputfile-container > .bch-button > .bch-filename {
+    padding: 0;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 32px;
+    color: #131212;
+    caret-color: #131212;
+    cursor: pointer;
+}
+
+.bch-inputfile-container > .bch-button > .bch-filename {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 54px);
+}
+
+.bch-inputfile-container > .bch-button > .bch-clear {
+    width: 16px;
+    height: 16px;
+    border: none;
+    background: transparent url(_content/Bch.Components.InputFile/img/clear.svg) center no-repeat;
+    background-size: 16px 16px;
+    margin-left: auto;
+    margin-right: 6px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.bch-inputfile-container > .bch-button > .bch-arrow {
+    width: 14px;
+    height: 7px;
+    background: url(_content/Bch.Components.InputFile/img/select-arrow.svg) center no-repeat;
+    margin-left: auto;
+}
+
+/* Themes */
+.bch-theme-light .bch-inputfile-container,
+.bch-theme-light.bch-inputfile-container { background: #FFFFFF; }
+
+.bch-theme-dark .bch-inputfile-container,
+.bch-theme-dark.bch-inputfile-container { background: #111827; filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.35)); }
