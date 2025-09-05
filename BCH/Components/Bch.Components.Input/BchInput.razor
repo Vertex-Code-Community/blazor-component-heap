@@ -1,6 +1,6 @@
-<div id="@_containerId" class="bch-component bch-input-container @GetThemeCssClass() @CssClass"
-     style="@($"width:{Width}px; height:{Height}px;")">
-    <div class="bch-input-wrapper @(Disabled ? "bch-disabled" : "") @(_showSearch ? "bch-has-icon" : "")">
+<div id="@_containerId" class="bch-component bch-input-container bch-no-selectable-text @GetThemeCssClass() @CssClass @_cssKey"
+     style="@($"width:{Width}px; height:{Height}px;")" tabindex="-1">
+    <div class="bch-input-wrapper bch-no-selectable-text @(Disabled ? "bch-disabled" : "") @(_showSearch ? "bch-has-icon" : "")">
         <input id="@_inputId"
                class="bch-input"
                placeholder="@Placeholder"
@@ -22,3 +22,58 @@
         }
     </div>
 </div>
+
+<style>
+    .@(_cssKey).bch-theme-light-green.bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input {
+        background-image: url(_content/Bch.Components.Input/img/search-green.svg);
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-input-container > .bch-input-wrapper .bch-clear,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper .bch-clear {
+        background-image: url(_content/Bch.Components.Input/img/clear-green.svg);
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-input-container,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-input-container {
+        border: 1px solid #E9EAEC;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-input-container > .bch-input-wrapper .bch-input,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper .bch-input {
+        border-color: #E9EAEC;
+        background: #FFFFFF;
+        color: #212529;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input {
+        background-image: url(_content/Bch.Components.Input/img/search.svg);
+    }
+
+    .@(_cssKey).bch-theme-light.bch-input-container > .bch-input-wrapper .bch-clear,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper .bch-clear {
+        background-image: url(_content/Bch.Components.Input/img/clear.svg);
+    }
+
+    .@(_cssKey).bch-theme-light.bch-input-container,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-input-container {
+        border: 1px solid #E9EAEC;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-input-container > .bch-input-wrapper .bch-input,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper .bch-input {
+        background: #111827;
+        color: #E5E7EB;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper.bch-has-icon .bch-input {
+        background-image: url(_content/Bch.Components.Input/img/search-white.svg);
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-input-container > .bch-input-wrapper .bch-clear,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-input-container > .bch-input-wrapper .bch-clear {
+        background-image: url(_content/Bch.Components.Input/img/clear-white.svg);
+    }
+</style>

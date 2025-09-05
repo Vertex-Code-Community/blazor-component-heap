@@ -21,18 +21,24 @@ public partial class BchInput : ComponentBase
 	[Parameter] public bool ReadOnly { get; set; } = false;
 	[Parameter] public bool ShowSearchIcon { get; set; } = false;
 	[Parameter] public bool ShowClearButton { get; set; } = true;
-	[Parameter] public int Width { get; set; } = 250;
-	[Parameter] public int Height { get; set; } = 48;
+	[Parameter] public int Width { get; set; } = 290;
+	[Parameter] public int Height { get; set; } = 56;
 	[Parameter] public int MaxLength { get; set; } = int.MaxValue;
 
 	[CascadingParameter] public BchTheme? ThemeCascading { get; set; }
 	[Parameter] public BchTheme? Theme { get; set; }
 
 	private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
-	private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+	private string GetThemeCssClass()
+	{
+		var themeSpecified = Theme ?? ThemeCascading;
+		return (EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty) +
+		       (themeSpecified is null ? " bch-no-theme-specified" : "");
+	}
 
 	private readonly string _containerId = $"_id_{Guid.NewGuid()}";
 	private readonly string _inputId = $"_id_{Guid.NewGuid()}";
+	private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
 	private ElementReference _inputRef;
 	private string _currentValue = string.Empty;
 	private bool _showSearch => ShowSearchIcon && Type == "text";

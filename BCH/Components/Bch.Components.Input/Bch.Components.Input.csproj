@@ -26,6 +26,15 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Modules\Bch.Modules.Themes\Bch.Modules.Themes.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+        <None Include="wwwroot\img\search-green.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\search-white.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\search.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\clear-green.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\clear-white.svg" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="wwwroot\img\clear.svg" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
 </Project>
 
 
