@@ -32,8 +32,14 @@ public partial class BchToggle
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
 
     private string _toggleId = $"_id_{Guid.NewGuid()}";
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
-    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+    private string GetThemeCssClass()
+    {
+        var themeSpecified = Theme ?? ThemeCascading;
+        var themeClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return themeClass + (themeSpecified is null ? " bch-no-theme-specified" : "");
+    }
 
     private string ResolveDefaultBackgroundColor()
         => string.IsNullOrWhiteSpace(DefaultBackgroundColor)

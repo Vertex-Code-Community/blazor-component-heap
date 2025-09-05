@@ -26,7 +26,13 @@ public partial class BchCalendarMonths
 
     // Theme support
     [Parameter] public BchTheme? Theme { get; set; }
-    private string GetThemeCssClass() => Theme?.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
+    private string GetThemeCssClass()
+    {
+        var themeClass = Theme?.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        var suffix = Theme is null ? " bch-no-theme-specified" : string.Empty;
+        return themeClass + suffix;
+    }
 
     private int _monthValue;
     private int _yearValue;

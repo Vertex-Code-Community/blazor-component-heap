@@ -1,0 +1,81 @@
+@page "/themes"
+@using Bch.Components.Select
+@using Bch.Components.RangeCalendar
+@using Bch.Components.Calendar
+@using Bch.Integration.Pages.Pages.Themes.ThemeControl
+
+<div>
+    <h3>Themes Component Test</h3>
+    
+    <ThemeControlComponent />
+
+    <div class="test-cases">
+        <div class="themes-section test-case">
+            <h3>Themed Variants</h3>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h4>Light Green</h4>
+                    <BchSelect TItem="int" Options="_itemsInts"/>
+                </div>
+                <div class="theme-col">
+                    <h4>Light</h4>
+                    <BchSelect TItem="int" Options="_itemsInts"/>
+                </div>
+                <div class="theme-col">
+                    <h4>Dark</h4>
+                    <BchSelect TItem="int" Options="_itemsInts"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>Themed Variants</h4>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy"/>
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy"/>
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <BchCalendar Culture="en-US" Format="MM/dd/yyyy"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <h4>Themed Variants</h4>
+            <div class="themes-row">
+                <div class="theme-col">
+                    <h5>Light Green</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" />
+                </div>
+                <div class="theme-col">
+                    <h5>Light</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" />
+                </div>
+                <div class="theme-col">
+                    <h5>Dark</h5>
+                    <BchRangeCalendar Culture="en-US" Format="MM/dd/yyyy" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    #app {
+        height: 100%;
+    }
+</style>

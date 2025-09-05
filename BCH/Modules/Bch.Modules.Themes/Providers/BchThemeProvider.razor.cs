@@ -1,7 +1,7 @@
 using Bch.Modules.Themes.Models;
 using Microsoft.AspNetCore.Components;
 
-namespace Bch.Modules.Themes;
+namespace Bch.Modules.Themes.Providers;
 
 public partial class BchThemeProvider : ComponentBase
 {

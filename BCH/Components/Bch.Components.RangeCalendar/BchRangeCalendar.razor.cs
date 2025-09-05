@@ -25,6 +25,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public BchTheme? Theme { get; set; }
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
 
     [Parameter]
     public DateRange Values
@@ -214,6 +215,8 @@ public partial class BchRangeCalendar : IAsyncDisposable
 
     private string GetThemeCssClass()
     {
-        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        var themeSpecified = Theme ?? ThemeCascading;
+        var themeClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return themeClass + (themeSpecified is null ? " bch-no-theme-specified" : "");
     }
 }

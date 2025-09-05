@@ -7,8 +7,7 @@
     <button @onclick="OnModal2SwitchClicked">Open Modal 2</button>
 </div>
 
-
-<CascadingValue Name="TesModalParameter" Value="@_text">
+<CascadingValue Name="@("TesModalParameter")" Value="@_text">
 
     <TestComponent/>
     <BchModal Width="20%"
