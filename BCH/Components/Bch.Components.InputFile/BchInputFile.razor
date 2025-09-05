@@ -12,7 +12,11 @@
                type="file"
                @ref="_fileInputRef"
                @attributes="_inputAttributes"
-               @onbchonfilechange="OnChangedInternalAsync" />
+               @onbchonfilechange="OnChangedInternalAsync"
+               @ondragenter:preventDefault
+               @ondragover:preventDefault
+               @ondrop:stopPropagation
+               @ondrop:preventDefault />
 
         <div class="bch-upload"></div>
 
