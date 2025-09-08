@@ -88,7 +88,7 @@
 /* Light Green Theme */
 .bch-theme-light-green .tab-content-wrapper {
     background: #FFFFFF;
-    border: 1px solid #E8F5E8;
+    border: none;
 }
 
     .bch-theme-light-green .tab-content-wrapper h4 {
@@ -102,7 +102,7 @@
 /* Light Theme */
 .bch-theme-light .tab-content-wrapper {
     background: #FFFFFF;
-    border: 1px solid #F7FAFC;
+    border: none;
 }
 
     .bch-theme-light .tab-content-wrapper h4 {
@@ -116,7 +116,7 @@
 /* Dark Theme */
 .bch-theme-dark .tab-content-wrapper {
     background: #4A5568;
-    border: 1px solid #2D3748;
+    border: none;
 }
 
     .bch-theme-dark .tab-content-wrapper h4 {

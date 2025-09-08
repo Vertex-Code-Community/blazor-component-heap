@@ -88,12 +88,17 @@
     }
 
 .bch-theme-light-green .bch-default-tab-container {
-    background: #FEFEFE;
+    background: #EFEFEF;
 }
 
 .bch-theme-light-green .bch-default-tab-container > .bch-name {
     color: #131212;
 }
+
+.bch-theme-light-green .bch-default-tab-container:not(.bch-selected) > .bch-name {
+    color: rgba(51, 180, 105, 0.55);
+}
+.bch-theme-light-green .bch-default-tab-container:not(.bch-selected) > .bch-close { opacity: 0.55; }
 
 .bch-theme-light-green .bch-default-tab-container.bch-selected {
     background: #FFFFFF;
@@ -112,12 +117,17 @@
 }
 
 .bch-theme-light .bch-default-tab-container {
-    background: #FFFFFF;
+    background: #EFEFEF;
 }
 
 .bch-theme-light .bch-default-tab-container > .bch-name {
     color: #212529;
 }
+
+.bch-theme-light .bch-default-tab-container:not(.bch-selected) > .bch-name {
+    color: rgba(108, 117, 125, 0.55);
+}
+.bch-theme-light .bch-default-tab-container:not(.bch-selected) > .bch-close { opacity: 0.55; }
 
 .bch-theme-light .bch-default-tab-container.bch-selected {
     background: #FFFFFF;
@@ -136,12 +146,17 @@
 }
 
 .bch-theme-dark .bch-default-tab-container {
-    background: #111827;
+    background: #2A303B;
 }
 
 .bch-theme-dark .bch-default-tab-container > .bch-name {
     color: #E5E7EB;
 }
+
+.bch-theme-dark .bch-default-tab-container:not(.bch-selected) > .bch-name {
+    color: rgba(229, 231, 235, 0.55);
+}
+.bch-theme-dark .bch-default-tab-container:not(.bch-selected) > .bch-close { opacity: 0.55; }
 
 .bch-theme-dark .bch-default-tab-container.bch-selected {
     background: #374151;
