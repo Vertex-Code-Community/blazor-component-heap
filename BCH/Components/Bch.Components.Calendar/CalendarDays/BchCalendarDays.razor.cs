@@ -116,6 +116,27 @@ public partial class BchCalendarDays
         UpdateCalendar(_year, _month);
     }
 
+    protected override void OnParametersSet()
+    {
+        // Update month/year when DefaultMonth/DefaultYear parameters change
+        // This handles the case when user changes year/month in months view
+        if (DefaultMonth != 0 && DefaultMonth != _month)
+        {
+            _month = DefaultMonth;
+        }
+        
+        if (DefaultYear != 0 && DefaultYear != _year)
+        {
+            _year = DefaultYear;
+        }
+
+        // Only update calendar if month or year changed
+        if (DefaultMonth != 0 || DefaultYear != 0)
+        {
+            UpdateCalendar(_year, _month);
+        }
+    }
+
     private void UpdateCalendar(int year, int month)
     {
         var countDayOfMounth = DateTime.DaysInMonth(year, month);
