@@ -70,8 +70,9 @@
 
 .bch-inputfile-container > .bch-button > .bch-arrow {
     width: 14px;
-    height: 7px;
-    background: url(_content/Bch.Components.InputFile/img/select-arrow.svg) center no-repeat;
+    height: 14px;
+    background: url(_content/Bch.Components.InputFile/img/upload.svg) center no-repeat;
+    background-size: 14px 14px;
     margin-left: auto;
 }
 
