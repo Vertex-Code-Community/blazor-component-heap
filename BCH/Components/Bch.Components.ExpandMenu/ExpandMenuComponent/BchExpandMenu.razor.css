@@ -104,7 +104,8 @@
     fill: #999999;
 }
 
-.bch-theme-light-green .bch-expand-menu:not(.bch-disabled):not(.bch-selected):hover .head-block {
+.bch-theme-light-green .bch-expand-menu:not(.bch-disabled):not(.bch-selected):hover .head-block,
+.bch-theme-light-green .bch-expand-menu:not(.bch-disabled):not(.bch-selected).has-hover .head-block {
     background: #F0F9F0;
 }
 
@@ -144,7 +145,8 @@
     fill: #ADB5BD;
 }
 
-.bch-theme-light .bch-expand-menu:not(.bch-disabled):not(.bch-selected):hover .head-block {
+.bch-theme-light .bch-expand-menu:not(.bch-disabled):not(.bch-selected):hover .head-block,
+.bch-theme-light .bch-expand-menu:not(.bch-disabled):not(.bch-selected).has-hover .head-block {
     background: #F8F9FA;
 }
 
@@ -184,6 +186,7 @@
     fill: #6B7280;
 }
 
-.bch-theme-dark .bch-expand-menu:not(.bch-disabled):not(.bch-selected):hover .head-block {
+.bch-theme-dark .bch-expand-menu:not(.bch-disabled):not(.bch-selected):hover .head-block,
+.bch-theme-dark .bch-expand-menu:not(.bch-disabled):not(.bch-selected).has-hover .head-block {
     background: #374151;
 }

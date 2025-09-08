@@ -35,6 +35,7 @@
     }
 
     .bch-datepicker .bch-datepicker-input:hover,
+    .bch-datepicker .bch-datepicker-input.has-hover,
     .bch-datepicker .bch-datepicker-input:focus,
     .bch-datepicker .bch-datepicker-input:focus-within,
     .bch-datepicker .bch-datepicker-input:focus-visible {

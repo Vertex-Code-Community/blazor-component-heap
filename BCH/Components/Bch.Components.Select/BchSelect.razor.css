@@ -158,7 +158,8 @@
     background-clip: content-box;
 }
 
-.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
+.bch-content > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
     background: transparent; /* themed */
     border: 0.7px solid transparent;
     border-radius: 12px;
@@ -204,7 +205,8 @@
     display: none;
 }
 
-.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
+.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty).has-hover {
     background: transparent; /* themed */
     border-left: 2px solid transparent; /* themed */
     padding-left: 15px;

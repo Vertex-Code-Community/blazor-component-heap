@@ -41,7 +41,9 @@
 }
 
 .bch-pagination-container .select-page-number .prev-page:hover,
-.bch-pagination-container .select-page-number .next-page:hover {
+.bch-pagination-container .select-page-number .prev-page.has-hover,
+.bch-pagination-container .select-page-number .next-page:hover,
+.bch-pagination-container .select-page-number .next-page.has-hover {
     transition: all ease 0.1s;
     transform: scale(1.05);
     opacity: 0.8;
@@ -80,7 +82,8 @@
     border: none;
 }
 
-.bch-pagination-container .select-page-number .page-number-item:not(.active):not(.bch-pagination-dots):hover {
+.bch-pagination-container .select-page-number .page-number-item:not(.active):not(.bch-pagination-dots):hover,
+.bch-pagination-container .select-page-number .page-number-item:not(.active):not(.bch-pagination-dots).has-hover {
     transition: all ease 0.1s;
     transform: scale(1.09);
     opacity: 0.8;

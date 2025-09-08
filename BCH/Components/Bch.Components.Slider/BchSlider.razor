@@ -60,7 +60,8 @@
         border: 1px solid @ResolveButtonBorderColor();
     }
 
-    #@_sliderId > .bch-scroll-btn > .bch-icon-wrapper:hover {
+    #@_sliderId > .bch-scroll-btn > .bch-icon-wrapper:hover,
+    #@_sliderId > .bch-scroll-btn > .bch-icon-wrapper.has-hover {
         background-color: @ResolveButtonHoverBackgroundColor();
         border-color: @ResolveButtonHoverBorderColor();
     }
@@ -73,7 +74,8 @@
         background: @ResolveCircleSelectedColor();
     }
 
-    #@_sliderId > .bch-circles-wrapper > .bch-circle:hover {
+    #@_sliderId > .bch-circles-wrapper > .bch-circle:hover,
+    #@_sliderId > .bch-circles-wrapper > .bch-circle.has-hover {
         border-color: @ResolveCircleHoverBorderColor();
     }
 </style>

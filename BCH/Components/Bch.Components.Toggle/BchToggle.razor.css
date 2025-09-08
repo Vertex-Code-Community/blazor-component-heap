@@ -20,12 +20,14 @@
     transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
 }
 
-    .bch-toggle > .toggle-button:checked:hover {
+    .bch-toggle > .toggle-button:checked:hover,
+    .bch-toggle > .toggle-button:checked.has-hover {
         background: #5BA47A;
         transition: 0.2s;
     }
 
-    .bch-toggle > .toggle-button:hover {
+    .bch-toggle > .toggle-button:hover,
+    .bch-toggle > .toggle-button.has-hover {
         background: #D1D0D0;
         transition: 0.2s;
     }
@@ -73,7 +75,8 @@
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-.bch-theme-light-green .bch-toggle > .toggle-button:hover {
+.bch-theme-light-green .bch-toggle > .toggle-button:hover,
+.bch-theme-light-green .bch-toggle > .toggle-button.has-hover {
     background: #E1F4E9 !important;
 }
 
@@ -81,11 +84,13 @@
     background-color: #33B469 !important;
 }
 
-.bch-theme-light-green .bch-toggle > .toggle-button:checked:hover { 
+.bch-theme-light-green .bch-toggle > .toggle-button:checked:hover,
+.bch-theme-light-green .bch-toggle > .toggle-button:checked.has-hover { 
     background: #2FAF62 !important;
 }
 
-.bch-theme-light .bch-toggle > .toggle-button:hover { 
+.bch-theme-light .bch-toggle > .toggle-button:hover,
+.bch-theme-light .bch-toggle > .toggle-button.has-hover { 
     background: #E9ECEF !important;
 }
 
@@ -93,7 +98,8 @@
     background-color: #6C757D !important;
 }
 
-.bch-theme-light .bch-toggle > .toggle-button:checked:hover { 
+.bch-theme-light .bch-toggle > .toggle-button:checked:hover,
+.bch-theme-light .bch-toggle > .toggle-button:checked.has-hover { 
     background: #5F6770 !important;
 }
 
@@ -101,7 +107,8 @@
     background: #D7D7D7 !important;
 }
 
-.bch-theme-dark .bch-toggle > .toggle-button:hover { 
+.bch-theme-dark .bch-toggle > .toggle-button:hover,
+.bch-theme-dark .bch-toggle > .toggle-button.has-hover { 
     background: #D1D0D0 !important;
 }
 
@@ -109,6 +116,7 @@
     background-color: #4B5563 !important;
 }
 
-.bch-theme-dark .bch-toggle > .toggle-button:checked:hover { 
+.bch-theme-dark .bch-toggle > .toggle-button:checked:hover,
+.bch-theme-dark .bch-toggle > .toggle-button:checked.has-hover { 
     background: #6B7280 !important;
 }

@@ -131,12 +131,16 @@
     }
 
     .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
-    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+    .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
         background: rgba(51, 180, 105, 0.85);
     }
 
     .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
-    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+    .@(_cssKey).bch-theme-light-green.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty).has-hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty).has-hover {
         background: rgba(51, 180, 105, 0.1);
         border-left-color: #33B469;
     }
@@ -181,12 +185,16 @@
     }
 
     .@(_cssKey).bch-theme-light.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+    .@(_cssKey).bch-theme-light.bch-content > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
         background: #9A9A9A;
     }
 
     .@(_cssKey).bch-theme-light.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+    .@(_cssKey).bch-theme-light.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty).has-hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty).has-hover {
         background: rgba(0, 0, 0, 0.06);
         border-left-color: #BDBDBD;
     }
@@ -245,7 +253,9 @@
     }
 
     .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover {
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
         background: #9CA3AF;
     }
 
@@ -260,7 +270,9 @@
     }
 
     .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover {
+    .@(_cssKey).bch-theme-dark.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty).has-hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty):hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-content > .bch-scroller > .bch-group > .bch-option:not(.selected):not(.empty).has-hover {
         background: rgba(255, 255, 255, 0.08);
         border-left-color: #9CA3AF;
     }

@@ -93,7 +93,8 @@
         color: #FEFEFE !important;
     }
 
-        .bch-datepicker-list-month .bch-list-of-month label:hover {
+        .bch-datepicker-list-month .bch-list-of-month label:hover,
+        .bch-datepicker-list-month .bch-list-of-month label.has-hover {
             border-radius: 8px;
             cursor: pointer;
             transition: 0.2s;

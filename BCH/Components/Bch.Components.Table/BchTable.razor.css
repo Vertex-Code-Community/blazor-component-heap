@@ -94,7 +94,9 @@
 
     /* Handle on hover */
     .bch-table-container::-webkit-scrollbar-thumb:hover,
-    .bch-table-container tbody::-webkit-scrollbar-thumb:hover {
+    .bch-table-container::-webkit-scrollbar-thumb.has-hover,
+    .bch-table-container tbody::-webkit-scrollbar-thumb:hover,
+    .bch-table-container tbody::-webkit-scrollbar-thumb.has-hover {
         background: #33B469;
         transform: scale(0.2);
         transition: 0.2s;
