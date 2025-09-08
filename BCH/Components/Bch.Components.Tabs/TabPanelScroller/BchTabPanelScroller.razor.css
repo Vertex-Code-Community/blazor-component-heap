@@ -41,7 +41,7 @@
             width: 20px;
             height: 100%;
             cursor: pointer;
-            background: url(_content/Bch.Components.Tabs/img/arrow-right.svg) center no-repeat;
+            background: url(/_content/Bch.Components.Tabs/img/arrow-right.svg) center no-repeat;
             transition: 0.2s all ease;
         }
 
@@ -53,19 +53,19 @@
     background: linear-gradient(270deg, #FEFEFE 50%, rgba(254, 254, 254, 0) 97.3%);
 }
 .bch-theme-light-green .bch-tabs-panel > .bch-tab-btn .bch-icon {
-    background-image: url(_content/Bch.Components.Tabs/img/arrow-right-green.svg);
+    background-image: url(/_content/Bch.Components.Tabs/img/arrow-right-green.svg);
 }
 
 .bch-theme-light .bch-tabs-panel > .bch-tab-btn {
     background: linear-gradient(270deg, #FFFFFF 50%, rgba(255, 255, 255, 0) 97.3%);
 }
 .bch-theme-light .bch-tabs-panel > .bch-tab-btn .bch-icon {
-    background-image: url(_content/Bch.Components.Tabs/img/arrow-right.svg);
+    background-image: url(/_content/Bch.Components.Tabs/img/arrow-right.svg);
 }
 
 .bch-theme-dark .bch-tabs-panel > .bch-tab-btn {
     background: linear-gradient(270deg, #111827 50%, rgba(17, 24, 39, 0) 97.3%);
 }
 .bch-theme-dark .bch-tabs-panel > .bch-tab-btn .bch-icon {
-    background-image: url(_content/Bch.Components.Tabs/img/arrow-right-white.svg);
+    background-image: url(/_content/Bch.Components.Tabs/img/arrow-right-white.svg);
 }
