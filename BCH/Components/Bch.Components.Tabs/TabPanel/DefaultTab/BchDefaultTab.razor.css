@@ -56,8 +56,10 @@
         
     .bch-default-tab-container > .bch-icon {
         display: flex;
-        width: fit-content;
-        height: fit-content;
+        width: 12px;
+        height: 13px;
+        background: center no-repeat;
+        background-size: 12px 13px;
     }
     
     .bch-default-tab-container > .bch-close {

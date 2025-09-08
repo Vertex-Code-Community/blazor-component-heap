@@ -1,10 +1,7 @@
 @typeparam TItem
 
-<div class="bch-default-tab-container @(IsSelected ? "bch-selected" : "") @GetThemeCssClass()">
-    <div class="bch-icon">
-        <img src="@(IsSelected ? _selectedIconImage : _iconImage)" 
-             draggable="false"/>
-    </div>
+<div class="bch-default-tab-container @(IsSelected ? "bch-selected" : "") @GetThemeCssClass() @_cssKey">
+    <div class="bch-icon"></div>
     <div class="bch-name">@_defaultTabText.Invoke(Item)</div> 
     <div class="bch-close @(!ShowCloseButton ? "bch-hide" : "bch-tab-control-btn")"
          @onclick="OnCloseClickedAsync">
@@ -14,3 +11,62 @@
 
     <div class="bch-bottom-line"></div>
 </div>
+
+<style>
+    /* THEME: LightGreen */
+    .@(_cssKey).bch-theme-light-green.bch-default-tab-container > .bch-icon,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-default-tab-container > .bch-icon {
+        background-image: url(_content/Bch.Components.Tabs/img/default-icon/default-tab.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-default-tab-container.bch-selected > .bch-icon,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-default-tab-container.bch-selected > .bch-icon {
+        background-image: url(_content/Bch.Components.Tabs/img/default-icon/default-tab-selected.svg);
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-default-tab-container > .bch-close > img,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-default-tab-container > .bch-close > img {
+        content: url(_content/Bch.Components.Tabs/img/close-tab.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-default-tab-container.bch-selected > .bch-close > img,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-default-tab-container.bch-selected > .bch-close > img {
+        content: url(_content/Bch.Components.Tabs/img/close-tab-selected.svg);
+    }
+
+    /* THEME: Light */
+    .@(_cssKey).bch-theme-light.bch-default-tab-container > .bch-icon,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-default-tab-container > .bch-icon {
+        background-image: url(_content/Bch.Components.Tabs/img/default-icon/default-tab-light.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-default-tab-container.bch-selected > .bch-icon,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-default-tab-container.bch-selected > .bch-icon {
+        background-image: url(_content/Bch.Components.Tabs/img/default-icon/default-tab-selected-light.svg);
+    }
+
+    .@(_cssKey).bch-theme-light.bch-default-tab-container > .bch-close > img,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-default-tab-container > .bch-close > img {
+        content: url(_content/Bch.Components.Tabs/img/close-tab-light.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-default-tab-container.bch-selected > .bch-close > img,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-default-tab-container.bch-selected > .bch-close > img {
+        content: url(_content/Bch.Components.Tabs/img/close-tab-selected-light.svg);
+    }
+
+    /* THEME: Dark */
+    .@(_cssKey).bch-theme-dark.bch-default-tab-container > .bch-icon,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-default-tab-container > .bch-icon {
+        background-image: url(_content/Bch.Components.Tabs/img/default-icon/default-tab-dark.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-default-tab-container.bch-selected > .bch-icon,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-default-tab-container.bch-selected > .bch-icon {
+        background-image: url(_content/Bch.Components.Tabs/img/default-icon/default-tab-selected-dark.svg);
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-default-tab-container > .bch-close > img,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-default-tab-container > .bch-close > img {
+        content: url(_content/Bch.Components.Tabs/img/close-tab-dark.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-default-tab-container.bch-selected > .bch-close > img,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-default-tab-container.bch-selected > .bch-close > img {
+        content: url(_content/Bch.Components.Tabs/img/close-tab-selected-dark.svg);
+    }
+</style>
