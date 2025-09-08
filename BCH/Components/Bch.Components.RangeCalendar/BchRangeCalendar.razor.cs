@@ -20,6 +20,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
     [Parameter] public string Format { get; set; } = string.Empty;
     [Parameter] public string Culture { get; set; } = CultureInfo.CurrentCulture.Name;
     [Parameter] public EventCallback<DateRange> ValuesChanged { get; set; }
+    [Parameter] public bool CollapseOnClickOutside { get; set; } = true;
 
     // Theme support (cascading + explicit override)
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
@@ -101,7 +102,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
                 x.Id == _containerId || x.Id == _calendarDaysId || 
                 x.Id == _calendarMonthsId || x.Id == _yearsSelectContentId);
 
-        if (container != null) return Task.CompletedTask; // inside calendar
+        if (container != null || !CollapseOnClickOutside) return Task.CompletedTask; // inside calendar
 
         var otherCalendar = e.PathCoordinates
             .Any(x => x.ClassList.Contains("bch-datepicker-wrapper") ||

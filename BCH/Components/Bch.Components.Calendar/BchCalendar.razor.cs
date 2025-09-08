@@ -36,7 +36,8 @@ public partial class BchCalendar : IAsyncDisposable
     // Theme support (cascading + explicit override)
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public BchTheme? Theme { get; set; }
-
+    [Parameter] public bool CollapseOnClickOutside { get; set; } = true;
+    
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
     private string GetThemeCssClass()
     {
@@ -101,7 +102,7 @@ public partial class BchCalendar : IAsyncDisposable
                 x.Id == _containerId || x.Id == _calendarDaysId || 
                 x.Id == _calendarMonthsId || x.Id == _yearsSelectContentId);
 
-        if (container != null) return Task.CompletedTask; // inside calendar
+        if (container != null || !CollapseOnClickOutside) return Task.CompletedTask; // inside calendar
 
         var otherCalendar = e.PathCoordinates
             .Any(x => x.ClassList.Contains("bch-datepicker-wrapper") ||
