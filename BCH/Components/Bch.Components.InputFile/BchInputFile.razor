@@ -1,3 +1,5 @@
+@if (!DropZoneOnly)
+{
 <div id="@_containerId"
      class="@($"bch-component bch-inputfile-container bch-no-selectable-text {GetThemeCssClass()} {(_hasFile ? "has-selected" : "")} {CssClass} {_cssKey}")"
      style="@($"width: {Width}px; height: {Height}px;")"
@@ -40,6 +42,25 @@
     </div>
 
 </div>
+}
+
+@if (DropZoneOnly)
+{
+    <div class="@($"bch-component bch-inputfile-dropzone-container bch-no-selectable-text {GetThemeCssClass()} {_cssKey}")"
+         style="@($"width: {Width}px; height: 124px;")"
+         @ondragenter="OnDragEnter"
+         @ondragenter:preventDefault
+         @ondragover="OnDragOver"
+         @ondragover:preventDefault
+         @ondrop="OnDrop"
+         @ondrop:preventDefault
+         @ondragleave="OnDragLeave">
+        <div class="@($"bch-dropzone {(_isDraggingOver ? "dragover" : "")}")">
+            <div class="icon"></div>
+            <div class="label">@(_isDraggingOver ? "Drop it here" : "Drop files in")</div>
+        </div>
+    </div>
+}
 
 <style>
     .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > label,
@@ -51,6 +72,16 @@
     }
 
     /* THEME: LightGreen (current) */
+
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-dropzone-container > .bch-dropzone,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-dropzone-container > .bch-dropzone {
+        border-color: rgba(51, 180, 105, 0.8);
+        background: rgba(51, 180, 105, 0.04);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-dropzone-container > .bch-dropzone > .icon,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-dropzone-container > .bch-dropzone > .icon {
+        background-image: url(_content/Bch.Components.InputFile/img/upload-green.svg);
+    }
 
     .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-arrow,
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-arrow {
@@ -64,6 +95,16 @@
 
     /* THEME: Light (silver monochrome) */
 
+    .@(_cssKey).bch-theme-light.bch-inputfile-dropzone-container > .bch-dropzone,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-dropzone-container > .bch-dropzone {
+        border-color: #BDBDBD;
+        background: rgba(0, 0, 0, 0.03);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-dropzone-container > .bch-dropzone > .icon,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-dropzone-container > .bch-dropzone > .icon {
+        background-image: url(_content/Bch.Components.InputFile/img/upload.svg);
+    }
+
     .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-arrow,
     html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-arrow {
         background: url(_content/Bch.Components.InputFile/img/upload.svg) center no-repeat;
@@ -75,6 +116,21 @@
     }
 
     /* THEME: Dark */
+
+    .@(_cssKey).bch-theme-dark.bch-inputfile-dropzone-container > .bch-dropzone,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-dropzone-container > .bch-dropzone {
+        border-color: #E5E7EB;
+        background: #111827;
+        color: #E5E7EB;
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-dropzone-container > .bch-dropzone.dragover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-dropzone-container > .bch-dropzone.dragover {
+        border-color: #F3F4F6;
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-dropzone-container > .bch-dropzone > .icon,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-dropzone-container > .bch-dropzone > .icon {
+        background-image: url(_content/Bch.Components.InputFile/img/upload-white.svg);
+    }
 
     .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-arrow,
     html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-arrow {

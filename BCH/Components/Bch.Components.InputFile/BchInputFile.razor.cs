@@ -7,6 +7,7 @@ using Bch.Modules.Files.Models;
 using Bch.Modules.Themes.Models;
 using Bch.Modules.Themes.Attributes;
 using Bch.Modules.Themes.Extensions;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Bch.Components.InputFile;
 
@@ -21,6 +22,7 @@ public partial class BchInputFile : ComponentBase
     [Parameter] public int Width { get; set; } = 290;
     [Parameter] public string Placeholder { get; set; } = "Choose file";
     [Parameter] public bool CreateImagePreview { get; set; } = false;
+    [Parameter] public bool DropZoneOnly { get; set; } = false;
 
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public BchTheme? Theme { get; set; }
@@ -37,6 +39,7 @@ public partial class BchInputFile : ComponentBase
 
     private bool _hasFile = false;
     private string _fileName = string.Empty;
+    private bool _isDraggingOver = false;
 
     protected override void OnParametersSet()
     {
@@ -108,5 +111,32 @@ public partial class BchInputFile : ComponentBase
         var themeSpecified = Theme ?? ThemeCascading;
         return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) +
                (themeSpecified is null ? " bch-no-theme-specified" : "");
+    }
+
+    private void OnDragEnter(DragEventArgs _)
+    {
+        _isDraggingOver = true;
+        StateHasChanged();
+    }
+
+    private void OnDragOver(DragEventArgs _)
+    {
+        if (!_isDraggingOver)
+        {
+            _isDraggingOver = true;
+            StateHasChanged();
+        }
+    }
+
+    private void OnDragLeave(DragEventArgs _)
+    {
+        _isDraggingOver = false;
+        StateHasChanged();
+    }
+
+    private void OnDrop(DragEventArgs _)
+    {
+        _isDraggingOver = false;
+        StateHasChanged();
     }
 }

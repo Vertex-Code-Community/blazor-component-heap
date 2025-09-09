@@ -38,10 +38,22 @@
     </div>
     
     @* 3. drag and drop *@
-    <BchFileDrop @bind-IsDragging="_isDraggingOver"
-                 OnFileDrop="OnFileDropAsync" class="file-drop-area" create-image-preview>
-        <div class="text">@(_isDraggingOver ? "Drop it here" : "Drop files in")</div>
-    </BchFileDrop>
+    <div class="themes-section">
+        <div class="themes-row">
+            <div class="theme-col">
+                <h4>Light Green</h4>
+                <BchInputFile Theme="BchTheme.LightGreen" DropZoneOnly="true" />
+            </div>
+            <div class="theme-col">
+                <h4>Light</h4>
+                <BchInputFile Theme="BchTheme.Light" DropZoneOnly="true" />
+            </div>
+            <div class="theme-col">
+                <h4>Dark</h4>
+                <BchInputFile Theme="BchTheme.Dark" DropZoneOnly="true" />
+            </div>
+        </div>
+    </div>
 
     @if (!string.IsNullOrEmpty(_draggedImage))
     {
