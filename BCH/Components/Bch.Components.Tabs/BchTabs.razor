@@ -16,7 +16,7 @@
                          ScrollTabWidth="ScrollTabWidth"
                          TabHeight="TabHeight"
                          Selected="_selectedValue"
-                         Theme="@EffectiveTheme" >
+                         Theme="@EffectiveTheme">
 
         <BchTabPanel TItem="TItem"
                      @bind-Selected="Selected"
@@ -41,7 +41,7 @@
                                    SelectedItem="_selectedValue"
                                    ShowCloseButton="@(Items.Count > 1 && ShowCloseOnDefaultTab)"
                                    OnClose="OnCloseItem"
-                                   Theme="@EffectiveTheme"/>
+                                   Theme="@EffectiveTheme" />
                 }
                 else
                 {
@@ -74,16 +74,17 @@
     <BchTabDraggingContent TItem="TItem"
                            Item="_draggableContext.DraggingItem"
                            TabHeight="TabHeight"
-                           TabWidthPredicate="TabWidthPredicate">
+                           TabWidthPredicate="TabWidthPredicate"
+                           Theme="@EffectiveTheme">
         <TabTemplate Context="item">
             @if (TabTemplate == null)
             {
-                            <BchDefaultTab TItem="TItem"
-                           Item="item"
-                           DefaultTabText="DefaultTabText"
-                           SelectedItem="_selectedValue"
-                           ShowCloseButton="ShowCloseOnDefaultTab"
-                           Theme="@EffectiveTheme"/>
+                <BchDefaultTab TItem="TItem"
+                               Item="item"
+                               DefaultTabText="DefaultTabText"
+                               SelectedItem="_selectedValue"
+                               ShowCloseButton="ShowCloseOnDefaultTab"
+                               Theme="@EffectiveTheme" />
             }
             else
             {
@@ -100,37 +101,37 @@
     </BchTabDraggingContent>
 </BchModal>
 
-@* <style> *@
-@*     /* THEME: LightGreen */ *@
-@*     .@(_cssKey).bch-theme-light-green.bch-tabs-container, *@
-@*     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-tabs-container { *@
-@*         background: #FEFEFE; *@
-@*         box-shadow: 0 0 21px rgba(188, 188, 188, 0.3); *@
-@*         border-radius: 15px; *@
-@*         padding: 0 18px 18px; *@
-@*     } *@
-@*     .@(_cssKey).bch-theme-light-green.bch-tabs-container > .bch-tabs-content, *@
-@*     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-tabs-container > .bch-tabs-content { color: #131212; } *@
-@* *@
-@*     /* THEME: Light */ *@
-@*     .@(_cssKey).bch-theme-light.bch-tabs-container, *@
-@*     html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-tabs-container { *@
-@*         background: #FFFFFF; *@
-@*         box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2); *@
-@*         border-radius: 15px; *@
-@*         padding: 0 18px 18px; *@
-@*     } *@
-@*     .@(_cssKey).bch-theme-light.bch-tabs-container > .bch-tabs-content, *@
-@*     html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-tabs-container > .bch-tabs-content { color: #212529; } *@
-@* *@
-@*     /* THEME: Dark */ *@
-@*     .@(_cssKey).bch-theme-dark.bch-tabs-container, *@
-@*     html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-tabs-container { *@
-@*         background: #111827; *@
-@*         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35); *@
-@*         border-radius: 15px; *@
-@*         padding: 0 18px 18px; *@
-@*     } *@
-@*     .@(_cssKey).bch-theme-dark.bch-tabs-container > .bch-tabs-content, *@
-@*     html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-tabs-container > .bch-tabs-content { color: #E5E7EB; } *@
-@* </style> *@
+<style>
+    /* THEME: LightGreen */
+    .@(_cssKey).bch-theme-light-green.bch-tabs-container,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-tabs-container {
+        background: #FEFEFE;
+        box-shadow: 0 0 21px rgba(188, 188, 188, 0.3);
+        border-radius: 15px;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-tabs-container > .bch-tabs-content,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-tabs-container > .bch-tabs-content { color: #131212; }
+
+    /* THEME: Light */
+    .@(_cssKey).bch-theme-light.bch-tabs-container,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-tabs-container {
+        background: #FFFFFF;
+        box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2);
+        border-radius: 15px;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-tabs-container > .bch-tabs-content,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-tabs-container > .bch-tabs-content { color: #212529; }
+
+    /* THEME: Dark */
+    .@(_cssKey).bch-theme-dark.bch-tabs-container,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-tabs-container {
+        background: #111827;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+        border-radius: 15px;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-tabs-container > .bch-tabs-content,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-tabs-container > .bch-tabs-content { color: #E5E7EB; }
+</style>

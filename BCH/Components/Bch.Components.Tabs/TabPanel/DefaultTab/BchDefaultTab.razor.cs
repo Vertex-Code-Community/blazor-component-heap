@@ -17,15 +17,33 @@ public partial class BchDefaultTab<TItem> : ComponentBase where TItem : class
 
     private bool IsSelected => Item == SelectedItem;
     
-    private readonly string _iconImage = "_content/Bch.Components.Tabs/img/default-icon/default-tab.svg";
-    private readonly string _selectedIconImage = "_content/Bch.Components.Tabs/img/default-icon/default-tab-selected.svg";
+    private string IconImage => EffectiveTheme switch
+    {
+        BchTheme.LightGreen => "_content/Bch.Components.Tabs/img/default-icon/default-tab.svg",
+        BchTheme.Light => "_content/Bch.Components.Tabs/img/default-icon/default-tab-light.svg",
+        BchTheme.Dark => "_content/Bch.Components.Tabs/img/default-icon/default-tab-dark.svg",
+        _ => "_content/Bch.Components.Tabs/img/default-icon/default-tab.svg"
+    };
+    private string SelectedIconImage => EffectiveTheme switch
+    {
+        BchTheme.LightGreen => "_content/Bch.Components.Tabs/img/default-icon/default-tab-selected.svg",
+        BchTheme.Light => "_content/Bch.Components.Tabs/img/default-icon/default-tab-selected-light.svg",
+        BchTheme.Dark => "_content/Bch.Components.Tabs/img/default-icon/default-tab-selected-dark.svg",
+        _ => "_content/Bch.Components.Tabs/img/default-icon/default-tab-selected.svg"
+    };
     private readonly string _closeIcon = "_content/Bch.Components.Tabs/img/close-tab.svg";
     private readonly string _closeIconSelected = "_content/Bch.Components.Tabs/img/close-tab-selected.svg";
 
     private Func<TItem, string> _defaultTabText = x => $"{x}";
     
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
-    private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
+    private string GetThemeCssClass()
+    {
+        var themeSpecified = Theme ?? ThemeCascading;
+        var themeClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return themeClass + (themeSpecified is null ? " bch-no-theme-specified" : "");
+    }
     
     protected override void OnInitialized()
     {
