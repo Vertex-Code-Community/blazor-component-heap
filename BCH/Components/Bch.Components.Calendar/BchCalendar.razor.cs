@@ -30,6 +30,8 @@ public partial class BchCalendar : IAsyncDisposable
             ValueChanged.InvokeAsync(value);
         }
     }
+    
+    [Parameter] public DateTime DefaultValue { get; set; } = DateTime.Now;
 
     [Parameter] public bool ShowClearButton { get; set; } = true;
 
@@ -140,7 +142,7 @@ public partial class BchCalendar : IAsyncDisposable
         
         _containerPos.Set(containerRect.X, containerRect.Y);
         
-        var currentDate = Value ?? DateTime.Now;
+        var currentDate = Value ?? DefaultValue;
         if (currentDate.Year != _selectedYear) _selectedYear = currentDate.Year;
         if (currentDate.Month != _selectedMonth) _selectedMonth = currentDate.Month;
         
