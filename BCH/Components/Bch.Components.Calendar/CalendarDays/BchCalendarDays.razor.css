@@ -65,7 +65,9 @@
 .bch-datepicker-container .bch-datepicker-header-info .change-month .next-month:hover,
 .bch-datepicker-container .bch-datepicker-header-info .change-month .next-month.has-hover,
 .bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month:hover,
-.bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month.has-hover {
+.bch-datepicker-container .bch-datepicker-header-info .change-month .previous-month.has-hover,
+.bch-datepicker-container .bch-datepicker-header-info .selected-month-year:hover,
+.bch-datepicker-container .bch-datepicker-header-info .selected-month-year.has-hover {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.2s;
