@@ -26,7 +26,8 @@
         background: var(--scroll-thumb);
     }
 
-        .bch-calendar-container .scroll::-webkit-scrollbar-thumb:hover {
+        .bch-calendar-container .scroll::-webkit-scrollbar-thumb:hover,
+        .bch-calendar-container .scroll::-webkit-scrollbar-thumb.has-hover {
             background: var(--scroll-thumb-hover);
         }
 
@@ -114,7 +115,7 @@
         width: 100%;
         height: 56px;
         display: flex;
-        padding-right: var(--sbw);
+        padding-right: 0;
         border-bottom: 1px solid #eeeeee;
         border-right: 1px solid #eeeeee;
         position: relative;
@@ -139,7 +140,8 @@
                 cursor: pointer;
             }
 
-                .bch-calendar-container > .bch-dateline > .scroll-btn > span:hover {
+                .bch-calendar-container > .bch-dateline > .scroll-btn > span:hover,
+                .bch-calendar-container > .bch-dateline > .scroll-btn > span.has-hover {
                     opacity: 1.0;
                 }
 
@@ -167,7 +169,7 @@
         }
 
         .bch-calendar-container > .bch-dateline > .dates-holder {
-            width: calc(100% - 72px);
+            width: calc(100% - 72px - var(--sbw));
             position: relative;
             overflow: hidden;
             will-change: transform;
@@ -218,7 +220,7 @@
         overflow-x: hidden;
         position: relative;
         flex: 1 1;
-        width: calc(100% + var(--sbw));
+        width: 100%;
         border-bottom: 1px solid #eeeeee;
         border-right: 1px solid #eeeeee;
     }
@@ -242,6 +244,10 @@
                     display: flex;
                     position: relative;
                 }
+
+                    .bch-calendar-container > .calendar-data > .bch-scroller > .timeline > .hour:first-child::after {
+                        border-bottom: none !important;
+                    }
 
                     .bch-calendar-container > .calendar-data > .bch-scroller > .timeline > .hour::after {
                         width: 100%;

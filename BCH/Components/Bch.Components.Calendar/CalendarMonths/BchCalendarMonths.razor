@@ -15,7 +15,7 @@
                        SelectedChanged="OnSelectYearAsync"
                        OnFocusOut="() => OnFocusOut.InvokeAsync()"
                        Theme="Theme"
-                       @bind-IsOpened="_isOpenedYearSelect">
+            @bind-IsOpened="_isOpenedYearSelect">
                 <OptionTemplate Context="year">
                     <div class="bch-year-wrapper">
                         <div class="year-item @(year.Number == _yearValue ? "current-year" : "")">
@@ -65,7 +65,8 @@
         transition: background 0.2s ease;
     }
 
-    .bch-calendar-year-select-modal.bch-select-container .bch-button:hover {
+    .bch-calendar-year-select-modal.bch-select-container .bch-button:hover,
+    .bch-calendar-year-select-modal.bch-select-container .bch-button.has-hover {
         background: transparent !important;
     }
 
@@ -82,15 +83,15 @@
     }
 
     .bch-calendar-year-select-modal .bch-content > .bch-scroller::-webkit-scrollbar {
-        width: 5px;
-    }
+            width: 5px;
+        }
 
     .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option {
         padding: 0 !important;
-        background: none;
-        opacity: 1.0;
-        justify-content: center;
-    }
+            background: none;
+            opacity: 1.0;
+            justify-content: center;
+        }
 
     .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper {
         width: 100%;
@@ -99,11 +100,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 19px;
     }
 
     .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item {
@@ -115,12 +116,13 @@
     }
 
     .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option.selected,
-    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option:hover {
-        background: none !important;
-        padding: 0 !important;
-        border: none !important;
-        opacity: 1.0;
-    }
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option:hover,
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option.has-hover {
+                background: none !important;
+                padding: 0 !important;
+                border: none !important;
+                opacity: 1.0;
+            }
 
     .bch-calendar-year-select-modal.bch-select-container .bch-button label {
         font-family: 'Roboto';
@@ -157,7 +159,9 @@
     }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller::-webkit-scrollbar-thumb:hover,
-    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover {
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
         background: rgba(51, 180, 105, 0.85);
     }
 
@@ -167,18 +171,20 @@
     }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
-    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper {
-        background: #E1F4E9;
-        border-radius: 5px;
-        color: #131212;
-    }
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper {
+                    background: #E1F4E9;
+                    border-radius: 5px;
+                    color: #131212;
+                }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper,
     html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper {
-        background: #33B469 !important;
-        border-radius: 5px !important;
-        color: #FFFFFF !important;
-    }
+                background: #33B469 !important;
+                border-radius: 5px !important;
+                color: #FFFFFF !important;
+            }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year,
     html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
@@ -209,7 +215,9 @@
     }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller::-webkit-scrollbar-thumb:hover,
-    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover {
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
         background: #9A9A9A;
     }
 
@@ -219,7 +227,9 @@
     }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
-    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper {
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper {
         background: #E9ECEF;
         border-radius: 5px;
         color: #212529;
@@ -274,7 +284,9 @@
     }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller::-webkit-scrollbar-thumb:hover,
-    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover {
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
         background: #9CA3AF;
     }
 
@@ -284,7 +296,9 @@
     }
 
     .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
-    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper {
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper {
         background: #374151;
         border-radius: 5px;
         color: #E5E7EB;
@@ -339,7 +353,9 @@
     }
 
     .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month label:hover,
-    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover {
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month label.has-hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label.has-hover {
         background: #E1F4E9 !important;
     }
 
@@ -377,7 +393,9 @@
     }
 
     .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month label:hover,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover {
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month label.has-hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label.has-hover {
         background: #E9ECEF !important;
     }
 
@@ -415,7 +433,9 @@
     }
 
     .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month label:hover,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover {
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month label.has-hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label.has-hover {
         background: #374151 !important;
     }
 </style>

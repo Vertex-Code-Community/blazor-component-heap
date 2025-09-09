@@ -158,6 +158,7 @@
         }
 
         .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-handle:hover,
+        .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-handle.has-hover,
         .bch-cropper-container > .bch-rectangular-wrapper > .bch-cropper-wrapper > .bch-handle.bch-active {
             opacity: 1.0;
         }

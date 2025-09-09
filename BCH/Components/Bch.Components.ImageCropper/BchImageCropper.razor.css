@@ -149,7 +149,8 @@
                 transform: scale(1.0);
             }
                 
-                .bch-image-cropper-container > .bch-control-container > .bch-second-line > .bch-scale-blocks > .bch-block:hover {
+                .bch-image-cropper-container > .bch-control-container > .bch-second-line > .bch-scale-blocks > .bch-block:hover,
+                .bch-image-cropper-container > .bch-control-container > .bch-second-line > .bch-scale-blocks > .bch-block.has-hover {
                     transform: scale(1.1);
                 }
 
