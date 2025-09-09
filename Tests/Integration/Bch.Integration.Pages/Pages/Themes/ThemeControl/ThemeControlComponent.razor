@@ -1,0 +1,18 @@
+@using Bch.Modules.Themes.Models
+@using Bch.Modules.Themes.Providers
+@using Bch.Components.Select
+
+<div class="theme-control">
+    <h4>Global Theme</h4>
+    <BchSelect TItem="BchTheme"
+               Options="_themes"
+               Width="200"
+               ContentHeight="132"
+               DefaultText="Select theme"
+               DefaultValue="_selectedTheme"
+               OptionNamePredicate="GetThemeName"
+               SelectedChanged="x => OnThemeChangedAsync(x)"
+               Theme="_selectedTheme" />
+</div>
+
+<BchGlobalThemeProvider Theme="_selectedTheme"/>

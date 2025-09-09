@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Microsoft.JSInterop;
 using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Models;
@@ -17,7 +16,6 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 {
     [Inject] public required IDomInteropService DomInteropService { get; set; }
     [Inject] public required IGlobalEventsService GlobalEventsService { get; set; }
-    [Inject] public required IJSRuntime JsRuntime { get; set; }
 
     private class Element
     {
@@ -32,7 +30,7 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
         public object Key { get; set; } = null!;
         public List<Element> Elements { get; set; } = new();
     }
-    
+
     [Parameter] public EventCallback OnFocusOut { get; set; }
     [Parameter] public bool Filtering { get; set; } = false;
     [Parameter] public bool MultipleValues { get; set; } = false;
@@ -56,12 +54,14 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     [Parameter] public Func<TItem, string>? CssItemPredicate { get; set; } = x => string.Empty;
     [Parameter] public EventCallback<KeyboardEventArgs> OnFilterKeyDown { get; set; }
     [Parameter] public EventCallback<TItem?> SelectedChanged { get; set; }
-    [Parameter] public TItem? Selected
+
+    [Parameter]
+    public TItem? Selected
     {
         get => _selectedValue;
         set
         {
-            if ((_selectedValue != null && _selectedValue.Equals(value)) || (_selectedValue == null && value == null) ) 
+            if ((_selectedValue != null && _selectedValue.Equals(value)) || (_selectedValue == null && value == null))
                 return;
             _selectedValue = value;
 
@@ -70,7 +70,9 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     }
 
     [Parameter] public EventCallback<string> FilterChanged { get; set; }
-    [Parameter] public string Filter
+
+    [Parameter]
+    public string Filter
     {
         get => _typedFilterValue;
         set
@@ -83,9 +85,12 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     }
 
     [Parameter] public EventCallback<bool> IsOpenedChanged { get; set; }
-    [Parameter] public bool IsOpened
+
+    [Parameter]
+    public bool IsOpened
     {
-        get => _isOpened; set {}
+        get => _isOpened;
+        set { }
     }
 
     [Parameter] public IList<TItem> SelectedItems { get; set; } = new List<TItem>();
@@ -93,6 +98,7 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     [Parameter] public EventCallback<TItem> OnDeselectItem { get; set; }
     [Parameter] public RenderFragment<TItem>? OptionTemplate { get; set; }
     [Parameter] public RenderFragment<object>? GroupTemplate { get; set; }
+    [Parameter] public bool CollapseOnClickOutside { get; set; } = true;
 
     // Theme support (cascading + explicit override)
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
@@ -116,14 +122,15 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 
     private int _prevCount = -1;
     private bool _scrolled = false;
-    private Vec2 _containerPos = new ();
+    private Vec2 _containerPos = new();
     private float _contentWidth = 0;
-    private NumberFormatInfo _nF = new () { NumberDecimalSeparator = "." };
+    private NumberFormatInfo _nF = new() { NumberDecimalSeparator = "." };
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
 
     protected override Task OnInitializedAsync()
     {
         OptionNamePredicate ??= x => $"{x}";
-        
+
         if (FilterByPredicate == null!)
             FilterByPredicate = OptionNamePredicate;
 
@@ -132,8 +139,8 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 
         //var isClass = default(TItem) == null; // Only true if T is a reference type or nullable value type
         _placeholder = (Selected == null) ? DefaultText : OptionNamePredicate.Invoke(Selected);
-        
-        return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey, 
+
+        return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey,
             OnDocumentMouseDownAsync);
     }
 
@@ -172,7 +179,7 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 
                     index++;
                 }
-                
+
                 var offset = index * ItemHeight;
                 await DomInteropService.ScrollToAsync(ScrollerId, "0", $"{offset}", "auto");
             }
@@ -189,9 +196,9 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
     {
         var scrollContainer = e.PathCoordinates.FirstOrDefault();
         if (scrollContainer?.Id == ScrollerId) return;
-        
+
         await SetOpenedAsync(false);
-        
+
         _scrolled = false;
         Filter = string.Empty;
         await OnFocusOut.InvokeAsync();
@@ -203,7 +210,7 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
         if (!MultipleValues)
         {
             await SetOpenedAsync(false);
-            
+
             Selected = option;
             Filter = string.Empty;
 
@@ -247,11 +254,11 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
         {
             var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
             _containerPos.Set(containerRect.X, containerRect.Y);
-            _contentWidth = (float) containerRect.Width;
+            _contentWidth = (float)containerRect.Width;
         }
-        
+
         await SetOpenedAsync(!_isOpened);
-        
+
         _scrolled = false;
         Filter = string.Empty;
 
@@ -275,7 +282,7 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 
         var groups = Options.GroupBy(groupPredicate);
         _prevCount = Options.Count();
-        
+
         foreach (var group in groups)
         {
             if (!group.Any()) continue;
@@ -293,7 +300,8 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
                 var name = OptionNamePredicate == null ? string.Empty : OptionNamePredicate.Invoke(item);
                 var filterElementValue = FilterByPredicate?.Invoke(item);
 
-                if (!string.IsNullOrEmpty(filterElementValue) && filterElementValue.Contains(filter, StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrEmpty(filterElementValue) &&
+                    filterElementValue.Contains(filter, StringComparison.OrdinalIgnoreCase))
                 {
                     gr.Elements.Add(new Element
                     {
@@ -327,7 +335,7 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
             if (!IsOpened)
             {
                 await SetOpenedAsync(true);
-                
+
                 _scrolled = false;
 
                 FilterData();
@@ -343,28 +351,26 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
         var container = e.PathCoordinates
             .FirstOrDefault(x => x.Id == _containerId || x.Id == ContentId);
 
-        if (container == null) // outside of select
-        {
-            await SetOpenedAsync(false);
-            
-            _scrolled = false;
-            Filter = string.Empty;
-            await OnFocusOut.InvokeAsync();
-            StateHasChanged();
-        }
+        if (container is not null || !CollapseOnClickOutside) return; // inside of select
+        await SetOpenedAsync(false);
+
+        _scrolled = false;
+        Filter = string.Empty;
+        await OnFocusOut.InvokeAsync();
+        StateHasChanged();
     }
 
     private async Task SetOpenedAsync(bool isOpened)
     {
         if (_isOpened == isOpened) return;
         _isOpened = isOpened;
-        
+
         if (_isOpened)
-            await GlobalEventsService.AddDocumentListenerAsync<BchScrollEventArgs>("scroll", 
+            await GlobalEventsService.AddDocumentListenerAsync<BchScrollEventArgs>("scroll",
                 _subscriptionKey, OnWindowGlobalScrollAsync, subscribingContext: GlobalSubscribingContext.Window);
         else
             await GlobalEventsService.RemoveDocumentListenerAsync<BchScrollEventArgs>("scroll", _subscriptionKey);
-        
+
         await IsOpenedChanged.InvokeAsync(isOpened);
     }
 
@@ -376,7 +382,9 @@ public partial class BchSelect<TItem> : ComponentBase, IAsyncDisposable
 
     private string GetThemeCssClass()
     {
-        // read CssName attribute from EffectiveTheme
-        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        var themeSpecified = Theme ?? ThemeCascading;
+
+        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) +
+               (themeSpecified is null ? " bch-no-theme-specified" : "");
     }
 }

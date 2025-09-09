@@ -20,11 +20,13 @@ public partial class BchRangeCalendar : IAsyncDisposable
     [Parameter] public string Format { get; set; } = string.Empty;
     [Parameter] public string Culture { get; set; } = CultureInfo.CurrentCulture.Name;
     [Parameter] public EventCallback<DateRange> ValuesChanged { get; set; }
+    [Parameter] public bool CollapseOnClickOutside { get; set; } = true;
 
     // Theme support (cascading + explicit override)
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public BchTheme? Theme { get; set; }
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
 
     [Parameter]
     public DateRange Values
@@ -38,6 +40,8 @@ public partial class BchRangeCalendar : IAsyncDisposable
             ValuesChanged.InvokeAsync(value);
         }
     }
+    
+    [Parameter] public DateTime DefaultValue { get; set; } = DateTime.Now;
 
     private DateRange _values = new();
     private bool _showDate = false;
@@ -53,8 +57,8 @@ public partial class BchRangeCalendar : IAsyncDisposable
     private DateTime _defaultStartDay;
     private DateTime _defaultEndDay;
 
-    private int _selectedYear = DateTime.Now.Year;
-    private int _selectedMonth = DateTime.Now.Month;
+    private int _selectedYear;
+    private int _selectedMonth;
 
     private readonly string _subscriptionKey = $"_key_{Guid.NewGuid()}";
     private Vec2 _containerPos = new();
@@ -63,6 +67,8 @@ public partial class BchRangeCalendar : IAsyncDisposable
     protected override Task OnInitializedAsync()
     {
         _culture = new CultureInfo(Culture);
+        _selectedYear = DefaultValue.Year;
+        _selectedMonth = DefaultValue.Month;
 
         if (string.IsNullOrWhiteSpace(Format))
             Format = "MM/dd/yyyy";
@@ -100,7 +106,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
                 x.Id == _containerId || x.Id == _calendarDaysId || 
                 x.Id == _calendarMonthsId || x.Id == _yearsSelectContentId);
 
-        if (container != null) return Task.CompletedTask; // inside calendar
+        if (container != null || !CollapseOnClickOutside) return Task.CompletedTask; // inside calendar
 
         var otherCalendar = e.PathCoordinates
             .Any(x => x.ClassList.Contains("bch-datepicker-wrapper") ||
@@ -214,6 +220,8 @@ public partial class BchRangeCalendar : IAsyncDisposable
 
     private string GetThemeCssClass()
     {
-        return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        var themeSpecified = Theme ?? ThemeCascading;
+        var themeClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return themeClass + (themeSpecified is null ? " bch-no-theme-specified" : "");
     }
 }

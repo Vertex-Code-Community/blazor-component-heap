@@ -1,5 +1,5 @@
 ﻿@using Bch.Components.Select
-<div id="@Id" class="bch-component bch-datepicker-list-month @GetThemeCssClass()">
+<div id="@Id" class="bch-component bch-datepicker-list-month @GetThemeCssClass() @_cssKey">
     <div class="bch-datepicker-button-of-open-years">
         <div>
             <BchSelect TItem="Year"
@@ -9,11 +9,11 @@
                        ItemHeight="34"
                        Width="70"
                        ScrollToSelected="true"
-                       CssClass="bch-calendar-year-select bch-calendar-year-select-modal"
+                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal {_cssKey}")"
                        OptionNamePredicate="x => x.Number.ToString()"
                        DefaultValue="_selectedYear"
                        SelectedChanged="OnSelectYearAsync"
-                       OnFocusOut="async () => { await OnFocusOut.InvokeAsync(); }"
+                       OnFocusOut="() => OnFocusOut.InvokeAsync()"
                        Theme="Theme"
             @bind-IsOpened="_isOpenedYearSelect">
                 <OptionTemplate Context="year">
@@ -26,21 +26,15 @@
             </BchSelect>
         </div>
 
-        <div style="height: 100%; width: 100%;" @onclick="async () => { await OnFocusOut.InvokeAsync(); }"></div>
+        <div style="height: 100%; width: 100%;" @onclick="() => OnFocusOut.InvokeAsync()"></div>
     </div>
 
-
-    @* @if (_isOpenedYearSelect) *@
-    @* { *@
-    @*     <div class="shadow-opened-select"></div> *@
-    @* } *@
-
-    <div class="bch-list-of-month" @onclick="async () => { await OnFocusOut.InvokeAsync(); }">
+    <div class="bch-list-of-month" @onclick="() => OnFocusOut.InvokeAsync()">
         @foreach (var month in _month)
         {
             <label class="@(_monthValue == month.Number ? "current-month" : "")
                        @(SelectedMonth == month.Number ? "selected-month" : "")"
-            @onclick="async () => { await OnSelectMonthAsync(month.Number); }">
+                   @onclick="() => OnSelectMonthAsync(month.Number)">
                 @month.Name
             </label>
         }
@@ -48,57 +42,400 @@
 </div>
 
 <style>
-    .bch-calendar-year-select { z-index: 999; }
-    .bch-select-content-modal-wrapper.bch-calendar-year-select { transform: translate(-15px, 51px) !important; }
+    .bch-calendar-year-select {
+        z-index: 999;
+    }
+
+    .bch-select-content-modal-wrapper.bch-calendar-year-select {
+        transform: translate(-15px, 51px) !important;
+    }
 
     /* Remove white bg/shadow from the trigger button (non-modal part), no hover */
-    .bch-calendar-year-select-modal.bch-select-container { background: transparent !important; filter: none !important; border-radius: 0 !important; }
-    .bch-calendar-year-select-modal.bch-select-container .bch-button { display: inline-flex; align-items: center; gap: 8px; border-radius: 5px; transition: background 0.2s ease; }
-    .bch-calendar-year-select-modal.bch-select-container .bch-button:hover { background: transparent !important; }
-    .bch-calendar-year-select-modal.bch-select-container .bch-button span { margin-left: 0 !important; }
+    .bch-calendar-year-select-modal.bch-select-container {
+        background: transparent !important;
+        filter: none !important;
+        border-radius: 0 !important;
+    }
+
+    .bch-calendar-year-select-modal.bch-select-container .bch-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 5px;
+        transition: background 0.2s ease;
+    }
+
+    .bch-calendar-year-select-modal.bch-select-container .bch-button:hover,
+    .bch-calendar-year-select-modal.bch-select-container .bch-button.has-hover {
+        background: transparent !important;
+    }
+
+    .bch-calendar-year-select-modal.bch-select-container .bch-button span {
+        margin-left: 0 !important;
+    }
 
     /* Base neutralization for modal content */
-    .bch-calendar-year-select-modal .bch-content { border-top: none !important; border-radius: 0 !important; border-bottom-left-radius: 10px !important; filter: none !important; }
-    .bch-calendar-year-select-modal .bch-content > .bch-scroller::-webkit-scrollbar { width: 5px; }
-    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option { padding: 0 !important; background: none; opacity: 1.0; justify-content: center; }
-    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper { width: 100%; margin: 0; box-sizing: border-box; display: flex; justify-content: center; align-items: center; font-family: 'Roboto'; font-style: normal; font-weight: 400; font-size: 16px; line-height: 19px; }
-    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
-    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option.selected,
-    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option:hover { background: none !important; padding: 0 !important; border: none !important; opacity: 1.0; }
-    .bch-calendar-year-select-modal.bch-select-container .bch-button label { font-family: 'Roboto'; font-style: normal; font-weight: 500 !important; font-size: 18px !important; line-height: 32px; }
-    .bch-calendar-year-select-modal.bch-select-container .bch-button span { transition: none !important; min-width: 14px !important; min-height: 12px !important; transform: none !important; margin-top: 2px; }
+    .bch-calendar-year-select-modal .bch-content {
+        border-top: none !important;
+        border-radius: 0 !important;
+        border-bottom-left-radius: 10px !important;
+        filter: none !important;
+    }
 
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller::-webkit-scrollbar {
+            width: 5px;
+        }
+
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option {
+        padding: 0 !important;
+            background: none;
+            opacity: 1.0;
+            justify-content: center;
+        }
+
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper {
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 19px;
+    }
+
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option.selected,
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option:hover,
+    .bch-calendar-year-select-modal .bch-content > .bch-scroller > .bch-group > .bch-option.has-hover {
+                background: none !important;
+                padding: 0 !important;
+                border: none !important;
+                opacity: 1.0;
+            }
+
+    .bch-calendar-year-select-modal.bch-select-container .bch-button label {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500 !important;
+        font-size: 18px !important;
+        line-height: 32px;
+    }
+
+    .bch-calendar-year-select-modal.bch-select-container .bch-button span {
+        transition: none !important;
+        min-width: 14px !important;
+        min-height: 12px !important;
+        transform: none !important;
+        margin-top: 2px;
+    }
+
+</style>
+
+@* Year Select Styles *@
+
+<style>
     /* Divider and themed rules remain unchanged (below) */
     /* LightGreen */
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light-green { background: #FEFEFE !important; border-right: 1px solid #E9ECEF !important; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller::-webkit-scrollbar-thumb { background: rgba(51,180,105,0.6); }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller::-webkit-scrollbar-thumb:hover { background: rgba(51,180,105,0.85); }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper { color: #131212; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper { background: #E1F4E9; border-radius: 5px; color: #131212; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper { background: #33B469 !important; border-radius: 5px !important; color: #FFFFFF !important; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year { border: 1px solid #33B469; border-radius: 5px; }
-    .bch-calendar-year-select-modal.bch-select-container.bch-theme-light-green .bch-button label { color: #131212 !important; }
-    .bch-calendar-year-select-modal.bch-select-container.bch-theme-light-green .bch-button span { background: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-green.svg") center no-repeat !important; }
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified {
+        background: #FEFEFE;
+        border-right: 1px solid #E9ECEF;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller::-webkit-scrollbar-thumb,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb {
+        background: rgba(51, 180, 105, 0.6);
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
+        background: rgba(51, 180, 105, 0.85);
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper {
+        color: #131212;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper {
+                    background: #E1F4E9;
+                    border-radius: 5px;
+                    color: #131212;
+                }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper {
+                background: #33B469 !important;
+                border-radius: 5px !important;
+                color: #FFFFFF !important;
+            }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light-green > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year,
+    html.bch-theme-light-green .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+        border: 1px solid #33B469;
+        border-radius: 5px;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal.bch-select-container.bch-theme-light-green .bch-button label,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-calendar-year-select-modal.bch-select-container .bch-button label {
+        color: #131212 !important;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal.bch-select-container.bch-theme-light-green .bch-button span,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-calendar-year-select-modal.bch-select-container .bch-button span {
+        background: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-green.svg") center no-repeat !important;
+    }
 
     /* Light */
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light { background: #FFFFFF !important; border-right: 1px solid #E9ECEF !important; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller::-webkit-scrollbar-thumb { background: #AFAFAF; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller::-webkit-scrollbar-thumb:hover { background: #9A9A9A; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper { color: #212529; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper { background: #E9ECEF; border-radius: 5px; color: #212529; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper { background: #6C757D !important; color: #FFFFFF !important; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year { border: 1px solid #6C757D; border-radius: 5px; }
-    .bch-calendar-year-select-modal.bch-select-container.bch-theme-light .bch-button label { color: #212529 !important; }
-    .bch-calendar-year-select-modal.bch-select-container.bch-theme-light .bch-button span { background: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-gray.svg") center no-repeat !important; }
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified {
+        background: #FFFFFF !important;
+        border-right: 1px solid #E9ECEF !important;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller::-webkit-scrollbar-thumb,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb {
+        background: #AFAFAF;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
+        background: #9A9A9A;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper {
+        color: #212529;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper {
+        background: #E9ECEF;
+        border-radius: 5px;
+        color: #212529;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper {
+        background: #6C757D !important;
+        color: #FFFFFF !important;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-light > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year,
+    html.bch-theme-light .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+        border: 1px solid #6C757D;
+        border-radius: 5px;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal.bch-select-container.bch-theme-light .bch-button label,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-calendar-year-select-modal.bch-select-container .bch-button label {
+        color: #212529 !important;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal.bch-select-container.bch-theme-light .bch-button span,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-calendar-year-select-modal.bch-select-container .bch-button span {
+        background: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-gray.svg") center no-repeat !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year,
+    html.bch-theme-light-green .@(_cssKey).bch-datepicker-list-month .bch-calendar-year-select .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+        color: #33B469 !important;
+        border: 1px solid #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year,
+    html.bch-theme-light .@(_cssKey).bch-datepicker-list-month .bch-calendar-year-select .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+        color: #6C757D !important;
+        border: 1px solid #6C757D !important;
+    }
+
+    /* Light */
 
     /* Dark */
-    .bch-calendar-year-select-modal .bch-content.bch-theme-dark { background: #111827 !important; border-right: 1px solid #374151 !important; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller::-webkit-scrollbar-thumb { background: #6B7280; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper { color: #E5E7EB; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper { background: #374151; border-radius: 5px; color: #E5E7EB; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper { background: #4B5563 !important; color: #E5E7EB !important; }
-    .bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year { border: 1px solid #9CA3AF; border-radius: 5px; }
-    .bch-calendar-year-select-modal.bch-select-container.bch-theme-dark .bch-button label { color: #E5E7EB !important; }
-    .bch-calendar-year-select-modal.bch-select-container.bch-theme-dark .bch-button span { background: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-white.svg") center no-repeat !important; }
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified {
+        background: #111827 !important;
+        border-right: 1px solid #374151 !important;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller::-webkit-scrollbar-thumb,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb {
+        background: #6B7280;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller::-webkit-scrollbar-thumb.has-hover,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb:hover,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller::-webkit-scrollbar-thumb.has-hover {
+        background: #9CA3AF;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper {
+        color: #E5E7EB;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option:hover > .bch-year-wrapper,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.has-hover > .bch-year-wrapper {
+        background: #374151;
+        border-radius: 5px;
+        color: #E5E7EB;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option.selected > .bch-year-wrapper {
+        background: #4B5563 !important;
+        color: #E5E7EB !important;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-theme-dark > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year,
+    html.bch-theme-dark .@(_cssKey).bch-calendar-year-select-modal .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+        border: 1px solid #9CA3AF;
+        border-radius: 5px;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal.bch-select-container.bch-theme-dark .bch-button label,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-calendar-year-select-modal.bch-select-container .bch-button label {
+        color: #E5E7EB !important;
+    }
+
+    .@(_cssKey).bch-calendar-year-select-modal.bch-select-container.bch-theme-dark .bch-button span,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-calendar-year-select-modal.bch-select-container .bch-button span {
+        background: url("_content/Bch.Components.Calendar/img/arrow-top-bottom-icon-white.svg") center no-repeat !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-calendar-year-select .bch-content > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year,
+    html.bch-theme-dark .@(_cssKey).bch-datepicker-list-month .bch-calendar-year-select .bch-content.bch-no-theme-specified > .bch-scroller > .bch-group > .bch-option > .bch-year-wrapper > .year-item.current-year {
+        color: #9CA3AF !important;
+        border: 1px solid #9CA3AF !important;
+    }
+
+    /* Dark */
+</style>
+
+<style>
+    /* Theme-specific styles */
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month .current-month,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .current-month {
+        color: #33B469 !important;
+        border: 1px solid #33B469 !important;
+    }
+
+    /* Selected month: use outline instead of solid fill */
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month .selected-month,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .selected-month {
+        background: transparent !important;
+        border: 1px solid #33B469 !important;
+        color: #33B469 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month label:hover,
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month label.has-hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label.has-hover {
+        background: #E1F4E9 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month {
+        background: #FFFFFF !important;
+        box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2) !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-datepicker-button-of-open-years,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-datepicker-button-of-open-years {
+        border-bottom: 1px solid #E9ECEF !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month {
+        color: #495057 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month label,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label {
+        color: #212529 !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month .current-month,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .current-month {
+        color: #6C757D !important;
+        border: 1px solid #6C757D !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month .selected-month,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .selected-month {
+        background: #6C757D !important;
+        color: #FFFFFF !important;
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month label:hover,
+    .@(_cssKey).bch-theme-light.bch-datepicker-list-month .bch-list-of-month label.has-hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label.has-hover {
+        background: #E9ECEF !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month {
+        background: #111827 !important;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35) !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-datepicker-button-of-open-years,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-datepicker-button-of-open-years {
+        border-bottom: 1px solid #374151 !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month {
+        color: #9CA3AF !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month label,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label {
+        color: #E5E7EB !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month .current-month,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .current-month {
+        color: #9CA3AF !important;
+        border: 1px solid #9CA3AF !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month .selected-month,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .selected-month {
+        background: #4B5563 !important;
+        color: #E5E7EB !important;
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month label:hover,
+    .@(_cssKey).bch-theme-dark.bch-datepicker-list-month .bch-list-of-month label.has-hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label.has-hover {
+        background: #374151 !important;
+    }
 </style>

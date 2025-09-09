@@ -26,7 +26,8 @@
         background: var(--scroll-thumb);
     }
 
-        .bch-calendar-container .scroll::-webkit-scrollbar-thumb:hover {
+        .bch-calendar-container .scroll::-webkit-scrollbar-thumb:hover,
+        .bch-calendar-container .scroll::-webkit-scrollbar-thumb.has-hover {
             background: var(--scroll-thumb-hover);
         }
 
@@ -139,7 +140,8 @@
                 cursor: pointer;
             }
 
-                .bch-calendar-container > .bch-dateline > .scroll-btn > span:hover {
+                .bch-calendar-container > .bch-dateline > .scroll-btn > span:hover,
+                .bch-calendar-container > .bch-dateline > .scroll-btn > span.has-hover {
                     opacity: 1.0;
                 }
 

@@ -14,7 +14,7 @@
         <div class="test-case">
             <h4>Light Green Theme</h4>
             <p>Table with Light Green theme demonstrating all features</p>
-            <BchThemeProvider Theme="BchTheme.LightGreen">
+            <BchGlobalThemeProvider Theme="BchTheme.LightGreen">
                 <BchTable @ref="_tableRef1"
                           TRowData="UserModel"
                           MinWidth="670px"
@@ -42,13 +42,13 @@
                         <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
                     </BchTableColumn>
                 </BchTable>
-            </BchThemeProvider>
+            </BchGlobalThemeProvider>
         </div>
 
         <div class="test-case">
             <h4>Light Theme</h4>
             <p>Table with Light theme demonstrating all features</p>
-            <BchThemeProvider Theme="BchTheme.Light">
+            <BchGlobalThemeProvider Theme="BchTheme.Light">
                 <BchTable @ref="_tableRef2" TRowData="UserModel"
                           MinWidth="670px"
                           PageSize="10"
@@ -75,13 +75,13 @@
                         <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
                     </BchTableColumn>
                 </BchTable>
-            </BchThemeProvider>
+            </BchGlobalThemeProvider>
         </div>
 
         <div class="test-case">
             <h4>Dark Theme</h4>
             <p>Table with Dark theme demonstrating all features</p>
-            <BchThemeProvider Theme="BchTheme.Dark">
+            <BchGlobalThemeProvider Theme="BchTheme.Dark">
                 <BchTable @ref="_tableRef3" TRowData="UserModel"
                           MinWidth="670px"
                           PageSize="10"
@@ -108,7 +108,7 @@
                         <TdTemplate>@context.ReportDate.ToString("yyyy-MM-dd")</TdTemplate>
                     </BchTableColumn>
                 </BchTable>
-            </BchThemeProvider>
+            </BchGlobalThemeProvider>
         </div>
     </div>
 </div>

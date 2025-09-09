@@ -75,11 +75,12 @@ public partial class BchCalendarDays
 
     // Theme support
     [Parameter] public BchTheme? Theme { get; set; }
-    private string GetThemeCssClass() 
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
+    private string GetThemeCssClass()
     {
-        var cssClass = Theme?.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
-        Console.WriteLine($"BchCalendarDays Theme: {Theme}, CSS Class: '{cssClass}'");
-        return cssClass;
+        var themeClass = Theme?.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        var suffix = Theme is null ? " bch-no-theme-specified" : string.Empty;
+        return themeClass + suffix;
     }
 
     private List<string> _weekDays = new();
@@ -113,6 +114,27 @@ public partial class BchCalendarDays
 
         SetWeekDayNamesToCalendars();
         UpdateCalendar(_year, _month);
+    }
+
+    protected override void OnParametersSet()
+    {
+        // Update month/year when DefaultMonth/DefaultYear parameters change
+        // This handles the case when user changes year/month in months view
+        if (DefaultMonth != 0 && DefaultMonth != _month)
+        {
+            _month = DefaultMonth;
+        }
+        
+        if (DefaultYear != 0 && DefaultYear != _year)
+        {
+            _year = DefaultYear;
+        }
+
+        // Only update calendar if month or year changed
+        if (DefaultMonth != 0 || DefaultYear != 0)
+        {
+            UpdateCalendar(_year, _month);
+        }
     }
 
     private void UpdateCalendar(int year, int month)

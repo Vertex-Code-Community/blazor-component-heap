@@ -1,9 +1,9 @@
 ﻿@using Bch.Components.Modal
 @using Bch.Components.Calendar.CalendarDays
 @using Bch.Components.Calendar.CalendarMonths
-@using Bch.Modules.Themes.Models
 
-<div class="bch-component bch-datepicker-wrapper @CssClass @GetThemeCssClass()" id="@_containerId" tabindex="-1">
+<div class="bch-component bch-datepicker-wrapper @CssClass @GetThemeCssClass() @_cssKey" id="@_containerId"
+     tabindex="-1">
     <div class="bch-datepicker" @onclick="OnCalendarClickedAsync">
         <input id="@_inputId"
                class="bch-datepicker-input"
@@ -11,18 +11,7 @@
                autocomplete="unrechable-filter-to-autocomplete"
                value="@GetValues()"
                @ref="@_inputRef"/>
-        @if (EffectiveTheme == BchTheme.Dark)
-        {
-            <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon-white.svg" />
-        }
-        else if (EffectiveTheme == BchTheme.Light)
-        {
-            <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon-gray.svg" />
-        }
-        else
-        {
-            <img class="bch-datepicker-img" src="_content/Bch.Components.Calendar/img/calendar-icon.svg" />
-        }
+        <div class="bch-datepicker-img"></div>
     </div>
 
     <BchModal CssClass="@($"bch-calendar-days-modal-wrapper {CssClass}")"
@@ -44,7 +33,7 @@
                          SelectedStartDay="SetStartDay"
                          @bind-Values="Values"
                          TrustedValues="TrustedValuesAsync"
-                         Theme="@EffectiveTheme"
+                         Theme="@(Theme ?? ThemeCascading)"
                          OnCloseDate="() => { _showDate = false; return OnShowModeChangedAsync(); }"
                          IsShowMonth="e => { _showMonth = e; _showDate = false; return OnShowModeChangedAsync(); }"/>
 
@@ -64,7 +53,7 @@
                            SelectedYear="_selectedYear"
                            MonthChanged="e => { _selectedMonth = e; StateHasChanged(); }"
                            YearChanged="e=> { _selectedYear = e; StateHasChanged(); }"
-                           Theme="@EffectiveTheme"
+                           Theme="@(Theme ?? ThemeCascading)"
                            IsShowDate="e => { _showMonth = false; _showDate = e; return OnShowModeChangedAsync(); }"
                            OnFocusOut="() => _inputRef.FocusAsync()"/>
     </BchModal>
@@ -75,5 +64,52 @@
     .bch-calendar-days-modal-wrapper,
     .bch-calendar-months-modal-wrapper {
         transform: translateY(49px);
+    }
+</style>
+
+<style>
+    /* THEME: LightGreen */
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-wrapper .bch-datepicker,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker {
+        box-shadow: 1px 0px 3px rgba(203, 203, 203, 0.25), 0px 1px 3px rgba(203, 203, 203, 0.25);
+    }
+
+    /* THEME: Light */
+    .@(_cssKey).bch-theme-light.bch-datepicker-wrapper .bch-datepicker,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker {
+        background-color: #FFFFFF;
+        box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2);
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input {
+        color: #212529;
+    }
+
+    /* THEME: Dark */
+    .@(_cssKey).bch-theme-dark.bch-datepicker-wrapper .bch-datepicker,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker {
+        background-color: #111827;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input {
+        color: #E5E7EB;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img {
+        background-image: url("_content/Bch.Components.Calendar/img/calendar-icon.svg");
+    }
+
+    .@(_cssKey).bch-theme-light.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img {
+        background-image: url("_content/Bch.Components.Calendar/img/calendar-icon-gray.svg");
+    }
+
+    .@(_cssKey).bch-theme-dark.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img {
+        background-image: url("_content/Bch.Components.Calendar/img/calendar-icon-white.svg");
     }
 </style>

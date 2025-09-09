@@ -15,6 +15,7 @@
     padding: 0 12px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
     .bch-datepicker .bch-datepicker-input {
@@ -34,6 +35,7 @@
     }
 
     .bch-datepicker .bch-datepicker-input:hover,
+    .bch-datepicker .bch-datepicker-input.has-hover,
     .bch-datepicker .bch-datepicker-input:focus,
     .bch-datepicker .bch-datepicker-input:focus-within,
     .bch-datepicker .bch-datepicker-input:focus-visible {
@@ -47,9 +49,11 @@
         cursor: pointer;
     }
 
-/* Theme-specific styles (match single-date BchCalendar) */
-.bch-theme-light-green .bch-datepicker { box-shadow: 1px 0px 3px rgba(203,203,203,0.25), 0px 1px 3px rgba(203,203,203,0.25); }
-.bch-theme-light .bch-datepicker { background-color: #FFFFFF; box-shadow: 1px 0px 3px rgba(200, 200, 200, 0.2), 0px 1px 3px rgba(200, 200, 200, 0.2); }
-.bch-theme-light .bch-datepicker .bch-datepicker-input { color: #212529; }
-.bch-theme-dark .bch-datepicker { background-color: #111827; box-shadow: 0 6px 12px rgba(0,0,0,0.35); }
-.bch-theme-dark .bch-datepicker .bch-datepicker-input { color: #E5E7EB; }
+/* Calendar icon (theme-based via background) */
+.bch-datepicker .bch-datepicker-img {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}

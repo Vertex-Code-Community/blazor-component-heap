@@ -1,0 +1,10 @@
+.theme-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-control h4 {
+    margin: 0;
+}
+

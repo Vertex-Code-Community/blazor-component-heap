@@ -45,7 +45,8 @@
             transition: 0.2s all ease;
         }
 
-            .bch-tabs-panel > .bch-tab-btn .bch-icon:hover {
+            .bch-tabs-panel > .bch-tab-btn .bch-icon:hover,
+            .bch-tabs-panel > .bch-tab-btn .bch-icon.has-hover {
                 transform: scale(1.2);
             }
 

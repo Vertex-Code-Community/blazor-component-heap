@@ -30,19 +30,22 @@ public partial class BchCalendar : IAsyncDisposable
             ValueChanged.InvokeAsync(value);
         }
     }
+    
+    [Parameter] public DateTime DefaultValue { get; set; } = DateTime.Now;
 
     [Parameter] public bool ShowClearButton { get; set; } = true;
 
     // Theme support (cascading + explicit override)
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public BchTheme? Theme { get; set; }
-
+    [Parameter] public bool CollapseOnClickOutside { get; set; } = true;
+    
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
-    private string GetThemeCssClass() 
+    private string GetThemeCssClass()
     {
-        var cssClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
-        Console.WriteLine($"BchCalendar EffectiveTheme: {EffectiveTheme}, CSS Class: '{cssClass}'");
-        return cssClass;
+        var themeSpecified = Theme ?? ThemeCascading;
+        var themeClass = EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+        return themeClass + (themeSpecified is null ? " bch-no-theme-specified" : "");
     }
 
     private DateTime? _value = null;
@@ -54,6 +57,7 @@ public partial class BchCalendar : IAsyncDisposable
     private readonly string _yearsSelectContentId = $"_id_{Guid.NewGuid()}";
     private readonly string _inputId = $"_id_{Guid.NewGuid()}";
     private readonly string _subscriptionKey = $"_key_{Guid.NewGuid()}";
+    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
     private ElementReference _inputRef;
     private CultureInfo _culture = null!;
     private Vec2 _containerPos = new ();
@@ -100,7 +104,7 @@ public partial class BchCalendar : IAsyncDisposable
                 x.Id == _containerId || x.Id == _calendarDaysId || 
                 x.Id == _calendarMonthsId || x.Id == _yearsSelectContentId);
 
-        if (container != null) return Task.CompletedTask; // inside calendar
+        if (container != null || !CollapseOnClickOutside) return Task.CompletedTask; // inside calendar
 
         var otherCalendar = e.PathCoordinates
             .Any(x => x.ClassList.Contains("bch-datepicker-wrapper") ||
@@ -138,7 +142,7 @@ public partial class BchCalendar : IAsyncDisposable
         
         _containerPos.Set(containerRect.X, containerRect.Y);
         
-        var currentDate = Value ?? DateTime.Now;
+        var currentDate = Value ?? DefaultValue;
         if (currentDate.Year != _selectedYear) _selectedYear = currentDate.Year;
         if (currentDate.Month != _selectedMonth) _selectedMonth = currentDate.Month;
         
