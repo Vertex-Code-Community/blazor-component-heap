@@ -40,6 +40,7 @@ public partial class BchInputFile : ComponentBase
     private bool _hasFile = false;
     private string _fileName = string.Empty;
     private bool _isDraggingOver = false;
+    private string _fileExtensionCssClass = "ext-generic";
 
     protected override void OnParametersSet()
     {
@@ -64,6 +65,7 @@ public partial class BchInputFile : ComponentBase
             var x = files[0];
             _hasFile = true;
             _fileName = x.Name;
+            _fileExtensionCssClass = GetExtensionCssClass(_fileName);
 
             var selected = new BchBrowserFile
             {
@@ -85,6 +87,7 @@ public partial class BchInputFile : ComponentBase
         {
             _hasFile = false;
             _fileName = string.Empty;
+            _fileExtensionCssClass = "ext-generic";
             await OnChange.InvokeAsync(new BchFilesContext { Files = new List<IBrowserFile>() });
         }
 
@@ -100,6 +103,7 @@ public partial class BchInputFile : ComponentBase
     {
         _hasFile = false;
         _fileName = string.Empty;
+        _fileExtensionCssClass = "ext-generic";
 
         _inputKey = Guid.NewGuid().ToString();
 
@@ -138,5 +142,32 @@ public partial class BchInputFile : ComponentBase
     {
         _isDraggingOver = false;
         StateHasChanged();
+    }
+
+    private static string GetExtensionCssClass(string fileName)
+    {
+        try
+        {
+            var ext = Path.GetExtension(fileName);
+            if (string.IsNullOrWhiteSpace(ext))
+                return "ext-generic";
+
+            ext = ext.TrimStart('.').ToLowerInvariant();
+
+            return ext switch
+            {
+                "png" or "jpg" or "jpeg" or "gif" or "bmp" or "webp" or "svg" or "ico" or "tif" or "tiff" => "ext-img",
+                "zip" or "rar" or "7z" or "gz" or "gzip" or "tar" or "tgz" => "ext-zip",
+                "txt" or "doc" or "docx" or "csv" or "log" or "json" or "xml" or "md" or "yaml" or "yml" => "ext-txt",
+                "xls" or "xlsx" => "ext-xls",
+                "ppt" or "pptx" => "ext-ppt",
+                "pdf" => "ext-pdf",
+                _ => "ext-generic"
+            };
+        }
+        catch
+        {
+            return "ext-generic";
+        }
     }
 }

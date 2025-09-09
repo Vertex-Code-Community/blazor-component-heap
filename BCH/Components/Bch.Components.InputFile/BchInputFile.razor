@@ -19,8 +19,14 @@
                @ondragover:preventDefault
                @ondrop:stopPropagation
                @ondrop:preventDefault />
-
-        <div class="bch-upload"></div>
+        @if (!_hasFile)
+        {
+            <div class="bch-upload"></div>
+        }
+        else
+        {
+            <div class="bch-filetype-icon @_fileExtensionCssClass"></div>
+        }
 
         @if (!_hasFile)
         {
@@ -91,6 +97,36 @@
     .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-clear,
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-clear {
         background-image: url(_content/Bch.Components.InputFile/img/clear-green.svg);
+    }
+
+    /* LightGreen theme: file type icons */
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-generic,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-generic {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-generic-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-img,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-img {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-img-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-zip,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-zip {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-zip-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-txt,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-txt {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-txt-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-xls,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-xls {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-xls-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ppt,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ppt {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-ppt-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-pdf,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-pdf {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-pdf-green.svg);
     }
 
     /* THEME: Light (silver monochrome) */

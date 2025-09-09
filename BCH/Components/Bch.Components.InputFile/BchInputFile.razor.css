@@ -27,6 +27,14 @@
     margin-right: 8px;
 }
 
+.bch-inputfile-container > .bch-button > .bch-filetype-icon {
+    width: 20px;
+    height: 20px;
+    background: center no-repeat;
+    background-size: 20px 20px;
+    margin-right: 8px;
+}
+
 .bch-inputfile-container > .bch-button > .bch-file-input {
     position: absolute;
     inset: 0;
