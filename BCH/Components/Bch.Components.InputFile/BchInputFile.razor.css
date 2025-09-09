@@ -108,10 +108,10 @@
 }
 
 .bch-inputfile-dropzone-container > .bch-dropzone > .icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     background: center no-repeat;
-    background-size: 24px 24px;
+    background-size: 20px 20px;
 }
 
 .bch-inputfile-dropzone-container > .bch-dropzone > .label {
