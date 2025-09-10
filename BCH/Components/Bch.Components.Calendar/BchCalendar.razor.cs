@@ -55,10 +55,8 @@ public partial class BchCalendar : IAsyncDisposable
     private readonly string _calendarDaysId = $"_id_{Guid.NewGuid()}";
     private readonly string _calendarMonthsId = $"_id_{Guid.NewGuid()}";
     private readonly string _yearsSelectContentId = $"_id_{Guid.NewGuid()}";
-    private readonly string _inputId = $"_id_{Guid.NewGuid()}";
     private readonly string _subscriptionKey = $"_key_{Guid.NewGuid()}";
     private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
-    private ElementReference _inputRef;
     private CultureInfo _culture = null!;
     private Vec2 _containerPos = new ();
     private NumberFormatInfo _nF = new () { NumberDecimalSeparator = "." };
@@ -80,10 +78,10 @@ public partial class BchCalendar : IAsyncDisposable
         await GlobalEventsService.RemoveDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey);
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (_showDate || _showMonth) await _inputRef.FocusAsync();
-    }
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     if (_showDate || _showMonth) await _inputRef.FocusAsync();
+    // }
 
     private Task OnWindowGlobalScrollAsync(BchScrollEventArgs e)
     {

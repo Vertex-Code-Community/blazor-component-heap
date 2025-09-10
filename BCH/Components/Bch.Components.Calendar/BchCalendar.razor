@@ -5,12 +5,7 @@
 
 <div class="bch-component bch-datepicker-wrapper @CssClass @GetThemeCssClass() @_cssKey" id="@_containerId" tabindex="-1">
     <div class="bch-datepicker" @onclick="OnCalendarClickedAsync">
-        <input id="@_inputId"
-               class="bch-datepicker-input"
-               readonly
-               autocomplete="unrechable-filter-to-autocomplete"
-               value="@(Value?.ToString(Format) ?? GetPlaceholderText())"
-               @ref="@_inputRef"/>
+        <div class="bch-datepicker-input">@(Value?.ToString(Format) ?? GetPlaceholderText())</div>
         <div class="bch-datepicker-img"></div>
     </div>
 
@@ -28,7 +23,7 @@
                          DefaultYear="_selectedYear"
                          SelectedDate="Value"
                          Theme="@(Theme ?? ThemeCascading)"
-                         OnFocusOut="() => _inputRef.FocusAsync()"
+                         OnFocusOut="() => { }"
                          IsDateRange="false"
                          ShowClearButton="ShowClearButton"
                          OnDateSelected="e => { Value = e; _showDate = false; return OnShowModeChangedAsync(); }"
@@ -55,7 +50,7 @@
                            MonthChanged="e => { _selectedMonth = e; StateHasChanged(); }"
                            YearChanged="e=> { _selectedYear = e; StateHasChanged(); }"
                            IsShowDate="e => { _showMonth = false; _showDate = e; return OnShowModeChangedAsync(); }"
-                           OnFocusOut="() => _inputRef.FocusAsync()"/>
+                           OnFocusOut="() => { }"/>
     </BchModal>
 
 </div>
@@ -96,9 +91,6 @@
     html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-input {
         color: #E5E7EB;
     }
-
-    /* Calendar icon (theme-based via background) */
-    .bch-datepicker .bch-datepicker-img { width: 20px; height: 20px; background-repeat: no-repeat; background-position: center; background-size: contain; }
 
     .@(_cssKey).bch-theme-light-green.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img,
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-wrapper .bch-datepicker .bch-datepicker-img {

@@ -16,9 +16,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
 }
 
     .bch-datepicker .bch-datepicker-input {
+        min-width: 90px;
         border: none;
         outline: none;
         background: transparent;
@@ -30,8 +32,12 @@
         width: calc(100% - 20px);
     }
 
-    .bch-datepicker .bch-datepicker-img {
-        width: 20px;
+    .bch-datepicker .bch-datepicker-img { 
+        min-width: 20px; 
+        min-height: 20px;
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-size: contain;
     }
 
     .bch-datepicker .bch-datepicker-input:hover,
