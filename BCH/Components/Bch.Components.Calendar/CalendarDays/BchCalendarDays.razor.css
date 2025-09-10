@@ -20,9 +20,7 @@
 .bch-datepicker-container .bch-datepicker-header-info .selected-month-year {
     display: flex;
     align-items: center;
-    /* Make the clickable/hover area vertically centered and consistent with nav arrows */
-    height: 26px;
-    padding: 0 6px;
+    padding-top: 5px;
 }
 
 .bch-datepicker-container .bch-datepicker-header-info .selected-month-year label:hover,
@@ -38,8 +36,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
-    /* Match container height to center text inside hover area */
-    line-height: 26px;
+    line-height: 32px;
     color: #131212;
 }
 

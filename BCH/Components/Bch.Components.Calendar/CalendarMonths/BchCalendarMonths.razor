@@ -9,7 +9,7 @@
                        ItemHeight="34"
                        Width="70"
                        ScrollToSelected="true"
-                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal centered {_cssKey}")"
+                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal {_cssKey}")"
                        OptionNamePredicate="x => x.Number.ToString()"
                        DefaultValue="_selectedYear"
                        SelectedChanged="OnSelectYearAsync"
@@ -57,20 +57,12 @@
         border-radius: 0 !important;
     }
 
-    .bch-calendar-year-select-modal.centered {
-        display: flex !important;
-        align-items: center !important;
-        height: 26px !important;
-    }
-
     .bch-calendar-year-select-modal.bch-select-container .bch-button {
         display: inline-flex;
         align-items: center;
         gap: 8px;
         border-radius: 5px;
         transition: background 0.2s ease;
-        height: 100%;
-        padding: 0 6px;
     }
 
     .bch-calendar-year-select-modal.bch-select-container .bch-button:hover,
