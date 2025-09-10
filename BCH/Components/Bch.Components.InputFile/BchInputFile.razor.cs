@@ -156,12 +156,32 @@ public partial class BchInputFile : ComponentBase
 
             return ext switch
             {
-                "png" or "jpg" or "jpeg" or "gif" or "bmp" or "webp" or "svg" or "ico" or "tif" or "tiff" => "ext-img",
-                "zip" or "rar" or "7z" or "gz" or "gzip" or "tar" or "tgz" => "ext-zip",
-                "txt" or "doc" or "docx" or "csv" or "log" or "json" or "xml" or "md" or "yaml" or "yml" => "ext-txt",
-                "xls" or "xlsx" => "ext-xls",
-                "ppt" or "pptx" => "ext-ppt",
+                "png" or "jpg" or "jpeg" or "gif" or "bmp" or "webp" or "svg" or "ico" or "tif" or "tiff" or "heic" or "heif" => "ext-img",
+                "zip" or "rar" or "7z" or "gz" or "gzip" or "tar" or "tgz" or "bz" or "bz2" or "xz" or "pkg" or "deb" or "rpm" or "msi" => "ext-zip",
+                "txt" or "doc" or "docx" or "csv" or "log" or "json" or "jsonl" or "ndjson" or "xml" or "md" or "yaml" or "yml" or "rtf" or "odt" => "ext-txt",
+                "xls" or "xlsx" or "ods" or "tsv" => "ext-xls",
+                "ppt" or "pptx" or "odp" => "ext-ppt",
                 "pdf" => "ext-pdf",
+                "mp3" or "wav" or "flac" or "aac" or "ogg" or "oga" or "m4a" or "aiff" or "alac" or "wma" or "opus" or "mid" or "midi" => "ext-audio",
+                "mp4" or "mov" or "m4v" or "avi" or "mkv" or "webm" or "wmv" or "mpg" or "mpeg" or "3gp" or "3g2" or "flv" => "ext-video",
+                "cs" or "ts" or "tsx" or "js" or "jsx" or "java" or "kt" or "kts" or "swift" or "go" or "rs" or "py" or "rb" or "php" or "scala" or "sh" or "bash" or "ps1" or "lua" or "hs" or "r" or "sql" or "pl" or "m" or "mm" => "ext-code",
+                "bat" or "cmd" or "vbs" or "ps1" or "psm1" or "psd1" => "ext-script",
+                "ai" or "eps" or "cdr" => "ext-vector",
+                "fig" or "sketch" or "xd" => "ext-design",
+                "ttf" or "otf" or "woff" or "woff2" or "eot" => "ext-font",
+                "sqlite" or "db" or "db3" or "sqlitedb" or "mdb" or "accdb" or "sas7bdat" or "parquet" or "feather" or "orc" or "avro" or "dta" or "sav" or "rds" => "ext-db",
+                "csv.gz" or "tsv.gz" or "parquet" or "feather" or "h5" or "hdf5" => "ext-data",
+                "epub" or "mobi" or "azw" or "azw3" or "fb2" or "djvu" => "ext-ebook",
+                "obj" or "stl" or "fbx" or "gltf" or "glb" or "dae" => "ext-3d",
+                "dwg" or "dxf" or "step" or "stp" or "iges" or "igs" => "ext-cad",
+                "exe" or "msi" or "apk" or "ipa" or "app" or "bin" or "dmg" => "ext-exe",
+                "iso" or "img" or "dmg" => "ext-disc",
+                "srt" or "vtt" or "ass" or "ssa" or "sub" => "ext-sub",
+                "ipynb" or "rmd" or "qmd" => "ext-notebook",
+                "cr2" or "nef" or "arw" or "orf" or "rw2" or "raf" or "dng" => "ext-raw",
+                "torrent" => "ext-torrent",
+                "cer" or "crt" or "pem" or "der" or "p7b" or "pfx" or "p12" or "key" => "ext-cert",
+                "shp" or "shx" or "dbf" or "geojson" or "kml" or "kmz" or "gpx" or "tif" or "tiff" => "ext-gis",
                 _ => "ext-generic"
             };
         }

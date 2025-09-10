@@ -22,28 +22,14 @@
         @if (!_hasFile)
         {
             <div class="bch-upload"></div>
+            <label class="bch-no-selectable-text">@Placeholder</label>
+            <span class="bch-arrow"></span>
         }
         else
         {
             <div class="bch-filetype-icon @_fileExtensionCssClass"></div>
-        }
-
-        @if (!_hasFile)
-        {
-            <label class="bch-no-selectable-text">@Placeholder</label>
-        }
-        else
-        {
             <span class="bch-filename">@_fileName</span>
-        }
-
-        @if (_hasFile)
-        {
             <button type="button" class="bch-clear" @onclick:stopPropagation @onclick="OnClearClickedAsync"></button>
-        }
-        else
-        {
-            <span class="bch-arrow"></span>
         }
     </div>
 
@@ -128,6 +114,90 @@
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-pdf {
         background-image: url(_content/Bch.Components.InputFile/img/extensions/file-pdf-green.svg);
     }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-audio,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-audio {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-audio-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-video,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-video {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-video-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-code,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-code {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-code-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-script,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-script {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-script-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-vector,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-vector {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-vector-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-font,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-font {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-font-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-db,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-db {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-db-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ebook,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ebook {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-ebook-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-3d,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-3d {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-3d-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-design,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-design {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-design-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-exe,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-exe {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-exe-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-disc,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-disc {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-disc-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-package,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-package {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-package-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-data,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-data {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-data-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-sub,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-sub {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-sub-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-notebook,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-notebook {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-notebook-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-raw,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-raw {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-raw-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cad,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cad {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-cad-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-torrent,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-torrent {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-torrent-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cert,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cert {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-cert-green.svg);
+    }
+    .@(_cssKey).bch-theme-light-green.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-gis,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-gis {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-gis-green.svg);
+    }
 
     /* THEME: Light (silver monochrome) */
 
@@ -179,6 +249,90 @@
     .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-pdf,
     html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-pdf {
         background-image: url(_content/Bch.Components.InputFile/img/extensions/file-pdf-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-audio,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-audio {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-audio-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-video,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-video {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-video-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-code,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-code {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-code-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-script,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-script {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-script-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-vector,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-vector {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-vector-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-font,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-font {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-font-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-db,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-db {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-db-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ebook,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ebook {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-ebook-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-3d,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-3d {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-3d-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-design,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-design {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-design-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-exe,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-exe {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-exe-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-disc,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-disc {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-disc-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-package,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-package {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-package-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-data,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-data {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-data-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-sub,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-sub {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-sub-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-notebook,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-notebook {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-notebook-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-raw,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-raw {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-raw-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cad,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cad {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-cad-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-torrent,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-torrent {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-torrent-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cert,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cert {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-cert-grey.svg);
+    }
+    .@(_cssKey).bch-theme-light.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-gis,
+    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-gis {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-gis-grey.svg);
     }
 
     /* THEME: Dark */
@@ -236,5 +390,89 @@
     .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-pdf,
     html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-pdf {
         background-image: url(_content/Bch.Components.InputFile/img/extensions/file-pdf-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-audio,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-audio {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-audio-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-video,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-video {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-video-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-code,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-code {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-code-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-script,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-script {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-script-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-vector,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-vector {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-vector-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-font,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-font {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-font-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-db,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-db {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-db-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ebook,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-ebook {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-ebook-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-3d,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-3d {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-3d-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-design,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-design {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-design-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-exe,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-exe {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-exe-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-disc,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-disc {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-disc-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-package,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-package {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-package-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-data,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-data {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-data-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-sub,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-sub {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-sub-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-notebook,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-notebook {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-notebook-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-raw,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-raw {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-raw-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cad,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cad {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-cad-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-torrent,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-torrent {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-torrent-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cert,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-cert {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-cert-white.svg);
+    }
+    .@(_cssKey).bch-theme-dark.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-gis,
+    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-inputfile-container > .bch-button > .bch-filetype-icon.ext-gis {
+        background-image: url(_content/Bch.Components.InputFile/img/extensions/file-gis-white.svg);
     }
 </style>
