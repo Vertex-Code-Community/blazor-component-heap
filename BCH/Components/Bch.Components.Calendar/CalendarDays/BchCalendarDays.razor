@@ -10,11 +10,11 @@
         </div>
 
         <div class="change-month">
-            <div class="previous-month" @onclick="PreviousMonthAsync">
+            <div class="previous-month" @onclick:stopPropagation="true" @onclick="PreviousMonth">
                 <div class="icon"></div>
             </div>
 
-            <div class="next-month" @onclick="NextMonthAsync">
+            <div class="next-month" @onclick:stopPropagation="true" @onclick="NextMonth">
                 <div class="icon"></div>
             </div>
         </div>

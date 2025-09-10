@@ -90,6 +90,9 @@ public partial class BchCalendarDays
     private int _month = DateTime.Now.Month;
     private int _year = DateTime.Now.Year;
     private DateRange _values = new();
+    // Track last parameter values to avoid resetting month/year on every re-render
+    private int _lastDefaultMonth;
+    private int _lastDefaultYear;
 
     private DateTime _startDay;
     private DateTime _endDay;
@@ -112,26 +115,32 @@ public partial class BchCalendarDays
             _year = DefaultYear == 0 ? DateTime.Now.Year : DefaultYear;
         }
 
+        _lastDefaultMonth = DefaultMonth;
+        _lastDefaultYear = DefaultYear;
+
         SetWeekDayNamesToCalendars();
         UpdateCalendar(_year, _month);
     }
 
     protected override void OnParametersSet()
     {
-        // Update month/year when DefaultMonth/DefaultYear parameters change
-        // This handles the case when user changes year/month in months view
-        if (DefaultMonth != 0 && DefaultMonth != _month)
+        // Only react to actual parameter changes to avoid overriding local navigation
+        var shouldRefresh = false;
+        if (DefaultMonth != 0 && DefaultMonth != _lastDefaultMonth)
         {
             _month = DefaultMonth;
-        }
-        
-        if (DefaultYear != 0 && DefaultYear != _year)
-        {
-            _year = DefaultYear;
+            _lastDefaultMonth = DefaultMonth;
+            shouldRefresh = true;
         }
 
-        // Only update calendar if month or year changed
-        if (DefaultMonth != 0 || DefaultYear != 0)
+        if (DefaultYear != 0 && DefaultYear != _lastDefaultYear)
+        {
+            _year = DefaultYear;
+            _lastDefaultYear = DefaultYear;
+            shouldRefresh = true;
+        }
+
+        if (shouldRefresh)
         {
             UpdateCalendar(_year, _month);
         }
@@ -243,7 +252,7 @@ public partial class BchCalendarDays
         return month == 12 ? currentYear + 1 : currentYear;
     }
 
-    private async Task NextMonthAsync()
+    private void NextMonth()
     {
         if (_month == 12)
         {
@@ -254,11 +263,9 @@ public partial class BchCalendarDays
         }
         _month++;
         UpdateCalendar(_year, _month);
-        await OnFocusOut.InvokeAsync();
-
     }
 
-    private async Task PreviousMonthAsync()
+    private void PreviousMonth()
     {
         if (_month == 1)
         {
@@ -269,7 +276,6 @@ public partial class BchCalendarDays
         }
         _month--;
         UpdateCalendar(_year, _month);
-        await OnFocusOut.InvokeAsync();
     }
 
     private string GetMonthName(int month)
