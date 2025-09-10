@@ -9,7 +9,7 @@
                        ItemHeight="34"
                        Width="70"
                        ScrollToSelected="true"
-                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal {_cssKey}")"
+                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal {_cssKey} {CssClass}")"
                        OptionNamePredicate="x => x.Number.ToString()"
                        DefaultValue="_selectedYear"
                        SelectedChanged="OnSelectYearAsync"
