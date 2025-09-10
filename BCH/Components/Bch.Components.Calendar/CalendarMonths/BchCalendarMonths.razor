@@ -8,8 +8,9 @@
                        ContentHeight="224"
                        ItemHeight="34"
                        Width="70"
+                       Height="26"
                        ScrollToSelected="true"
-                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal centered {_cssKey}")"
+                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal {_cssKey}")"
                        OptionNamePredicate="x => x.Number.ToString()"
                        DefaultValue="_selectedYear"
                        SelectedChanged="OnSelectYearAsync"
@@ -47,7 +48,7 @@
     }
 
     .bch-select-content-modal-wrapper.bch-calendar-year-select {
-        transform: translate(-15px, 51px) !important;
+        transform: translate(-15px, 36px) !important;
     }
 
     /* Remove white bg/shadow from the trigger button (non-modal part), no hover */
@@ -57,10 +58,11 @@
         border-radius: 0 !important;
     }
 
-    .bch-calendar-year-select-modal.centered {
-        display: flex !important;
-        align-items: center !important;
-        height: 26px !important;
+    .bch-calendar-year-select-modal.bch-select-container:hover,
+    .bch-calendar-year-select-modal.bch-select-container.has-hover,
+    .bch-calendar-year-select-modal.bch-select-container:focus-within {
+        box-shadow: none !important;
+        filter: none !important;
     }
 
     .bch-calendar-year-select-modal.bch-select-container .bch-button {
