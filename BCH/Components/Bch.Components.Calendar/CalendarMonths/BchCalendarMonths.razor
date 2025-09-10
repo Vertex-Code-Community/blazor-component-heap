@@ -17,7 +17,7 @@
                        Theme="Theme"
             @bind-IsOpened="_isOpenedYearSelect">
                 <OptionTemplate Context="year">
-                    <div class="bch-year-wrapper">
+                    <div class="bch-year-wrapper" bch-year="@year.Number">
                         <div class="year-item @(year.Number == _yearValue ? "current-year" : "")">
                             @year.Number
                         </div>
