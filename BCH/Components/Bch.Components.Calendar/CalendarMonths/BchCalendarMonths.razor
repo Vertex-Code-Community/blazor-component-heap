@@ -376,9 +376,9 @@
     /* Selected month: use outline instead of solid fill */
     .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month .selected-month,
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .selected-month {
-        background: transparent !important;
-        border: 1px solid #33B469 !important;
-        color: #33B469 !important;
+        background: #33B469 !important;
+        border: 1px solid transparent !important;
+        color: #FFFFFF !important;
     }
 
     .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month label:hover,
@@ -386,6 +386,13 @@
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label:hover,
     html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month label.has-hover {
         background: #E1F4E9 !important;
+    }
+
+    .@(_cssKey).bch-theme-light-green.bch-datepicker-list-month .bch-list-of-month .selected-month:hover,
+    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-datepicker-list-month .bch-list-of-month .selected-month:hover {
+        background: #33B469 !important;
+        border-color: transparent !important;
+        color: #FFFFFF !important;
     }
 
     .@(_cssKey).bch-theme-light.bch-datepicker-list-month,
