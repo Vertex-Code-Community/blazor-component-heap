@@ -10,7 +10,7 @@
                        Width="70"
                        Height="26"
                        ScrollToSelected="true"
-                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal {_cssKey}")"
+                       CssClass="@($"bch-calendar-year-select bch-calendar-year-select-modal {_cssKey} {CssClass}")"
                        OptionNamePredicate="x => x.Number.ToString()"
                        DefaultValue="_selectedYear"
                        SelectedChanged="OnSelectYearAsync"
@@ -18,7 +18,7 @@
                        Theme="Theme"
             @bind-IsOpened="_isOpenedYearSelect">
                 <OptionTemplate Context="year">
-                    <div class="bch-year-wrapper">
+                    <div class="bch-year-wrapper" bch-year="@year.Number">
                         <div class="year-item @(year.Number == _yearValue ? "current-year" : "")">
                             @year.Number
                         </div>

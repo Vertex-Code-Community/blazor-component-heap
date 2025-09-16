@@ -19,6 +19,7 @@ public partial class BchCalendarMonths
     [Parameter] public string Culture { get; set; } = CultureInfo.CurrentCulture.Name;
     [Parameter] public int SelectedMonth { get; set; }
     [Parameter] public int SelectedYear { get; set; }
+    [Parameter] public string CssClass { get; set; } = string.Empty;
     [Parameter] public EventCallback<bool> IsShowDate { get; set; }
     [Parameter] public EventCallback<int> MonthChanged { get; set; }
     [Parameter] public EventCallback<int> YearChanged { get; set; }

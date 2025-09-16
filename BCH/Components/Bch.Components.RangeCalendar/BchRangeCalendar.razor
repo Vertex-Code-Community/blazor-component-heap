@@ -53,6 +53,7 @@
                            SelectedYear="_selectedYear"
                            MonthChanged="e => { _selectedMonth = e; StateHasChanged(); }"
                            YearChanged="e=> { _selectedYear = e; StateHasChanged(); }"
+                           CssClass="@CssClass"
                            Theme="@(Theme ?? ThemeCascading)"
                            IsShowDate="e => { _showMonth = false; _showDate = e; return OnShowModeChangedAsync(); }"
                            OnFocusOut="() => _inputRef.FocusAsync()"/>
