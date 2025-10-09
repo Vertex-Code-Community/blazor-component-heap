@@ -8,4 +8,5 @@ public interface IDomInteropService
     Task<BoundingClientRect?> GetBoundingClientRectAsync(string id);
     Task ScrollToAsync(string id, string x, string y, string behavior = "smooth"); // auto
     ValueTask FocusAsync(string elementId);
+    Task<WindowSize> GetWindowSizeAsync();
 }

@@ -63,6 +63,10 @@ public partial class BchRangeCalendar : IAsyncDisposable
     private readonly string _subscriptionKey = $"_key_{Guid.NewGuid()}";
     private Vec2 _containerPos = new();
     private NumberFormatInfo _nF = new() { NumberDecimalSeparator = "." };
+    private bool _openUp = false;
+    private const float _modalWidthPx = 250f;
+    private const float _modalHeightEstimatePx = 320f; // approximate calendar height
+    private const float _screenPaddingPx = 8f;
 
     protected override Task OnInitializedAsync()
     {
@@ -176,8 +180,17 @@ public partial class BchRangeCalendar : IAsyncDisposable
     {
         var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
         if (containerRect is null) return;
+        var win = await DomInteropService.GetWindowSizeAsync();
         
-        _containerPos.Set(containerRect.X, containerRect.Y);
+        var x = containerRect.X;
+        var maxX = MathF.Max(0, win.Width - _modalWidthPx - _screenPaddingPx);
+        if (x > maxX) x = maxX;
+        if (x < _screenPaddingPx) x = _screenPaddingPx;
+        _containerPos.Set(x, containerRect.Y);
+        
+        var spaceBelow = win.Height - containerRect.Bottom;
+        var spaceAbove = containerRect.Top;
+        _openUp = spaceBelow < _modalHeightEstimatePx && spaceAbove > spaceBelow;
         
         _showDate = !_showMonth && !_showDate;
         _showMonth = false;
@@ -200,8 +213,17 @@ public partial class BchRangeCalendar : IAsyncDisposable
         {
             var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
             if (containerRect is null) return;
+            var win = await DomInteropService.GetWindowSizeAsync();
             
-            _containerPos.Set(containerRect.X, containerRect.Y);
+            var x = containerRect.X;
+            var maxX = MathF.Max(0, win.Width - _modalWidthPx - _screenPaddingPx);
+            if (x > maxX) x = maxX;
+            if (x < _screenPaddingPx) x = _screenPaddingPx;
+            _containerPos.Set(x, containerRect.Y);
+            
+            var spaceBelow = win.Height - containerRect.Bottom;
+            var spaceAbove = containerRect.Top;
+            _openUp = spaceBelow < _modalHeightEstimatePx && spaceAbove > spaceBelow;
             
             await SubscribeOnGlobalScrollAsync();
         }
