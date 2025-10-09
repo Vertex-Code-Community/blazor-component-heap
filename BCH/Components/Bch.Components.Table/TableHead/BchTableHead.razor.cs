@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using Bch.Modules.Themes.Models;
 using Bch.Modules.Themes.Attributes;
 using Bch.Modules.Themes.Extensions;
+using Microsoft.JSInterop;
 
 namespace Bch.Components.Table.TableHead;
 
@@ -24,6 +25,29 @@ public partial class BchTableHead<TRowData> : ComponentBase where TRowData : cla
     private List<DateTime> _selectedDates = new();
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
     private string GetThemeCssClass() => EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) ?? string.Empty;
+
+    [Inject] private IJSRuntime JS { get; set; } = null!;
+    private ElementReference _resizerRef;
+    private ElementReference _rootRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync(
+                    "initColumnResizer",
+                    _resizerRef,
+                    _rootRef,
+                    DotNetObjectReference.Create(this));
+            }
+            catch
+            {
+                // ignore init errors
+            }
+        }
+    }
 
     private async Task OnFilterAsync(ChangeEventArgs changeEvent, string columnName, bool isMultiple = false)
     {
@@ -112,5 +136,13 @@ public partial class BchTableHead<TRowData> : ComponentBase where TRowData : cla
             PropertyName = columnName,
             DateRange = date
         });
+    }
+
+    [JSInvokable]
+    public Task OnColumnResizeCompleted(string widthCss)
+    {
+        Column.Width = widthCss;
+        StateHasChanged();
+        return Task.CompletedTask;
     }
 }

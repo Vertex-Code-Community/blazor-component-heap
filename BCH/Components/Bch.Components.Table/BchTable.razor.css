@@ -1,9 +1,19 @@
 ﻿.bch-table-container {
     height: 100%;
     width: 100%;
-    overflow-x: auto;
+    overflow: hidden;
     border: 1px solid #E9EAEC;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bch-table-container .bch-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
     .bch-table-container .bch-table-wrapper {

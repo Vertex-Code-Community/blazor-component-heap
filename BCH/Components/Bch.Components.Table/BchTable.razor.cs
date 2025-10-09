@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
-using Bch.Components.Table.Models;
+﻿using Bch.Components.Table.Models;
 using Bch.Components.Table.TableColumn;
 using Bch.Modules.GlobalEvents.Events;
-using Bch.Modules.Themes.Models;
 using Bch.Modules.Themes.Attributes;
 using Bch.Modules.Themes.Extensions;
+using Bch.Modules.Themes.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace Bch.Components.Table;
 
@@ -34,7 +34,8 @@ public partial class BchTable<TRowData> : ComponentBase
     [Parameter] public int PageSize { get; set; }
     [Parameter] public List<uint> Sizes { get; set; } = new() { 5, 10, 20 };
 
-    [Parameter] public int CurrentPage
+    [Parameter]
+    public int CurrentPage
     {
         get => _currentPage;
         set
@@ -44,14 +45,14 @@ public partial class BchTable<TRowData> : ComponentBase
             CurrentPageChanged.InvokeAsync(value);
         }
     }
-    
+
     [Parameter] public EventCallback<int> CurrentPageChanged { get; set; }
 
     private int _currentPage = 1;
     private bool _prevInBottom = false;
     public int _totalItems => Items.Count();
     private int _previousPageSize;
-    private int _pageSize  = 5;
+    private int _pageSize = 5;
 
     internal bool Sorted = true;
     internal string PrevSortPropertyName = string.Empty;
@@ -62,7 +63,7 @@ public partial class BchTable<TRowData> : ComponentBase
 
     private readonly List<BchTableColumn<TRowData>> columns = new List<BchTableColumn<TRowData>>();
     private readonly string _containerId = $"_id_{Guid.NewGuid()}";
-    
+
     internal void AddColumn(BchTableColumn<TRowData> column)
     {
         columns.Add(column);
@@ -128,6 +129,7 @@ public partial class BchTable<TRowData> : ComponentBase
 
     public void ReloadTable()
     {
-        OnInitialized();
+        CurrentPage = 1;
+        ReloadItems();
     }
 }

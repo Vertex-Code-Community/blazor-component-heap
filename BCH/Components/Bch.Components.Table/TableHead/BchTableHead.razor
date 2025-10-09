@@ -4,7 +4,7 @@
 @using Bch.Components.Table.Models
 @typeparam TRowData
 
-<div id="@_containerId" class="bch-component bch-table-head-container @GetThemeCssClass()">
+<div id="@_containerId" class="bch-table-head-container @GetThemeCssClass()" @ref="_rootRef">
     <div class="head-name-container @(Column.FilterType is not ColumnFilterType.None ? "bch-filtering" : "")">
 
         <div class="head-name">
@@ -86,6 +86,10 @@
             }
         </div>
     }
+
+    <div class="bch-col-resizer" @ref="_resizerRef">
+        <img class="bch-resize-icon" src="_content/Bch.Components.Table/img/resize-col.svg" alt="resize" />
+    </div>
 </div>
 
 <style>

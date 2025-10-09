@@ -110,3 +110,32 @@
 .bch-theme-dark .bch-table-head-container .head-filtering .bch-input-text::placeholder,
 .bch-theme-dark .bch-table-head-container .head-filtering .bch-input-number::placeholder { color: #E5E7EB; }
 .bch-theme-dark .bch-table-head-container .head-filtering .bch-select-data { border-color: #E9EAEC; color: #E5E7EB; background: #111827; }
+
+.bch-table-head-container { position: relative; }
+.bch-table-head-container > .bch-col-resizer {
+    position: absolute;
+    right: -12px;
+    top: 1px;
+    height: 54px;
+    width: 24px;
+    cursor: col-resize;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--icon-primary);
+}
+
+.bch-table-head-container > .bch-col-resizer .bch-resize-icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.9;
+    display: block;
+    pointer-events: none;
+}
+
+.bch-table-head-container > .bch-col-resizer:hover .bch-resize-icon { opacity: 1; }
+
+.bch-table-head-container > .bch-col-resizer .bch-resize-icon { filter: invert(0); }
+.bch-theme-dark .bch-table-head-container > .bch-col-resizer .bch-resize-icon,
+.bch-theme-dark.bch-table-head-container > .bch-col-resizer .bch-resize-icon { filter: invert(1); }
