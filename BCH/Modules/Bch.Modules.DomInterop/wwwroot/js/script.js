@@ -49,3 +49,10 @@ function bchFocusElement(elementId) {
     if (element === document.activeElement) return;
     element.focus();
 }
+
+function bchGetWindowSize() {
+    return {
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
+}

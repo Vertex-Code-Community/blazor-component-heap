@@ -32,4 +32,9 @@ internal class DomInteropService : IDomInteropService
     {
         return _jsRuntime.InvokeVoidAsync("bchFocusElement", elementId);
     }
+
+    public async Task<WindowSize> GetWindowSizeAsync()
+    {
+        return await _jsRuntime.InvokeAsync<WindowSize>("bchGetWindowSize");
+    }
 }

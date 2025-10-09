@@ -1,13 +1,13 @@
-﻿using System.Globalization;
-using Microsoft.AspNetCore.Components;
-using Bch.Components.Calendar.Models;
+﻿using Bch.Components.Calendar.Models;
 using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.Maths.Models;
-using Bch.Modules.Themes.Models;
 using Bch.Modules.Themes.Attributes;
 using Bch.Modules.Themes.Extensions;
+using Bch.Modules.Themes.Models;
+using Microsoft.AspNetCore.Components;
+using System.Globalization;
 
 namespace Bch.Components.RangeCalendar;
 
@@ -40,7 +40,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
             ValuesChanged.InvokeAsync(value);
         }
     }
-    
+
     [Parameter] public DateTime DefaultValue { get; set; } = DateTime.Now;
 
     private DateRange _values = new();
@@ -63,6 +63,10 @@ public partial class BchRangeCalendar : IAsyncDisposable
     private readonly string _subscriptionKey = $"_key_{Guid.NewGuid()}";
     private Vec2 _containerPos = new();
     private NumberFormatInfo _nF = new() { NumberDecimalSeparator = "." };
+    private bool _openUp = false;
+    private const float _modalWidthPx = 250f;
+    private const float _modalHeightEstimatePx = 320f;
+    private const float _screenPaddingPx = 8f;
 
     protected override Task OnInitializedAsync()
     {
@@ -76,7 +80,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
         return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey,
             OnDocumentMouseDownAsync);
     }
-    
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (_showDate || _showMonth) await _inputRef.FocusAsync();
@@ -91,7 +95,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
     {
         var scrollContainer = e.PathCoordinates.FirstOrDefault();
         if (scrollContainer?.Id == $"{_yearsSelectContentId}_scroller") return Task.CompletedTask;
-        
+
         _showDate = false;
         _showMonth = false;
         StateHasChanged();
@@ -102,8 +106,8 @@ public partial class BchRangeCalendar : IAsyncDisposable
     private Task OnDocumentMouseDownAsync(BchMouseEventArgs e)
     {
         var container = e.PathCoordinates
-            .FirstOrDefault(x => 
-                x.Id == _containerId || x.Id == _calendarDaysId || 
+            .FirstOrDefault(x =>
+                x.Id == _containerId || x.Id == _calendarDaysId ||
                 x.Id == _calendarMonthsId || x.Id == _yearsSelectContentId);
 
         if (container != null || !CollapseOnClickOutside) return Task.CompletedTask; // inside calendar
@@ -118,10 +122,10 @@ public partial class BchRangeCalendar : IAsyncDisposable
             _showDate = false;
             _showMonth = false;
             StateHasChanged();
-            
+
             return UnsubscribeFromGlobalScrollAsync();
         }
-        
+
         if (_showMonth)
         {
             _showMonth = false;
@@ -129,7 +133,7 @@ public partial class BchRangeCalendar : IAsyncDisposable
             StateHasChanged();
             return SubscribeOnGlobalScrollAsync();
         }
-        
+
         _showDate = false;
         _showMonth = false;
         StateHasChanged();
@@ -176,16 +180,25 @@ public partial class BchRangeCalendar : IAsyncDisposable
     {
         var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
         if (containerRect is null) return;
-        
-        _containerPos.Set(containerRect.X, containerRect.Y);
-        
+        var win = await DomInteropService.GetWindowSizeAsync();
+
+        var x = containerRect.X;
+        var maxX = MathF.Max(0, win.Width - _modalWidthPx - _screenPaddingPx);
+        if (x > maxX) x = maxX;
+        if (x < _screenPaddingPx) x = _screenPaddingPx;
+        _containerPos.Set(x, containerRect.Y);
+
+        var spaceBelow = win.Height - containerRect.Bottom;
+        var spaceAbove = containerRect.Top;
+        _openUp = spaceBelow < _modalHeightEstimatePx && spaceAbove > spaceBelow;
+
         _showDate = !_showMonth && !_showDate;
         _showMonth = false;
         _defaultStartDay = DateTime.MinValue;
-        
+
         if (_showDate)
             await SubscribeOnGlobalScrollAsync();
-        
+
         StateHasChanged();
     }
 
@@ -193,23 +206,32 @@ public partial class BchRangeCalendar : IAsyncDisposable
     {
         _defaultStartDay = date;
     }
-    
+
     private async Task OnShowModeChangedAsync()
     {
         if (_showDate || _showMonth)
         {
             var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
             if (containerRect is null) return;
-            
-            _containerPos.Set(containerRect.X, containerRect.Y);
-            
+            var win = await DomInteropService.GetWindowSizeAsync();
+
+            var x = containerRect.X;
+            var maxX = MathF.Max(0, win.Width - _modalWidthPx - _screenPaddingPx);
+            if (x > maxX) x = maxX;
+            if (x < _screenPaddingPx) x = _screenPaddingPx;
+            _containerPos.Set(x, containerRect.Y);
+
+            var spaceBelow = win.Height - containerRect.Bottom;
+            var spaceAbove = containerRect.Top;
+            _openUp = spaceBelow < _modalHeightEstimatePx && spaceAbove > spaceBelow;
+
             await SubscribeOnGlobalScrollAsync();
         }
         else
         {
             await UnsubscribeFromGlobalScrollAsync();
         }
-        
+
         StateHasChanged();
     }
 

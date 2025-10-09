@@ -1,12 +1,12 @@
-﻿using System.Globalization;
-using Microsoft.AspNetCore.Components;
-using Bch.Modules.DomInterop.Services;
+﻿using Bch.Modules.DomInterop.Services;
 using Bch.Modules.GlobalEvents.Events;
 using Bch.Modules.GlobalEvents.Services;
 using Bch.Modules.Maths.Models;
-using Bch.Modules.Themes.Models;
 using Bch.Modules.Themes.Attributes;
 using Bch.Modules.Themes.Extensions;
+using Bch.Modules.Themes.Models;
+using Microsoft.AspNetCore.Components;
+using System.Globalization;
 
 namespace Bch.Components.Calendar;
 
@@ -19,7 +19,8 @@ public partial class BchCalendar : IAsyncDisposable
     [Parameter] public string Format { get; set; } = string.Empty;
     [Parameter] public string Culture { get; set; } = CultureInfo.CurrentCulture.Name;
     [Parameter] public EventCallback<DateTime?> ValueChanged { get; set; }
-    [Parameter] public DateTime? Value
+    [Parameter]
+    public DateTime? Value
     {
         get => _value;
         set
@@ -30,7 +31,7 @@ public partial class BchCalendar : IAsyncDisposable
             ValueChanged.InvokeAsync(value);
         }
     }
-    
+
     [Parameter] public DateTime DefaultValue { get; set; } = DateTime.Now;
 
     [Parameter] public bool ShowClearButton { get; set; } = true;
@@ -39,7 +40,7 @@ public partial class BchCalendar : IAsyncDisposable
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public BchTheme? Theme { get; set; }
     [Parameter] public bool CollapseOnClickOutside { get; set; } = true;
-    
+
     private BchTheme EffectiveTheme => Theme ?? ThemeCascading ?? BchTheme.LightGreen;
     private string GetThemeCssClass()
     {
@@ -58,8 +59,12 @@ public partial class BchCalendar : IAsyncDisposable
     private readonly string _subscriptionKey = $"_key_{Guid.NewGuid()}";
     private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
     private CultureInfo _culture = null!;
-    private Vec2 _containerPos = new ();
-    private NumberFormatInfo _nF = new () { NumberDecimalSeparator = "." };
+    private Vec2 _containerPos = new();
+    private NumberFormatInfo _nF = new() { NumberDecimalSeparator = "." };
+    private bool _openUp = false;
+    private const float _modalWidthPx = 250f;
+    private const float _modalHeightEstimatePx = 320f;
+    private const float _screenPaddingPx = 8f;
 
     private int _selectedYear;
     private int _selectedMonth;
@@ -68,7 +73,7 @@ public partial class BchCalendar : IAsyncDisposable
     {
         _culture = new CultureInfo(Culture);
         Format = string.IsNullOrWhiteSpace(Format) ? _culture.DateTimeFormat.ShortDatePattern : Format;
-        
+
         return GlobalEventsService.AddDocumentListenerAsync<BchMouseEventArgs>("mousedown", _subscriptionKey,
             OnDocumentMouseDownAsync);
     }
@@ -87,7 +92,7 @@ public partial class BchCalendar : IAsyncDisposable
     {
         var scrollContainer = e.PathCoordinates.FirstOrDefault();
         if (scrollContainer?.Id == $"{_yearsSelectContentId}_scroller") return Task.CompletedTask;
-        
+
         _showDate = false;
         _showMonth = false;
         StateHasChanged();
@@ -98,8 +103,8 @@ public partial class BchCalendar : IAsyncDisposable
     private Task OnDocumentMouseDownAsync(BchMouseEventArgs e)
     {
         var container = e.PathCoordinates
-            .FirstOrDefault(x => 
-                x.Id == _containerId || x.Id == _calendarDaysId || 
+            .FirstOrDefault(x =>
+                x.Id == _containerId || x.Id == _calendarDaysId ||
                 x.Id == _calendarMonthsId || x.Id == _yearsSelectContentId);
 
         if (container != null || !CollapseOnClickOutside) return Task.CompletedTask; // inside calendar
@@ -114,10 +119,10 @@ public partial class BchCalendar : IAsyncDisposable
             _showDate = false;
             _showMonth = false;
             StateHasChanged();
-            
+
             return UnsubscribeFromGlobalScrollAsync();
         }
-        
+
         if (_showMonth)
         {
             _showMonth = false;
@@ -125,7 +130,7 @@ public partial class BchCalendar : IAsyncDisposable
             StateHasChanged();
             return SubscribeOnGlobalScrollAsync();
         }
-        
+
         _showDate = false;
         _showMonth = false;
         StateHasChanged();
@@ -137,19 +142,28 @@ public partial class BchCalendar : IAsyncDisposable
     {
         var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
         if (containerRect is null) return;
-        
-        _containerPos.Set(containerRect.X, containerRect.Y);
-        
+        var win = await DomInteropService.GetWindowSizeAsync();
+
+        var x = containerRect.X;
+        var maxX = MathF.Max(0, win.Width - _modalWidthPx - _screenPaddingPx);
+        if (x > maxX) x = maxX;
+        if (x < _screenPaddingPx) x = _screenPaddingPx;
+        _containerPos.Set(x, containerRect.Y);
+
+        var spaceBelow = win.Height - containerRect.Bottom;
+        var spaceAbove = containerRect.Top;
+        _openUp = spaceBelow < _modalHeightEstimatePx && spaceAbove > spaceBelow;
+
         var currentDate = Value ?? DefaultValue;
         if (currentDate.Year != _selectedYear) _selectedYear = currentDate.Year;
         if (currentDate.Month != _selectedMonth) _selectedMonth = currentDate.Month;
-        
+
         _showDate = !_showMonth && !_showDate;
         _showMonth = false;
 
         if (_showDate)
             await SubscribeOnGlobalScrollAsync();
-        
+
         StateHasChanged();
     }
 
@@ -159,16 +173,25 @@ public partial class BchCalendar : IAsyncDisposable
         {
             var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
             if (containerRect is null) return;
-            
-            _containerPos.Set(containerRect.X, containerRect.Y);
-            
+            var win = await DomInteropService.GetWindowSizeAsync();
+
+            var x = containerRect.X;
+            var maxX = MathF.Max(0, win.Width - _modalWidthPx - _screenPaddingPx);
+            if (x > maxX) x = maxX;
+            if (x < _screenPaddingPx) x = _screenPaddingPx;
+            _containerPos.Set(x, containerRect.Y);
+
+            var spaceBelow = win.Height - containerRect.Bottom;
+            var spaceAbove = containerRect.Top;
+            _openUp = spaceBelow < _modalHeightEstimatePx && spaceAbove > spaceBelow;
+
             await SubscribeOnGlobalScrollAsync();
         }
         else
         {
             await UnsubscribeFromGlobalScrollAsync();
         }
-        
+
         StateHasChanged();
     }
 

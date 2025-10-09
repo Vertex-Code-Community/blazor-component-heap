@@ -9,7 +9,7 @@
         <div class="bch-datepicker-img"></div>
     </div>
 
-    <BchModal CssClass="@($"bch-calendar-days-modal-wrapper {CssClass}")"
+    <BchModal CssClass="@($"bch-calendar-days-modal-wrapper {( _openUp ? "bch-open-up" : "") } {CssClass}")"
               Width="250px"
               Height="unset"
               X="@($"{_containerPos.X.ToString(_nF)}px")"
@@ -33,7 +33,7 @@
 
     </BchModal>
 
-    <BchModal CssClass="@($"bch-calendar-months-modal-wrapper {CssClass}")"
+    <BchModal CssClass="@($"bch-calendar-months-modal-wrapper {( _openUp ? "bch-open-up" : "") } {CssClass}")"
               Width="250px"
               Height="unset"
               X="@($"{_containerPos.X.ToString(_nF)}px")"
@@ -61,6 +61,11 @@
     .bch-calendar-days-modal-wrapper,
     .bch-calendar-months-modal-wrapper {
         transform: translateY(49px);
+    }
+    .bch-calendar-days-modal-wrapper.bch-open-up,
+    .bch-calendar-months-modal-wrapper.bch-open-up {
+        transform: translateY(-100%);
+        margin-top: -8px;
     }
 </style>
 
