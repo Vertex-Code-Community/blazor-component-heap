@@ -14,6 +14,7 @@
     overflow-y: hidden;
     flex: 1 1 auto;
     min-height: 0;
+    scrollbar-gutter: stable both-edges;
 }
 
     .bch-table-container .bch-table-wrapper {
@@ -25,7 +26,7 @@
         border-spacing: 0 !important;
     }
 
-        /*thead*/
+        
 
         .bch-table-container .bch-table-wrapper .bch-thead {
             border-bottom: 1px solid #E9EAEC;
@@ -34,14 +35,15 @@
             .bch-table-container .bch-table-wrapper .bch-thead tr th {
                 padding: 0;
                 vertical-align: top;
+            box-sizing: border-box;
             }
 
                 .bch-table-container .bch-table-wrapper .bch-thead tr th:first-child .bch-table-head-container {
                     border-top-left-radius: 10px;
                 }
 
-        /*thead*/
-        /*tbody*/
+        
+        
         .bch-table-container .bch-table-wrapper .bch-tbody tr {
             border-bottom: 1px solid #E9EAEC;
             height: 64px;
@@ -53,11 +55,22 @@
 
             .bch-table-container .bch-table-wrapper .bch-tbody tr td {
                 padding: 0 12px 0 12px;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             }
+
+        /* Smooth transition only for actively resized column */
+        .bch-table-container .bch-table-wrapper.bch-col-resizing .bch-col-active {
+            transition: width 100ms linear, min-width 100ms linear, max-width 100ms linear;
+            will-change: width;
+        }
 
         .bch-table-container .bch-table-wrapper .bch-tbody {
             flex: 1 1;
             overflow: overlay;
+            scrollbar-gutter: stable both-edges;
         }
 
         /*tbody*/
@@ -73,13 +86,7 @@
                 table-layout: fixed;
             }
 
-/*tfoot*/
-
-        /*.bch-table-container .bch-table-wrapper .bch-tfoot {*/
-        /*    border-top: 1px solid #E9EAEC;*/
-        /*}*/
-
-/*tfoot*/
+ 
 
 
 .bch-table-container::-webkit-scrollbar,

@@ -4,118 +4,147 @@
 @typeparam TRowData
 
 <CascadingValue Value="EffectiveTheme">
-    <CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
+	<CascadingValue IsFixed="true" Value="this">@ChildContent</CascadingValue>
 
-    <div id="@_containerId" class="bch-table-container @GetThemeCssClass()">
-        <div class="bch-table-scroll">
-            <table class="bch-table-wrapper" style="@(string.IsNullOrWhiteSpace(MinWidth) ? "" : $"min-width:{MinWidth};")">
-                <thead class="bch-thead">
-                <tr>
-                    @foreach (var column in columns)
-                    {
-                        <th @key="column"
-                            style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width}; min-width: {column.Width}; max-width: {column.Width};") ">
+	<div id="@_containerId" class="bch-table-container @GetThemeCssClass()">
+		<div class="bch-table-scroll">
+			<table class="bch-table-wrapper" style="@(string.IsNullOrWhiteSpace(MinWidth) ? "" : $"min-width:{MinWidth};")">
+				<thead class="bch-thead">
+					<tr>
+						@foreach (var column in columns)
+						{
+							<th @key="column"
+								style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width}; min-width: {column.Width}; max-width: {column.Width};") ">
 
-                            <BchTableHead TRowData="TRowData"
-                                          Column="column"
-                                          OnFilterData="async (e) => { await OnFilterData.InvokeAsync(e); }"
-                                          OnClickSorted="async (e) => { await OnSortData.InvokeAsync(e); }"/>
-                        </th>
-                    }
-                </tr>
-                </thead>
+								<BchTableHead TRowData="TRowData"
+											  Column="column"
+											  OnFilterData="async (e) => { await OnFilterData.InvokeAsync(e); }"
+											  OnClickSorted="async (e) => { await OnSortData.InvokeAsync(e); }" />
+							</th>
+						}
+					</tr>
+				</thead>
 
-                <tbody class="bch-tbody" @onbchtablescroll="OnScroll">
-                @{
-                    if (Items != null)
-                    {
-                        foreach (var item in _items)
-                        {
-                            <tr @key="item.GetHashCode()">
-                                @foreach (var column in columns)
-                                {
-                                    if (column.TdTemplate != null)
-                                    {
-                                        <td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
-                                            style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width};") "
-                                            class="@column.TdClass">
-                                            @column.TdTemplate(item)
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
-                                            style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width}; min-width: {column.Width}; max-width: {column.Width};") ">
-                                            <BchTableData Item="item" TRowData="TRowData" Expression="column.Expression"/>
-                                        </td>
-                                    }
-                                }
-                            </tr>
-                        }
-                    }
-                }
-                </tbody>
-            </table>
-        </div>
+				<tbody class="bch-tbody" @onbchtablescroll="OnScroll">
+					@{
+						if (Items != null)
+						{
+							foreach (var item in _items)
+							{
+								<tr @key="item.GetHashCode()">
+									@foreach (var column in columns)
+									{
+										if (column.TdTemplate != null)
+										{
+											<td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
+												style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width}; min-width: {column.Width}; max-width: {column.Width};") "
+												class="@column.TdClass">
+												@column.TdTemplate(item)
+											</td>
+										}
+										else
+										{
+											<td @key="@($"{item.GetHashCode()}_{column.GetHashCode()}")"
+												style="@(string.IsNullOrWhiteSpace(column.Width) ? "" : $"width: {column.Width}; min-width: {column.Width}; max-width: {column.Width};") ">
+												<BchTableData Item="item" TRowData="TRowData" Expression="column.Expression" />
+											</td>
+										}
+									}
+								</tr>
+							}
+						}
+					}
+				</tbody>
+			</table>
+		</div>
 
-        @if (IsPagination && !IsScrollPagination)
-        {
-            <div class="bch-tfoot">
-                <BchTablePagination @bind-PageSize="@_pageSize"
-                                    CurrentPage="@CurrentPage"
-                                    TotalItems="@_totalItems"
-                                    Sizes="Sizes"
-                                    PageSizeSelectChanged="() => { OnPagination(1); }"
-                                    OnPageNumber="OnPagination"/>
-            </div>
-        }
-    </div>
+		@if (IsPagination && !IsScrollPagination)
+		{
+			<div class="bch-tfoot">
+				<BchTablePagination @bind-PageSize="@_pageSize"
+									CurrentPage="@CurrentPage"
+									TotalItems="@_totalItems"
+									Sizes="Sizes"
+									PageSizeSelectChanged="() => { OnPagination(1); }"
+									OnPageNumber="OnPagination" />
+			</div>
+		}
+	</div>
 </CascadingValue>
 
 <style>
-    .bch-table-container#@_containerId .bch-pagination-container > .select-page-number {
-        padding-right: 10px;
-    }
+	.bch-table-container# @_containerId .bch-pagination-container > .select-page-number {
+		padding-right: 10px;
+	}
 
-    .bch-table-container#@_containerId .bch-table-wrapper .bch-thead tr th:first-child .bch-table-head-container .head-name {
-        border-top-left-radius: 10px;
-    }
+	.bch-table-container# @_containerId .bch-table-wrapper .bch-thead tr th:first-child .bch-table-head-container .head-name {
+		border-top-left-radius: 10px;
+	}
 
-    .bch-table-container#@_containerId .bch-table-wrapper .bch-thead tr th:last-child .bch-table-head-container .head-name {
-        border-top-right-radius: 10px;
-    }
+	.bch-table-container# @_containerId .bch-table-wrapper .bch-thead tr th:last-child .bch-table-head-container .head-name {
+		border-top-right-radius: 10px;
+	}
 </style>
 
 <style>
-    /* THEME: Light */
-    .@(_cssKey).bch-theme-light.bch-table-container,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-table-container { border-color: #CED4DA; }
-    .@(_cssKey).bch-theme-light.bch-table-container .bch-table-wrapper .bch-thead,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-thead { border-bottom-color: #CED4DA; }
-    .@(_cssKey).bch-theme-light.bch-table-container .bch-table-wrapper .bch-tbody tr,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-tbody tr { border-bottom-color: #CED4DA; }
-    .@(_cssKey).bch-theme-light.bch-table-container::-webkit-scrollbar-thumb,
-    .@(_cssKey).bch-theme-light.bch-table-container tbody::-webkit-scrollbar-thumb,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-table-container::-webkit-scrollbar-thumb,
-    html.bch-theme-light .@(_cssKey).bch-no-theme-specified.bch-table-container tbody::-webkit-scrollbar-thumb { background: #6C757D; }
+	/* THEME: Light */
+	. @(_cssKey) .bch-theme-light.bch-table-container,
+	html.bch-theme-light . @(_cssKey) .bch-no-theme-specified.bch-table-container {
+		border-color: #CED4DA;
+	}
 
-    /* THEME: Dark */
-    .@(_cssKey).bch-theme-dark.bch-table-container,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-table-container { border-color: #374151; background: #111827; }
-    .@(_cssKey).bch-theme-dark.bch-table-container .bch-table-wrapper .bch-thead,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-thead { border-bottom-color: #374151; }
-    .@(_cssKey).bch-theme-dark.bch-table-container .bch-table-wrapper .bch-tbody tr,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-tbody tr { border-bottom-color: #374151; }
-    .@(_cssKey).bch-theme-dark.bch-table-container .bch-table-wrapper .bch-tbody tr td,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-tbody tr td { background: #111827; color: #E5E7EB; }
-    .@(_cssKey).bch-theme-dark.bch-table-container::-webkit-scrollbar-thumb,
-    .@(_cssKey).bch-theme-dark.bch-table-container tbody::-webkit-scrollbar-thumb,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-table-container::-webkit-scrollbar-thumb,
-    html.bch-theme-dark .@(_cssKey).bch-no-theme-specified.bch-table-container tbody::-webkit-scrollbar-thumb { background: #4B5563; }
+		. @(_cssKey) .bch-theme-light.bch-table-container .bch-table-wrapper .bch-thead,
+		html.bch-theme-light . @(_cssKey) .bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-thead {
+			border-bottom-color: #CED4DA;
+		}
 
-    /* THEME: LightGreen */
-    .@(_cssKey).bch-theme-light-green.bch-table-container::-webkit-scrollbar-thumb,
-    .@(_cssKey).bch-theme-light-green.bch-table-container tbody::-webkit-scrollbar-thumb,
-    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-table-container::-webkit-scrollbar-thumb,
-    html.bch-theme-light-green .@(_cssKey).bch-no-theme-specified.bch-table-container tbody::-webkit-scrollbar-thumb { background: #33B469; }
+		. @(_cssKey) .bch-theme-light.bch-table-container .bch-table-wrapper .bch-tbody tr,
+		html.bch-theme-light . @(_cssKey) .bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-tbody tr {
+			border-bottom-color: #CED4DA;
+		}
+
+		. @(_cssKey) .bch-theme-light.bch-table-container::-webkit-scrollbar-thumb,
+		. @(_cssKey) .bch-theme-light.bch-table-container tbody::-webkit-scrollbar-thumb,
+		html.bch-theme-light . @(_cssKey) .bch-no-theme-specified.bch-table-container::-webkit-scrollbar-thumb,
+		html.bch-theme-light . @(_cssKey) .bch-no-theme-specified.bch-table-container tbody::-webkit-scrollbar-thumb {
+			background: #6C757D;
+		}
+
+	/* THEME: Dark */
+	. @(_cssKey) .bch-theme-dark.bch-table-container,
+	html.bch-theme-dark . @(_cssKey) .bch-no-theme-specified.bch-table-container {
+		border-color: #374151;
+		background: #111827;
+	}
+
+		. @(_cssKey) .bch-theme-dark.bch-table-container .bch-table-wrapper .bch-thead,
+		html.bch-theme-dark . @(_cssKey) .bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-thead {
+			border-bottom-color: #374151;
+		}
+
+		. @(_cssKey) .bch-theme-dark.bch-table-container .bch-table-wrapper .bch-tbody tr,
+		html.bch-theme-dark . @(_cssKey) .bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-tbody tr {
+			border-bottom-color: #374151;
+		}
+
+			. @(_cssKey) .bch-theme-dark.bch-table-container .bch-table-wrapper .bch-tbody tr td,
+			html.bch-theme-dark . @(_cssKey) .bch-no-theme-specified.bch-table-container .bch-table-wrapper .bch-tbody tr td {
+				background: #111827;
+				color: #E5E7EB;
+			}
+
+		. @(_cssKey) .bch-theme-dark.bch-table-container::-webkit-scrollbar-thumb,
+		. @(_cssKey) .bch-theme-dark.bch-table-container tbody::-webkit-scrollbar-thumb,
+		html.bch-theme-dark . @(_cssKey) .bch-no-theme-specified.bch-table-container::-webkit-scrollbar-thumb,
+		html.bch-theme-dark . @(_cssKey) .bch-no-theme-specified.bch-table-container tbody::-webkit-scrollbar-thumb {
+			background: #4B5563;
+		}
+
+	/* THEME: LightGreen */
+	. @(_cssKey) .bch-theme-light-green.bch-table-container::-webkit-scrollbar-thumb,
+	. @(_cssKey) .bch-theme-light-green.bch-table-container tbody::-webkit-scrollbar-thumb,
+	html.bch-theme-light-green . @(_cssKey) .bch-no-theme-specified.bch-table-container::-webkit-scrollbar-thumb,
+	html.bch-theme-light-green . @(_cssKey) .bch-no-theme-specified.bch-table-container tbody::-webkit-scrollbar-thumb {
+		background: #33B469;
+	}
 </style>

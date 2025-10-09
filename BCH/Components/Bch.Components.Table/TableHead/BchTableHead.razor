@@ -5,123 +5,131 @@
 @typeparam TRowData
 
 <div id="@_containerId" class="bch-table-head-container @GetThemeCssClass()" @ref="_rootRef">
-    <div class="head-name-container @(Column.FilterType is not ColumnFilterType.None ? "bch-filtering" : "")">
+	<div class="head-name-container @(Column.FilterType is not ColumnFilterType.None ? "bch-filtering" : "")">
 
-        <div class="head-name">
-            @if (Column.ThTemplate is not null)
-            {
-                @Column.ThTemplate
-            }
-            else
-            {
-                @if (Column.IsSorted)
-                {
-                    <img class="bch-sort-checkbox"
-                         @onclick="async () => { await OnSortedAsync(Column.FilterProperty); }"
-                         src="_content/Bch.Components.Table/img/arrow-top-bottom-sort.svg" />
-                }
-                <label class="title">@Column.Title</label>
-            }
-        </div>
+		<div class="head-name">
+			@if (Column.ThTemplate is not null)
+			{
+				@Column.ThTemplate
+			}
+			else
+			{
+				@if (Column.IsSorted)
+				{
+					<img class="bch-sort-icon"
+						 src="_content/Bch.Components.Table/img/arrow-top-bottom-sort.svg"
+						 @onclick="async () => { await OnSortedAsync(Column.FilterProperty); }"
+						 @onmousedown:stopPropagation="true" />
+				}
+				<label class="title">@Column.Title</label>
+			}
+		</div>
 
-    </div>
+	</div>
 
-    @if (Column.FilterType is not ColumnFilterType.None)
-    {
-        <div class="head-filtering">
+	@if (Column.FilterType is not ColumnFilterType.None)
+	{
+		<div class="head-filtering">
 
-            @if (Column.FilterType == ColumnFilterType.TextSearch)
-            {
-                <input placeholder="Search"
-                       class="bch-input-text"
-                       type="text"
-                       @oninput="async (e) => { await OnFilterAsync(e, Column.FilterProperty); }"/>
-            }
-            @if (Column.FilterType == ColumnFilterType.NumberSearch)
-            {
-                <input placeholder="Search"
-                       class="bch-input-number"
-                       type="number" @oninput="async (e) => { await OnFilterAsync(e, Column.FilterProperty); }"/>
-            }
-            @if (Column.FilterType == ColumnFilterType.Select)
-            {
-                <BchSelect TItem="string"
-                           CssClass="@_selectTableClass"
-                           Height="40"
-                           DefaultText="All"
-                           OptionNamePredicate="x => x"
-                           Options="Column.SelectData"
-                           Theme="@EffectiveTheme"
-                           SelectedChanged="async (e) => { await OnSelectedAsync(e, Column.FilterProperty); }"/>
-            }
-            @if (Column.FilterType == ColumnFilterType.MultiSelect)
-            {
-                <BchSelect TItem="string"
-                           CssClass="@_selectTableClass"
-                           Height="40"
-                           OptionNamePredicate="x => x"
-                           Options="Column.SelectData"
-                           DefaultText="All"
-                           MultipleValues="true"
-                           SelectedItems="_selectedItems"
-                           Theme="@EffectiveTheme"
-                           OnSelectItem="async (e) => { await OnSelectedAsync(Column.FilterProperty); }"
-                           OnDeselectItem="async (e) => { await OnSelectedAsync(Column.FilterProperty); }"/>
-            }
-            @if (Column.FilterType == ColumnFilterType.DateRange)
-            {
-                <BchRangeCalendar ValuesChanged="async (e) => { await OnSelectDateAsync(e, Column.FilterProperty); }"
-                                  CssClass="@_calendarTableClass"
-                                  Theme="@EffectiveTheme"
-                                  Culture="en-US" 
-                                  Format="MM/dd/yyyy" />
-            }
-            @if (Column.FilterType == ColumnFilterType.Date)
-            {
-                <BchCalendar ValueChanged="async (e) => { await OnSelectDateAsync(e, Column.FilterProperty); }"
-                             CssClass="@_calendarTableClass"
-                             Theme="@EffectiveTheme"
-                             Culture="en-US" 
-                             Format="MM/dd/yyyy" />
-            }
-        </div>
-    }
+			@if (Column.FilterType == ColumnFilterType.TextSearch)
+			{
+				<div class="bch-input-wrapper">
+					<img class="bch-input-icon" src="_content/Bch.Components.Table/img/search.svg" alt="search" />
+					<input placeholder="Search"
+						   class="bch-input-text"
+						   type="text"
+						   @oninput="async (e) => { await OnFilterAsync(e, Column.FilterProperty); }" />
+				</div>
+			}
+			@if (Column.FilterType == ColumnFilterType.NumberSearch)
+			{
+				<div class="bch-input-wrapper">
+					<img class="bch-input-icon" src="_content/Bch.Components.Table/img/search.svg" alt="search" />
+					<input placeholder="Search"
+						   class="bch-input-number"
+						   type="number" @oninput="async (e) => { await OnFilterAsync(e, Column.FilterProperty); }" />
+				</div>
+			}
+			@if (Column.FilterType == ColumnFilterType.Select)
+			{
+				<BchSelect TItem="string"
+						   CssClass="@_selectTableClass"
+						   Height="40"
+						   DefaultText="All"
+						   OptionNamePredicate="x => x"
+						   Options="Column.SelectData"
+						   Theme="@EffectiveTheme"
+						   SelectedChanged="async (e) => { await OnSelectedAsync(e, Column.FilterProperty); }" />
+			}
+			@if (Column.FilterType == ColumnFilterType.MultiSelect)
+			{
+				<BchSelect TItem="string"
+						   CssClass="@_selectTableClass"
+						   Height="40"
+						   OptionNamePredicate="x => x"
+						   Options="Column.SelectData"
+						   DefaultText="All"
+						   MultipleValues="true"
+						   SelectedItems="_selectedItems"
+						   Theme="@EffectiveTheme"
+						   OnSelectItem="async (e) => { await OnSelectedAsync(Column.FilterProperty); }"
+						   OnDeselectItem="async (e) => { await OnSelectedAsync(Column.FilterProperty); }" />
+			}
+			@if (Column.FilterType == ColumnFilterType.DateRange)
+			{
+				<BchRangeCalendar ValuesChanged="async (e) => { await OnSelectDateAsync(e, Column.FilterProperty); }"
+								  CssClass="@_calendarTableClass"
+								  Theme="@EffectiveTheme"
+								  Culture="en-US"
+								  Format="MM/dd/yyyy" />
+			}
+			@if (Column.FilterType == ColumnFilterType.Date)
+			{
+				<BchCalendar ValueChanged="async (e) => { await OnSelectDateAsync(e, Column.FilterProperty); }"
+							 CssClass="@_calendarTableClass"
+							 Theme="@EffectiveTheme"
+							 Culture="en-US"
+							 Format="MM/dd/yyyy" />
+			}
+		</div>
+	}
 
-    <div class="bch-col-resizer" @ref="_resizerRef">
-        <img class="bch-resize-icon" src="_content/Bch.Components.Table/img/resize-col.svg" alt="resize" />
-    </div>
+	<div class="bch-col-resizer" @ref="_resizerRef">
+
+		<img class="bch-resize-icon" src="_content/Bch.Components.Table/img/resize-col.svg" alt="resize" />
+	</div>
 </div>
 
 <style>
-    .bch-table-head-container#@_containerId .bch-select-container.@_selectTableClass {
-        border: 1px solid #E9EAEC;
-        /*border-radius: 10px;*/
-        filter: none !important;
-    }
+	.bch-table-head-container# @_containerId .bch-select-container. @_selectTableClass {
+		border: 1px solid #E9EAEC;
+		/*border-radius: 10px;*/
+		filter: none !important;
+	}
 
-        .bch-table-head-container#@_containerId .bch-select-container.@_selectTableClass > .bch-content {
-            top: 39px !important;
-            border: 1px solid #E9EAEC;
-            border-top: unset !important;
-        }
+		.bch-table-head-container# @_containerId .bch-select-container. @_selectTableClass > .bch-content {
+			top: 39px !important;
+			border: 1px solid #E9EAEC;
+			border-top: unset !important;
+		}
 
-        .bch-table-head-container#@_containerId .bch-select-container.@_selectTableClass .bch-button label {
-            font-size: 12px !important;
-        }
+		.bch-table-head-container# @_containerId .bch-select-container. @_selectTableClass .bch-button label {
+			font-size: 12px !important;
+		}
 
-    .bch-table-head-container#@_containerId .bch-datepicker-wrapper.@_calendarTableClass .bch-datepicker {
-        height: 40px !important;
-        border: 1px solid #E9EAEC !important;
-        border-radius: 10px !important;
-        box-shadow: none !important;
-    }
+	.bch-table-head-container# @_containerId .bch-datepicker-wrapper. @_calendarTableClass .bch-datepicker {
+		height: 40px !important;
+		border: 1px solid #E9EAEC !important;
+		border-radius: 10px !important;
+		box-shadow: none !important;
+	}
 
-        .bch-table-head-container#@_containerId .bch-datepicker-wrapper.@_calendarTableClass .bch-datepicker .bch-datepicker-input {
-            font-size: 12px !important;
-        }
+		.bch-table-head-container# @_containerId .bch-datepicker-wrapper. @_calendarTableClass .bch-datepicker .bch-datepicker-input {
+			font-size: 12px !important;
+		}
 
-    .bch-calendar-days-modal-wrapper.@_calendarTableClass,
-    .bch-calendar-months-modal-wrapper.@_calendarTableClass {
-        transform: translateY(40px) !important;
-    }
+	.bch-calendar-days-modal-wrapper. @_calendarTableClass,
+	.bch-calendar-months-modal-wrapper. @_calendarTableClass {
+		transform: translateY(40px) !important;
+	}
 </style>

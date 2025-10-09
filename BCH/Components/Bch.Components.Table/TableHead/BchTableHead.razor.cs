@@ -9,7 +9,7 @@ using Microsoft.JSInterop;
 
 namespace Bch.Components.Table.TableHead;
 
-public partial class BchTableHead<TRowData> : ComponentBase where TRowData : class
+public partial class BchTableHead<TRowData> : ComponentBase, IAsyncDisposable where TRowData : class
 {
     [Parameter] public string Width { get; set; } = string.Empty;
     [Parameter] public BchTableColumn<TRowData> Column { get; set; } = null!;
@@ -29,6 +29,8 @@ public partial class BchTableHead<TRowData> : ComponentBase where TRowData : cla
     [Inject] private IJSRuntime JS { get; set; } = null!;
     private ElementReference _resizerRef;
     private ElementReference _rootRef;
+    private IJSObjectReference? _module;
+    private DotNetObjectReference<BchTableHead<TRowData>>? _dotNetRef;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -36,16 +38,38 @@ public partial class BchTableHead<TRowData> : ComponentBase where TRowData : cla
         {
             try
             {
-                await JS.InvokeVoidAsync(
+                _module = await JS.InvokeAsync<IJSObjectReference>(
+                    "import",
+                    "/_content/Bch.Components.Table/js/table-resize.js");
+
+                _dotNetRef = DotNetObjectReference.Create(this);
+
+                await _module.InvokeVoidAsync(
                     "initColumnResizer",
                     _resizerRef,
                     _rootRef,
-                    DotNetObjectReference.Create(this));
+                    _dotNetRef);
             }
             catch
             {
                 // ignore init errors
             }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (_module is not null)
+            {
+                await _module.DisposeAsync();
+            }
+        }
+        catch { }
+        finally
+        {
+            _dotNetRef?.Dispose();
         }
     }
 
