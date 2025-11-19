@@ -1,4 +1,3 @@
-using Bch.Components.InputFile.Events;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
@@ -7,22 +6,26 @@ using Bch.Modules.Files.Models;
 using Bch.Modules.Themes.Models;
 using Bch.Modules.Themes.Attributes;
 using Bch.Modules.Themes.Extensions;
-using Microsoft.AspNetCore.Components.Web;
+using Bch.Components.InputFile.Events;
+using Bch.Modules.DomInterop.Services;
+using Bch.Modules.Maths.Models;
 
 namespace Bch.Components.InputFile;
 
 public partial class BchInputFile : ComponentBase
 {
     [Inject] public required IJSRuntime JsRuntime { get; set; }
-    [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object>? AdditionalAttributes { get; set; }
+    [Inject] public required IDomInteropService DomInteropService { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public IDictionary<string, object>? AdditionalAttributes { get; set; }
+
     [Parameter] public EventCallback<BchFilesContext> OnChange { get; set; }
 
     [Parameter] public string CssClass { get; set; } = string.Empty;
-    [Parameter] public int Height { get; set; } = 56;
-    [Parameter] public int Width { get; set; } = 290;
+    [Parameter] public string Width { get; set; } = "290px";
+    [Parameter] public string Height { get; set; } = "56px";
     [Parameter] public string Placeholder { get; set; } = "Choose file";
-    [Parameter] public bool CreateImagePreview { get; set; } = false;
-    [Parameter] public bool DropZoneOnly { get; set; } = false;
 
     [CascadingParameter] public BchTheme? ThemeCascading { get; set; }
     [Parameter] public BchTheme? Theme { get; set; }
@@ -31,79 +34,62 @@ public partial class BchInputFile : ComponentBase
 
     private readonly string _containerId = $"_id_{Guid.NewGuid()}";
     private readonly string _inputId = $"_id_{Guid.NewGuid()}";
-    private readonly string _cssKey = $"_cssKey_{Guid.NewGuid()}";
     private string _inputKey = Guid.NewGuid().ToString();
 
-    private ElementReference _fileInputRef;
-    private IDictionary<string, object> _inputAttributes = new Dictionary<string, object>();
+    private readonly List<BchBrowserFile> _files = new();
+    private bool _showSelectedFiles = false;
 
-    private bool _hasFile = false;
-    private string _fileName = string.Empty;
-    private bool _isDraggingOver = false;
+    private Vec2 _ddlContentPos = new();
 
-    protected override void OnParametersSet()
+    private Task OnChangedInternalAsync(BchFilesOnChangeEvent e)
     {
-        _inputAttributes = AdditionalAttributes is null
-            ? new Dictionary<string, object>()
-            : new Dictionary<string, object>(AdditionalAttributes);
-
-        if (_inputAttributes.ContainsKey("multiple"))
-            _inputAttributes.Remove("multiple");
-
-        if (CreateImagePreview)
-            _inputAttributes["create-image-preview"] = string.Empty;
-        else if (_inputAttributes.ContainsKey("create-image-preview"))
-            _inputAttributes.Remove("create-image-preview");
-    }
-
-    private async Task OnChangedInternalAsync(BchFilesOnChangeEvent e)
-    {
-        var files = e.Files;
-        if (files is { Count: > 0 })
+        _files.Clear();
+        _files.AddRange(e.Files.Select(x => new BchBrowserFile
         {
-            var x = files[0];
-            _hasFile = true;
-            _fileName = x.Name;
+            JsRuntime = JsRuntime,
+            Id = x.Id,
+            Name = x.Name,
+            ContentType = x.ContentType,
+            Size = x.Size,
+            LastModified = x.LastModified,
+            ImagePreviewUrl = x.ImagePreviewUrl
+        }).ToList());
 
-            var selected = new BchBrowserFile
-            {
-                JsRuntime = JsRuntime,
-                Id = x.Id,
-                Name = x.Name,
-                ContentType = x.ContentType,
-                Size = x.Size,
-                LastModified = x.LastModified,
-                ImagePreviewUrl = x.ImagePreviewUrl
-            } as IBrowserFile;
-
-            await OnChange.InvokeAsync(new BchFilesContext
-            {
-                Files = new List<IBrowserFile> { selected }
-            });
-        }
-        else
+        return OnChange.InvokeAsync(new BchFilesContext
         {
-            _hasFile = false;
-            _fileName = string.Empty;
-            await OnChange.InvokeAsync(new BchFilesContext { Files = new List<IBrowserFile>() });
-        }
-
-        StateHasChanged();
-    }
-
-    private Task OnSelectClickedAsync()
-    {
-        return Task.CompletedTask;
+            Files = _files.Select(x => x as IBrowserFile).ToList()
+        });
     }
 
     private Task OnClearClickedAsync()
     {
-        _hasFile = false;
-        _fileName = string.Empty;
-
         _inputKey = Guid.NewGuid().ToString();
+        _files.Clear();
 
-        return OnChange.InvokeAsync(new BchFilesContext { Files = new List<IBrowserFile>() });
+        return OnChange.InvokeAsync(new BchFilesContext { Files = new() });
+    }
+
+    private string GetInfoText()
+    {
+        return _files.Count switch
+        {
+            0 => Placeholder,
+            1 => _files[0].Name,
+            _ => $"Selected {_files.Count} files"
+        };
+    }
+
+    private async Task OnExpandFilesListAsync()
+    {
+        if (!_showSelectedFiles)
+        {
+            var containerRect = await DomInteropService.GetBoundingClientRectAsync(_containerId);
+            if (containerRect is null) return;
+            _ddlContentPos.Set(containerRect.X, containerRect.Y + containerRect.Height);
+        }
+
+        _showSelectedFiles = !_showSelectedFiles;
+        StateHasChanged();
     }
 
     private string GetThemeCssClass()
@@ -111,32 +97,5 @@ public partial class BchInputFile : ComponentBase
         var themeSpecified = Theme ?? ThemeCascading;
         return EffectiveTheme.GetValue<string, CssNameAttribute>(a => a.CssName) +
                (themeSpecified is null ? " bch-no-theme-specified" : "");
-    }
-
-    private void OnDragEnter(DragEventArgs _)
-    {
-        _isDraggingOver = true;
-        StateHasChanged();
-    }
-
-    private void OnDragOver(DragEventArgs _)
-    {
-        if (!_isDraggingOver)
-        {
-            _isDraggingOver = true;
-            StateHasChanged();
-        }
-    }
-
-    private void OnDragLeave(DragEventArgs _)
-    {
-        _isDraggingOver = false;
-        StateHasChanged();
-    }
-
-    private void OnDrop(DragEventArgs _)
-    {
-        _isDraggingOver = false;
-        StateHasChanged();
     }
 }

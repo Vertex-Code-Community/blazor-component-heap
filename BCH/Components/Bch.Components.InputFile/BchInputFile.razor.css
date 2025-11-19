@@ -1,4 +1,4 @@
-.bch-inputfile-container {
+.bch-input-file-container {
     width: 290px;
     display: flex;
     position: relative;
@@ -9,7 +9,12 @@
     outline: none;
 }
 
-.bch-inputfile-container > .bch-button {
+.bch-input-file-container.bch-show-selected-files {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.bch-input-file-container > .bch-button {
     width: 100%;
     height: 100%;
     display: flex;
@@ -19,15 +24,7 @@
     position: relative;
 }
 
-.bch-inputfile-container > .bch-button > .bch-upload {
-    width: 20px;
-    height: 20px;
-    background: url(_content/Bch.Components.InputFile/img/upload.svg) center no-repeat;
-    background-size: 20px 20px;
-    margin-right: 8px;
-}
-
-.bch-inputfile-container > .bch-button > .bch-file-input {
+.bch-input-file-container > .bch-button > .bch-file-input {
     position: absolute;
     inset: 0;
     opacity: 0;
@@ -35,10 +32,10 @@
     z-index: 1;
 }
 
-.bch-inputfile-container > .bch-button > label,
-.bch-inputfile-container > .bch-button > .bch-filename {
+.bch-input-file-container > .bch-button > label {
+    margin-right: 6px;
     padding: 0;
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -46,82 +43,121 @@
     color: #131212;
     caret-color: #131212;
     cursor: pointer;
-}
 
-.bch-inputfile-container > .bch-button > .bch-filename {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: calc(100% - 54px);
 }
 
-.bch-inputfile-container > .bch-button > .bch-clear {
-    width: 16px;
-    height: 16px;
+.bch-input-file-container > .bch-button > .bch-btn {
+    min-width: 16px;
+    min-height: 16px;
     border: none;
-    background: transparent url(_content/Bch.Components.InputFile/img/clear.svg) center no-repeat;
-    background-size: 16px 16px;
-    margin-left: auto;
+    background-size: 16px 16px !important;
     margin-right: 6px;
     cursor: pointer;
     position: relative;
     z-index: 2;
 }
 
-.bch-inputfile-container > .bch-button > .bch-arrow {
-    width: 14px;
-    height: 14px;
-    background: url(_content/Bch.Components.InputFile/img/upload.svg) center no-repeat;
-    background-size: 14px 14px;
+.bch-input-file-container > .bch-button > .bch-btn.bch-clear {
+    background: transparent url(img/clear.svg) center no-repeat;
+}
+
+.bch-input-file-container:not(.bch-multiple-files) > .bch-button > .bch-btn.bch-clear {
+    margin-left: auto;
+}
+
+.bch-input-file-container > .bch-button > .bch-btn.bch-expand {
+    background: transparent url(img/select-arrow.svg) center no-repeat;
+    margin-left: auto;
+    margin-right: 12px;
+    background-size: 15px !important;
+    transition: all 0.25s ease;
+}
+
+.bch-input-file-container.bch-show-selected-files > .bch-button > .bch-btn.bch-expand {
+    transform: rotate(180deg);
+}
+
+.bch-input-file-container > .bch-button > .bch-file-select-icon {
+    width: 18px;
+    height: 18px;
+    background: url(img/upload.svg) center no-repeat;
+    background-size: 18px;
     margin-left: auto;
 }
 
 /* Themes */
-.bch-theme-light .bch-inputfile-container,
-.bch-theme-light.bch-inputfile-container { background: #FFFFFF; }
-
-.bch-theme-dark .bch-inputfile-container,
-.bch-theme-dark.bch-inputfile-container { background: #111827; filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.35)); }
-
-.bch-inputfile-dropzone-container {
-    width: 290px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-top: 14px;
-}
-
-.bch-inputfile-dropzone-container > .bch-dropzone {
-    width: 100%;
-    height: 100%;
-    min-height: 112px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 10px;
-    border: 2px dashed #BDBDBD;
+.bch-theme-light .bch-input-file-container,
+.bch-theme-light.bch-input-file-container {
     background: #FFFFFF;
-    filter: drop-shadow(0px 4px 8px rgba(183, 183, 183, 0.2));
-    box-sizing: border-box;
 }
 
-.bch-inputfile-dropzone-container > .bch-dropzone > .icon {
-    width: 20px;
-    height: 20px;
-    background: center no-repeat;
-    background-size: 20px 20px;
+.bch-theme-dark .bch-input-file-container,
+.bch-theme-dark.bch-input-file-container {
+    background: #111827;
+    filter: drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.35));
 }
 
-.bch-inputfile-dropzone-container > .bch-dropzone > .label {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 22px;
+
+.bch-theme-dark.bch-input-file-container > .bch-button > label,
+html.bch-theme-dark .bch-no-theme-specified.bch-input-file-container > .bch-button > label {
+    color: #E5E7EB;
+    caret-color: #E5E7EB;
 }
 
-.bch-inputfile-dropzone-container > .bch-dropzone.dragover {
-    filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+/* THEME: LightGreen (current) */
+
+.bch-theme-light-green.bch-input-file-container > .bch-button > .bch-file-select-icon,
+html.bch-theme-light-green .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-file-select-icon {
+    background: url(img/upload-green.svg) center no-repeat;
+    background-size: 18px;
 }
+
+.bch-theme-light-green.bch-input-file-container > .bch-button > .bch-btn.bch-clear,
+html.bch-theme-light-green .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-btn.bch-clear {
+    background-image: url(img/clear-green.svg);
+}
+
+.bch-theme-light-green.bch-input-file-container > .bch-button > .bch-btn.bch-expand,
+html.bch-theme-light-green .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-btn.bch-expand {
+    background-image: url(img/select-arrow-green.svg);
+}
+
+/* THEME: Light (silver monochrome) */
+
+.bch-theme-light.bch-input-file-container > .bch-button > .bch-file-select-icon,
+html.bch-theme-light .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-file-select-icon {
+    background: url(img/upload.svg) center no-repeat;
+    background-size: 18px;
+}
+
+.bch-theme-light.bch-input-file-container > .bch-button > .bch-btn.bch-clear,
+html.bch-theme-light .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-btn.bch-clear {
+    background-image: url(img/clear.svg);
+}
+
+.bch-theme-light.bch-input-file-container > .bch-button > .bch-btn.bch-expand,
+html.bch-theme-light .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-btn.bch-expand {
+    background-image: url(img/select-arrow.svg);
+}
+
+/* THEME: Dark */
+
+.bch-theme-dark.bch-input-file-container > .bch-button > .bch-file-select-icon,
+html.bch-theme-dark .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-file-select-icon {
+    background: url(img/upload-white.svg) center no-repeat;
+    background-size: 18px;
+}
+
+.bch-theme-dark.bch-input-file-container > .bch-button > .bch-btn.bch-clear,
+html.bch-theme-dark .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-btn.bch-clear {
+    background-image: url(img/clear-white.svg);
+}
+
+.bch-theme-dark.bch-input-file-container > .bch-button > .bch-btn.bch-expand,
+html.bch-theme-dark .bch-no-theme-specified.bch-input-file-container > .bch-button > .bch-btn.bch-expand {
+    background-image: url(img/select-arrow-white.svg);
+}
+

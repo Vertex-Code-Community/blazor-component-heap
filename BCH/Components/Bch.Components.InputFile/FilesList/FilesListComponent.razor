@@ -1,0 +1,26 @@
+@using Bch.Components.Modal
+@using Bch.Modules.Files
+
+<BchModal @bind-Show="Show"
+          Width="@Width"
+          Height="unset"
+          CssStyles="max-height: 180px;"
+          X="@($"{Position.X.ToString(_nF)}px")"
+          Y="@($"{Position.Y.ToString(_nF)}px")">
+    
+    <div id="@_contentContainerId" class="files-ddl-content">
+        <div class="scroller">
+            @foreach (var file in Files)
+            {
+                <div @key="@file" class="file-item">
+                    <div class="name">@file.Name</div>
+                    <div class="info-wrapper">
+                        <div class="content-type">@file.ContentType</div>
+                        <div class="size">@FileSizeFormatter.FormatFileSize(file.Size)</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</BchModal>

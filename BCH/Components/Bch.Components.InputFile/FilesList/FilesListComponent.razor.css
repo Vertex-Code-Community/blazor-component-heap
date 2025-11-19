@@ -1,0 +1,88 @@
+.files-ddl-content {
+    width: 100%;
+    height: 100%;
+    max-height: 180px;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    pointer-events: all;
+    background: white;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    filter: drop-shadow(0px 6px 3px rgba(183, 183, 183, 0.2));
+}
+
+.files-ddl-content > .scroller {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.files-ddl-content > .scroller > .file-item {
+    width: 100%;
+    height: 52px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-inline: 5px;
+    gap: 6px;
+}
+
+.files-ddl-content > .scroller > .file-item:hover {
+    background: #f7f7f7;
+    cursor: pointer;
+}
+
+.files-ddl-content > .scroller > .file-item > .name {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.files-ddl-content > .scroller > .file-item > .info-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.files-ddl-content > .scroller > .file-item > .info-wrapper > .size {
+    font-size: 11px;
+    color: #616161;
+}
+
+.files-ddl-content > .scroller > .file-item > .info-wrapper > .content-type {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+    color: #616161;
+}
+
+
+
+.files-ddl-content > .scroller > .file-item:not(:last-child) {
+    border-bottom: 0.5px solid #d6d6d6;
+}
+
+.files-ddl-content::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.files-ddl-content::-webkit-scrollbar-thumb {
+    background: #33B469;
+    border: 0.7px solid transparent;
+    border-radius: 12px;
+    background-clip: content-box;
+}
+
+.files-ddl-content::-webkit-scrollbar-track {
+    display: flex;
+    justify-content: center;
+    /*border-top: 1px solid #E8EAED;*/
+    background: transparent;
+}
