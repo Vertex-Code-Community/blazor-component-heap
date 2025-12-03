@@ -346,6 +346,7 @@ steps:
         $(Build.ArtifactStagingDirectory)/Bch.Components.RadioButton.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Components.Toggle.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Components.Slider.$(nugetVersion).nupkg \
+        $(Build.ArtifactStagingDirectory)/Bch.Components.SnapSlider.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Components.ImageCropper.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Components.Tabs.$(nugetVersion).nupkg \
         $(Build.ArtifactStagingDirectory)/Bch.Components.Table.$(nugetVersion).nupkg \
