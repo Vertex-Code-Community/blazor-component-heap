@@ -82,6 +82,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{3B3A7B3D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.Input", "BCH\Components\Bch.Components.Input\Bch.Components.Input.csproj", "{8F1FFA41-4C2E-6384-3F09-E275356F5FF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bch.Components.SnapSlider", "BCH\Components\Bch.Components.SnapSlider\Bch.Components.SnapSlider.csproj", "{4431909B-430B-4940-BB95-F1F4AC70D93A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -204,6 +206,10 @@ Global
 		{8F1FFA41-4C2E-6384-3F09-E275356F5FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F1FFA41-4C2E-6384-3F09-E275356F5FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F1FFA41-4C2E-6384-3F09-E275356F5FF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4431909B-430B-4940-BB95-F1F4AC70D93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4431909B-430B-4940-BB95-F1F4AC70D93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4431909B-430B-4940-BB95-F1F4AC70D93A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4431909B-430B-4940-BB95-F1F4AC70D93A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -241,6 +247,7 @@ Global
 		{ADF6D64E-E059-49C1-A158-74A127F0B052} = {76F359BB-7CAE-440A-9231-C0A089E5FB50}
 		{9DB36977-D22F-47AA-98FC-A781C232C57C} = {76F359BB-7CAE-440A-9231-C0A089E5FB50}
 		{8F1FFA41-4C2E-6384-3F09-E275356F5FF4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{4431909B-430B-4940-BB95-F1F4AC70D93A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {126013D3-68F2-4915-A284-E0056A565CE6}
