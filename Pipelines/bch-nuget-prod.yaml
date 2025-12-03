@@ -36,6 +36,7 @@ variables:
     **/Bch.Components.RadioButton.csproj
     **/Bch.Components.Toggle.csproj
     **/Bch.Components.Slider.csproj
+    **/Bch.Components.SnapSlider.csproj
     **/Bch.Components.ImageCropper.csproj
     **/Bch.Components.Tabs.csproj
     **/Bch.Components.Table.csproj
@@ -256,6 +257,16 @@ steps:
       command: 'pack'
       arguments: '--configuration $(buildConfiguration)'
       packagesToPack: '**/Bch.Components.Slider.csproj'
+      nobuild: true
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'nugetVersion'
+      
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack Bch.Components.SnapSlider'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '**/Bch.Components.SnapSlider.csproj'
       nobuild: true
       versioningScheme: 'byEnvVar'
       versionEnvVar: 'nugetVersion'
