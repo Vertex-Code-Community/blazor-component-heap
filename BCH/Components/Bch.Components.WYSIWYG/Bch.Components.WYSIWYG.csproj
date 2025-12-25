@@ -6,9 +6,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
-
     <ItemGroup>
         <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="wwwroot\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -16,16 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Bch.Components.Select\Bch.Components.Select.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <UpToDateCheckInput Remove="Toolbar\BchEditorToolbar.razor" />
-      <UpToDateCheckInput Remove="Toolbar\LinkInsert\BchEditorLinkInsert.razor" />
-    </ItemGroup>
-
 </Project>

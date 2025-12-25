@@ -26,11 +26,15 @@ if (!("path" in MouseEvent.prototype)) {
     });
 }
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
 function getPathCoordinates(event) {
     const pageX = event.clientX | 0;
     const pageY = event.clientY | 0;
     
-    return event.path.map(element => {
+    const path = event.path ?? [];
+    
+    return path.map(element => {
         if (element.getBoundingClientRect) {
             const viewportOffset = element.getBoundingClientRect();
             

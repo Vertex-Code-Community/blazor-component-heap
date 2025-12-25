@@ -33,27 +33,27 @@
 }
 
 .floating-toolbar-container > .item.insert-row-above > .icon {
-    background: url(imgs/table-options/insert-row-above-icon.png) center no-repeat;
+    background: url(imgs/table-options/insert-row-above-icon.svg) center no-repeat;
     background-position-x: 2px;
 }
 
 .floating-toolbar-container > .item.insert-row-below > .icon {
-    background: url(imgs/table-options/insert-row-below-icon.png) center no-repeat;
+    background: url(imgs/table-options/insert-row-below-icon.svg) center no-repeat;
     background-position-x: 2px;
 }
 
 .floating-toolbar-container > .item.remove-row > .icon,
 .floating-toolbar-container > .item.remove-column > .icon {
-    background: url(imgs/table-options/remove-row-icon.png) center no-repeat;
+    background: url(imgs/table-options/remove-row-icon.svg) center no-repeat;
     background-position-x: 4px;
 }
 
 .floating-toolbar-container > .item.insert-column-to-the-left > .icon {
-    background: url(imgs/table-options/insert-left-column-icon.png) center no-repeat;
+    background: url(imgs/table-options/insert-left-column-icon.svg) center no-repeat;
     background-position-x: 4px;
 }
 
 .floating-toolbar-container > .item.insert-column-to-the-right > .icon {
-    background: url(imgs/table-options/insert-right-column-icon.png) center no-repeat;
+    background: url(imgs/table-options/insert-right-column-icon.svg) center no-repeat;
     background-position-x: 4px;
 }
