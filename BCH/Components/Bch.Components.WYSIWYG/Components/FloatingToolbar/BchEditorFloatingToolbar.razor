@@ -1,0 +1,43 @@
+<div class="floating-toolbar-container">
+    <div class="control-item align-container">
+        <div class="control-cnt">
+            <BchSelect TItem="string"
+                       ContentHeight="200"
+                       ItemHeight="30"
+                       Options="@BchEditorConstants.AlignCommands"
+                       DefaultValue="@(BchEditorConstants.AlignCommands[0])"
+                       Filtering="false"
+                       FilterByPredicate="x => x"
+                       SelectedChanged="OnAlignTextSelectedAsync">
+                <OptionTemplate Context="action">
+                    <div class="action-cnt"
+                         style="@($"background: url(_content/BlazorComponentHeap.HtmlEditor/imgs/toolbar/align-text/{action}.svg) center no-repeat;")">
+                    </div>
+                </OptionTemplate>
+            </BchSelect>
+        </div>
+    </div>
+    <div class="control-item paragraph-container">
+        <div class="control-cnt">
+            <BchSelect TItem="string"
+                       ContentHeight="200"
+                       ItemHeight="30"
+                       Options="@BchEditorConstants.Headings"
+                       DefaultValue="@(BchEditorConstants.Headings[0])"
+                       Filtering="false"
+                       FilterByPredicate="x => x"
+                       SelectedChanged="OnParagraphSelectedAsync"/>
+        </div>
+    </div>
+</div>
+
+<style>
+    .select-content-modal-wrapper.html-editor-font-size {
+        transform: translateY(29px);
+    }
+
+    .select-content-modal-wrapper.html-editor-font-size > .content {
+        border: 1px solid #e8eaed;
+        filter: none;
+    }
+</style>
